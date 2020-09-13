@@ -1,0 +1,12 @@
+import React from 'react';
+import '../App.css';
+
+function Games() {
+  return (
+    <div>
+      <h1>Games</h1>
+    </div>
+  );
+}
+
+export default Games;
