@@ -16,6 +16,9 @@ function Nav() {
             <Link className='navLink' to="/profile">
               <li>Profile</li>
             </Link>
+            <Link className='navLink' to="/games">
+              <li>Games</li>
+            </Link>
         </ul>
     </nav>
   );
