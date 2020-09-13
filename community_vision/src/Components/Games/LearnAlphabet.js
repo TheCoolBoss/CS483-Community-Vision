@@ -5,19 +5,20 @@ function LearnAlphabet() {
     return (
         <div>
             <h1>Learn the Alphabet in Morse</h1>
-            <h1 id="letter"></h1>
-            <button onClick="enterDot()" id="dotButton">•</button>
-            <button onClick="enterDash()" id="dashButton">-</button>
+            <h1 id="letter">A</h1>
+            <h1 id="morseCode">•-</h1>
+            <button onClick="processDot()" id="dotButton">•</button>
+            <button onClick="processDash()" id="dashButton">-</button>
         </div>
     );
 }
 
-function enterDot() {
+function proccessDot() {
     var x = document.getElementById("dotButton");
     
 }
 
-function enterDash() {
+function processDash() {
     var x = document.getElementById("dashButton");
 }
 
