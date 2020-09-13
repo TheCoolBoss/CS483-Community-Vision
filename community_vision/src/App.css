@@ -54,7 +54,12 @@ nav{
   list-style: none;
 }
 
-.navLink{
+.nav-link{
   color: white;
   text-decoration: none;
 }
+
+.games-difficulty{
+  text-align: left;
+}
+
