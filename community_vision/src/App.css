@@ -1,3 +1,7 @@
+/*--------------------*/
+/* deafault logo stuff*/
+/*--------------------*/
+
 .App {
   text-align: center;
 }
@@ -37,6 +41,12 @@
   }
 }
 
+
+/*------------------------------------------------*/
+/* the different tabs at the top of the home page */
+/*------------------------------------------------*/
+
+/* nav bar */
 nav{
   display: flex;
   justify-content: space-around;
@@ -46,6 +56,7 @@ nav{
   color: white;
 }
 
+/* spacing between how much space the logo has and how much space the links have */
 .nav-links{
   width: 50%;
   display: flex;
@@ -54,7 +65,9 @@ nav{
   list-style: none;
 }
 
+/* tabs on the nav bar */
 .navLink{
   color: white;
   text-decoration: none;
 }
+
