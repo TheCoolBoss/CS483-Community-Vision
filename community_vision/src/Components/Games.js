@@ -86,7 +86,7 @@ class GameSelection extends React.Component {
       <Link className='game-selection' to={this.props.link}>
         <Card className='game-selection-card'>
           <CardActionArea>
-            <img className='game-selection-image' src={this.props.img}/>
+            <img className='game-selection-image' src={this.props.img} alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*//>
             <p className='game-selection-text'>Learn The Alphabet</p>
           </CardActionArea>
         </Card>
