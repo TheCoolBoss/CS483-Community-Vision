@@ -6,9 +6,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 
 var t;
-var resetTimer = 2000; //reset timer in milliseconds
+var resetTimer = 1500; //reset timer in milliseconds
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-function morseToCharacter(x) {
+function morseToChar(x) {
     if (x === '.-'){
         return 'A';
     } else if (x === '-...'){
@@ -86,15 +87,102 @@ function morseToCharacter(x) {
     }
 }
 
+function charToMorse(x) {
+    if (x === 'A'){
+        return '.-';
+    } else if (x === 'B'){
+        return '-...';
+    } else if (x === 'C'){
+        return '-.-.';
+    } else if (x === 'D'){
+        return '-..';
+    } else if (x === 'E'){
+        return '.';
+    } else if (x === 'F'){
+        return '..-.';
+    } else if (x === 'G'){
+        return '--.';
+    } else if (x === 'H'){
+        return '....';
+    } else if (x === 'I'){
+        return '..';
+    } else if (x === 'J'){
+        return '.---';
+    } else if (x === 'K'){
+        return '-.-';
+    } else if (x === 'L'){
+        return '.-..';
+    } else if (x === 'M'){
+        return '--';
+    } else if (x === 'N'){
+        return '-.';
+    } else if (x === 'O'){
+        return '---';
+    } else if (x === 'P'){
+        return '.--.';
+    } else if (x === 'Q'){
+        return '--.-';
+    } else if (x === 'R'){
+        return '.-.';
+    } else if (x === 'S'){
+        return '...';
+    } else if (x === 'T'){
+        return '-';
+    } else if (x === 'U'){
+        return '..-';
+    } else if (x === 'V'){
+        return '...-';
+    } else if (x === 'W'){
+        return '.--';
+    } else if (x === 'X'){
+        return '-..-';
+    } else if (x === 'Y'){
+        return '-.--';
+    } else if (x === 'Z'){
+        return '--..';
+    } else if (x === '1'){
+        return '.----';
+    } else if (x === '2'){
+        return '..---';
+    } else if (x === '3'){
+        return '...--';
+    } else if (x === '4'){
+        return '....-';
+    } else if (x === '5'){
+        return '.....';
+    } else if (x === '6'){
+        return '-....';
+    } else if (x === '7'){
+        return '--...';
+    } else if (x === '8'){
+        return '---..';
+    } else if (x === '9'){
+        return '----.';
+    } else if (x === '0'){
+        return '-----';
+    } else{
+        return '';
+    }
+}
+
+var currentIndex = 0;
+var currentLetter = list[currentIndex];
+var currentMorse = charToMorse(currentLetter);
 function LearnAlphabet() {
     var [input, setInput] = React.useState('');
-    var output = morseToCharacter(input);
+    var output = morseToChar(input);
     clearTimeout(t);
     t = setTimeout(function(){
-        setInput('')
+        setInput('');
     }, resetTimer);
-    var currentMorse = '.-';
-    var currentLetter = morseToCharacter(currentMorse);
+    if (input.length > 6){
+        setInput('');
+    }
+    if (input === currentMorse){
+        currentIndex++;
+        currentLetter = list[currentIndex];
+        currentMorse = charToMorse(currentLetter);
+    }
 
     return (
         <div style={{backgroundColor: '#01214f',height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
@@ -121,14 +209,18 @@ function LearnAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={() => setInput(input + '.')}>.</button>
+                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                        setInput(input + '.');
+                                        }}>.</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={() => setInput(input + '-')}>-</button>
+                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                        setInput(input + '-');
+                                        }}>-</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
