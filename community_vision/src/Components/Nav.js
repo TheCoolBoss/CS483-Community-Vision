@@ -13,7 +13,7 @@ function Nav() {
             <Link className='nav-link' to="/games">
               <li>Games</li>
             </Link>
-            <Link className='navLink' to="/about">
+            <Link className='nav-link' to="/about">
               <li>About</li>
             </Link>
             <Link className='nav-link' to="/profile">

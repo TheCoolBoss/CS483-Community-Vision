@@ -48,11 +48,12 @@
 
 /* nav bar */
 nav{
+  grid-area: header;
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: rgb(73, 79, 82);
+  background: #b8ee30;
   color: white;
 }
 
@@ -67,21 +68,28 @@ nav{
 
 /* tabs on the nav bar */
 .nav-link{
-  color: white;
+  color: black;
   text-decoration: none;
 }
 
+/*------------------------*/
+/* CSS for the Games Page */
+/*------------------------*/
+
+/* The bar that has the difficulty of the games */
 .games-difficulty{
   text-align: left;
   text-indent: 2%;
-  background-color: #61dafb;
+  background-color: #26dfd0;
   margin: 0%;
 }
 
+/* for the link object */
 .game-selection{
   text-decoration: none;
 }
 
+/* the tile image for the games */
 .game-selection-image{
   height: 100%;
   width: 100%;
@@ -90,9 +98,10 @@ nav{
   display: block;
 }
 
+/* the text under the tile images */
 .game-selection-text{
-  background-color: black;
-  color: white;
+  background-color: #f62aa0;
+  color: black;
   margin: 0%;
   padding: 0%;
   display: block;
