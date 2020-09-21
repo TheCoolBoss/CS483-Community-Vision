@@ -9,7 +9,28 @@ var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
+function readKeyInput(x) {
+
+}
+
+/*
+event listener for space and enter buttons
+document.addEventListener('space', function(event) {
+        // keycode for space button
+        if(event.keyCode == '32') {
+            x += '.';
+        }
+        // keycode for enter button
+        if(event.keyCode == '13') {
+            x += '-';
+        }
+    });
+*/
+
+
+
 function morseToChar(x) {
+    
     if (x === '.-'){
         return 'A';
     } else if (x === '-...'){
