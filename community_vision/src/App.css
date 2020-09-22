@@ -58,30 +58,3 @@ nav{
   color: white;
   text-decoration: none;
 }
-
-.games-difficulty{
-  text-align: left;
-  text-indent: 2%;
-  background-color: #61dafb;
-  margin: 0%;
-}
-
-.game-selection{
-  text-decoration: none;
-}
-
-.game-selection-image{
-  height: 100%;
-  width: 100%;
-  margin: 0%;
-  padding: 0%;
-  display: block;
-}
-
-.game-selection-text{
-  background-color: black;
-  color: white;
-  margin: 0%;
-  padding: 0%;
-  display: block;
-}
