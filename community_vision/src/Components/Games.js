@@ -12,8 +12,8 @@ function Games() {
   return (
     <div style={{backgroundColor: '#01214f',height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 4fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
       <h1 style={{fontSize: '7vh', color: '#ffaba6', textDecoration: 'underline', position: 'relative', bottom: '-2vh'}}>Games</h1>
-      <Container maxWidth>
-        <Grid container justify='flex-start' spacing={2} style={{backgroundColor: '#01214f'}}>
+      <Container maxWidth='xl' style={{backgroundColor: '#01214f'}}>
+        <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Hard'/>
           </Grid>
