@@ -6,8 +6,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 //import dashSound from '../../../public/dash.mp3'
 //import dotSound from '../../../public/dot.mp3'
-import {useSpring} from 'react-spring'
-import ReactPlayer from 'react-player'
+import { Transition, animate } from 'react-spring'
+
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
@@ -182,9 +182,6 @@ function LearnAlphabet() {
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
 
-    const displayLetter = useRef(null);
-    const displayMorse = useRef(null);
-
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
@@ -195,6 +192,7 @@ function LearnAlphabet() {
     }
     if (input === currentMorse){
         setIndex(prevState => prevState + 1);
+        
     }
 
     // tracks keycodes for space button  and enter button input 
