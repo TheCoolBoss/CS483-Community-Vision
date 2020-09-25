@@ -3,7 +3,7 @@ import '../App.css';
 
 function About() {
   return (
-    <div>
+    <div style={{position: 'relative'}}>
       <h1>About Community Vision</h1>
       <p>Community Vision takes a person-centered approach in providing quality 
         supports tailored to the unique needs and wishes of each individual and family.</p>

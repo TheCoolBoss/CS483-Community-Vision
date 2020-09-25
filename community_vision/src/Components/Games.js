@@ -10,7 +10,13 @@ import { Container } from '@material-ui/core';
 
 function Games() {
   return (
-    <div style={{backgroundColor: '#01214f',height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 4fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+    <div style={{backgroundColor: '#01214f',
+      position: 'relative',
+      height: '90vh',
+      width: '100vw',
+      display: 'grid',
+      gridTemplate: '1fr 4fr / 1fr',
+      gridTemplateAreas: '"top" "bottom'}}>
       <h1 style={{fontSize: '7vh', color: '#ffaba6', textDecoration: 'underline', position: 'relative', bottom: '-2vh'}}>Games</h1>
       <Container maxWidth='xl' style={{backgroundColor: '#01214f'}}>
         <Grid container justify='center' spacing={2}>
