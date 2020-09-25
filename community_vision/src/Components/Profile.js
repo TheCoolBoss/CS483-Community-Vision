@@ -3,7 +3,7 @@ import '../App.css';
 
 function Profile() {
   return (
-    <div>
+    <div style={{position: 'relative'}}>
       <h1>Profile</h1>
     </div>
   );

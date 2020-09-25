@@ -48,34 +48,3 @@
     transform: rotate(360deg);
   }
 }
-
-
-/*------------------------------------------------*/
-/* the different tabs at the top of the home page */
-/*------------------------------------------------*/
-
-/* nav bar */
-nav{
-  grid-area: header;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background: #b8ee30;
-  color: white;
-}
-
-/* spacing between how much space the logo has and how much space the links have */
-.nav-links{
-  width: 80%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
-}
-
-/* tabs on the nav bar */
-.nav-link{
-  color: black;
-  text-decoration: none;
-}

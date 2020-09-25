@@ -5,32 +5,14 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 
+
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-function readKeyInput(x) {
-
-}
-
-/*
-event listener for space and enter buttons
-document.addEventListener('space', function(event) {
-        // keycode for space button
-        if(event.keyCode == '32') {
-            x += '.';
-        }
-        // keycode for enter button
-        if(event.keyCode == '13') {
-            x += '-';
-        }
-    });
-*/
-
 
 
 function morseToChar(x) {
-    
     if (x === '.-'){
         return 'A';
     } else if (x === '-...'){
@@ -186,27 +168,39 @@ function charToMorse(x) {
     }
 }
 
-var currentIndex = 0;
-var currentLetter = list[currentIndex];
-var currentMorse = charToMorse(currentLetter);
 function LearnAlphabet() {
+    var [index, setIndex] = React.useState(0);
+    var currentLetter = list[index];
+    var currentMorse = charToMorse(currentLetter);
+
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
+
     if (input.length > 6){
         setInput('');
     }
     if (input === currentMorse){
-        currentIndex++;
-        currentLetter = list[currentIndex];
-        currentMorse = charToMorse(currentLetter);
+        setIndex(prevState => prevState + 1);
+        
     }
 
+    // tracks keycodes for space button  and enter button input 
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode === 32) {
+            setInput(input + '.');
+        } else if (evt.keyCode === 13) {
+            setInput(input + '-');
+        }
+    };
+
     return (
-        <div style={{backgroundColor: '#01214f',height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
+        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
@@ -230,8 +224,8 @@ function LearnAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                        setInput(input + '.');
+                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                            setInput(input + '.');
                                         }}>.</button>
                                 </CardActionArea>
                             </Card>
@@ -239,7 +233,7 @@ function LearnAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
                                         setInput(input + '-');
                                         }}>-</button>
                                 </CardActionArea>
