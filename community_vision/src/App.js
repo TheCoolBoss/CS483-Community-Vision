@@ -6,6 +6,7 @@ import Games from './Components/Games';
 import About from './Components/About';
 import Profile from './Components/Profile';
 import LearnAlphabet from './Components/Games/LearnAlphabet';
+import LearnWord from './Components/Games/LearnWord';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" component={About}/>
           <Route path="/profile" component={Profile}/>
           <Route path="/learnAlphabet" component={LearnAlphabet}/>
+          <Route path="/learnWord" component={LearnWord}/>
         </Switch>
       </div>
     </Router>
