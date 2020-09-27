@@ -1,5 +1,17 @@
+/*---------------------*/
+/* deafault logo stuff */
+/*---------------------*/
+
 .App {
   text-align: center;
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
 }
 
 .App-logo {
@@ -35,53 +47,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-nav{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background: rgb(73, 79, 82);
-  color: white;
-}
-
-.nav-links{
-  width: 80%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
-}
-
-.nav-link{
-  color: white;
-  text-decoration: none;
-}
-
-.games-difficulty{
-  text-align: left;
-  text-indent: 2%;
-  background-color: #61dafb;
-  margin: 0%;
-}
-
-.game-selection{
-  text-decoration: none;
-}
-
-.game-selection-image{
-  height: 100%;
-  width: 100%;
-  margin: 0%;
-  padding: 0%;
-  display: block;
-}
-
-.game-selection-text{
-  background-color: black;
-  color: white;
-  margin: 0%;
-  padding: 0%;
-  display: block;
 }
