@@ -15,7 +15,7 @@ const express = require('express');
 const router = express.Router();
 const utils = require("../db_api/dbutils");
 const { check, validationResult } = require('express-validator');
-const dbms = require('../db_api/dbms');
+const dbms = require('./dbms');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

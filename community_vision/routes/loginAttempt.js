@@ -13,7 +13,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const dbms    = require('../db_api/dbms');
+const dbms    = require('./dbms');
 const users   = require('./users');
 const utils   = require('../db_api/dbutils');
 const check   = require('express-validator').check;
