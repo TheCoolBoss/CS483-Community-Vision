@@ -4,7 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-//import dashSound from '../../../public/dash.mp3'
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
 //import dotSound from '../../../public/dot.mp3'
 import { Transition, animate } from 'react-spring'
 
@@ -12,8 +13,6 @@ import { Transition, animate } from 'react-spring'
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-
 
 function morseToChar(x) {
     if (x === '.-'){
@@ -182,6 +181,11 @@ function LearnAlphabet() {
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
 
+    const BoopButton = () => {
+        const [play] = useSound(dashSound);
+        return <button onClick={play}>Boop!</button>;
+    };
+
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
@@ -211,6 +215,11 @@ function LearnAlphabet() {
                 <div>
                     <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
                     <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
+                    {/* <ReactAudioPlayer
+                        src="dash.ogg"
+                        autoPlay
+                        controls
+                    /> */}
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
