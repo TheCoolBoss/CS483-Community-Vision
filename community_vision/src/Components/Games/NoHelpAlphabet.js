@@ -9,7 +9,8 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
 
 function LearnAlphabet() {
     var [index, setIndex] = React.useState(0);
@@ -29,6 +30,7 @@ function LearnAlphabet() {
     }
     if (input === currentMorse){
         setIndex(prevState => prevState + 1);
+        
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -46,7 +48,7 @@ function LearnAlphabet() {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
-                    <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
+
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
