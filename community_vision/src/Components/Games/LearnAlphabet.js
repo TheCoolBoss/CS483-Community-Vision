@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -174,9 +174,6 @@ function LearnAlphabet() {
     var [index, setIndex] = React.useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
-
-    var dotAudio = new Audio('./Assets/Sounds/dot.mp3');
-    var dashAudio = new Audio('./Assets/Sounds/dash.mp3');
 
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
