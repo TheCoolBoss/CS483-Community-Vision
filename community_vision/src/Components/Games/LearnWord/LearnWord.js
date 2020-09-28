@@ -185,6 +185,7 @@ function LearnWord () {
 
     if(input === currentMorse) {
         setCorrect(correct + Word[index]);
+        setInput('');
         setIndex(prevState => prevState + 1);
     }
 
@@ -221,14 +222,18 @@ function LearnWord () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}}>.</button>
+                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                            setInput(input + '.');
+                                    }}>.</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}}>-</button>
+                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                        setInput(input + '-');
+                                    }}>-</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
