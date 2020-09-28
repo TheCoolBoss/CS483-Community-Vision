@@ -6,6 +6,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import Apple from './Apple.png';
 
+var t;
+var resetTimer = 1500; //reset timer in milliseconds
+
 function morseToChar(x) {
     if (x === '.-'){
         return 'A';
@@ -165,7 +168,25 @@ function charToMorse(x) {
 
 function LearnWord () {
     let Word = 'APPLE';
+    var [correct, setCorrect] = React.useState('');
     var [input, setInput] = React.useState('');
+    var [index, setIndex] = React.useState(0);
+    var currentLetter = Word[index];
+    var currentMorse = charToMorse(currentLetter);
+
+    clearTimeout(t);
+    t = setTimeout(function(){
+        setInput('');
+    }, resetTimer);
+
+    if (input.length > 6){
+        setInput('');
+    }
+
+    if(input === currentMorse) {
+        setCorrect(correct + Word[index]);
+        setIndex(prevState => prevState + 1);
+    }
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
@@ -181,8 +202,17 @@ function LearnWord () {
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
-                    <img src={Apple} style={{width: '15%', height: '15%', padding: 0}} />
-                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>APPLE</p>
+                    <Container>
+                        <img src={Apple} style={{width: '15%', height: '15%', padding: 0}} />
+                        <Grid container justify='center'>
+                            <Grid>
+                                <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                            </Grid>
+                            <Grid>
+                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{Word.substr(index)}</p>
+                            </Grid>
+                        </Grid>
+                    </Container>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
