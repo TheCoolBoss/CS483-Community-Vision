@@ -6,7 +6,7 @@ import Games from './Components/Games';
 import About from './Components/About';
 import Profile from './Components/Profile';
 import LearnAlphabet from './Components/Games/LearnAlphabet';
-import LearnWord from './Components/Games/LearnWord';
+import LearnWord from './Components/Games/LearnWord/LearnWord';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
