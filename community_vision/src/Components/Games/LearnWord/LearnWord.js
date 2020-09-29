@@ -5,10 +5,21 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import Apple from './Apple.png';
+/*
+* Game that shows a picture and word that associates with that picture
+* The user have to put in the correct sequence of morse code
+*
+* 
+* Created : 9/28/2020
+* Modified: 9/28/2020
+*/
 
+//Variables for time
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
+
+//Temp function(will move to another .js file)
 function morseToChar(x) {
     if (x === '.-'){
         return 'A';
@@ -86,7 +97,7 @@ function morseToChar(x) {
         return '';
     }
 }
-
+//Temp function(will be move to another .js file)
 function charToMorse(x) {
     if (x === 'A'){
         return '.-';
@@ -167,31 +178,32 @@ function charToMorse(x) {
 
 
 function LearnWord () {
-    var Word = 'APPLE';
-    var [finish, setFinish] = React.useState(false);
-    var [correct, setCorrect] = React.useState('');
-    var [input, setInput] = React.useState('');
-    var [index, setIndex] = React.useState(0);
-    var currentLetter = Word[index];
-    var currentMorse = charToMorse(currentLetter);
+    var Word = 'APPLE';                                 //Word that the user needs to type
+    var [correct, setCorrect] = React.useState('');     //The correct words that the user got so far
+    var [input, setInput] = React.useState('');         //Track user input
+    var [index, setIndex] = React.useState(0);          //Index to track each letter in "Word"
+    var currentLetter = Word[index];                    //Current letter to be type
+    var currentMorse = charToMorse(currentLetter);      //Current morse code the user is typing
 
+    //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
-
+    //Reset input if the length is greater than 6
     if (input.length > 6){
         setInput('');
     }
-
+    /**
+     * Check if the input match
+     * If it is, add the current character to "correct"
+     * Then move on to the next character in "Word"
+     */
     if(input === currentMorse) {
         setCorrect(correct + Word[index]);
         setInput('');
         if(index < Word.length) {
             setIndex(prevState => prevState + 1);
-        }
-        else {
-            setFinish(true);
         }
     }
 
