@@ -3,12 +3,14 @@ import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
+import backgroundImage from './home/background.jpg'
+import Video from './home/clouds.mp4'
 
 function Home() {
   return (
-    <div style={{backgroundColor: '#01214f',
+    <div style={{
+      backgroundImage: {backgroundImage},
       position: 'relative',
-      zIndex: 0,
       height: '90vh',
       width: '100vw',
       display: 'grid',
@@ -20,7 +22,7 @@ function Home() {
       <div style={{gridArea: 'middleBottom'}}>
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
             <Grid item xs={11} style={{height: '80%'}}>
-              <h1 style={{height: '100%', color: 'white', fontWeight: 900}}>
+              <h1 style={{height: '100%', color: 'black', fontWeight: 900}}>
                 block of text, blah, blah, blah things here
                 block of text, blah, blah, blah things here
                 block of text, blah, blah, blah things here
