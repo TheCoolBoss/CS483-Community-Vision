@@ -167,7 +167,8 @@ function charToMorse(x) {
 
 
 function LearnWord () {
-    let Word = 'APPLE';
+    var Word = 'APPLE';
+    var [finish, setFinish] = React.useState(false);
     var [correct, setCorrect] = React.useState('');
     var [input, setInput] = React.useState('');
     var [index, setIndex] = React.useState(0);
@@ -186,7 +187,12 @@ function LearnWord () {
     if(input === currentMorse) {
         setCorrect(correct + Word[index]);
         setInput('');
-        setIndex(prevState => prevState + 1);
+        if(index < Word.length) {
+            setIndex(prevState => prevState + 1);
+        }
+        else {
+            setFinish(true);
+        }
     }
 
     // tracks keycodes for space button  and enter button input 
