@@ -6,8 +6,7 @@ import {Link} from 'react-router-dom';
 
 function Home() {
   return (
-    <div style={{backgroundColor: '#01214f',
-      position: 'relative',
+    <div style={{position: 'relative',
       zIndex: 0,
       height: '90vh',
       width: '100vw',

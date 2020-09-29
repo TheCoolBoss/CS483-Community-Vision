@@ -4,13 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-
+/*
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../../../public/dot.mp3'*/
+import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-
 
 function morseToChar(x) {
     if (x === '.-'){
@@ -172,9 +174,14 @@ function LearnAlphabet() {
     var [index, setIndex] = React.useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
-
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+
+    /*
+    const BoopButton = () => {
+        const [play] = useSound(dashSound);
+        return <button onClick={play}>Boop!</button>;
+    };*/
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -186,9 +193,8 @@ function LearnAlphabet() {
     }
     if (input === currentMorse){
         setIndex(prevState => prevState + 1);
-        
     }
-
+    
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
         evt = evt || window.event;
@@ -203,8 +209,12 @@ function LearnAlphabet() {
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
-                    <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
-                    <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
+                    <animated.h1 style={{lineHeight: 0,
+                        color: '#ff8e97',
+                        fontSize: '15vh'}}>{currentLetter}</animated.h1>
+                    <animated.p style={{lineHeight: 0,
+                        color: '#ffaba6',
+                        fontSize: '7vh'}}>{currentMorse}</animated.p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
