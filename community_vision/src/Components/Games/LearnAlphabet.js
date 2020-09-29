@@ -4,13 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import {useTransition, animated} from 'react-spring'
+/*
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../../../public/dot.mp3'*/
+import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-
 
 function morseToChar(x) {
     if (x === '.-'){
@@ -174,6 +176,12 @@ function LearnAlphabet() {
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+
+    /*
+    const BoopButton = () => {
+        const [play] = useSound(dashSound);
+        return <button onClick={play}>Boop!</button>;
+    };*/
 
     clearTimeout(t);
     t = setTimeout(function(){
