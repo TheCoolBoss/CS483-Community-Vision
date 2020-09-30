@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import Apple from './Apple.png';
+import Apple from './Images/APPLE.png';
 /*
 * Game that shows a picture and word that associates with that picture
 * The user have to put in the correct sequence of morse code
