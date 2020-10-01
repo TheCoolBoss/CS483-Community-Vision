@@ -179,18 +179,19 @@ function charToMorse(x) {
 
 function LearnWord () {
     //Run generate data
-    generateData();
+    //generateData();
 
     //Get the data
     const gameData = require('./WordGameData');
 
     var [correct, setCorrect] = React.useState('');     //The correct words that the user got so far
+    var [wordIndex, setWordIndex] = React.useState(0);  //Keeping track of current letter in current word
     var [input, setInput] = React.useState('');         //Track user input
-    var [index, setIndex] = React.useState(0);          //Index to track each letter in "Word"
-    var Word = gameData[index].name;                    //Word that the user needs to type
-    var currentLetter = Word[index];                    //Current letter to be type
+    var [gameIndex, setGameIndex] = React.useState(0);  //Index to track the current word
+    var currentWord = gameData[gameIndex].name;         //Word that the user needs to type
+    var currentLetter = currentWord[wordIndex];         //Current letter to be type
     var currentMorse = charToMorse(currentLetter);      //Current morse code the user is typing
-    var imgSrc = gameData[index].imagePath;             //Path of current image
+    var imgSrc = gameData[gameIndex].imagePath;             //Path of current image
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -201,17 +202,23 @@ function LearnWord () {
     if (input.length > 6){
         setInput('');
     }
-    /**
-     * Check if the input match
-     * If it is, add the current character to "correct"
-     * Then move on to the next character in "Word"
-     */
-    if(input === currentMorse) {
-        setCorrect(correct + Word[index]);
+    
+    //Check for matching current morse sequence to current letter
+    if (input === currentMorse) {
+        setCorrect(correct + currentWord[wordIndex]);
         setInput('');
-        if(index < Word.length) {
-            setIndex(prevState => prevState + 1);
-        }
+        setWordIndex(prevState => prevState + 1);
+        
+    }
+
+    //Check when the user complete the whole word
+    if (correct.localeCompare(currentWord) === 0) {
+        //Set the new word
+        setGameIndex(prevState => prevState + 1);
+        //Reset word index
+        setWordIndex(0);
+        //Reset correct
+        setCorrect('');
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -235,7 +242,7 @@ function LearnWord () {
                                 <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
                             </Grid>
                             <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{Word.substr(index)}</p>
+                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex)}</p>
                             </Grid>
                         </Grid>
                     </Container>
