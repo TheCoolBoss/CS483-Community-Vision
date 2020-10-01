@@ -236,13 +236,16 @@ function LearnWord () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={img} style={{width: '15%', height: '15%', padding: 0}} />
+                        <img src={img} style={{width: '20%', height: '20%', padding: 0}} />
                         <Grid container justify='center'>
                             <Grid>
                                 <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
                             </Grid>
                             <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex)}</p>
+                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                            </Grid>
+                            <Grid>
+                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
                             </Grid>
                         </Grid>
                     </Container>
