@@ -180,12 +180,17 @@ function charToMorse(x) {
 function LearnWord () {
     //Run generate data
     generateData();
-    var Word = 'APPLE';                                 //Word that the user needs to type
+
+    //Get the data
+    const gameData = require('./WordGameData');
+
     var [correct, setCorrect] = React.useState('');     //The correct words that the user got so far
     var [input, setInput] = React.useState('');         //Track user input
     var [index, setIndex] = React.useState(0);          //Index to track each letter in "Word"
+    var Word = gameData[index].name;                    //Word that the user needs to type
     var currentLetter = Word[index];                    //Current letter to be type
     var currentMorse = charToMorse(currentLetter);      //Current morse code the user is typing
+    var imgSrc = gameData[index].imagePath;             //Path of current image
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -224,7 +229,7 @@ function LearnWord () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={Apple} style={{width: '15%', height: '15%', padding: 0}} />
+                        <img src={imgSrc} style={{width: '15%', height: '15%', padding: 0}} />
                         <Grid container justify='center'>
                             <Grid>
                                 <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
