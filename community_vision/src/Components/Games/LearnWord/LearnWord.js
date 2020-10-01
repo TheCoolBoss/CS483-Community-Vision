@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import generateData from './generateData';
+
 /*
 * Game that shows a picture and word that associates with that picture
 * The user have to put in the correct sequence of morse code
@@ -182,16 +182,16 @@ function LearnWord () {
     //generateData();
 
     //Get the data
-    const gameData = require('./WordGameData');
+    var gameData = require('./WordGameData.json');
 
-    var [correct, setCorrect] = React.useState('');     //The correct words that the user got so far
-    var [wordIndex, setWordIndex] = React.useState(0);  //Keeping track of current letter in current word
-    var [input, setInput] = React.useState('');         //Track user input
-    var [gameIndex, setGameIndex] = React.useState(0);  //Index to track the current word
-    var currentWord = gameData[gameIndex].name;         //Word that the user needs to type
-    var currentLetter = currentWord[wordIndex];         //Current letter to be type
-    var currentMorse = charToMorse(currentLetter);      //Current morse code the user is typing
-    var imgSrc = gameData[gameIndex].imagePath;             //Path of current image
+    var [correct, setCorrect] = React.useState('');         //The correct words that the user got so far
+    var [wordIndex, setWordIndex] = React.useState(0);      //Keeping track of current letter in current word
+    var [input, setInput] = React.useState('');             //Track user input
+    var [gameIndex, setGameIndex] = React.useState(0);      //Index to track the current word
+    var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
+    var currentLetter = currentWord[wordIndex];             //Current letter to be type
+    var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
+    var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -236,7 +236,7 @@ function LearnWord () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={imgSrc} style={{width: '15%', height: '15%', padding: 0}} />
+                        <img src={img} style={{width: '15%', height: '15%', padding: 0}} />
                         <Grid container justify='center'>
                             <Grid>
                                 <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
