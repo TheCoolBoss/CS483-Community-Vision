@@ -191,6 +191,7 @@ function LearnWord () {
     var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
     var currentLetter = currentWord[wordIndex];             //Current letter to be type
     var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
+    var output = morseToChar(input);                        //Get current character from user input
     var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
 
     //Reset input after 1.5 second if no new input is being enter
@@ -208,7 +209,6 @@ function LearnWord () {
         setCorrect(correct + currentWord[wordIndex]);
         setInput('');
         setWordIndex(prevState => prevState + 1);
-        
     }
 
     //Check when the user complete the whole word
@@ -250,6 +250,17 @@ function LearnWord () {
             </div>
             <div style={{gridArea: 'bottom'}}>
                 <Container>
+                    <Grid container justify='center' spacing={0}>
+                        <Grid item xs={3} sm={2}>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{input}</p>
+                        </Grid>
+                        <Grid item xs={0}>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>|</p>
+                        </Grid>
+                        <Grid item xs={3} sm={2}>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{output}</p>
+                        </Grid>
+                    </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}>
                             <Card>
