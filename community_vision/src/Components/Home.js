@@ -3,8 +3,8 @@ import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import backgroundImage from './home/background.jpg'
-import Video from './home/clouds.mp4'
+import backgroundImage from './home/background.jpg';
+import Video from './home/clouds.mp4';
 
 function Home() {
   return (
