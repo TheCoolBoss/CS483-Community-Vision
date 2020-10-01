@@ -13,18 +13,8 @@ function generateData () {
     var fs = require('fs');
     var path = require('path');
 
-    //Delete all existing .json file
-    fs.unlink('./*.json', (err) => {
-        if (err) throw err;
-    })
-
-    //Create a new .json file name WordGameData.json
-    fs.writeFile('./WordGameData.json', '', (err) => {
-        //Check for errors
-        if (err) throw err;
-    })
     //Get JSON file
-    const myData = require('./WordGameData.json');
+    const myData = [];
 
     //Get the images in the directory 'Images'
     var images = fs.readdirSync('./Images');
@@ -45,7 +35,7 @@ function generateData () {
             myData.push(imageData);
         }
     }));
-
+    console.log(myData);
     //Write the data created to WordGameData.json
     fs.writeFile('./WordGameData.json', JSON.stringify(myData), err => {
         //Check for errors

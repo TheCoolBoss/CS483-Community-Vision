@@ -4,14 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import Apple from './Images/APPLE.png';
+import generateData from './generateData';
 /*
 * Game that shows a picture and word that associates with that picture
 * The user have to put in the correct sequence of morse code
 *
 * 
 * Created : 9/28/2020
-* Modified: 9/28/2020
+* Modified: 9/30/2020
 */
 
 //Variables for time
@@ -178,6 +178,8 @@ function charToMorse(x) {
 
 
 function LearnWord () {
+    //Run generate data
+    generateData();
     var Word = 'APPLE';                                 //Word that the user needs to type
     var [correct, setCorrect] = React.useState('');     //The correct words that the user got so far
     var [input, setInput] = React.useState('');         //Track user input
