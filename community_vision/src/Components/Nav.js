@@ -46,7 +46,9 @@ function Nav() {
       <animated.div style={{gridArea: 'header',
         display: 'flex',
         justifContent: 'space-around',
+        alignSelf: 'center',
         alignItems: 'center',
+        position: 'relative',
         minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '70vh']}),
         background: 'grey',
         color: 'white'}}>

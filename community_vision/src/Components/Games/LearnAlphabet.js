@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-/*
+
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
-import dotSound from '../../../public/dot.mp3'*/
+import dotSound from '../Assets/Sounds/dot.mp3'
 import { useTransition, animated } from 'react-spring'
 
 var t;
@@ -176,12 +176,9 @@ function LearnAlphabet() {
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
 
-    /*
-    const BoopButton = () => {
-        const [play] = useSound(dashSound);
-        return <button onClick={play}>Boop!</button>;
-    };*/
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -200,8 +197,10 @@ function LearnAlphabet() {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '.');
+            playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+            playDash();
         }
     };
 
@@ -236,6 +235,7 @@ function LearnAlphabet() {
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
                                             setInput(input + '.');
+                                            playDot();
                                         }}>.</button>
                                 </CardActionArea>
                             </Card>
@@ -245,6 +245,7 @@ function LearnAlphabet() {
                                 <CardActionArea>
                                     <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
                                         setInput(input + '-');
+                                        playDash();
                                         }}>-</button>
                                 </CardActionArea>
                             </Card>
