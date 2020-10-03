@@ -12,7 +12,7 @@ var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 
-function LearnAlphabet() {
+function NoHelpAlphabet() {
     var [index, setIndex] = React.useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -90,4 +90,4 @@ function LearnAlphabet() {
     );
 }
 
-export default LearnAlphabet;
+export default NoHelpAlphabet;

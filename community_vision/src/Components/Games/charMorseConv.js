@@ -1,8 +1,6 @@
 //Converts chars to Morse and vice versa
-//Stephen Nguyen
-//9/27/20
 
-//To import this into a game, add the following code 
+//To import this into a game, add the following code
 //Be sure to update the directory if needed
 //import {charToMorse, morseToChar} from "./charMorseConv";
 
