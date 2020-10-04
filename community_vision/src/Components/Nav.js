@@ -2,13 +2,16 @@ import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import logo from './logo192.png'
+import {useSpring, animated} from 'react-spring'
 
 function Nav() {
-  var [state, setState] = React.useState(false);
-  var height = '0vh'
-  if (state){
-    height = '70vh'
-  }
+  var [state, toggle] = React.useState(false);
+  const {x} = useSpring({
+    from: {x: 0},
+    to: {x: state ? 1 : 0},
+    config: {duration: 500}
+  })
+
   return (
     <div>
       <div style={{gridArea: 'header',
@@ -36,18 +39,18 @@ function Nav() {
             <li>Profile</li>
           </Link>
         </ul>
-        <button style={{position: 'absolute', right: 0}} onClick={function(){setState(!state)}}>
+        <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>
         </button>
       </div>
-      <div style={{gridArea: 'header',
+      <animated.div style={{gridArea: 'header',
         display: 'flex',
         justifContent: 'space-around',
         alignItems: 'center',
-        minHeight: height,
+        minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '70vh']}),
         background: 'grey',
         color: 'white'}}>
-      </div>
+      </animated.div>
     </div>
   );
 }
