@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
+//import generateData from './generateData'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -13,6 +14,8 @@ import { Container } from '@material-ui/core';
 * Created : 9/28/2020
 * Modified: 9/30/2020
 */
+
+//generateData();
 
 //Variables for time
 var t;
@@ -236,7 +239,7 @@ function LearnWord () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={img} style={{width: '20%', height: '20%', padding: 0}} />
+                        <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
                         <Grid container justify='center'>
                             <Grid>
                                 <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>

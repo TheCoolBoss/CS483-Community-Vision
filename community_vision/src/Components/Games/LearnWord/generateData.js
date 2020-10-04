@@ -12,33 +12,40 @@ generateData();
 
 function generateData () {
     //File system module
-    var fs = require('fs');
+    var fs = require('brfs');
     var path = require('path');
 
-    //Get JSON file
+    //Get directory path
+    var dirPath = path.join(__dirname, 'Images');
+
+    //JSON data var
     const myData = [];
 
     //Read the images in the directory 'Images'
-    var images = fs.readdirSync('./Images', (err) => {
-        if (err) throw err;
-    });
-
-     /**
-     * Loop through all the images
-     * push the correct image data to the 
-     */
-    images.forEach(image => {
-         //Check that file is an image
-        if(path.parse(image).ext.localeCompare('.png') === 0 || path.parse(image).ext.localeCompare('.jpg') === 0) {
-            //Variable to store all necessary information from each image
-            let imageData = {
-                 name: path.parse(image).name.toUpperCase(),
-                imagePath: './Images/' + image
-            };
-            //Push data to json obj
-            myData.push(imageData);
+    fs.readdir(dirPath, function(err, images) {
+        if (err) {
+            return console.log(err);
+        }
+        else {
+            /**
+            * Loop through all the images
+            * push the correct image data to the 
+            */
+            images.forEach(image => {
+                //Check that file is an image
+                if(path.parse(image).ext.localeCompare('.png') === 0 || path.parse(image).ext.localeCompare('.jpg') === 0) {
+                    //Variable to store all necessary information from each image
+                    let imageData = {
+                    name: path.parse(image).name.toUpperCase(),
+                    imagePath: './Images/' + image
+                    };
+                    //Push data to json obj
+                myData.push(imageData);
+                }
+            });
         }
     });
+
     console.log(myData);
     //Write the data created to WordGameData.json
     fs.writeFile('./WordGameData.json', JSON.stringify(myData), err => {
