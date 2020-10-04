@@ -15,75 +15,75 @@ var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
 function morseToChar(x) {
-    if (x === '.-'){
+    if (x === '•-'){
         return 'A';
-    } else if (x === '-...'){
+    } else if (x === '-•••'){
         return 'B';
-    } else if (x === '-.-.'){
+    } else if (x === '-•-•'){
         return 'C';
-    } else if (x === '-..'){
+    } else if (x === '-••'){
         return 'D';
-    } else if (x === '.'){
+    } else if (x === '•'){
         return 'E';
-    } else if (x === '..-.'){
+    } else if (x === '••-•'){
         return 'F';
-    } else if (x === '--.'){
+    } else if (x === '--•'){
         return 'G';
-    } else if (x === '....'){
+    } else if (x === '••••'){
         return 'H';
-    } else if (x === '..'){
+    } else if (x === '••'){
         return 'I';
-    } else if (x === '.---'){
+    } else if (x === '•---'){
         return 'J';
-    } else if (x === '-.-'){
+    } else if (x === '-•-'){
         return 'K';
-    } else if (x === '.-..'){
+    } else if (x === '•-••'){
         return 'L';
     } else if (x === '--'){
         return 'M';
-    } else if (x === '-.'){
+    } else if (x === '-•'){
         return 'N';
     } else if (x === '---'){
         return 'O';
     } else if (x === '.--.'){
         return 'P';
-    } else if (x === '--.-'){
+    } else if (x === '--•-'){
         return 'Q';
-    } else if (x === '.-.'){
+    } else if (x === '•-•'){
         return 'R';
-    } else if (x === '...'){
+    } else if (x === '•••'){
         return 'S';
     } else if (x === '-'){
         return 'T';
-    } else if (x === '..-'){
+    } else if (x === '••-'){
         return 'U';
-    } else if (x === '...-'){
+    } else if (x === '•••-'){
         return 'V';
-    } else if (x === '.--'){
+    } else if (x === '•--'){
         return 'W';
-    } else if (x === '-..-'){
+    } else if (x === '-••-'){
         return 'X';
-    } else if (x === '-.--'){
+    } else if (x === '-•--'){
         return 'Y';
-    } else if (x === '--..'){
+    } else if (x === '--••'){
         return 'Z';
-    } else if (x === '.----'){
+    } else if (x === '•----'){
         return '1';
-    } else if (x === '..---'){
+    } else if (x === '••---'){
         return '2';
-    } else if (x === '...--'){
+    } else if (x === '•••--'){
         return '3';
-    } else if (x === '....-'){
+    } else if (x === '••••-'){
         return '4';
-    } else if (x === '.....'){
+    } else if (x === '•••••'){
         return '5';
-    } else if (x === '-....'){
+    } else if (x === '-••••'){
         return '6';
-    } else if (x === '--...'){
+    } else if (x === '--•••'){
         return '7';
-    } else if (x === '---..'){
+    } else if (x === '---••'){
         return '8';
-    } else if (x === '----.'){
+    } else if (x === '----•'){
         return '9';
     } else if (x === '-----'){
         return '0';
@@ -94,75 +94,75 @@ function morseToChar(x) {
 
 function charToMorse(x) {
     if (x === 'A'){
-        return '.-';
+        return '•-';
     } else if (x === 'B'){
-        return '-...';
+        return '-•••';
     } else if (x === 'C'){
-        return '-.-.';
+        return '-•-•';
     } else if (x === 'D'){
-        return '-..';
+        return '-••';
     } else if (x === 'E'){
-        return '.';
+        return '•';
     } else if (x === 'F'){
-        return '..-.';
+        return '••-•';
     } else if (x === 'G'){
-        return '--.';
+        return '--•';
     } else if (x === 'H'){
-        return '....';
+        return '••••';
     } else if (x === 'I'){
-        return '..';
+        return '••';
     } else if (x === 'J'){
-        return '.---';
+        return '•---';
     } else if (x === 'K'){
-        return '-.-';
+        return '-•-';
     } else if (x === 'L'){
-        return '.-..';
+        return '•-••';
     } else if (x === 'M'){
         return '--';
     } else if (x === 'N'){
-        return '-.';
+        return '-•';
     } else if (x === 'O'){
         return '---';
     } else if (x === 'P'){
-        return '.--.';
+        return '•--•';
     } else if (x === 'Q'){
-        return '--.-';
+        return '--•-';
     } else if (x === 'R'){
-        return '.-.';
+        return '•-•';
     } else if (x === 'S'){
-        return '...';
+        return '•••';
     } else if (x === 'T'){
         return '-';
     } else if (x === 'U'){
-        return '..-';
+        return '••-';
     } else if (x === 'V'){
-        return '...-';
+        return '•••-';
     } else if (x === 'W'){
-        return '.--';
+        return '•--';
     } else if (x === 'X'){
-        return '-..-';
+        return '-••-';
     } else if (x === 'Y'){
-        return '-.--';
+        return '-•--';
     } else if (x === 'Z'){
-        return '--..';
+        return '--••';
     } else if (x === '1'){
-        return '.----';
+        return '•----';
     } else if (x === '2'){
-        return '..---';
+        return '••---';
     } else if (x === '3'){
-        return '...--';
+        return '•••--';
     } else if (x === '4'){
-        return '....-';
+        return '••••-';
     } else if (x === '5'){
-        return '.....';
+        return '•••••';
     } else if (x === '6'){
-        return '-....';
+        return '-••••';
     } else if (x === '7'){
-        return '--...';
+        return '--•••';
     } else if (x === '8'){
-        return '---..';
+        return '---••';
     } else if (x === '9'){
-        return '----.';
+        return '----•';
     } else if (x === '0'){
         return '-----';
     } else{
@@ -196,7 +196,7 @@ function LearnAlphabet() {
     document.onkeydown = function(evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '.');
+            setInput(input + '•');
             playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
@@ -210,40 +210,40 @@ function LearnAlphabet() {
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '15vh'}}>{currentLetter}</animated.h1>
+                        fontSize: '25vh'}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
-                        fontSize: '7vh'}}>{currentMorse}</animated.p>
+                        fontSize: '15vh'}}>{currentMorse}</animated.p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{input}</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>|</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{output}</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
+                        <Grid item xs={4}> 
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                            setInput(input + '.');
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                            setInput(input + '•');
                                             playDot();
-                                        }}>.</button>
+                                        }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                         }}>-</button>
