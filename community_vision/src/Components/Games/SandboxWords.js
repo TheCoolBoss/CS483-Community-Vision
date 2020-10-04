@@ -95,15 +95,15 @@ function SandboxWords() {
                                 </CardActionArea>
                             </Card>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="clearButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                        document.getElementById("textbox").innerHTML = "";
-                                    }}>Clear</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
+                    </Grid>
+                    <Grid container justify = "center">
+                        <Card>
+                            <CardActionArea>
+                                <button id="clearButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    document.getElementById("textbox").innerHTML = "";
+                                }}>Clear</button>
+                            </CardActionArea>
+                        </Card>
                     </Grid>
                 </Container>
             </div>
