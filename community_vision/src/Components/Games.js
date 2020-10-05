@@ -21,7 +21,7 @@ function Games() {
       <Container maxWidth='xl' style={{backgroundColor: '#01214f'}}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Hard'/>
+            <GameSelection name='AlphabetNoHelp' img={LearnAlphabetIMG} link='/noHelpAlphabet' difficulty='Hard'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Medium'/>
@@ -33,10 +33,10 @@ function Games() {
             <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
+            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/sandboxLetters' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
+            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/sandboxWords' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
