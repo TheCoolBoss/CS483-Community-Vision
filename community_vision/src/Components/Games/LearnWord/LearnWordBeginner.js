@@ -5,7 +5,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
-//import generateData from './generateData'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -16,34 +15,45 @@ import {charToMorse, morseToChar} from "./../charMorseConv";
 * Modified: 10/11/2020
 */
 
-//generateData();
-
 //Variables for time
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
+//Get the data
+var gameData = require('./WordGameData.json');
+
 function LearnWord () {
-    //Run generate data
-    //generateData();
+    //current letters
+    var [correct, setCorrect] = React.useState('');
 
-    //Get the data
-    var gameData = require('./WordGameData.json');
+    //Track user input
+    var [input, setInput] = React.useState('');
+    
+    //Get current character from user input
+    var output = morseToChar(input);
 
-    var [correct, setCorrect] = React.useState('');         //The correct words that the user got so far
-    var [wordIndex, setWordIndex] = React.useState(0);      //Keeping track of current letter in current word
-    var [input, setInput] = React.useState('');             //Track user input
-    var [gameIndex, setGameIndex] = React.useState(0);      //Index to track the current word
-    var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
-    var currentLetter = currentWord[wordIndex];             //Current letter to be type
-    var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
-    var output = morseToChar(input);                        //Get current character from user input
-    var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
+    //Index to track the current word
+    var [gameIndex, setGameIndex] = React.useState(0);
+
+    //Get the image source
+    var img = require('' + gameData[gameIndex].imagePath);
+
+    //Word that the user needs to type
+    //var [currentWord, setCurrentWord] = React.useState(gameData[gameIndex].name);
+    var currentWord = gameData[gameIndex].name;
+
+    //Current letter to be type(first letter)
+    var currentLetter = currentWord[0];
+
+    //Current morse code the user is typing                  
+    var currentMorse = charToMorse(currentLetter); 
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
+
     //Reset input if the length is greater than 6
     if (input.length > 6){
         setInput('');
@@ -51,19 +61,12 @@ function LearnWord () {
     
     //Check for matching current morse sequence to current letter
     if (input === currentMorse) {
-        setCorrect(correct + currentWord[wordIndex]);
-        setInput('');
-        setWordIndex(prevState => prevState + 1);
-    }
-
-    //Check when the user complete the whole word
-    if (correct.localeCompare(currentWord) === 0) {
-        //Set the new word
-        setGameIndex(prevState => prevState + 1);
-        //Reset word index
-        setWordIndex(0);
-        //Reset correct
-        setCorrect('');
+        setCorrect(currentWord);
+        currentWord = '';
+        //setCurrentWord('');
+        sleep(1500).then(() => {
+            setGameIndex(prevState => prevState + 1);
+        })
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -90,7 +93,7 @@ function LearnWord () {
                                 <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
                             </Grid>
                             <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
+                                <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
                             </Grid>
                         </Grid>
                     </Container>
@@ -133,6 +136,10 @@ function LearnWord () {
             </div>
         </div>
     )
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export default LearnWord
