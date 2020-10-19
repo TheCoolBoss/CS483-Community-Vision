@@ -44,9 +44,9 @@ function generateData () {
                 }
             });
             //Write the data created to WordGameData.json
-            fs.writeFile('./WordGameData.json', JSON.stringify(myData), err => {
+            fs.writeFile('./WordGameData.json', JSON.stringify(myData), erro => {
                 //Check for errors
-                if (err) throw err;
+                if (erro) throw erro;
             })
         }
     });
