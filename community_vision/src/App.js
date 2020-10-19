@@ -6,7 +6,8 @@ import Games from './Components/Games';
 import About from './Components/About';
 import Profile from './Components/Profile';
 import LearnAlphabet from './Components/Games/LearnAlphabet';
-import LearnWord from './Components/Games/LearnWord/LearnWord';
+import LearnWordAdvanced from './Components/Games/LearnWord/LearnWordAdvanced';
+import LearnWordBeginner from './Components/Games/LearnWord/LearnWordBeginner';
 import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -21,7 +22,8 @@ function App() {
           <Route path="/about" component={About}/>
           <Route path="/profile" component={Profile}/>
           <Route path="/learnAlphabet" component={LearnAlphabet}/>
-          <Route path="/learnWord" component={LearnWord}/>
+          <Route path="/learnWordBeginner" component={LearnWordBeginner}/>
+          <Route path="/learnWordAdvanced" component={LearnWordAdvanced}/>
           <Route path="/noHelpAlphabet" component={AlphabetNoHelp}/>
         </Switch>
       </div>
