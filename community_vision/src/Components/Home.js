@@ -3,6 +3,7 @@ import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
+import pencils from './home/pencils.jpg';
 
 function Home() {
   return (
@@ -13,6 +14,11 @@ function Home() {
       display: 'grid',
       gridTemplate: '18fr 10fr 42fr 20fr/ 1fr',
       gridTemplateAreas: '"top" "middleTop" "middleBottom" "bottom"'}}>
+      
+      <img src={pencils} alt="pencils"
+      style={{position: 'fixed', height: '100%', width: '100%', objectFit: 'cover', zIndex: -1}}
+      />;
+
       <div style={{gridArea: 'top',
         backgroundColor: 'blue', height: '80%', opacity: 0.8,
         alignSelf: 'center', alignItems: 'center',

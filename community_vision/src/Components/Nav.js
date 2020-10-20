@@ -1,7 +1,8 @@
 import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
-import logo from './logo192.png'
+import logo from './logo.png'
+import pic from './logopic.png'
 import {useSpring, animated} from 'react-spring'
 
 function Nav() {
@@ -40,7 +41,7 @@ function Nav() {
           </Link>
         </ul>
         <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>
-          <img style={{height: '8vh'}} src={logo} alt={logo}></img>
+          <img style={{height: '8vh'}} src={pic} alt={pic}></img>
         </button>
       </div>
       <animated.div style={{gridArea: 'header',
