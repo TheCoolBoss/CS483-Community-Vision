@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -10,18 +10,19 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../../../public/dot.mp3'*/
-import { useTransition, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 function LearnAlphabet() {
-    var [index, setIndex] = React.useState(0);
+    var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
-    var [input, setInput] = React.useState('');
+    var [input, setInput] = useState('');
     var output = morseToChar(input);
+    const [anim, setAnim] = useState(true)
 
     /*
     const BoopButton = () => {
@@ -38,29 +39,41 @@ function LearnAlphabet() {
         setInput('');
     }
     if (input === currentMorse){
+        setAnim(!anim);
         setIndex(prevState => prevState + 1);
     }
     
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
         evt = evt || window.event;
-        if (evt.keyCode === 32) {
+        if (evt.keyCode === 32){
             setInput(input + '.');
-        } else if (evt.keyCode === 13) {
+        } else if (evt.keyCode === 13){
             setInput(input + '-');
         }
     };
 
+    var d = 2000;
+    if (!anim){
+        d = 0;
+        t = setTimeout(function(){
+            setAnim(!anim)
+        }, 100);
+    }
+    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
+    
     return (
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '15vh'}}>{currentLetter}</animated.h1>
+                        fontSize: '15vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
-                        fontSize: '7vh'}}>{currentMorse}</animated.p>
+                        fontSize: '7vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
