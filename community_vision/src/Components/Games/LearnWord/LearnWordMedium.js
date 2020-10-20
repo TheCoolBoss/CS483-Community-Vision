@@ -4,78 +4,66 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import {charToMorse, morseToChar} from "./../charMorseConv";
+import {charToMorse, morseToChar} from "../charMorseConv";
+//import generateData from './generateData'
 
 /*
 * Game that shows a picture and word that associates with that picture
-* The user have to put in the correct sequence of morse code for the first letter
+* The user have to put in the correct sequence of morse code
 *
 * 
-* Created : 10/18/2020
-* Modified: 10/11/2020
+* Created : 9/28/2020
+* Modified: 9/30/2020
 */
+
+//generateData();
 
 //Variables for time
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
-
 function LearnWord () {
+    //Run generate data
+    //generateData();
+
     //Get the data
     var gameData = require('./WordGameData.json');
 
-    //current letters
-    var [correct, setCorrect] = React.useState('');
-    //Track user input
-    var [input, setInput] = React.useState('');
-    
-    //Get current character from user input
-    var output = morseToChar(input);
-
-    //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0);
-
-    //Get the image source
-    var img = require('' + gameData[gameIndex].imagePath);
-
-    //Keeping track of current letter in current word
-    //var [wordIndex, setWordIndex] = React.useState(0);
-
-    //Word that the user needs to type
-    //var [currentWord, setCurrentWord] = React.useState(gameData[gameIndex].name);
-    var currentWord = gameData[gameIndex].name;
-
-    //Current letter to be type(first letter)
-    var currentLetter = currentWord[0];
-
-    //Current morse code the user is typing                  
-    var currentMorse = charToMorse(currentLetter); 
+    var [correct, setCorrect] = React.useState('');         //The correct words that the user got so far
+    var [wordIndex, setWordIndex] = React.useState(0);      //Keeping track of current letter in current word
+    var [input, setInput] = React.useState('');             //Track user input
+    var [gameIndex, setGameIndex] = React.useState(0);      //Index to track the current word
+    var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
+    var currentLetter = currentWord[wordIndex];             //Current letter to be type
+    var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
+    var output = morseToChar(input);                        //Get current character from user input
+    var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
-
     //Reset input if the length is greater than 6
     if (input.length > 6){
         setInput('');
     }
-    let isCorrect = false;
+    
     //Check for matching current morse sequence to current letter
     if (input === currentMorse) {
-        setCorrect(currentWord);
-        setTimeout(function() {
-            sleep(1500);
-            isCorrect = true;
-        }, 100);
+        setCorrect(correct + currentWord[wordIndex]);
+        setInput('');
+        setWordIndex(prevState => prevState + 1);
     }
 
-    if (isCorrect) {
+    //Check when the user complete the whole word
+    if (correct.localeCompare(currentWord) === 0) {
+        //Set the new word
         setGameIndex(prevState => prevState + 1);
+        //Reset word index
+        setWordIndex(0);
+        //Reset correct
         setCorrect('');
-        setInput('')
-        isCorrect = false;
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -102,7 +90,7 @@ function LearnWord () {
                                 <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
                             </Grid>
                             <Grid>
-                                <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
+                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
                             </Grid>
                         </Grid>
                     </Container>
@@ -145,14 +133,6 @@ function LearnWord () {
             </div>
         </div>
     )
-}
-
-function sleep(ms) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < ms);
 }
 
 export default LearnWord
