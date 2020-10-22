@@ -20,7 +20,7 @@ var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
 
-function LearnWord () {
+function LearnWordBeginner () {
     //Get the data
     var gameData = require('./WordGameData.json');
 
@@ -64,11 +64,12 @@ function LearnWord () {
     let isCorrect = false;
     //Check for matching current morse sequence to current letter
     if (input === currentMorse) {
-        setCorrect(currentWord);
-        setTimeout(function() {
-            sleep(1500);
-            isCorrect = true;
-        }, 100);
+        // setCorrect(currentWord);
+        // setTimeout(function() {
+        //     sleep(1500);
+        //     isCorrect = true;
+        // }, 100);
+        isCorrect = true;
     }
 
     if (isCorrect) {
@@ -105,6 +106,7 @@ function LearnWord () {
                                 <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
                             </Grid>
                         </Grid>
+                        <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
             </div>
@@ -155,4 +157,4 @@ function sleep(ms) {
     } while (currentDate - date < ms);
 }
 
-export default LearnWord
+export default LearnWordBeginner

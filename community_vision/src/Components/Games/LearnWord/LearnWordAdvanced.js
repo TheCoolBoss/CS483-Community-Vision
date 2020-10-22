@@ -22,7 +22,7 @@ import {charToMorse, morseToChar} from "./../charMorseConv";
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
-function LearnWord () {
+function LearnWordAdvanced () {
     //Run generate data
     //generateData();
 
@@ -135,4 +135,4 @@ function LearnWord () {
     )
 }
 
-export default LearnWord
+export default LearnWordAdvanced

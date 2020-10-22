@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import {charToMorse, morseToChar} from "../charMorseConv";
+import {charToMorse, morseToChar} from "./../charMorseConv";
 //import generateData from './generateData'
 
 /*
@@ -22,7 +22,7 @@ import {charToMorse, morseToChar} from "../charMorseConv";
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
-function LearnWord () {
+function LearnWordMedium () {
     //Run generate data
     //generateData();
 
@@ -93,6 +93,7 @@ function LearnWord () {
                                 <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
                             </Grid>
                         </Grid>
+                        <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
             </div>
@@ -135,4 +136,4 @@ function LearnWord () {
     )
 }
 
-export default LearnWord
+export default LearnWordMedium
