@@ -45,12 +45,13 @@ function  Settings() {
     return (
         <div style={{position: 'relative', alignContent: 'center'}} className={classes.root}>
             <h1>Choose Your Game Settings</h1>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px'}}>
                 <Grid item xs={6}>
                     <Paper className={classes.paper}>
                         Sound
                         <HearingIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
+                    <br></br>
                     <input type="radio" id="onButton" name="soundButton" value="on" checked="checked"></input>
                     <label for="onButton">Sound On</label>
                     <input type="radio" id="offButton" name="soundButton" value="off" style={{marginLeft: '30px'}}></input>
@@ -60,7 +61,16 @@ function  Settings() {
                         <VolumeDown />
                         </Grid>
                         <Grid item xs>
-                        <Slider value={value} onChange={handleChange} aria-labelledby="continuous-slider" />
+                            <Slider 
+                                defaultValue={50}
+                                getAriaValueText={valuetext}
+                                aria-labelledby="discrete-slider"
+                                valueLabelDisplay="auto"
+                                step={10}
+                                marks
+                                min={10}
+                                max={100}
+                            />
                         </Grid>
                         <Grid item>
                         <VolumeUp />
@@ -72,6 +82,7 @@ function  Settings() {
                         Choose Colors
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
+                    <br></br>
                     <input type="radio" id="defaultColorButton" name="colorButton" value="" checked="checked"></input>
                     <label for="defaultColorButton">Default</label>
                     <input type="radio" id="greyScaleButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
@@ -84,7 +95,17 @@ function  Settings() {
                         Speed
                         <AccessAlarmsIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    <Slider speed defaultValue={30} aria-labelledby="speed-slider" />
+                    <Slider 
+                        defaultValue={50}
+                        getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={10}
+                        max={100}
+                        style={{marginBottom: '-70px'}}
+                    />
                 </Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.paper}>
@@ -105,7 +126,7 @@ function  Settings() {
                                 marks
                                 min={10}
                                 max={100}
-                                style={{marginLeft: '5px', marginBottom: '-70px'}}
+                                style={{marginBottom: '-70px'}}
                             />
                         </Grid>
                         <Grid  item>
