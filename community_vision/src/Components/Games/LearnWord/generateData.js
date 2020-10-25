@@ -12,14 +12,14 @@ generateData();
 
 function generateData () {
     //File system module
-    var fs = require('brfs');
+    var fs = require('fs');
     var path = require('path');
 
     //Get directory path
     var dirPath = path.join(__dirname, 'Images');
 
     //JSON data var
-    const myData = [];
+    var myData = [];
 
     //Read the images in the directory 'Images'
     fs.readdir(dirPath, function(err, images) {
@@ -36,22 +36,20 @@ function generateData () {
                 if(path.parse(image).ext.localeCompare('.png') === 0 || path.parse(image).ext.localeCompare('.jpg') === 0) {
                     //Variable to store all necessary information from each image
                     let imageData = {
-                    name: path.parse(image).name.toUpperCase(),
-                    imagePath: './Images/' + image
+                        name: path.parse(image).name.toUpperCase(),
+                        imagePath: './Images/' + image
                     };
                     //Push data to json obj
-                myData.push(imageData);
+                    myData.push(imageData);
                 }
             });
+            //Write the data created to WordGameData.json
+            fs.writeFile('./WordGameData.json', JSON.stringify(myData), erro => {
+                //Check for errors
+                if (erro) throw erro;
+            })
         }
     });
-
-    console.log(myData);
-    //Write the data created to WordGameData.json
-    fs.writeFile('./WordGameData.json', JSON.stringify(myData), err => {
-        //Check for errors
-        if (err) throw err;
-    })
 }
 
 //export default generateData;

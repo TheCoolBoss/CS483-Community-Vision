@@ -4,198 +4,55 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-//import generateData from './generateData'
+import {charToMorse, morseToChar} from "./../charMorseConv";
 
 /*
 * Game that shows a picture and word that associates with that picture
 * The user have to put in the correct sequence of morse code
+* This difficult allows user to see the sequence of morse code needed to be input
 *
 * 
 * Created : 9/28/2020
 * Modified: 9/30/2020
 */
 
-//generateData();
-
 //Variables for time
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
-
-//Temp function(will move to another .js file)
-function morseToChar(x) {
-    if (x === '.-'){
-        return 'A';
-    } else if (x === '-...'){
-        return 'B';
-    } else if (x === '-.-.'){
-        return 'C';
-    } else if (x === '-..'){
-        return 'D';
-    } else if (x === '.'){
-        return 'E';
-    } else if (x === '..-.'){
-        return 'F';
-    } else if (x === '--.'){
-        return 'G';
-    } else if (x === '....'){
-        return 'H';
-    } else if (x === '..'){
-        return 'I';
-    } else if (x === '.---'){
-        return 'J';
-    } else if (x === '-.-'){
-        return 'K';
-    } else if (x === '.-..'){
-        return 'L';
-    } else if (x === '--'){
-        return 'M';
-    } else if (x === '-.'){
-        return 'N';
-    } else if (x === '---'){
-        return 'O';
-    } else if (x === '.--.'){
-        return 'P';
-    } else if (x === '--.-'){
-        return 'Q';
-    } else if (x === '.-.'){
-        return 'R';
-    } else if (x === '...'){
-        return 'S';
-    } else if (x === '-'){
-        return 'T';
-    } else if (x === '..-'){
-        return 'U';
-    } else if (x === '...-'){
-        return 'V';
-    } else if (x === '.--'){
-        return 'W';
-    } else if (x === '-..-'){
-        return 'X';
-    } else if (x === '-.--'){
-        return 'Y';
-    } else if (x === '--..'){
-        return 'Z';
-    } else if (x === '.----'){
-        return '1';
-    } else if (x === '..---'){
-        return '2';
-    } else if (x === '...--'){
-        return '3';
-    } else if (x === '....-'){
-        return '4';
-    } else if (x === '.....'){
-        return '5';
-    } else if (x === '-....'){
-        return '6';
-    } else if (x === '--...'){
-        return '7';
-    } else if (x === '---..'){
-        return '8';
-    } else if (x === '----.'){
-        return '9';
-    } else if (x === '-----'){
-        return '0';
-    } else{
-        return '';
-    }
-}
-//Temp function(will be move to another .js file)
-function charToMorse(x) {
-    if (x === 'A'){
-        return '.-';
-    } else if (x === 'B'){
-        return '-...';
-    } else if (x === 'C'){
-        return '-.-.';
-    } else if (x === 'D'){
-        return '-..';
-    } else if (x === 'E'){
-        return '.';
-    } else if (x === 'F'){
-        return '..-.';
-    } else if (x === 'G'){
-        return '--.';
-    } else if (x === 'H'){
-        return '....';
-    } else if (x === 'I'){
-        return '..';
-    } else if (x === 'J'){
-        return '.---';
-    } else if (x === 'K'){
-        return '-.-';
-    } else if (x === 'L'){
-        return '.-..';
-    } else if (x === 'M'){
-        return '--';
-    } else if (x === 'N'){
-        return '-.';
-    } else if (x === 'O'){
-        return '---';
-    } else if (x === 'P'){
-        return '.--.';
-    } else if (x === 'Q'){
-        return '--.-';
-    } else if (x === 'R'){
-        return '.-.';
-    } else if (x === 'S'){
-        return '...';
-    } else if (x === 'T'){
-        return '-';
-    } else if (x === 'U'){
-        return '..-';
-    } else if (x === 'V'){
-        return '...-';
-    } else if (x === 'W'){
-        return '.--';
-    } else if (x === 'X'){
-        return '-..-';
-    } else if (x === 'Y'){
-        return '-.--';
-    } else if (x === 'Z'){
-        return '--..';
-    } else if (x === '1'){
-        return '.----';
-    } else if (x === '2'){
-        return '..---';
-    } else if (x === '3'){
-        return '...--';
-    } else if (x === '4'){
-        return '....-';
-    } else if (x === '5'){
-        return '.....';
-    } else if (x === '6'){
-        return '-....';
-    } else if (x === '7'){
-        return '--...';
-    } else if (x === '8'){
-        return '---..';
-    } else if (x === '9'){
-        return '----.';
-    } else if (x === '0'){
-        return '-----';
-    } else{
-        return '';
-    }
-}
-
-
-function LearnWord () {
+function LearnWordMedium () {
     //Run generate data
     //generateData();
 
     //Get the data
     var gameData = require('./WordGameData.json');
 
-    var [correct, setCorrect] = React.useState('');         //The correct words that the user got so far
-    var [wordIndex, setWordIndex] = React.useState(0);      //Keeping track of current letter in current word
-    var [input, setInput] = React.useState('');             //Track user input
-    var [gameIndex, setGameIndex] = React.useState(0);      //Index to track the current word
-    var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
-    var currentLetter = currentWord[wordIndex];             //Current letter to be type
-    var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
-    var output = morseToChar(input);                        //Get current character from user input
-    var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
+    //The correct words that the user got so far
+    var [correct, setCorrect] = React.useState('');  
+    
+    //Keeping track of current letter in current word
+    var [wordIndex, setWordIndex] = React.useState(0); 
+    
+    //Track user input
+    var [input, setInput] = React.useState('');
+    
+    //Index to track the current word
+    var [gameIndex, setGameIndex] = React.useState(0);
+    
+    //Word that the user needs to type
+    var currentWord = gameData[gameIndex].name;
+
+    //Current letter to be type
+    var currentLetter = currentWord[wordIndex]; 
+    
+    //Current morse code the user is typing
+    var currentMorse = charToMorse(currentLetter);  
+    
+    //Get current character from user input
+    var output = morseToChar(input);   
+    
+    //Get the image source
+    var img = require('' + gameData[gameIndex].imagePath);  
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -251,6 +108,7 @@ function LearnWord () {
                                 <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
                             </Grid>
                         </Grid>
+                        <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
             </div>
@@ -293,4 +151,4 @@ function LearnWord () {
     )
 }
 
-export default LearnWord
+export default LearnWordMedium
