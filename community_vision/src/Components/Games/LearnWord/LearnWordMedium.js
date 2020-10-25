@@ -5,18 +5,16 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
-//import generateData from './generateData'
 
 /*
 * Game that shows a picture and word that associates with that picture
 * The user have to put in the correct sequence of morse code
+* This difficult allows user to see the sequence of morse code needed to be input
 *
 * 
 * Created : 9/28/2020
 * Modified: 9/30/2020
 */
-
-//generateData();
 
 //Variables for time
 var t;
@@ -29,15 +27,32 @@ function LearnWordMedium () {
     //Get the data
     var gameData = require('./WordGameData.json');
 
-    var [correct, setCorrect] = React.useState('');         //The correct words that the user got so far
-    var [wordIndex, setWordIndex] = React.useState(0);      //Keeping track of current letter in current word
-    var [input, setInput] = React.useState('');             //Track user input
-    var [gameIndex, setGameIndex] = React.useState(0);      //Index to track the current word
-    var currentWord = gameData[gameIndex].name;             //Word that the user needs to type
-    var currentLetter = currentWord[wordIndex];             //Current letter to be type
-    var currentMorse = charToMorse(currentLetter);          //Current morse code the user is typing
-    var output = morseToChar(input);                        //Get current character from user input
-    var img = require('' + gameData[gameIndex].imagePath);  //Get the image source
+    //The correct words that the user got so far
+    var [correct, setCorrect] = React.useState('');  
+    
+    //Keeping track of current letter in current word
+    var [wordIndex, setWordIndex] = React.useState(0); 
+    
+    //Track user input
+    var [input, setInput] = React.useState('');
+    
+    //Index to track the current word
+    var [gameIndex, setGameIndex] = React.useState(0);
+    
+    //Word that the user needs to type
+    var currentWord = gameData[gameIndex].name;
+
+    //Current letter to be type
+    var currentLetter = currentWord[wordIndex]; 
+    
+    //Current morse code the user is typing
+    var currentMorse = charToMorse(currentLetter);  
+    
+    //Get current character from user input
+    var output = morseToChar(input);   
+    
+    //Get the image source
+    var img = require('' + gameData[gameIndex].imagePath);  
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
