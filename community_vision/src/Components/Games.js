@@ -21,28 +21,28 @@ function Games() {
       <Container maxWidth='xl' style={{backgroundColor: '#01214f'}}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='AlphabetNoHelp' img={LearnAlphabetIMG} link='/noHelpAlphabet' difficulty='Hard'/>
+            <GameSelection name='Alphabet No Help' img={LearnAlphabetIMG} link='/noHelpAlphabet' difficulty='Hard'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Medium'/>
+            <GameSelection name='Learn Word Advanced' img={LearnAlphabetIMG} link='/learnWordAdvanced' difficulty='Hard'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Easy'/>
+            <GameSelection name='Learn Word Medium' img={LearnAlphabetIMG} link='/learnWordMedium' difficulty='Medium'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
+            <GameSelection name='Learn Word Easy' img={LearnAlphabetIMG} link='/learnWordBeginner' difficulty='Easy'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/sandboxLetters' difficulty='Beginner'/>
+            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/sandboxLetters' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/sandboxWords' difficulty='Beginner'/>
+            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/sandboxWords' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
+            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='LearnTheAlphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
+            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
           </Grid>
         </Grid>
       </Container>
@@ -68,7 +68,7 @@ class GameSelection extends React.Component {
           <Card>
             <CardActionArea>
               <img style={{height: '100%', width: '100%', margin: '0%', padding: '0%', display: 'block'}} src={this.props.img} alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*//>
-              <p style={{color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color}} >Learn The Alphabet</p>
+              <p style={{color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color}} >{this.props.name}</p>
             </CardActionArea>
           </Card>
         </Link>
