@@ -33,10 +33,10 @@ function Games() {
             <GameSelection name='Learn Word Easy' img={LearnAlphabetIMG} link='/learnWordBeginner' difficulty='Easy'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/sandboxLetters' difficulty='Beginner'/>
+            <GameSelection name='Sandbox Letters' img={LearnAlphabetIMG} link='/sandboxLetters' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/sandboxWords' difficulty='Beginner'/>
+            <GameSelection name='Sandbox Words' img={LearnAlphabetIMG} link='/sandboxWords' difficulty='Beginner'/>
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn The Alphabet' img={LearnAlphabetIMG} link='/learnAlphabet' difficulty='Beginner'/>
