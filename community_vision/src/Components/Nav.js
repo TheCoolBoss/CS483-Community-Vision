@@ -29,7 +29,7 @@ function Nav() {
           justifyContent: 'space-around',
           alignItems: 'center',
           listStyle: 'none'}}>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/games">
+          <Link style={{color: 'black', textDecoration: 'none'}} to="/settings">
             <li>Games</li>
           </Link>
           <Link style={{color: 'black', textDecoration: 'none'}} to="/about">

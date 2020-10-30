@@ -89,6 +89,9 @@ function  Settings() {
                     <label for="greyScaleButton">Grey Scale</label>
                     <input type="radio" id="oneColorButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">One-Color</label>
+                    <br></br>
+                    <h2>Background Color</h2>
+                    
                 </Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.paper}>
