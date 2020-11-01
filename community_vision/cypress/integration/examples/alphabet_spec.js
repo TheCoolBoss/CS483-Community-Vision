@@ -2,6 +2,8 @@ const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
 const { interpolate } = require("react-spring")
 
+//./node_modules/.bin/cypress open
+
 describe('Learning Alphabet Game Test', function () {
     it('Navigates to Learn Alph Game and tests functionality', function () {
         // Arrange - setup initial app state
