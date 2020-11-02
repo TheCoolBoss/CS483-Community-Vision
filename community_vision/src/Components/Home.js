@@ -45,7 +45,7 @@ function Home() {
             </Grid>
             <Grid item xs={5} style={{height: '20%'}}>
               <Card style={{height: '100%'}}>
-                <Link className='nav-link' to="/games">
+                <Link className='nav-link' to="/settings">
                   <button style={{height: '100%', width: '100%', fontSize: '4vh', fontWeight: 900}}>Play Games!</button>
                 </Link>
               </Card>

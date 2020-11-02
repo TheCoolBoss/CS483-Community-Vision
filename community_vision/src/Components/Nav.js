@@ -30,7 +30,7 @@ function Nav() {
           justifyContent: 'space-around',
           alignItems: 'center',
           listStyle: 'none'}}>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/games">
+          <Link style={{color: 'black', textDecoration: 'none'}} to="/settings">
             <li>Games</li>
           </Link>
           <Link style={{color: 'black', textDecoration: 'none'}} to="/about">
@@ -47,7 +47,9 @@ function Nav() {
       <animated.div style={{gridArea: 'header',
         display: 'flex',
         justifContent: 'space-around',
+        alignSelf: 'center',
         alignItems: 'center',
+        position: 'relative',
         minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '70vh']}),
         background: 'grey',
         color: 'white'}}>
