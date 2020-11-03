@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import logo from './logo.png'
 import pic from './logopic.png'
 import {useSpring, animated} from 'react-spring'
+import Settings from './Settings.js'
 
 function Nav() {
   var [state, toggle] = React.useState(false);
@@ -21,7 +22,9 @@ function Nav() {
         alignItems: 'center',
         minHeight: '10vh',
         background: '#b8ee30',
-        color: 'white'}}>
+        color: 'white',
+        position: 'relative',
+        zIndex: '2'}}>
         <Link to="/">
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>
         </Link>
@@ -50,9 +53,10 @@ function Nav() {
         alignSelf: 'center',
         alignItems: 'center',
         position: 'relative',
-        minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '70vh']}),
+        minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '75vh']}),
         background: 'grey',
         color: 'white'}}>
+        <Settings/>
       </animated.div>
     </div>
   );

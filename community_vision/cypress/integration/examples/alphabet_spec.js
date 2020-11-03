@@ -2,6 +2,7 @@ const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
 const { interpolate } = require("react-spring")
 
+// command to open cypress below:
 //./node_modules/.bin/cypress open
 
 describe('Learning Alphabet Game Test', function () {

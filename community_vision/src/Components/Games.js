@@ -8,9 +8,16 @@ import Grid from '@material-ui/core/Grid';
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg"
 import { Container } from '@material-ui/core';
 
+var pageColor = '#01214f';
+
+// changes background color
+if(localStorage.getItem("backgroundColor") != null) {
+  pageColor = localStorage.getItem("backgroundColor");
+}
+
 function Games() {
   return (
-    <div style={{backgroundColor: '#01214f',
+    <div style={{backgroundColor: pageColor,
       position: 'relative',
       height: '90vh',
       width: '100vw',
@@ -18,7 +25,7 @@ function Games() {
       gridTemplate: '1fr 4fr / 1fr',
       gridTemplateAreas: '"top" "bottom'}}>
       <h1 style={{fontSize: '7vh', color: '#ffaba6', textDecoration: 'underline', position: 'relative', bottom: '-2vh'}}>Games</h1>
-      <Container maxWidth='xl' style={{backgroundColor: '#01214f'}}>
+      <Container maxWidth='xl' style={{backgroundColor: pageColor}}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Alphabet No Help' img={LearnAlphabetIMG} link='/noHelpAlphabet' difficulty='Hard'/>
