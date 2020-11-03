@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-
+import { useSpring, animated } from 'react-spring';
 
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
-import { useTransition, animated } from 'react-spring'
+//import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
@@ -171,17 +171,13 @@ function charToMorse(x) {
     }
 }
 
-import {charToMorse, morseToChar} from "./charMorseConv";
+//import {charToMorse, morseToChar} from "./charMorseConv";
 
 /*
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../../../public/dot.mp3'*/
-import { useSpring, animated } from 'react-spring';
 
-var t;
-var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 
 function LearnAlphabet() {
@@ -215,9 +211,6 @@ function LearnAlphabet() {
             setInput(input + '•');
             playDot();
         } else if (evt.keyCode === 13) {
-        if (evt.keyCode === 32){
-            setInput(input + '.');
-        } else if (evt.keyCode === 13){
             setInput(input + '-');
             playDash();
         }
@@ -242,8 +235,8 @@ function LearnAlphabet() {
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
                         fontSize: '15vh'}}>{currentMorse}</animated.p>
-                        fontSize: '15vh',
-                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
+                        {/* fontSize: '15vh', */}
+                        {/* opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1> */}
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
                         fontSize: '7vh',
