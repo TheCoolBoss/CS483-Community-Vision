@@ -4,77 +4,76 @@
 //Be sure to update the directory if needed
 //import {charToMorse, morseToChar} from "./charMorseConv";
 
-
 export function morseToChar(x) {
-    if (x === '.-'){
+    if (x === '•-'){
         return 'A';
-    } else if (x === '-...'){
+    } else if (x === '-•••'){
         return 'B';
-    } else if (x === '-.-.'){
+    } else if (x === '-•-•'){
         return 'C';
-    } else if (x === '-..'){
+    } else if (x === '-••'){
         return 'D';
-    } else if (x === '.'){
+    } else if (x === '•'){
         return 'E';
-    } else if (x === '..-.'){
+    } else if (x === '••-•'){
         return 'F';
-    } else if (x === '--.'){
+    } else if (x === '--•'){
         return 'G';
-    } else if (x === '....'){
+    } else if (x === '••••'){
         return 'H';
-    } else if (x === '..'){
+    } else if (x === '••'){
         return 'I';
-    } else if (x === '.---'){
+    } else if (x === '•---'){
         return 'J';
-    } else if (x === '-.-'){
+    } else if (x === '-•-'){
         return 'K';
-    } else if (x === '.-..'){
+    } else if (x === '•-••'){
         return 'L';
     } else if (x === '--'){
         return 'M';
-    } else if (x === '-.'){
+    } else if (x === '-•'){
         return 'N';
     } else if (x === '---'){
         return 'O';
     } else if (x === '.--.'){
         return 'P';
-    } else if (x === '--.-'){
+    } else if (x === '--•-'){
         return 'Q';
-    } else if (x === '.-.'){
+    } else if (x === '•-•'){
         return 'R';
-    } else if (x === '...'){
+    } else if (x === '•••'){
         return 'S';
     } else if (x === '-'){
         return 'T';
-    } else if (x === '..-'){
+    } else if (x === '••-'){
         return 'U';
-    } else if (x === '...-'){
+    } else if (x === '•••-'){
         return 'V';
-    } else if (x === '.--'){
+    } else if (x === '•--'){
         return 'W';
-    } else if (x === '-..-'){
+    } else if (x === '-••-'){
         return 'X';
-    } else if (x === '-.--'){
+    } else if (x === '-•--'){
         return 'Y';
-    } else if (x === '--..'){
+    } else if (x === '--••'){
         return 'Z';
-    } else if (x === '.----'){
+    } else if (x === '•----'){
         return '1';
-    } else if (x === '..---'){
+    } else if (x === '••---'){
         return '2';
-    } else if (x === '...--'){
+    } else if (x === '•••--'){
         return '3';
-    } else if (x === '....-'){
+    } else if (x === '••••-'){
         return '4';
-    } else if (x === '.....'){
+    } else if (x === '•••••'){
         return '5';
-    } else if (x === '-....'){
+    } else if (x === '-••••'){
         return '6';
-    } else if (x === '--...'){
+    } else if (x === '--•••'){
         return '7';
-    } else if (x === '---..'){
+    } else if (x === '---••'){
         return '8';
-    } else if (x === '----.'){
+    } else if (x === '----•'){
         return '9';
     } else if (x === '-----'){
         return '0';
@@ -85,75 +84,75 @@ export function morseToChar(x) {
 
 export function charToMorse(x) {
     if (x === 'A'){
-        return '.-';
+        return '•-';
     } else if (x === 'B'){
-        return '-...';
+        return '-•••';
     } else if (x === 'C'){
-        return '-.-.';
+        return '-•-•';
     } else if (x === 'D'){
-        return '-..';
+        return '-••';
     } else if (x === 'E'){
-        return '.';
+        return '•';
     } else if (x === 'F'){
-        return '..-.';
+        return '••-•';
     } else if (x === 'G'){
-        return '--.';
+        return '--•';
     } else if (x === 'H'){
-        return '....';
+        return '••••';
     } else if (x === 'I'){
-        return '..';
+        return '••';
     } else if (x === 'J'){
-        return '.---';
+        return '•---';
     } else if (x === 'K'){
-        return '-.-';
+        return '-•-';
     } else if (x === 'L'){
-        return '.-..';
+        return '•-••';
     } else if (x === 'M'){
         return '--';
     } else if (x === 'N'){
-        return '-.';
+        return '-•';
     } else if (x === 'O'){
         return '---';
     } else if (x === 'P'){
-        return '.--.';
+        return '•--•';
     } else if (x === 'Q'){
-        return '--.-';
+        return '--•-';
     } else if (x === 'R'){
-        return '.-.';
+        return '•-•';
     } else if (x === 'S'){
-        return '...';
+        return '•••';
     } else if (x === 'T'){
         return '-';
     } else if (x === 'U'){
-        return '..-';
+        return '••-';
     } else if (x === 'V'){
-        return '...-';
+        return '•••-';
     } else if (x === 'W'){
-        return '.--';
+        return '•--';
     } else if (x === 'X'){
-        return '-..-';
+        return '-••-';
     } else if (x === 'Y'){
-        return '-.--';
+        return '-•--';
     } else if (x === 'Z'){
-        return '--..';
+        return '--••';
     } else if (x === '1'){
-        return '.----';
+        return '•----';
     } else if (x === '2'){
-        return '..---';
+        return '••---';
     } else if (x === '3'){
-        return '...--';
+        return '•••--';
     } else if (x === '4'){
-        return '....-';
+        return '••••-';
     } else if (x === '5'){
-        return '.....';
+        return '•••••';
     } else if (x === '6'){
-        return '-....';
+        return '-••••';
     } else if (x === '7'){
-        return '--...';
+        return '--•••';
     } else if (x === '8'){
-        return '---..';
+        return '---••';
     } else if (x === '9'){
-        return '----.';
+        return '----•';
     } else if (x === '0'){
         return '-----';
     } else{

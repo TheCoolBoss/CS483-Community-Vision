@@ -83,7 +83,7 @@ function LearnWordAdvanced () {
     document.onkeydown = function(evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '.');
+            setInput(input + '•');
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
         }
