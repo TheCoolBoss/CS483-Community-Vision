@@ -20,7 +20,7 @@ function Nav() {
         justifContent: 'space-around',
         alignItems: 'center',
         minHeight: '10vh',
-        background: '#b8ee30',
+        background: '#facb2c',
         color: 'white'}}>
         <Link to="/">
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>
@@ -35,9 +35,6 @@ function Nav() {
           </Link>
           <Link style={{color: 'black', textDecoration: 'none'}} to="/about">
             <li>About</li>
-          </Link>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/profile">
-            <li>Profile</li>
           </Link>
         </ul>
         <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>

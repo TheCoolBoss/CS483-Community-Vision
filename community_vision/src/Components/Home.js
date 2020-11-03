@@ -20,14 +20,9 @@ function Home() {
       />;
 
       <div style={{gridArea: 'top',
-        backgroundColor: 'blue', height: '80%', opacity: 0.8,
-        alignSelf: 'center', alignItems: 'center',
-        position: 'absolute', width: '100%'}}>
-      </div>
-      <div style={{gridArea: 'top',
         height: '80%',
         alignSelf: 'center', alignItems: 'center'}}>
-        <h1 style={{fontSize: '6vh', color: '#ffaba6', textDecoration: 'underline', position: 'relative', bottom: '-1vh', fontWeight: 900}}>Play Morse!</h1>
+        <h1 style={{fontSize: '10vh', color: '#3c5291', textDecoration: 'underline', position: 'relative', bottom: '-1vh', fontWeight: 900}}>Play Morse!</h1>
       </div>
       <div style={{gridArea: 'middleBottom'}}>
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
@@ -48,11 +43,6 @@ function Home() {
                 <Link className='nav-link' to="/settings">
                   <button style={{height: '100%', width: '100%', fontSize: '4vh', fontWeight: 900}}>Play Games!</button>
                 </Link>
-              </Card>
-            </Grid>
-            <Grid item xs={5} style={{height: '20%'}}>
-              <Card style={{height: '100%'}}>
-                <button style={{height: '100%', width: '100%', fontSize: '4vh', fontWeight: 900}}>Login/Signup</button>
               </Card>
             </Grid>
           </Grid>
