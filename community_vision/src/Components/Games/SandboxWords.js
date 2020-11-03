@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./charMorseConv";
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../Assets/Sounds/dot.mp3'
 
 /*
 import useSound from 'use-sound';
@@ -22,6 +25,9 @@ function SandboxWords() {
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
+    const [anim, setAnim] = useState(true);
     /*
     const BoopButton = () => {
         const [play] = useSound(dashSound);
@@ -82,6 +88,7 @@ function SandboxWords() {
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
                                         setInput(input + '•');
+                                        playDot();
                                     }}>.</button>
                                 </CardActionArea>
                             </Card>
@@ -91,6 +98,7 @@ function SandboxWords() {
                                 <CardActionArea>
                                     <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
                                         setInput(input + '-');
+                                        playDash();
                                     }}>-</button>
                                 </CardActionArea>
                             </Card>
