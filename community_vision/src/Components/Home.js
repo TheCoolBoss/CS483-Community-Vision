@@ -50,11 +50,6 @@ function Home() {
                 </Link>
               </Card>
             </Grid>
-            <Grid item xs={5} style={{height: '20%'}}>
-              <Card style={{height: '100%'}}>
-                <button style={{height: '100%', width: '100%', fontSize: '4vh', fontWeight: 900}}>Login/Signup</button>
-              </Card>
-            </Grid>
           </Grid>
       </div>
     </div>

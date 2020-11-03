@@ -36,9 +36,6 @@ function Nav() {
           <Link style={{color: 'black', textDecoration: 'none'}} to="/about">
             <li>About</li>
           </Link>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/profile">
-            <li>Profile</li>
-          </Link>
         </ul>
         <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>
           <img style={{height: '8vh'}} src={pic} alt={pic}></img>

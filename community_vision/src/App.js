@@ -25,7 +25,6 @@ function App() {
           <Route path="/games" component={Games}/>
           <Route path="/about" component={About}/>
           <Route path="/settings" component={Settings}/>
-          <Route path="/profile" component={Profile}/>
           <Route path="/learnAlphabet" component={LearnAlphabet}/>
           <Route path="/learnWordBeginner" component={LearnWordBeginner}/>
           <Route path="/learnWordAdvanced" component={LearnWordAdvanced}/>
