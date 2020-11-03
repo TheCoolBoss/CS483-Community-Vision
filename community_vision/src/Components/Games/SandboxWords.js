@@ -51,6 +51,8 @@ function SandboxWords() {
             setInput(input + '•');
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+        } else if (evt.keyCode === 9) {
+            document.getElementById("textbox").innerHTML = "";
         }
     };
 
