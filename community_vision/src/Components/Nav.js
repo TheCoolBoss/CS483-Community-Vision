@@ -20,7 +20,7 @@ function Nav() {
         justifContent: 'space-around',
         alignItems: 'center',
         minHeight: '10vh',
-        background: '#facb2c',
+        background: '#f8ac2e',
         color: 'white'}}>
         <Link to="/">
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>
