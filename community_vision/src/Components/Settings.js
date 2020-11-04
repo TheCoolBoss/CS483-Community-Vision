@@ -13,11 +13,7 @@ import ColorLensIcon from '@material-ui/icons/ColorLens';
 import HearingIcon from '@material-ui/icons/Hearing';
 import TextField from '@material-ui/core/TextField';
 
-var pageColor = "gold";
-// changes background color
-if(localStorage.getItem("backgroundColor") != null) {
-    pageColor = localStorage.getItem("backgroundColor");
-}
+var pageColor = 'gold';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,9 +48,19 @@ function  Settings() {
         setValue(newValue);
     };
 
+    var [backgroundColor, setBackgroundColor] = React.useState("gold");
+    // changes background color
+    if(localStorage.getItem("backgroundColor") != null) {
+        pageColor = localStorage.getItem("backgroundColor");
+    }
+    // <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+    //     setInput(input + '-');
+    //     playDash();
+    //     }}>-</button>
+    
     //ToDo: need to adjust sizing so that the page is relative to rescaling and not pixel specific
     return (
-        <div style={{position: 'absolute', alignContent: 'center', backgroundColor: 'gold'}} className={classes.root}>
+        <div style={{position: 'absolute', alignContent: 'center', backgroundColor: pageColor, width: '100%'}} assName={classes.root}>
             <h1>Choose Your Game Settings</h1>
             <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px', backgroundColor: 'gold'}}>
                 <Grid item xs={6}>
@@ -86,7 +92,7 @@ function  Settings() {
                     </Grid>
                 </Grid>
                 <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black"}}>
+                    <Paper className={classes.paper} style={{color:"black", width: '100%'}}>
                         Color Packages
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
@@ -107,13 +113,13 @@ function  Settings() {
                         <TextField id="hexCodeBackground" label="Custom Hex Code" />
                     </form>
                     <br></br>
-                    <input type="radio" id="yellowBackground" name="backgroundButton" value="" defaultChecked style={{marginLeft: '30px'}} onClick={setBackgroundColor('gold')}></input>
+                    <button id="yellowBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('gold')}></button>
                     <label for="oneColorButton">Yellow</label>
-                    <input type="radio" id="greyBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#808080')}></input>
+                    <button id="greyBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#808080')}></button>
                     <label for="oneColorButton">Grey</label>
-                    <input type="radio" id="whiteBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#FFFFFF')}></input>
+                    <button id="whiteBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#808080')}></button>
                     <label for="oneColorButton">White</label>
-                    <input type="radio" id="blackBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#000000')}></input>
+                    <button id="blackBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#FFFFFF')}></button>
                     <label for="oneColorButton">Black</label>
                     <br></br>
                 </Grid>

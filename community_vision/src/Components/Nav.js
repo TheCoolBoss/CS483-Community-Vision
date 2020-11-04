@@ -56,7 +56,7 @@ function Nav() {
         minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '75vh']}),
         background: 'grey',
         color: 'white'}}>
-        <Settings/>
+        {/* <Settings/> */}
       </animated.div>
     </div>
   );
