@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
+import useSound from 'use-sound';
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -49,7 +50,11 @@ function LearnWordBeginner () {
     var currentLetter = currentWord[0];
 
     //Current morse code the user is typing                  
-    var currentMorse = charToMorse(currentLetter); 
+    var currentMorse = charToMorse(currentLetter);
+
+    //Get the sound of current word
+    var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var [playCurrWordSound] = useSound(soundSrc);
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -61,22 +66,16 @@ function LearnWordBeginner () {
     if (input.length > 6){
         setInput('');
     }
-    let isCorrect = false;
+
     //Check for matching current morse sequence to current letter
     if (input === currentMorse) {
-        // setCorrect(currentWord);
-        // setTimeout(function() {
-        //     sleep(1500);
-        //     isCorrect = true;
-        // }, 100);
-        isCorrect = true;
-    }
-
-    if (isCorrect) {
+        //Play current sound of word
+        playCurrWordSound();
+        //Move to the next word
         setGameIndex(prevState => prevState + 1);
+        //Reset inputs
         setCorrect('');
-        setInput('')
-        isCorrect = false;
+        setInput('');
     }
 
     // tracks keycodes for space button  and enter button input 

@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
+import useSound from 'use-sound';
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -52,7 +53,11 @@ function LearnWordMedium () {
     var output = morseToChar(input);   
     
     //Get the image source
-    var img = require('' + gameData[gameIndex].imagePath);  
+    var img = require('' + gameData[gameIndex].imagePath);
+
+    //Get the sound of current word
+    var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var [playCurrWordSound] = useSound(soundSrc);
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -73,6 +78,8 @@ function LearnWordMedium () {
 
     //Check when the user complete the whole word
     if (correct.localeCompare(currentWord) === 0) {
+        //Play the current sound of the word
+        playCurrWordSound();
         //Set the new word
         setGameIndex(prevState => prevState + 1);
         //Reset word index
