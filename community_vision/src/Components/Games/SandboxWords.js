@@ -13,7 +13,7 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../../../public/dot.mp3'*/
-import { useTransition, animated } from 'react-spring';
+import {useTransition, animated, useSpring} from 'react-spring';
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
@@ -88,17 +88,17 @@ function SandboxWords() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '•');
                                         playDot();
-                                    }}>.</button>
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
@@ -109,7 +109,7 @@ function SandboxWords() {
                     <Grid container justify = "center">
                         <Card>
                             <CardActionArea>
-                                <button id="clearButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                <button id="clearButton" style={{backgroundColor: '#01214f', width: '100%', height: '10vh', fontSize: '10vh', color: '#ffaba6'}} onClick={function(){
                                     document.getElementById("textbox").innerHTML = "";
                                 }}>Clear</button>
                             </CardActionArea>

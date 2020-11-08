@@ -8,6 +8,7 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
+import {animated, useSpring} from "react-spring";
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
@@ -48,12 +49,24 @@ function NoHelpAlphabet() {
         }
     };
 
+    var d = 2000;
+    if (!anim){
+        d = 0;
+        t = setTimeout(function(){
+            setAnim(!anim)
+        }, 100);
+    }
+    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } });
+
     return (
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
-                    <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
-
+                    <animated.h1 style={{lineHeight: 0,
+                        color: '#ff8e97',
+                        fontSize: '25vh'}}>{currentLetter}</animated.h1>
+                    {/* fontSize: '15vh', */}
+                    {/* opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1> */}
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
@@ -73,7 +86,7 @@ function NoHelpAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                             setInput(input + '•');
                                             playDot();
                                         }}>.</button>
@@ -83,7 +96,7 @@ function NoHelpAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                         }}>-</button>
