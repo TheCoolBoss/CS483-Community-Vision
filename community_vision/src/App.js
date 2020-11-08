@@ -5,7 +5,6 @@ import Nav from './Components/Nav';
 import Games from './Components/Games';
 import About from './Components/About';
 import Settings from './Components/Settings'
-import Profile from './Components/Profile';
 import LearnAlphabet from './Components/Games/LearnAlphabet';
 import LearnWordAdvanced from './Components/Games/LearnWord/LearnWordAdvanced';
 import LearnWordBeginner from './Components/Games/LearnWord/LearnWordBeginner';

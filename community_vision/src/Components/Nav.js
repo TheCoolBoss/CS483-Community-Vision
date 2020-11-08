@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import logo from './logo.png'
-import pic from './logopic.png'
+import pic from './settings.png'
 import {useSpring, animated} from 'react-spring'
 
 function Nav() {
@@ -20,7 +20,7 @@ function Nav() {
         justifContent: 'space-around',
         alignItems: 'center',
         minHeight: '10vh',
-        background: '#b8ee30',
+        background: '#f8ac2e',
         color: 'white'}}>
         <Link to="/">
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>

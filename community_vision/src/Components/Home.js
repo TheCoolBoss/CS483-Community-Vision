@@ -20,27 +20,15 @@ function Home() {
       />;
 
       <div style={{gridArea: 'top',
-        backgroundColor: 'blue', height: '80%', opacity: 0.8,
-        alignSelf: 'center', alignItems: 'center',
-        position: 'absolute', width: '100%'}}>
-      </div>
-      <div style={{gridArea: 'top',
         height: '80%',
         alignSelf: 'center', alignItems: 'center'}}>
-        <h1 style={{fontSize: '6vh', color: '#ffaba6', textDecoration: 'underline', position: 'relative', bottom: '-1vh', fontWeight: 900}}>Play Morse!</h1>
+        <h1 style={{fontSize: '10vh', color: '#003087', textDecoration: 'underline', position: 'relative', bottom: '-1vh', fontWeight: 900}}>Play Morse!</h1>
       </div>
       <div style={{gridArea: 'middleBottom'}}>
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
             <Grid item xs={11} style={{height: '80%'}}>
               <h1 style={{height: '100%', color: 'black', fontWeight: 900}}>
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
-                block of text, blah, blah, blah things here
+                Welcome to Community Vision Morse Code Games!
               </h1>
             </Grid>
             <Grid item xs={5} style={{height: '20%'}}>
