@@ -8,14 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg"
 import { Container } from '@material-ui/core';
 
-var pageColor = '#01214f';
-
-// changes background color
-if(localStorage.getItem("backgroundColor") != null) {
-  pageColor = localStorage.getItem("backgroundColor");
-}
-
 function Games() {
+  // changes background color
+  var pageColor = '#01214f';
+  if(localStorage.getItem("backgroundColor") != null) {
+    pageColor = localStorage.getItem("backgroundColor");
+  }
   return (
     <div style={{backgroundColor: pageColor,
       position: 'relative',

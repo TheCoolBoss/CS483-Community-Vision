@@ -43,7 +43,12 @@ function Nav() {
             <li>Profile</li>
           </Link>
         </ul>
-        <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>
+        <button style={{position: 'absolute', right: 0}} onClick={
+          function(){
+            if(window.location.href.slice(-8) !== 'settings'){
+              toggle(!state);
+            }
+          }}>
           <img style={{height: '8vh'}} src={pic} alt={pic}></img>
         </button>
       </div>
@@ -56,7 +61,7 @@ function Nav() {
         minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '75vh']}),
         background: 'grey',
         color: 'white'}}>
-        {/* <Settings/> */}
+        <Settings/>
       </animated.div>
     </div>
   );

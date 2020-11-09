@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import { makeStyles} from '@material-ui/core/styles';
@@ -11,20 +11,7 @@ import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 import FontDownloadIcon from '@material-ui/icons/FontDownload';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import HearingIcon from '@material-ui/icons/Hearing';
-import TextField from '@material-ui/core/TextField';
-
-var pageColor = 'gold';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-}));
+import { SketchPicker } from 'react-color';
 
 function muteSound() {
     //ToDo: mute the dot and dash sounds
@@ -34,35 +21,45 @@ function muteSound() {
 
 function valuetext(value) {
     return `${value}°C`;
-  }
-
-function setBackgroundColor(colorCode) {
-    localStorage.setItem("backgroundColor", colorCode);
 }
 
-function  Settings() {
+function Settings() {
+    var backgroundColor = 'gold';
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+            padding: theme.spacing(2),
+            color: theme.palette.text.secondary,
+        },
+    }));
     const classes =  useStyles();
-    //ToDo: add functionality to volume slider and sound off button click change slider value to 0
     const [value, setValue] = React.useState(30);
     const handleChange = (event, newValue)  => {
         setValue(newValue);
     };
 
-    var [backgroundColor, setBackgroundColor] = React.useState("gold");
+    //ToDo: add functionality to volume slider and sound off button click change slider value to 0
+    //ToDo: rerender pages when background color is changed
+    
     // changes background color
     if(localStorage.getItem("backgroundColor") != null) {
-        pageColor = localStorage.getItem("backgroundColor");
+        backgroundColor = localStorage.getItem("backgroundColor");
+        
     }
-    // <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
-    //     setInput(input + '-');
-    //     playDash();
-    //     }}>-</button>
+    var [backgroundColor, setColor] = useState(backgroundColor);
+    localStorage.setItem("backgroundColor", backgroundColor);
     
     //ToDo: need to adjust sizing so that the page is relative to rescaling and not pixel specific
     return (
-        <div style={{position: 'absolute', alignContent: 'center', backgroundColor: pageColor, width: '100%'}} assName={classes.root}>
+        <div style={{
+            position: 'absolute', 
+            alignContent: 'center', 
+            backgroundColor: backgroundColor, 
+            width: '100%', 
+            flexGrow: 1, 
+            textAlign: 'center',
+            }}>
             <h1>Choose Your Game Settings</h1>
-            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px', backgroundColor: 'gold'}}>
+            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px', backgroundColor: backgroundColor}}>
                 <Grid item xs={6}>
                     <Paper className={classes.paper} style={{color:"black"}}>
                         Sound
@@ -109,17 +106,23 @@ function  Settings() {
                         Background Color
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="hexCodeBackground" label="Custom Hex Code" />
-                    </form>
+                    
                     <br></br>
-                    <button id="yellowBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('gold')}></button>
+                    <button id="yellowBackground" style={{marginLeft: '30px'}} onClick={function(){
+                        setColor('gold');
+                    }}></button>
                     <label for="oneColorButton">Yellow</label>
-                    <button id="greyBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#808080')}></button>
+                    <button id="greyBackground" style={{marginLeft: '30px'}} onClick={function(){
+                        setColor('#808080');
+                    }}></button>
                     <label for="oneColorButton">Grey</label>
-                    <button id="whiteBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#808080')}></button>
+                    <button id="whiteBackground" style={{marginLeft: '30px'}} onClick={function(){
+                        setColor('#FFFFFF');
+                    }}></button>
                     <label for="oneColorButton">White</label>
-                    <button id="blackBackground" style={{marginLeft: '30px'}} onClick={setBackgroundColor('#FFFFFF')}></button>
+                    <button id="blackBackground" style={{marginLeft: '30px'}} onClick={function(){
+                        setColor('#000000');
+                    }}></button>
                     <label for="oneColorButton">Black</label>
                     <br></br>
                 </Grid>
@@ -172,9 +175,6 @@ function  Settings() {
                         Font Color
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="hexCodeFont" label="Custom Hex Code"  />
-                    </form>
                     <br></br>
                     <input type="radio" id="blackFont" name="fontButton" value="" defaultChecked style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">Black</label>
@@ -200,6 +200,23 @@ function  Settings() {
             
         </div>
     )
+}
+
+class Component extends React.Component {
+    state = {
+        background: '#fff',
+    };
+    handleChangeComplete = (color) => {
+        this.setState({ background: color.hex });
+    };  
+    render() {
+        return (
+          <SketchPicker
+            color={ this.state.background }
+            onChangeComplete={ this.handleChangeComplete }
+          />
+        );
+    }
 }
 
 export default Settings;
