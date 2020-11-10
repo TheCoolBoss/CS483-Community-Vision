@@ -13,7 +13,7 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 function LearnAlphabet() {
     var [index, setIndex] = useState(0);

@@ -12,6 +12,7 @@ import LearnWordMedium from './Components/Games/LearnWord/LearnWordMedium';
 import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
+import LearnNumbers from "./Components/Games/LearnNumbers";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/noHelpAlphabet" component={AlphabetNoHelp}/>
           <Route path="/sandboxLetters" component={SandboxLetters}/>
           <Route path="/sandboxWords" component={SandboxWords}/>
+          <Route path="/learnNumbers" component={LearnNumbers}/>
         </Switch>
       </div>
     </Router>
