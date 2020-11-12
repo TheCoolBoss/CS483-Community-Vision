@@ -96,7 +96,9 @@ function Settings() {
                     <br></br>
                     <input type="radio" id="defaultColorButton" name="colorButton" value="default" defaultChecked></input>
                     <label for="defaultColorButton">Default</label>
-                    <input type="radio" id="greyScaleButton" name="colorButton" value="geryScale" style={{marginLeft: '30px'}}></input>
+                    <input type="radio" id="greyScaleButton" name="colorButton" value="geryScale" style={{marginLeft: '30px'}} onClick={function(){
+                        setColor('#C2C5CC');
+                    }}></input>
                     <label for="greyScaleButton">Grey Scale</label>
                     <input type="radio" id="oneColorButton" name="colorButton" value="oneColor" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">One-Color</label>
@@ -108,21 +110,21 @@ function Settings() {
                     </Paper>
                     
                     <br></br>
-                    <button id="yellowBackground" style={{marginLeft: '30px'}} onClick={function(){
+                    <input type="radio" id="yellowBackground" name="backgroundButton" defaultChecked style={{marginLeft: '30px'}} onClick={function(){
                         setColor('gold');
-                    }}></button>
+                    }}></input>
                     <label for="oneColorButton">Yellow</label>
-                    <button id="greyBackground" style={{marginLeft: '30px'}} onClick={function(){
+                    <input type="radio" id="greyBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
                         setColor('#808080');
-                    }}></button>
+                    }}></input>
                     <label for="oneColorButton">Grey</label>
-                    <button id="whiteBackground" style={{marginLeft: '30px'}} onClick={function(){
+                    <input type="radio" id="whiteBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
                         setColor('#FFFFFF');
-                    }}></button>
+                    }}></input>
                     <label for="oneColorButton">White</label>
-                    <button id="blackBackground" style={{marginLeft: '30px'}} onClick={function(){
+                    <input type="radio" id="blackBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
                         setColor('#000000');
-                    }}></button>
+                    }}></input>
                     <label for="oneColorButton">Black</label>
                     <br></br>
                 </Grid>
@@ -211,10 +213,14 @@ class Component extends React.Component {
     };  
     render() {
         return (
-          <SketchPicker
-            color={ this.state.background }
-            onChangeComplete={ this.handleChangeComplete }
-          />
+            <div>
+                <SketchPicker
+                    color={ this.state.background }
+                    onChangeComplete={ this.handleChangeComplete }
+                />
+          
+                <h1>HELLO</h1>
+          </div>
         );
     }
 }
