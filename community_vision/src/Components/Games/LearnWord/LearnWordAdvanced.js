@@ -16,8 +16,6 @@ import useSound from 'use-sound';
 * Modified: 9/30/2020
 */
 
-//generateData();
-
 //Variables for time
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
@@ -42,10 +40,10 @@ function LearnWordAdvanced () {
     var currentWord = gameData[gameIndex].name; 
     
     //Current letter to be type
-    var currentLetter = currentWord[wordIndex];  
+    var currentLetter = currentWord[wordIndex];
     
     //Current morse code the user is typing
-    var currentMorse = charToMorse(currentLetter); 
+    var currentMorse = charToMorse(currentLetter);
     
     //Get current character from user input
     var output = morseToChar(input);   
@@ -62,28 +60,42 @@ function LearnWordAdvanced () {
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
+
     //Reset input if the length is greater than 6
     if (input.length > 6){
         setInput('');
     }
     
-    //Check for matching current morse sequence to current letter
-    if (input === currentMorse) {
-        setCorrect(correct + currentWord[wordIndex]);
-        setInput('');
-        setWordIndex(prevState => prevState + 1);
+    //Check for correct character after each input
+    React.useEffect (() => {
+        //Check for matching current morse sequence to current letter
+        if (input === currentMorse) {
+            setCorrect(correct + currentWord[wordIndex]);
+            setInput('');
+            setWordIndex(prevWordIndex => prevWordIndex + 1);
+            //Check when the user complete the whole word
+            if (correct.localeCompare(currentWord) === 0) {
+                //Play the pronunciation of the current word
+                playCurrWordSound();
+                //Delay 2 sec
+                setTimeout(function () {
+                    //Set the new word
+                    setGameIndex(prevState => prevState + 1);
+                    //Reset word index
+                    setWordIndex(0);
+                    //Reset correct
+                    setCorrect('');
+                }, 2000)
+            }
+        }
+    }, [input]);
+    
+    var isValidLetter;
+    if (typeof(currentLetter) == 'undefined') {
+        isValidLetter = false;
     }
-
-    //Check when the user complete the whole word
-    if (correct.localeCompare(currentWord) === 0) {
-        //Play the pronunciation of the current word
-        playCurrWordSound();
-        //Set the new word
-        setGameIndex(prevState => prevState + 1);
-        //Reset word index
-        setWordIndex(0);
-        //Reset correct
-        setCorrect('');
+    else {
+        isValidLetter = true;
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -102,17 +114,26 @@ function LearnWordAdvanced () {
                 <div>
                     <Container>
                         <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                        {isValidLetter 
+                            ?
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                            :
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
-                            </Grid>
-                        </Grid>
+                        }
                     </Container>
                 </div>
             </div>
@@ -134,7 +155,7 @@ function LearnWordAdvanced () {
                             <Card>
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                            setInput(input + '•');
+                                        setInput(input + '•');
                                     }}>.</button>
                                 </CardActionArea>
                             </Card>

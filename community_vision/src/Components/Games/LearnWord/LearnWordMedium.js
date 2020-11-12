@@ -14,7 +14,7 @@ import useSound from 'use-sound';
 *
 * 
 * Created : 9/28/2020
-* Modified: 9/30/2020
+* Modified: 11/10/2020
 */
 
 //Variables for time
@@ -22,32 +22,29 @@ var t;
 var resetTimer = 1500; //reset timer in milliseconds
 
 function LearnWordMedium () {
-    //Run generate data
-    //generateData();
-
     //Get the data
     var gameData = require('./WordGameData.json');
 
     //The correct words that the user got so far
     var [correct, setCorrect] = React.useState('');  
-    
-    //Keeping track of current letter in current word
+
+    //Keeping track of current letter in current word       
     var [wordIndex, setWordIndex] = React.useState(0); 
     
     //Track user input
-    var [input, setInput] = React.useState('');
+    var [input, setInput] = React.useState('');  
     
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0);
+    var [gameIndex, setGameIndex] = React.useState(0); 
     
     //Word that the user needs to type
-    var currentWord = gameData[gameIndex].name;
-
+    var currentWord = gameData[gameIndex].name; 
+    
     //Current letter to be type
-    var currentLetter = currentWord[wordIndex]; 
+    var currentLetter = currentWord[wordIndex];
     
     //Current morse code the user is typing
-    var currentMorse = charToMorse(currentLetter);  
+    var currentMorse = charToMorse(currentLetter);
     
     //Get current character from user input
     var output = morseToChar(input);   
@@ -64,28 +61,42 @@ function LearnWordMedium () {
     t = setTimeout(function(){
         setInput('');
     }, resetTimer);
+
     //Reset input if the length is greater than 6
     if (input.length > 6){
         setInput('');
     }
     
-    //Check for matching current morse sequence to current letter
-    if (input === currentMorse) {
-        setCorrect(correct + currentWord[wordIndex]);
-        setInput('');
-        setWordIndex(prevState => prevState + 1);
+    //Check for correct character after each input
+    React.useEffect (() => {
+        //Check for matching current morse sequence to current letter
+        if (input === currentMorse) {
+            setCorrect(correct + currentWord[wordIndex]);
+            setInput('');
+            setWordIndex(prevWordIndex => prevWordIndex + 1);
+            //Check when the user complete the whole word
+            if (correct.localeCompare(currentWord) === 0) {
+                //Play the pronunciation of the current word
+                playCurrWordSound();
+                //Delay 2 sec
+                setTimeout(function () {
+                    //Set the new word
+                    setGameIndex(prevState => prevState + 1);
+                    //Reset word index
+                    setWordIndex(0);
+                    //Reset correct
+                    setCorrect('');
+                }, 2000)
+            }
+        }
+    }, [input]);
+    
+    var isValidLetter;
+    if (typeof(currentLetter) == 'undefined') {
+        isValidLetter = false;
     }
-
-    //Check when the user complete the whole word
-    if (correct.localeCompare(currentWord) === 0) {
-        //Play the current sound of the word
-        playCurrWordSound();
-        //Set the new word
-        setGameIndex(prevState => prevState + 1);
-        //Reset word index
-        setWordIndex(0);
-        //Reset correct
-        setCorrect('');
+    else {
+        isValidLetter = true;
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -104,17 +115,26 @@ function LearnWordMedium () {
                 <div>
                     <Container>
                         <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                        {isValidLetter 
+                            ?
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                            :
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
-                            </Grid>
-                        </Grid>
+                        }
                         <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
@@ -137,7 +157,7 @@ function LearnWordMedium () {
                             <Card>
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                            setInput(input + '•');
+                                            setInput(prevInput => prevInput + '•');
                                     }}>.</button>
                                 </CardActionArea>
                             </Card>
@@ -146,7 +166,7 @@ function LearnWordMedium () {
                             <Card>
                                 <CardActionArea>
                                     <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                        setInput(input + '-');
+                                        setInput(prevInput => prevInput + '-');
                                     }}>-</button>
                                 </CardActionArea>
                             </Card>
@@ -156,6 +176,14 @@ function LearnWordMedium () {
             </div>
         </div>
     )
+}
+
+function sleep(ms) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < ms);
 }
 
 export default LearnWordMedium

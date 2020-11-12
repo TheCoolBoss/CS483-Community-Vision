@@ -24,11 +24,12 @@ var resetTimer = 1500; //reset timer in milliseconds
 function LearnWordBeginner () {
     //Get the data
     var gameData = require('./WordGameData.json');
-
-    //current letters
-    var [correct, setCorrect] = React.useState('');
+    
     //Track user input
     var [input, setInput] = React.useState('');
+
+    //correct input tracker
+    var [isCorrect, setIsCorrect] = React.useState(false);
     
     //Get current character from user input
     var output = morseToChar(input);
@@ -39,11 +40,7 @@ function LearnWordBeginner () {
     //Get the image source
     var img = require('' + gameData[gameIndex].imagePath);
 
-    //Keeping track of current letter in current word
-    //var [wordIndex, setWordIndex] = React.useState(0);
-
     //Word that the user needs to type
-    //var [currentWord, setCurrentWord] = React.useState(gameData[gameIndex].name);
     var currentWord = gameData[gameIndex].name;
 
     //Current letter to be type(first letter)
@@ -67,16 +64,20 @@ function LearnWordBeginner () {
         setInput('');
     }
 
-    //Check for matching current morse sequence to current letter
-    if (input === currentMorse) {
-        //Play current sound of word
-        playCurrWordSound();
-        //Move to the next word
-        setGameIndex(prevState => prevState + 1);
-        //Reset inputs
-        setCorrect('');
-        setInput('');
-    }
+    React.useEffect(() => {
+        //Check for matching current morse sequence to current letter
+        if (input === currentMorse) {
+            //Play current sound of word
+            playCurrWordSound();
+            setIsCorrect(true);
+            //Move to the next word
+            setTimeout(function () {
+                setGameIndex(prevState => prevState + 1);
+                setInput('');
+                setIsCorrect(false);
+            }, 2000);
+        }
+    }, [input]);
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
@@ -94,17 +95,23 @@ function LearnWordBeginner () {
                 <div>
                     <Container>
                         <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                        {isCorrect
+                            ?
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                            :
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
-                            </Grid>
-                        </Grid>
+                        }
                         <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
@@ -149,11 +156,12 @@ function LearnWordBeginner () {
 }
 
 function sleep(ms) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < ms);
+    // const date = Date.now();
+    // let currentDate = null;
+    // do {
+    //     currentDate = Date.now();
+    // } while (currentDate - date < ms);
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export default LearnWordBeginner
