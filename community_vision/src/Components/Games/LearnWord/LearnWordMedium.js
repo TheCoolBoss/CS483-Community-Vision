@@ -6,6 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
+import {Transition, animated} from 'react-spring/renderprops';
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -114,7 +115,21 @@ function LearnWordMedium () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                            enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
+                            leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                        >
+                            {show => show && (props => 
+                                <animated.div style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
+                                </animated.div>
+                            )}
+                        </Transition>
                         {isValidLetter 
                             ?
                             <Grid container justify='center'>
@@ -176,14 +191,6 @@ function LearnWordMedium () {
             </div>
         </div>
     )
-}
-
-function sleep(ms) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < ms);
 }
 
 export default LearnWordMedium
