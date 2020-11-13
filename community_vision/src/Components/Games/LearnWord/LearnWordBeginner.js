@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
+import useSound from 'use-sound';
+import {Transition, animated} from 'react-spring/renderprops';
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -23,11 +25,12 @@ var resetTimer = 1500; //reset timer in milliseconds
 function LearnWordBeginner () {
     //Get the data
     var gameData = require('./WordGameData.json');
-
-    //current letters
-    var [correct, setCorrect] = React.useState('');
+    
     //Track user input
     var [input, setInput] = React.useState('');
+
+    //correct input tracker
+    var [isCorrect, setIsCorrect] = React.useState(false);
     
     //Get current character from user input
     var output = morseToChar(input);
@@ -38,18 +41,18 @@ function LearnWordBeginner () {
     //Get the image source
     var img = require('' + gameData[gameIndex].imagePath);
 
-    //Keeping track of current letter in current word
-    //var [wordIndex, setWordIndex] = React.useState(0);
-
     //Word that the user needs to type
-    //var [currentWord, setCurrentWord] = React.useState(gameData[gameIndex].name);
     var currentWord = gameData[gameIndex].name;
 
     //Current letter to be type(first letter)
     var currentLetter = currentWord[0];
 
     //Current morse code the user is typing                  
-    var currentMorse = charToMorse(currentLetter); 
+    var currentMorse = charToMorse(currentLetter);
+
+    //Get the sound of current word
+    var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var [playCurrWordSound] = useSound(soundSrc);
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -61,23 +64,21 @@ function LearnWordBeginner () {
     if (input.length > 6){
         setInput('');
     }
-    let isCorrect = false;
-    //Check for matching current morse sequence to current letter
-    if (input === currentMorse) {
-        // setCorrect(currentWord);
-        // setTimeout(function() {
-        //     sleep(1500);
-        //     isCorrect = true;
-        // }, 100);
-        isCorrect = true;
-    }
 
-    if (isCorrect) {
-        setGameIndex(prevState => prevState + 1);
-        setCorrect('');
-        setInput('')
-        isCorrect = false;
-    }
+    React.useEffect(() => {
+        //Check for matching current morse sequence to current letter
+        if (input === currentMorse) {
+            //Play current sound of word
+            playCurrWordSound();
+            setIsCorrect(true);
+            //Move to the next word
+            setTimeout(function () {
+                setGameIndex(prevState => prevState + 1);
+                setInput('');
+                setIsCorrect(false);
+            }, 2000);
+        }
+    }, [input]);
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
@@ -94,18 +95,38 @@ function LearnWordBeginner () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <img src={img} style={{width: '15%', height: '10%', padding: 0}} />
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{correct}</p>
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                            enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
+                            leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                            >
+                            {show => show && (props => 
+                                <animated.div style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
+                                </animated.div>
+                            )}
+                        </Transition>
+                        {isCorrect
+                            ?
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                            :
+                            <Grid container justify='center'>
+                                <Grid>
+                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
-                            </Grid>
-                        </Grid>
+                        }
                         <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
                     </Container>
                 </div>
@@ -147,14 +168,6 @@ function LearnWordBeginner () {
             </div>
         </div>
     )
-}
-
-function sleep(ms) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < ms);
 }
 
 export default LearnWordBeginner
