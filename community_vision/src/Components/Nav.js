@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import logo from './logo.png'
-import pic from './logopic.png'
+import pic from './settings.png'
 import {useSpring, animated} from 'react-spring'
 import Settings from './Settings.js'
 
@@ -21,6 +21,7 @@ function Nav() {
         justifContent: 'space-around',
         alignItems: 'center',
         minHeight: '10vh',
+
         background: '#b8ee30',
         color: 'white',
         position: 'relative',
@@ -38,9 +39,6 @@ function Nav() {
           </Link>
           <Link style={{color: 'black', textDecoration: 'none'}} to="/about">
             <li>About</li>
-          </Link>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/profile">
-            <li>Profile</li>
           </Link>
         </ul>
         <button style={{position: 'absolute', right: 0}} onClick={

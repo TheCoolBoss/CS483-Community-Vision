@@ -42,7 +42,7 @@ function SandboxLetters() {
     document.onkeydown = function(evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '.');
+            setInput(input + '•');
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
         }
@@ -78,7 +78,7 @@ function SandboxLetters() {
                             <Card>
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                        setInput(input + '.');
+                                        setInput(input + '•');
                                     }}>.</button>
                                 </CardActionArea>
                             </Card>

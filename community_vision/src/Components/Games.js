@@ -15,6 +15,7 @@ function Games() {
     pageColor = localStorage.getItem("backgroundColor");
   }
   return (
+
     <div style={{backgroundColor: pageColor,
       position: 'relative',
       height: '90vh',
