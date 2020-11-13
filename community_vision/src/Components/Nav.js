@@ -58,7 +58,7 @@ function Nav() {
             </Grid>
           </Container>
         </div>
-        <button style={{position: 'relative', right: 0}} onClick={function(){toggle(!state)}}>
+        <button style={{position: 'relative', right: '2px'}} onClick={function(){toggle(!state)}}>
           <img style={{height: '8vh'}} src={pic} alt={pic}></img>
         </button>
       </div>

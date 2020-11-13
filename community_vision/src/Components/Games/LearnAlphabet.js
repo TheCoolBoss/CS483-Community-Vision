@@ -66,7 +66,7 @@ function LearnAlphabet() {
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '25vh',
+                        fontSize: '29vh',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',

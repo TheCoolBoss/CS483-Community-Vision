@@ -1,190 +1,224 @@
 import React from 'react';
 import '../App.css';
-import {Link} from 'react-router-dom';
-import { makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
-import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
-import FontDownloadIcon from '@material-ui/icons/FontDownload';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import HearingIcon from '@material-ui/icons/Hearing';
-import TextField from '@material-ui/core/TextField';
+import { SketchPicker, SwatchesPicker } from 'react-color';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-}));
-
-function muteSound() {
-    //ToDo: mute the dot and dash sounds
-    var volumeMute = true;
-    volumeMute = !volumeMute;
+function initial(type){
+    if(localStorage.getItem(type) != null){
+        return localStorage.getItem(type);
+    }
+    return 50;
 }
 
-function valuetext(value) {
-    return `${value}°C`;
-  }
-
 function  Settings() {
-    const classes =  useStyles();
-    //ToDo: add functionality to volume slider and sound off button click change slider value to 0
-    const [value, setValue] = React.useState(30);
-    const handleChange = (event, newValue)  => {
-        setValue(newValue);
+    const [volume, setVolume] = React.useState(() => initial('volume'));
+    const changeVolume = (event, newValue) => {
+        setVolume(newValue);
     };
-
-    //ToDo: need to adjust sizing so that the page is relative to rescaling and not pixel specific
+    const [size, setSize] = React.useState(() => initial('size'));
+    const changeSize = (event, newValue) => {
+        setSize(newValue);
+    };
+    const [speed, setSpeed] = React.useState(() => initial('speed'));
+    const changeSpeed = (event, newValue) => {
+        setSpeed(newValue);
+    };
+    localStorage.setItem('volume', volume)
+    localStorage.setItem('size', size)
+    localStorage.setItem('speed', speed)
     return (
-        <div style={{position: 'relative', alignContent: 'center'}} className={classes.root}>
-            <h1>Choose Your Game Settings</h1>
-            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px'}}>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Sound
-                        <HearingIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <br></br>
-                    <input type="radio" id="onButton" name="soundButton" value="" checked="checked"></input>
-                    <label for="onButton">Sound On</label>
-                    <input type="radio" id="offButton" name="soundButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="offButton">Sound Off</label>
-                    <Grid container spacing={2}>
-                        <Grid item>
-                        <VolumeDown />
-                        </Grid>
-                        {/* insert sample sound levels here */}
-                        <Grid item xs>
-                            <Slider 
-                                defaultValue={50}
-                                getAriaValueText={valuetext}
-                                aria-labelledby="discrete-slider"
-                                valueLabelDisplay="auto"
-                                step={10}
-                                marks
-                                min={10}
-                                max={100}
-                            />
-                        </Grid>
-                        <Grid item>
-                        <VolumeUp />
-                        </Grid>
+        <div style={{position: 'relative',
+            marginTop: '1.1vh',
+            width: '98vw',
+            margin: '1.5vh'}}>
+            <Grid container justify='space-evenly'>
+                <Grid style={{marginTop: '0.5vh'}} container spacing={1} lg={6} md={7} sm={10} xs={12} direction='column'>
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>HOW LOUD DO YOU WANT IT?</h1>
+                            <Grid container spacing={0} alignItems='center'>
+                                <Grid item xs={1}>
+                                    <VolumeDown/>
+                                </Grid>
+                                <Grid item xs={10}>
+                                    <Slider value={volume} onChange={changeVolume}
+                                    aria-labelledby='discrete-slider' marks
+                                    valueLabelDisplay='auto'
+                                    step={10} min={0} max={100}/>
+                                </Grid>
+                                <Grid item xs={1}>
+                                    <VolumeUp/>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>PICK THE TEXT SIZE!</h1>
+                            <Grid container spacing={0} alignItems='center'>
+                                <Grid item xs={2}>
+                                    <h1 style={{fontSize: '19vh', margin: '-9.5vh'}}>A</h1>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <Slider value={size} onChange={changeSize}
+                                    aria-labelledby='discrete-slider' marks
+                                    valueLabelDisplay='auto'
+                                    step={1} min={19} max={29}/>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <h1 style={{fontSize: '29vh', margin: '-23vh'}}>A</h1>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>HOW FAST DO YOU WANT TO PLAY?</h1>
+                            <Grid container spacing={0} alignItems='center'>
+                                <Grid item xs={1}>
+                                    <VolumeDown/>
+                                </Grid>
+                                <Grid item xs={10}>
+                                    <Slider value={speed} onChange={changeSpeed}
+                                    aria-labelledby='discrete-slider' marks
+                                    valueLabelDisplay='auto'
+                                    step={10} min={0} max={100}/>
+                                </Grid>
+                                <Grid item xs={1}>
+                                    <VolumeUp/>
+                                    </Grid>
+                            </Grid>
+                        </Card>
                     </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Color Packages
-                        <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <br></br>
-                    <input type="radio" id="defaultColorButton" name="colorButton" value="" checked="checked"></input>
-                    <label for="defaultColorButton">Default</label>
-                    <input type="radio" id="greyScaleButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="greyScaleButton">Grey Scale</label>
-                    <input type="radio" id="oneColorButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">One-Color</label>
-                    <br></br>
-                    <br></br>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Background Color
-                        <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="hexCodeBackground" label="Custom Hex Code" />
-                    </form>
-                    <input type="radio" id="blackBackground" name="backgroundButton" value="" checked="checked" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Black</label>
-                    <input type="radio" id="greyBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Grey</label>
-                    <input type="radio" id="whiteBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">White</label>
-                    <input type="radio" id="yellowBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Yellow</label>
-                    <br></br>
-                </Grid>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Speed
-                        <AccessAlarmsIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <Slider 
-                        defaultValue={50}
-                        getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider"
-                        valueLabelDisplay="auto"
-                        step={10}
-                        marks
-                        min={10}
-                        max={100}
-                        style={{marginBottom: '-70px'}}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Font Size
-                        <FontDownloadIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <Grid container spacing={2}>
-                        <Grid  item>
-                            <h2 style={{marginTop: '55px', marginBottom: '-70px'}}>A</h2>
-                        </Grid>
-                        <Grid item xs>
-                            <Slider 
-                                defaultValue={50}
-                                getAriaValueText={valuetext}
-                                aria-labelledby="discrete-slider"
-                                valueLabelDisplay="auto"
-                                step={10}
-                                marks
-                                min={10}
-                                max={100}
-                                style={{marginBottom: '-70px'}}
-                            />
-                        </Grid>
-                        <Grid  item>
-                            <h2 style={{fontSize: '10vh', marginTop: '5px', marginBottom: '-30px'}}>A</h2>
-                        </Grid>
+                <Grid style={{marginTop: '0.5vh'}} container spacing={1} lg={6} md={7} sm={10} xs={12} direction='column'>
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>PICK A THEME!</h1>
+                            <div style={{display: 'grid',
+                                gridTemplate: '1fr 1fr / 1fr 1fr',
+                                gridTemplateAreas: '"1" "2"',
+                                width: '10vh',
+                                height: '10vh',
+                                marginLeft: '5%'}}>
+                                <div style={{gridArea: '1', backgroundColor: 'grey', width: '5vh', height: '5vh', borderStyle: 'solid'}}/>
+                                <div style={{gridArea: '1', backgroundColor: 'LightGray', width: '5vh', height: '5vh', borderStyle: 'solid'}}/>
+                                <div style={{gridArea: '2', backgroundColor: 'white', width: '5vh', height: '5vh', borderStyle: 'solid'}}/>
+                                <div style={{gridArea: '2', backgroundColor: 'grey', width: '5vh', height: '5vh', borderStyle: 'solid'}}/>
+                            </div>
+                        </Card>
                     </Grid>
-                    <br></br>
-                    <Paper className={classes.paper} style={{color:"black"}}>
-                        Font Color
-                        <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
-                    </Paper>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="hexCodeFont" label="Custom Hex Code"  />
-                    </form>
-                    <input type="radio" id="blackFont" name="fontButton" value="" checked="checked" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Black</label>
-                    <input type="radio" id="whiteFont" name="fontButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">White</label>
-                    <input type="radio" id="redFont" name="fontButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Red</label>
-                    <input type="radio" id="greenFont" name="fontButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Green</label>
-                    <input type="radio" id="yellowFont" name="fontButton" value="" style={{marginLeft: '30px'}}></input>
-                    <label for="oneColorButton">Yellow</label>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper} style={{backgroundColor: '#ffd700'}}>
-                        <Link className='nav-link' to="/games">
-                            <button style={{width: '100%', height: '100%', fontSize: '5vh'}}>Play!</button>
-                        </Link>
-                    </Paper>
-                    
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>CHOOSE BACKGROUND COLOR!</h1>
+                            <Grid container direction='row'>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'blue'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>BLUE</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="blue" name="color" value="blue"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'red'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>RED</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="red" name="color" value="red"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'green'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>Green</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="green" name="color" value="green"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>Pick your own color!</p>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item> 
+                        <Card style={{borderRadius: '0px', height: '25vh'}}>
+                            <h1>CHOOSE COLOR FOR WORDS!</h1>
+                            <Grid container direction='row'>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'blue'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>BLUE</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="blue" name="color" value="blue"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'red'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>RED</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="red" name="color" value="red"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh', backgroundColor: 'green'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>Green</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input type="radio" id="green" name="color" value="green"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{height: '5vh', width: '5vh'}}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{margin: -2}}>Pick your own color!</p>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
                 </Grid>
             </Grid>
-            
-            
         </div>
     )
 }
+
+class SketchPickerComponent extends React.Component {
+
+    render() {
+      return <SketchPicker />;
+    }
+  }
 
 export default Settings;
