@@ -13,8 +13,14 @@ import ColorLensIcon from '@material-ui/icons/ColorLens';
 import HearingIcon from '@material-ui/icons/Hearing';
 import { SketchPicker } from 'react-color';
 
+// Known bugs: if you misclick a radio button it activiates part of the dropdown menu for some reason
+// ToDo's: implement sound, speed, color package, font size and color, and dropdown functionalities
+// - also implement slider bar functionality
+// - re-rendering of pages once the settings are set
+// - need to adjust sizing so that the page is relative to rescaling and not pixel specific
+// - add sample sounds for when volume is changed
+// - check licensing on sounds
 function muteSound() {
-    //ToDo: mute the dot and dash sounds
     var volumeMute = true;
     volumeMute = !volumeMute;
 }
@@ -36,9 +42,6 @@ function Settings() {
     const handleChange = (event, newValue)  => {
         setValue(newValue);
     };
-
-    //ToDo: add functionality to volume slider and sound off button click change slider value to 0
-    //ToDo: rerender pages when background color is changed
     
     // changes background color
     if(localStorage.getItem("backgroundColor") != null) {
@@ -48,7 +51,7 @@ function Settings() {
     var [backgroundColor, setColor] = useState(backgroundColor);
     localStorage.setItem("backgroundColor", backgroundColor);
     
-    //ToDo: need to adjust sizing so that the page is relative to rescaling and not pixel specific
+
     return (
         <div style={{
             position: 'absolute', 
@@ -192,7 +195,7 @@ function Settings() {
                 <Grid item xs={12}>
                     <Paper className={classes.paper} style={{backgroundColor: '#ffd700'}}>
                         <Link className='nav-link' to="/games">
-                            <button style={{width: '100%', height: '100%', fontSize: '5vh'}}>Play!</button>
+                            <button style={{width: '100%', height: '100%', fontSize: '5vh'}} >Play!</button>
                         </Link>
                     </Paper>
                     
