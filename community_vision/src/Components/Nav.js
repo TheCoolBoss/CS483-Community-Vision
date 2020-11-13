@@ -37,7 +37,7 @@ function Nav() {
             <Grid container direction='row' justify='flex-start' alignItems='center' spacing={2}>
               <Grid item xs={2}/>
               <Grid item xs={2}> 
-                <Card style={{borderRadius: '5vw', height: '6vh'}}>
+                <Card style={{borderRadius: '20px'}}>
                   <CardActionArea>
                     <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/settings">
                       Games
@@ -47,7 +47,7 @@ function Nav() {
               </Grid>
               <Grid item xs={3}/>
               <Grid item xs={2}> 
-                <Card style={{borderRadius: '5vw', height: '6vh'}}>
+                <Card style={{borderRadius: '20px'}}>
                   <CardActionArea>
                     <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/about">
                       About
