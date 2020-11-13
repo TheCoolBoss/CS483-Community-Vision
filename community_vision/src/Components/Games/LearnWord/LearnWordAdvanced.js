@@ -7,6 +7,8 @@ import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
 import { Transition, animated} from 'react-spring/renderprops';
+import dashSound from '../../Assets/Sounds/dash.mp3'
+import dotSound from '../../Assets/Sounds/dot.mp3'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -55,6 +57,8 @@ function LearnWordAdvanced () {
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
     var [playCurrWordSound] = useSound(soundSrc);
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -104,8 +108,10 @@ function LearnWordAdvanced () {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
+            playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+            playDash();
         }
     };
 
@@ -171,6 +177,7 @@ function LearnWordAdvanced () {
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '•');
+                                        playDot();
                                     }}>•</button>
                                 </CardActionArea>
                             </Card>
@@ -180,6 +187,7 @@ function LearnWordAdvanced () {
                                 <CardActionArea>
                                     <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
+                                        playDash();
                                     }}>-</button>
                                 </CardActionArea>
                             </Card>
