@@ -13,12 +13,12 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var list = "1234567890"
 
-function LearnAlphabet() {
+function LearnNumbers() {
     var [index, setIndex] = useState(0);
-    var currentLetter = list[index];
-    var currentMorse = charToMorse(currentLetter);
+    var currentNumber = list[index];
+    var currentMorse = charToMorse(currentNumber);
     var [input, setInput] = useState('');
     var output = morseToChar(input);
     const [playDash] = useSound(dashSound);
@@ -62,23 +62,19 @@ function LearnAlphabet() {
     
     return (
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
-            <div style={{gridArea: 'middle'}}>
+            <div style={{gridArea: 'top'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '25vh'}}>{currentLetter}</animated.h1>
+                        fontSize: '25vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentNumber}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
-                        fontSize: '15vh'}}>{currentMorse}</animated.p>
-                        {/* fontSize: '15vh', */}
-                        {/* opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1> */}
-                    <animated.p style={{lineHeight: 0,
-                        color: '#ffaba6',
-                        fontSize: '7vh',
+                        fontSize: '10vh',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{gridArea: 'bottom'}}>
+            <div style={{gridArea: 'middle'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
@@ -119,4 +115,4 @@ function LearnAlphabet() {
     );
 }
 
-export default LearnAlphabet;
+export default LearnNumbers;
