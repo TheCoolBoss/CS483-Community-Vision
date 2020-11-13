@@ -114,23 +114,21 @@ function LearnWordAdvanced () {
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <Container>
-                        <div>
-                            <Transition
-                                native
-                                reset
-                                unique
-                                items={img}
-                                from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
-                                enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
-                                leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
-                            >
-                                {show => show && (props => 
-                                    <animated.div style={props}>
-                                        <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
-                                    </animated.div>
-                                )}
-                            </Transition>
-                        </div>
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                            enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
+                            leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                        >
+                            {show => show && (props => 
+                                <animated.image style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
+                                </animated.image>
+                            )}
+                        </Transition>
                         {isValidLetter 
                             ?
                             <Grid container justify='center'>
@@ -171,16 +169,16 @@ function LearnWordAdvanced () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '•');
-                                    }}>.</button>
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                     }}>-</button>
                                 </CardActionArea>

@@ -105,25 +105,25 @@ function LearnWordBeginner () {
                             leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
                             >
                             {show => show && (props => 
-                                <animated.div style={props}>
+                                <animated.image style={props}>
                                     <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
-                                </animated.div>
+                                </animated.image>
                             )}
                         </Transition>
                         {isCorrect
                             ?
                             <Grid container justify='center'>
                                 <Grid>
-                                    <p style={{color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
                                 </Grid>
                             </Grid>
                             :
                             <Grid container justify='center'>
                                 <Grid>
-                                    <p style={{color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
+                                    <p style={{lineHeight: 0, color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
                                 </Grid>
                                 <Grid>
-                                    <p style={{color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
+                                    <p style={{lineHeight: 0, color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
                                 </Grid>
                             </Grid>
                         }
@@ -148,16 +148,16 @@ function LearnWordBeginner () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                             setInput(input + '•');
-                                    }}>.</button>
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                     }}>-</button>
                                 </CardActionArea>
