@@ -4,6 +4,10 @@ import {Link} from 'react-router-dom';
 import logo from './logo.png'
 import pic from './settings.png'
 import {useSpring, animated} from 'react-spring'
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import { Container, Box } from '@material-ui/core';
 
 function Nav() {
   var [state, toggle] = React.useState(false);
@@ -25,19 +29,36 @@ function Nav() {
         <Link to="/">
           <img style={{height: '8vh'}} src={logo} alt={logo}></img>
         </Link>
-        <ul style={{width: '80%',
+        <div style={{width: '100%',
           display: 'flex',
           justifyContent: 'space-around',
-          alignItems: 'center',
-          listStyle: 'none'}}>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/settings">
-            <li>Games</li>
-          </Link>
-          <Link style={{color: 'black', textDecoration: 'none'}} to="/about">
-            <li>About</li>
-          </Link>
-        </ul>
-        <button style={{position: 'absolute', right: 0}} onClick={function(){toggle(!state)}}>
+          listStyleType: 'none'}}>
+          <Container>
+            <Grid container direction='row' justify='flex-start' alignItems='center' spacing={2}>
+              <Grid item xs={2}/>
+              <Grid item xs={2}> 
+                <Card style={{borderRadius: '5vw', height: '6vh'}}>
+                  <CardActionArea>
+                    <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/settings">
+                      Games
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+              <Grid item xs={3}/>
+              <Grid item xs={2}> 
+                <Card style={{borderRadius: '5vw', height: '6vh'}}>
+                  <CardActionArea>
+                    <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/about">
+                      About
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            </Grid>
+          </Container>
+        </div>
+        <button style={{position: 'relative', right: 0}} onClick={function(){toggle(!state)}}>
           <img style={{height: '8vh'}} src={pic} alt={pic}></img>
         </button>
       </div>

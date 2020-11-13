@@ -61,20 +61,16 @@ function LearnAlphabet() {
     var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
     
     return (
-        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
-            <div style={{gridArea: 'middle'}}>
+        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+            <div style={{gridArea: 'top'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '25vh'}}>{currentLetter}</animated.h1>
+                        fontSize: '25vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
-                        fontSize: '15vh'}}>{currentMorse}</animated.p>
-                        {/* fontSize: '15vh', */}
-                        {/* opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1> */}
-                    <animated.p style={{lineHeight: 0,
-                        color: '#ffaba6',
-                        fontSize: '7vh',
+                        fontSize: '10vh',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
