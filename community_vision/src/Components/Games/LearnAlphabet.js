@@ -25,12 +25,6 @@ function LearnAlphabet() {
     const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
 
-    if(localStorage.getItem("backgroundColor") != null) {
-        backgroundColor = localStorage.getItem("backgroundColor");
-    }
-    var [backgroundColor, setColor] = useState(backgroundColor);
-    localStorage.setItem("backgroundColor", backgroundColor);
-    
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -67,7 +61,7 @@ function LearnAlphabet() {
     var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
     
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
+        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,

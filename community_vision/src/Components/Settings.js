@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import { makeStyles} from '@material-ui/core/styles';
@@ -11,64 +11,52 @@ import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 import FontDownloadIcon from '@material-ui/icons/FontDownload';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import HearingIcon from '@material-ui/icons/Hearing';
-import { SketchPicker } from 'react-color';
+import TextField from '@material-ui/core/TextField';
 
-// Known bugs: if you misclick a radio button it activiates part of the dropdown menu for some reason
-// ToDo's: implement sound, speed, color package, font size and color, and dropdown functionalities
-// - also implement slider bar functionality
-// - re-rendering of pages once the settings are set
-// - need to adjust sizing so that the page is relative to rescaling and not pixel specific
-// - add sample sounds for when volume is changed
-// - check licensing on sounds
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+}));
+
 function muteSound() {
+    //ToDo: mute the dot and dash sounds
     var volumeMute = true;
     volumeMute = !volumeMute;
 }
 
 function valuetext(value) {
     return `${value}°C`;
-}
+  }
 
-function Settings() {
-    var backgroundColor = 'gold';
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-            padding: theme.spacing(2),
-            color: theme.palette.text.secondary,
-        },
-    }));
+function  Settings() {
     const classes =  useStyles();
+    //ToDo: add functionality to volume slider and sound off button click change slider value to 0
     const [value, setValue] = React.useState(30);
     const handleChange = (event, newValue)  => {
         setValue(newValue);
     };
-    
-    // changes background color
-    if(localStorage.getItem("backgroundColor") != null) {
-        backgroundColor = localStorage.getItem("backgroundColor");
-        
-    }
-    var [backgroundColor, setColor] = useState(backgroundColor);
-    localStorage.setItem("backgroundColor", backgroundColor);
-    
 
+    //ToDo: need to adjust sizing so that the page is relative to rescaling and not pixel specific
     return (
-        <div style={{
-            position: 'absolute', 
-            alignContent: 'center', 
-            backgroundColor: backgroundColor, 
-            width: '100%', 
-            flexGrow: 1, 
-            textAlign: 'center',
-            }}>
+        <div style={{position: 'relative', alignContent: 'center'}} className={classes.root}>
             <h1>Choose Your Game Settings</h1>
-            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px', backgroundColor: backgroundColor}}>
+            <Grid container spacing={3} style={{position: 'relative', marginRight: '10px', marginLeft: '5px'}}>
                 <Grid item xs={6}>
                     <Paper className={classes.paper} style={{color:"black"}}>
                         Sound
                         <HearingIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
                     <br></br>
+                    <input type="radio" id="onButton" name="soundButton" value="" checked="checked"></input>
+                    <label for="onButton">Sound On</label>
+                    <input type="radio" id="offButton" name="soundButton" value="" style={{marginLeft: '30px'}}></input>
+                    <label for="offButton">Sound Off</label>
                     <Grid container spacing={2}>
                         <Grid item>
                         <VolumeDown />
@@ -92,18 +80,16 @@ function Settings() {
                     </Grid>
                 </Grid>
                 <Grid item xs={6}>
-                    <Paper className={classes.paper} style={{color:"black", width: '100%'}}>
+                    <Paper className={classes.paper} style={{color:"black"}}>
                         Color Packages
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
                     <br></br>
-                    <input type="radio" id="defaultColorButton" name="colorButton" value="default" defaultChecked></input>
+                    <input type="radio" id="defaultColorButton" name="colorButton" value="" checked="checked"></input>
                     <label for="defaultColorButton">Default</label>
-                    <input type="radio" id="greyScaleButton" name="colorButton" value="geryScale" style={{marginLeft: '30px'}} onClick={function(){
-                        setColor('#C2C5CC');
-                    }}></input>
+                    <input type="radio" id="greyScaleButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
                     <label for="greyScaleButton">Grey Scale</label>
-                    <input type="radio" id="oneColorButton" name="colorButton" value="oneColor" style={{marginLeft: '30px'}}></input>
+                    <input type="radio" id="oneColorButton" name="colorButton" value="" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">One-Color</label>
                     <br></br>
                     <br></br>
@@ -111,24 +97,17 @@ function Settings() {
                         Background Color
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    
-                    <br></br>
-                    <input type="radio" id="yellowBackground" name="backgroundButton" defaultChecked style={{marginLeft: '30px'}} onClick={function(){
-                        setColor('gold');
-                    }}></input>
-                    <label for="oneColorButton">Yellow</label>
-                    <input type="radio" id="greyBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
-                        setColor('#808080');
-                    }}></input>
-                    <label for="oneColorButton">Grey</label>
-                    <input type="radio" id="whiteBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
-                        setColor('#FFFFFF');
-                    }}></input>
-                    <label for="oneColorButton">White</label>
-                    <input type="radio" id="blackBackground" name="backgroundButton" style={{marginLeft: '30px'}} onClick={function(){
-                        setColor('#000000');
-                    }}></input>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField id="hexCodeBackground" label="Custom Hex Code" />
+                    </form>
+                    <input type="radio" id="blackBackground" name="backgroundButton" value="" checked="checked" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">Black</label>
+                    <input type="radio" id="greyBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
+                    <label for="oneColorButton">Grey</label>
+                    <input type="radio" id="whiteBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
+                    <label for="oneColorButton">White</label>
+                    <input type="radio" id="yellowBackground" name="backgroundButton" value="" style={{marginLeft: '30px'}}></input>
+                    <label for="oneColorButton">Yellow</label>
                     <br></br>
                 </Grid>
                 <Grid item xs={6}>
@@ -153,7 +132,6 @@ function Settings() {
                         Font Size
                         <FontDownloadIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    <h2>Example Font</h2>
                     <Grid container spacing={2}>
                         <Grid  item>
                             <h2 style={{marginTop: '55px', marginBottom: '-70px'}}>A</h2>
@@ -180,8 +158,10 @@ function Settings() {
                         Font Color
                         <ColorLensIcon style={{marginLeft: '5px', marginBottom: '-5px'}}/>
                     </Paper>
-                    <br></br>
-                    <input type="radio" id="blackFont" name="fontButton" value="" defaultChecked style={{marginLeft: '30px'}}></input>
+                    <form className={classes.root} noValidate autoComplete="off">
+                        <TextField id="hexCodeFont" label="Custom Hex Code"  />
+                    </form>
+                    <input type="radio" id="blackFont" name="fontButton" value="" checked="checked" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">Black</label>
                     <input type="radio" id="whiteFont" name="fontButton" value="" style={{marginLeft: '30px'}}></input>
                     <label for="oneColorButton">White</label>
@@ -195,7 +175,7 @@ function Settings() {
                 <Grid item xs={12}>
                     <Paper className={classes.paper} style={{backgroundColor: '#ffd700'}}>
                         <Link className='nav-link' to="/games">
-                            <button style={{width: '100%', height: '100%', fontSize: '5vh'}} >Play!</button>
+                            <button style={{width: '100%', height: '100%', fontSize: '5vh'}}>Play!</button>
                         </Link>
                     </Paper>
                     
@@ -205,27 +185,6 @@ function Settings() {
             
         </div>
     )
-}
-
-class Component extends React.Component {
-    state = {
-        background: '#fff',
-    };
-    handleChangeComplete = (color) => {
-        this.setState({ background: color.hex });
-    };  
-    render() {
-        return (
-            <div>
-                <SketchPicker
-                    color={ this.state.background }
-                    onChangeComplete={ this.handleChangeComplete }
-                />
-          
-                <h1>HELLO</h1>
-          </div>
-        );
-    }
 }
 
 export default Settings;
