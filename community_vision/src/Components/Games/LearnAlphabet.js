@@ -12,8 +12,20 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 //import { useTransition, animated } from 'react-spring'
 
 var t;
-var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+function initial(type){
+    if(localStorage.getItem(type) != null){
+        return localStorage.getItem(type);
+    }
+    if(type == 'volume'){
+        return 50;
+    } else if(type == 'size'){
+        return 29;
+    } else if(type == 'speed'){
+        return 1.5;
+    }
+}
 
 function LearnAlphabet() {
     var [index, setIndex] = useState(0);
@@ -25,6 +37,11 @@ function LearnAlphabet() {
     const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
 
+    const [volume] = React.useState(() => initial('volume'));
+    const [size] = React.useState(() => initial('size'));
+    const [speed] = React.useState(() => initial('speed'));
+    const resetTimer = speed*1000; //reset timer in milliseconds
+    const fSize = size +'vh';
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -66,7 +83,7 @@ function LearnAlphabet() {
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '29vh',
+                        fontSize: fSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',

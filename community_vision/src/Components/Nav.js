@@ -7,7 +7,8 @@ import {useSpring, animated} from 'react-spring'
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import { Container, Box } from '@material-ui/core';
+import { Container } from '@material-ui/core';
+import Settings from './Settings';
 
 function Nav() {
   var [state, toggle] = React.useState(false);
@@ -39,7 +40,7 @@ function Nav() {
               <Grid item xs={2}> 
                 <Card style={{borderRadius: '20px'}}>
                   <CardActionArea>
-                    <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/settings">
+                    <Link style={{color: 'black', textDecoration: 'none', fontSize: '5vh'}} to="/games">
                       Games
                     </Link>
                   </CardActionArea>

@@ -12,7 +12,13 @@ function initial(type){
     if(localStorage.getItem(type) != null){
         return localStorage.getItem(type);
     }
-    return 50;
+    if(type == 'volume'){
+        return 50;
+    } else if(type == 'size'){
+        return 29;
+    } else if(type == 'speed'){
+        return 1.5;
+    }
 }
 
 function  Settings() {
@@ -30,9 +36,9 @@ function  Settings() {
     };
     localStorage.setItem('volume', volume)
     localStorage.setItem('size', size)
-    localStorage.setItem('speed', speed)
+    localStorage.setItem('speed', (3-speed).toFixed(1))
     const fSize = size +'vh'
-    const fMargin = -size*3/4 + 'vh'
+    const fMargin = -size*3/4 +'vh'
     return (
         <div style={{position: 'relative',
             marginTop: '1.1vh',
@@ -49,8 +55,7 @@ function  Settings() {
                                 </Grid>
                                 <Grid item xs={10}>
                                     <Slider value={volume} onChange={changeVolume}
-                                    aria-labelledby='discrete-slider' marks
-                                    valueLabelDisplay='auto'
+                                    valueLabelDisplay='auto' marks
                                     step={10} min={0} max={100}/>
                                 </Grid>
                                 <Grid item xs={1}>
@@ -66,8 +71,7 @@ function  Settings() {
                                 <Grid item xs={1}/>
                                 <Grid item xs={7}>
                                     <Slider value={size} onChange={changeSize}
-                                    aria-labelledby='discrete-slider' marks
-                                    valueLabelDisplay='auto'
+                                    valueLabelDisplay='auto' marks
                                     step={1} min={19} max={29}/>
                                 </Grid>
                                 <Grid item xs={1}/>
@@ -86,9 +90,10 @@ function  Settings() {
                                 </Grid>
                                 <Grid item xs={10}>
                                     <Slider value={speed} onChange={changeSpeed}
-                                    aria-labelledby='discrete-slider' marks
-                                    valueLabelDisplay='auto'
-                                    step={10} min={0} max={100}/>
+                                    valueLabelDisplay="auto" marks
+                                    step={0.2} min={0.5} max={2.5}
+                                    scale={x => (3-x).toFixed(1)}
+                                    />
                                 </Grid>
                                 <Grid item xs={1}>
                                     <VolumeUp/>
@@ -153,7 +158,7 @@ function  Settings() {
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
                                     <Grid item>
-                                        <SketchExample/>
+                                        <ColorPicker/>
                                     </Grid>
                                     <Grid item>
                                         <p style={{margin: -2}}>Pick your own color!</p>
@@ -201,7 +206,7 @@ function  Settings() {
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
                                     <Grid item>
-                                        <SketchExample/>
+                                        <ColorPicker/>
                                     </Grid>
                                     <Grid item>
                                         <p style={{margin: -2}}>Pick your own color!</p>
@@ -216,7 +221,7 @@ function  Settings() {
     )
 }
 
-class SketchExample extends React.Component {
+class ColorPicker extends React.Component {
     state = {
       displayColorPicker: false,
       color: {
