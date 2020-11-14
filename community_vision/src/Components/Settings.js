@@ -30,6 +30,8 @@ function  Settings() {
     localStorage.setItem('volume', volume)
     localStorage.setItem('size', size)
     localStorage.setItem('speed', speed)
+    const fSize = size +'vh'
+    const fMargin = -size*3/4 + 'vh'
     return (
         <div style={{position: 'relative',
             marginTop: '1.1vh',
@@ -60,17 +62,16 @@ function  Settings() {
                         <Card style={{borderRadius: '0px', height: '25vh'}}>
                             <h1>PICK THE TEXT SIZE!</h1>
                             <Grid container spacing={0} alignItems='center'>
-                                <Grid item xs={2}>
-                                    <h1 style={{fontSize: '19vh', margin: '-9.5vh'}}>A</h1>
-                                </Grid>
+                                <Grid item xs={1}/>
                                 <Grid item xs={7}>
                                     <Slider value={size} onChange={changeSize}
                                     aria-labelledby='discrete-slider' marks
                                     valueLabelDisplay='auto'
                                     step={1} min={19} max={29}/>
                                 </Grid>
+                                <Grid item xs={1}/>
                                 <Grid item xs={3}>
-                                    <h1 style={{fontSize: '29vh', margin: '-23vh'}}>A</h1>
+                                    <h1 style={{fontSize: fSize, margin: fMargin}}>A</h1>
                                 </Grid>
                             </Grid>
                         </Card>
