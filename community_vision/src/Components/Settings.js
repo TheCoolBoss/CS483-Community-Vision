@@ -151,7 +151,7 @@ function  Settings() {
                                         <input type="radio" id="green" name="color" value="green"/>
                                     </Grid>
                                 </Grid>
-                                <Grid container xs={3} direction='column'>
+                                <Grid container xs={3} direction='column' alignItems='center'>
                                     <Grid item>
                                         <SketchExample/>
                                     </Grid>
@@ -199,7 +199,7 @@ function  Settings() {
                                         <input type="radio" id="green" name="color" value="green"/>
                                     </Grid>
                                 </Grid>
-                                <Grid container xs={3} direction='column'>
+                                <Grid container xs={3} direction='column' alignItems='center'>
                                     <Grid item>
                                         <SketchExample/>
                                     </Grid>
@@ -258,8 +258,8 @@ class SketchExample extends React.Component {
           },
           popover: {
             position: 'absolute',
-            marginTop: '-300px',
-            marginLeft: '-20px',
+            marginTop: '-305px',
+            marginLeft: '-110px',
             zIndex: '2',
           },
           cover: {
