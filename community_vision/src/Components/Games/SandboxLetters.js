@@ -5,11 +5,9 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./charMorseConv";
-
-/*
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
-import dotSound from '../../../public/dot.mp3'*/
+import dotSound from '../Assets/Sounds/dot.mp3'
 import { useTransition, animated } from 'react-spring';
 
 var t;
@@ -22,6 +20,8 @@ function SandboxLetters() {
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
 
     /*
     const BoopButton = () => {
@@ -43,8 +43,10 @@ function SandboxLetters() {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
+            playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+            playDash();
         }
     };
 
@@ -77,17 +79,19 @@ function SandboxLetters() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '•');
-                                    }}>.</button>
+                                        playDot();
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
+                                        playDash();
                                     }}>-</button>
                                 </CardActionArea>
                             </Card>
