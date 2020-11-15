@@ -15,7 +15,7 @@ function  SettingsPage() {
                         marginBottom: '1.5vh',
                         fontSize: '6vh',
                         textDecoration: 'none'}}>
-                        Browse Games
+                        Games
                     </button>
                 </Link>
             </Grid>

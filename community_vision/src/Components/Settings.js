@@ -12,15 +12,15 @@ function initial(type){
     if(localStorage.getItem(type) != null){
         return localStorage.getItem(type);
     }
-    if(type == 'volume'){
+    if(type === 'volume'){
         return 50;
-    } else if(type == 'size'){
+    } else if(type === 'size'){
         return 29;
-    } else if(type == 'speed'){
+    } else if(type === 'speed'){
         return 1.5;
-    } else if(type == 'backgroundColor'){
+    } else if(type === 'backgroundColor'){
         return '#0068a6';
-    } else if(type == 'fontColor'){
+    } else if(type === 'fontColor'){
         return 'black';
     }
 }
@@ -39,11 +39,11 @@ function  Settings() {
         setSpeed(newValue);
     };
     const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
-    const changeBackgroundColor = (event, newValue) => {
+    const changeBackgroundColor = (newValue) => {
         setBackgroundColor(newValue);
     };
     const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
-    const changeFontColor = (event, newValue) => {
+    const changeFontColor = (newValue) => {
         setFontColor(newValue);
     };
     localStorage.setItem('volume', volume)
@@ -145,7 +145,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>BLUE</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="blue" name="color" value="blue"/>
+                                        <input type="radio" id="blue" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -156,7 +156,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>RED</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="red" name="color" value="red"/>
+                                        <input type="radio" id="red" name="backgroundColor" value="red" onClick={() => changeBackgroundColor('red')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -167,7 +167,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>Green</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="green" name="color" value="green"/>
+                                        <input type="radio" id="green" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
@@ -193,7 +193,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>BLUE</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="blue" name="color" value="blue"/>
+                                        <input type="radio" id="blue" name="fontColor" value="blue" onClick={() => changeFontColor('blue')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -204,7 +204,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>RED</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="red" name="color" value="red"/>
+                                        <input type="radio" id="red" name="fontColor" value="red" onClick={() => changeFontColor('red')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -215,7 +215,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>Green</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="green" name="color" value="green"/>
+                                        <input type="radio" id="green" name="fontColor" value="green" onClick={() => changeFontColor('green')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>

@@ -18,15 +18,15 @@ function initial(type){
     if(localStorage.getItem(type) != null){
         return localStorage.getItem(type);
     }
-    if(type == 'volume'){
+    if(type === 'volume'){
         return 50;
-    } else if(type == 'size'){
+    } else if(type === 'size'){
         return 29;
-    } else if(type == 'speed'){
+    } else if(type === 'speed'){
         return 1.5;
-    } else if(type == 'backgroundColor'){
+    } else if(type === 'backgroundColor'){
         return '#0068a6';
-    } else if(type == 'fontColor'){
+    } else if(type === 'fontColor'){
         return 'black';
     }
 }
@@ -44,6 +44,8 @@ function LearnAlphabet() {
     const [volume] = React.useState(() => initial('volume'));
     const [size] = React.useState(() => initial('size'));
     const [speed] = React.useState(() => initial('speed'));
+    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
 
