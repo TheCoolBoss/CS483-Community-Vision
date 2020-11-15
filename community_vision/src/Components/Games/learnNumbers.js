@@ -7,9 +7,9 @@ import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
-import dashSound from '../Assets/Sounds/dash.mp3'
-import dotSound from '../Assets/Sounds/dot.mp3'
-import { render } from 'react'
+import dashSound from '../Assets/Sounds/dash.mp3';
+import dotSound from '../Assets/Sounds/dot.mp3';
+
 //import { useTransition, animated } from 'react-spring'
 
 var t;
