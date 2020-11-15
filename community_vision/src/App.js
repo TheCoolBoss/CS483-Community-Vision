@@ -12,7 +12,7 @@ import LearnWordMedium from './Components/Games/LearnWord/LearnWordMedium';
 import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
-import LearnNumbers from "./Components/Games/LearnNumbers";
+import LearnNumbers from "./Components/Games/learnNumbers";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
