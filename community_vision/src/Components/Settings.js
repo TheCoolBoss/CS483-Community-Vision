@@ -145,7 +145,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>BLUE</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="blue" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')}/>
+                                        <input type="radio" id="blueBackgroundColor" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -156,7 +156,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>RED</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="red" name="backgroundColor" value="red" onClick={() => changeBackgroundColor('red')}/>
+                                        <input type="radio" id="redBackgroundColor" name="backgroundColor" value="red" onClick={() => changeBackgroundColor('red')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -167,7 +167,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>Green</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="green" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')}/>
+                                        <input type="radio" id="greenBackgroundColor" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
@@ -193,7 +193,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>BLUE</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="blue" name="fontColor" value="blue" onClick={() => changeFontColor('blue')}/>
+                                        <input type="radio" id="blueFontColor" name="fontColor" value="blue" onClick={() => changeFontColor('blue')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -204,7 +204,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>RED</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="red" name="fontColor" value="red" onClick={() => changeFontColor('red')}/>
+                                        <input type="radio" id="redFontColor" name="fontColor" value="red" onClick={() => changeFontColor('red')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -215,7 +215,7 @@ function  Settings() {
                                         <p style={{margin: -2}}>Green</p>
                                     </Grid>
                                     <Grid item>
-                                        <input type="radio" id="green" name="fontColor" value="green" onClick={() => changeFontColor('green')}/>
+                                        <input type="radio" id="greenFontColor" name="fontColor" value="green" onClick={() => changeFontColor('green')}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
