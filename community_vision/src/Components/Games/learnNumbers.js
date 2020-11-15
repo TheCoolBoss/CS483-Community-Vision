@@ -9,15 +9,22 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
+import { render } from 'react'
 //import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "1234567890"
+var list = "0123456789"
 
 function LearnNumbers() {
+    var [randomNumber, setRandomNumber] = useState(0);
     var [index, setIndex] = useState(0);
-    var currentNumber = list[index];
+    var currentNumber;
+    if(index < list.length) {
+        currentNumber = list[index];
+    } else {
+        currentNumber = list[randomNumber];
+    }
     var currentMorse = charToMorse(currentNumber);
     var [input, setInput] = useState('');
     var output = morseToChar(input);
@@ -34,9 +41,11 @@ function LearnNumbers() {
     if (input.length > 6){
         setInput('');
     }
+
     if (input === currentMorse){
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setRandomNumber(Math.floor(Math.random() * 10));
     }
     
     // tracks keycodes for space button  and enter button input 
