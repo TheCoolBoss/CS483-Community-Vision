@@ -24,6 +24,10 @@ function initial(type){
         return 29;
     } else if(type == 'speed'){
         return 1.5;
+    } else if(type == 'backgroundColor'){
+        return '#0068a6';
+    } else if(type == 'fontColor'){
+        return 'black';
     }
 }
 

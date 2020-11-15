@@ -18,6 +18,10 @@ function initial(type){
         return 29;
     } else if(type == 'speed'){
         return 1.5;
+    } else if(type == 'backgroundColor'){
+        return '#0068a6';
+    } else if(type == 'fontColor'){
+        return 'black';
     }
 }
 
@@ -34,9 +38,19 @@ function  Settings() {
     const changeSpeed = (event, newValue) => {
         setSpeed(newValue);
     };
+    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
+    const changeBackgroundColor = (event, newValue) => {
+        setBackgroundColor(newValue);
+    };
+    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
+    const changeFontColor = (event, newValue) => {
+        setFontColor(newValue);
+    };
     localStorage.setItem('volume', volume)
     localStorage.setItem('size', size)
     localStorage.setItem('speed', (3-speed).toFixed(1))
+    localStorage.setItem('backgroundColor', backgroundColor)
+    localStorage.setItem('fontColor', fontColor)
     const fSize = size +'vh'
     const fMargin = -size*3/4 +'vh'
     return (
