@@ -1,44 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
+import { useSpring, animated } from 'react-spring';
 import {charToMorse, morseToChar} from "./charMorseConv";
-import { useTransition, animated } from 'react-spring';
-import useSound from "use-sound";
-import dashSound from "../Assets/Sounds/dash.mp3";
-import dotSound from "../Assets/Sounds/dot.mp3";
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../Assets/Sounds/dot.mp3'
+//import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+var list = "1234567890"
 
-function SandboxWords() {
-    var [index, setIndex] = React.useState(0);
-    var currentLetter = list[index];
-    var currentMorse = charToMorse(currentLetter);
-    var [input, setInput] = React.useState('');
+function LearnNumbers() {
+    var [index, setIndex] = useState(0);
+    var currentNumber = list[index];
+    var currentMorse = charToMorse(currentNumber);
+    var [input, setInput] = useState('');
     var output = morseToChar(input);
     const [playDash] = useSound(dashSound);
     const [playDot] = useSound(dotSound);
-    /*
-    const BoopButton = () => {
-        const [play] = useSound(dashSound);
-        return <button onClick={play}>Boop!</button>;
-    };*/
+    const [anim, setAnim] = useState(true);
+
 
     clearTimeout(t);
     t = setTimeout(function(){
-        document.getElementById("textbox").innerHTML += output;
         setInput('');
     }, resetTimer);
 
     if (input.length > 6){
         setInput('');
     }
-
-    // tracks keycodes for space button  and enter button input
+    if (input === currentMorse){
+        setAnim(!anim);
+        setIndex(prevState => prevState + 1);
+    }
+    
+    // tracks keycodes for space button  and enter button input 
     document.onkeydown = function(evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
@@ -47,47 +48,53 @@ function SandboxWords() {
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
             playDash();
-        } else if (evt.keyCode === 9) {
-            document.getElementById("textbox").innerHTML = "";
         }
     };
 
+    var d = 2000;
+    if (!anim){
+        d = 0;
+        t = setTimeout(function(){
+            setAnim(!anim)
+        }, 100);
+    }
+    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
+    
     return (
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
-            <div style={{gridArea: 'middle'}}>
+            <div style={{gridArea: 'top'}}>
                 <div>
-                    <animated.p id = "textbox" style={{lineHeight: 0,
-                        color: '#ff8e97',
-                        fontSize: '15vh'}}>{""}</animated.p>
                     <animated.h1 style={{lineHeight: 0,
                         color: '#ff8e97',
-                        fontSize: '7vh'}}>{output}</animated.h1>
+                        fontSize: '25vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentNumber}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: '#ffaba6',
-                        fontSize: '7vh'}}>{input}</animated.p>
+                        fontSize: '10vh',
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{gridArea: 'bottom'}}>
+            <div style={{gridArea: 'middle'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{input}</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>|</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{output}</p>
+                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
+                        <Grid item xs={4}> 
                             <Card>
                                 <CardActionArea>
                                     <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•</button>
+                                            setInput(input + '•');
+                                            playDot();
+                                        }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
@@ -97,19 +104,10 @@ function SandboxWords() {
                                     <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
-                                    }}>-</button>
+                                        }}>-</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
-                    </Grid>
-                    <Grid container justify = "center">
-                        <Card>
-                            <CardActionArea>
-                                <button id="clearButton" style={{backgroundColor: '#01214f', width: '100%', height: '10vh', fontSize: '5vh', color: '#ffaba6'}} onClick={function(){
-                                    document.getElementById("textbox").innerHTML = "";
-                                }}>Clear</button>
-                            </CardActionArea>
-                        </Card>
                     </Grid>
                 </Container>
             </div>
@@ -117,4 +115,4 @@ function SandboxWords() {
     );
 }
 
-export default SandboxWords;
+export default LearnNumbers;

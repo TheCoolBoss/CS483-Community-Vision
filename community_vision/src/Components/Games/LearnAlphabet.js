@@ -88,7 +88,7 @@ function LearnAlphabet() {
             setAnim(!anim)
         }, 100);
     }
-    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
+    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } });
     
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>

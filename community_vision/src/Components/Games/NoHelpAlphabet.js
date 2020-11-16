@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./charMorseConv";
+import { useSpring, animated } from 'react-spring';
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../Assets/Sounds/dot.mp3'
 
 
 var t;
@@ -20,6 +24,10 @@ function NoHelpAlphabet() {
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
 
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
+    const [anim, setAnim] = useState(true);
+
     clearTimeout(t);
     t = setTimeout(function(){
         setInput('');
@@ -29,8 +37,8 @@ function NoHelpAlphabet() {
         setInput('');
     }
     if (input === currentMorse){
+        setAnim(!anim);
         setIndex(prevState => prevState + 1);
-        
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -38,16 +46,28 @@ function NoHelpAlphabet() {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
+            playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+            playDash();
         }
     };
+
+    var d = 2000;
+    if (!anim){
+        d = 0;
+        t = setTimeout(function(){
+            setAnim(!anim)
+        }, 100);
+    }
+
+    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } });
 
     return (
         <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'middle'}}>
                 <div>
-                    <h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '15vh'}}>{currentLetter}</h1>
+                    <animated.h1 style={{lineHeight: 0, color: '#ff8e97', fontSize: '25vh'}}>{currentLetter}</animated.h1>
 
                 </div>
             </div>
@@ -68,18 +88,20 @@ function NoHelpAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
-                                            setInput(input + '•');
-                                        }}>.</button>
+                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                        setInput(input + '•');
+                                        playDot();
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#ffaba6', width: '100%', height: '10vh', fontSize: '5vh'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
-                                        }}>-</button>
+                                        playDash();
+                                    }}>-</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
