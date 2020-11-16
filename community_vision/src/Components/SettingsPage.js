@@ -11,11 +11,11 @@ function  SettingsPage() {
             <Grid justify='center'>
                 <Link to="/games">
                     <button style={{width: '50vw',
-                        height: '7vh',
+                        minHeight: '7vh',
                         marginBottom: '1.5vh',
                         fontSize: '6vh',
                         textDecoration: 'none'}}>
-                        Games
+                        Play Games!
                     </button>
                 </Link>
             </Grid>

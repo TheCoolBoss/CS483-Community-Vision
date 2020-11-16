@@ -25,9 +25,9 @@ function initial(type){
     } else if(type === 'speed'){
         return 1.5;
     } else if(type === 'backgroundColor'){
-        return '#0068a6';
+        return 'blue';
     } else if(type === 'fontColor'){
-        return 'black';
+        return 'white';
     }
 }
 
@@ -37,8 +37,6 @@ function LearnAlphabet() {
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = useState('');
     var output = morseToChar(input);
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
 
     const [volume] = React.useState(() => initial('volume'));
@@ -48,6 +46,15 @@ function LearnAlphabet() {
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
+
+    const [playDash] = useSound(
+        dashSound,
+        { volume: volume/100}
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: volume/100}
+    );
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -84,15 +91,15 @@ function LearnAlphabet() {
     var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
     
     return (
-        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
             <div style={{gridArea: 'top'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
-                        color: '#ff8e97',
+                        color: fontColor,
                         fontSize: fSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
-                        color: '#ffaba6',
+                        color: fontColor,
                         fontSize: '10vh',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
@@ -101,20 +108,20 @@ function LearnAlphabet() {
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{input}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>|</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{output}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}> 
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                             setInput(input + '•');
                                             playDot();
                                         }}>•</button>
@@ -124,7 +131,7 @@ function LearnAlphabet() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                         }}>-</button>
