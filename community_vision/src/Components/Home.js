@@ -16,13 +16,19 @@ function Home() {
       gridTemplateAreas: '"top" "middleTop" "middleBottom" "bottom"'}}>
       
       <img src={pencils} alt="pencils"
-      style={{position: 'fixed', height: '100%', width: '100%', objectFit: 'cover', zIndex: -1}}
-      />;
+      style={{gridRowStart: 'top', gridRowEnd: 'bottom', position: 'absolute', height: '100%', width: '100%', objectFit: 'cover', zIndex: -1}}
+      />
 
       <div style={{gridArea: 'top',
         height: '80%',
         alignSelf: 'center', alignItems: 'center'}}>
-        <h1 style={{fontSize: '10vh', color: '#003087', textDecoration: 'underline', position: 'relative', bottom: '-1vh', fontWeight: 900}}>Play Morse!</h1>
+        <h1 style={{fontSize: '10vh',
+          color: '#003087',
+          textDecoration: 'underline',
+          position: 'relative',
+          bottom: '-1vh',
+          fontWeight: 900}}>
+          Play Morse!</h1>
       </div>
       <div style={{gridArea: 'middleBottom'}}>
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
@@ -34,7 +40,7 @@ function Home() {
             <Grid item xs={5} style={{height: '20%'}}>
               <Card style={{height: '100%'}}>
                 <Link className='nav-link' to="/settings">
-                  <button style={{height: '100%', width: '100%', fontSize: '4vh', fontWeight: 900}}>Play Games!</button>
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900}}>Play Games!</button>
                 </Link>
               </Card>
             </Grid>

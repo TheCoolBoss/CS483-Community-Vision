@@ -4,7 +4,7 @@ import Home from './Components/Home';
 import Nav from './Components/Nav';
 import Games from './Components/Games';
 import About from './Components/About';
-import Settings from './Components/Settings'
+import SettingsPage from './Components/SettingsPage'
 import LearnAlphabet from './Components/Games/LearnAlphabet';
 import LearnWordAdvanced from './Components/Games/LearnWord/LearnWordAdvanced';
 import LearnWordBeginner from './Components/Games/LearnWord/LearnWordBeginner';
@@ -24,7 +24,7 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/games" component={Games}/>
           <Route path="/about" component={About}/>
-          <Route path="/settings" component={Settings}/>
+          <Route path="/settings" component={SettingsPage}/>
           <Route path="/learnAlphabet" component={LearnAlphabet}/>
           <Route path="/learnWordBeginner" component={LearnWordBeginner}/>
           <Route path="/learnWordAdvanced" component={LearnWordAdvanced}/>

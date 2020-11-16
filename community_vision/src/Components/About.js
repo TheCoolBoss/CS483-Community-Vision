@@ -3,11 +3,8 @@ import '../App.css';
 
 function About() {
   return (
-    <div style={{position: 'relative'}}>
-      <h1 style={{height: '100%', color: 'black', fontWeight: 900}}></h1>
-      <h1>About Community Vision</h1>
-      <h2 style ={{height: '100%', color: 'black', fontWeight: 900}}></h2>
-      <h2>At Community Vision</h2>
+    <div style={{position: 'relative', marginLeft: '5vw', marginRight: '5vw', marginBottom: '10vh'}}>
+      <h1 style ={{height: '100%', color: 'black', fontWeight: 900}}>At Community Vision</h1>
 
       
       <p>* we value individuals * value whole lives * we begin with "yes" * we are future-oriented *
