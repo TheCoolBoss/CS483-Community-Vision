@@ -94,6 +94,7 @@ function LearnAlphabet() {
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
             <div style={{gridArea: 'top'}}>
+                <Radio />
                 <div>
                     <animated.h1 style={{lineHeight: 0,
                         color: fontColor,
@@ -145,5 +146,52 @@ function LearnAlphabet() {
         </div>
     );
 }
+
+const Radio = () => {
+    const [isToggled, setToggle] = useState(false);
+    const menubg = useSpring({ background: isToggled ? "#6ce2ff" : "#ebebeb" });
+    const { y } = useSpring({
+      y: isToggled ? 180 : 0
+    });
+    const menuAppear = useSpring({
+      transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
+      opacity: isToggled ? 1 : 0
+    });
+  
+    return (
+      <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
+        <animated.button
+          style={menubg}
+          className="radiowrapper"
+          onClick={() => setToggle(!isToggled)}
+        >
+          <div className="radio">
+            <p>Tutorial</p>
+            <animated.p
+              style={{
+                transform: y.interpolate(y => `rotateX(${y}deg)`)
+              }}
+            >
+              ▼
+            </animated.p>
+          </div>
+        </animated.button>
+        <animated.div style={menuAppear}>
+          {isToggled ? <RadioContent /> : null}
+        </animated.div>
+      </div>
+    );
+  };
+  
+  const RadioContent = () => {
+    return (
+      <div className="radiocontent">
+        <a href="#" alt="Home">
+          This is how you play
+        </a>
+        <button>next</button>
+      </div>
+    );
+  };
 
 export default LearnAlphabet;
