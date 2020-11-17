@@ -240,26 +240,26 @@ function  Settings() {
                                             width: '6vh',
                                             height: '6vh',
                                             marginLeft: '-1.5vh'}} onClick={function(){
-                                                changeBackgroundColor('#0072B2');
-                                                changeFontColor('#E69F00');
+                                                changeBackgroundColor('#89CFF0');
+                                                changeFontColor('#FC0FC0');
                                             }}>
-                                            <div style={{gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
-                                            <div style={{gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
+                                            <div style={{gridArea: '1', backgroundColor: '#89CFF0', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
+                                            <div style={{gridArea: '1', backgroundColor: '#FFC0CB', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
                                             <div style={{gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
-                                            <div style={{gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
+                                            <div style={{gridArea: '2', backgroundColor: '#FC0FC0', width: '3vh', height: '3vh', borderStyle: 'solid'}}/>
                                         </div>
                                     </Grid>
                                     <Grid item>
                                         <p style={{marginTop: '1vh', marginBottom: '-0.5vh', cursor: 'default'}} onClick={function(){
-                                                changeBackgroundColor('#0072B2');
-                                                changeFontColor('#E69F00');
+                                                changeBackgroundColor('#89CFF0');
+                                                changeFontColor('#FC0FC0');
                                             }}>Tritan</p>
                                     </Grid>
                                     <Grid item>
                                         <input checked={isChecked('theme', 'tritan')} type="radio" id="tritanTheme" name="theme" value="blue"
                                             onClick={() => {
-                                                changeBackgroundColor('#0072B2');
-                                                changeFontColor('#E69F00')
+                                                changeBackgroundColor('#89CFF0');
+                                                changeFontColor('#FC0FC0')
                                             }}/>
                                     </Grid>
                                 </Grid>    

@@ -63,6 +63,8 @@ function Nav() {
           <img style={{height: '8vh'}} src={pic} alt={pic}></img>
         </button>
       </div>
+      <div id="root">
+      </div>
       <animated.div style={{gridArea: 'header',
         display: 'flex',
         justifContent: 'space-around',
@@ -76,5 +78,6 @@ function Nav() {
     </div>
   );
 }
+
 
 export default Nav;
