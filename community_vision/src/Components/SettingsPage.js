@@ -4,9 +4,19 @@ import Settings from './Settings'
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 
+function initial(type){
+    if(localStorage.getItem(type) != null){
+        return localStorage.getItem(type);
+    }
+    if(type === 'backgroundColor'){
+        return 'blue';
+    }
+}
+
 function  SettingsPage() {
+    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     return(
-        <div>
+        <div style={{backgroundColor: backgroundColor, minHeight: '90vh', marginTop: '-1.5vh'}}>
             <Settings/>
             <Grid justify='center'>
                 <Link to="/games">

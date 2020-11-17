@@ -63,7 +63,7 @@ function  Settings() {
                 return true;
             } else if(color === 'deutran' && backgroundColor === '#030303' && fontColor === '#D0A15D'){
                 return true;
-            } else if(color === 'tritan' && backgroundColor === '#0072B2' && fontColor === '#E69F00'){
+            } else if(color === 'tritan' && backgroundColor === '#89CFF0' && fontColor === '#FC0FC0'){
                 return true;
             }
         }
