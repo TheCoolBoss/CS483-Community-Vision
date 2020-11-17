@@ -46,6 +46,7 @@ function LearnAlphabet() {
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
+    const sfSize = size/3 +'vh'
 
     const [playDash] = useSound(
         dashSound,
@@ -100,20 +101,20 @@ function LearnAlphabet() {
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                     <animated.p style={{lineHeight: 0,
                         color: fontColor,
-                        fontSize: '10vh',
+                        fontSize: sfSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
-                        <Grid item xs={5} sm={5}>
+                        <Grid item sm={5}>
                             <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
                             <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
                         </Grid>
-                        <Grid item xs={5} sm={5}>
+                        <Grid item sm={5}>
                             <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left'}}>{output}</p>
                         </Grid>
                     </Grid>
