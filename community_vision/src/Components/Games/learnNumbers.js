@@ -16,6 +16,23 @@ var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "0123456789"
 
+function initial(type){
+    if(localStorage.getItem(type) != null){
+        return localStorage.getItem(type);
+    }
+    if(type === 'volume'){
+        return 50;
+    } else if(type === 'size'){
+        return 29;
+    } else if(type === 'speed'){
+        return 1.5;
+    } else if(type === 'backgroundColor'){
+        return 'blue';
+    } else if(type === 'fontColor'){
+        return 'white';
+    }
+}
+
 function LearnNumbers() {
     var [randomNumber, setRandomNumber] = useState(0);
     var [index, setIndex] = useState(0);
@@ -28,10 +45,25 @@ function LearnNumbers() {
     var currentMorse = charToMorse(currentNumber);
     var [input, setInput] = useState('');
     var output = morseToChar(input);
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
 
+    const [volume] = React.useState(() => initial('volume'));
+    const [size] = React.useState(() => initial('size'));
+    const [speed] = React.useState(() => initial('speed'));
+    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [fontColor] = React.useState(() => initial('fontColor'));
+    const resetTimer = speed*1000; //reset timer in milliseconds
+    const fSize = size +'vh';
+    const sfSize = size/3 +'vh';
+
+    const [playDash] = useSound(
+        dashSound,
+        { volume: volume/100}
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: volume/100}
+    );
 
     clearTimeout(t);
     t = setTimeout(function(){
@@ -70,16 +102,16 @@ function LearnNumbers() {
     var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } })
     
     return (
-        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
+        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
             <div style={{gridArea: 'top'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
-                        color: '#ff8e97',
-                        fontSize: '25vh',
+                        color: fontColor,
+                        fontSize: fSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentNumber}</animated.h1>
                     <animated.p style={{lineHeight: 0,
-                        color: '#ffaba6',
-                        fontSize: '10vh',
+                        color: fontColor,
+                        fontSize: sfSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
                 </div>
             </div>
@@ -87,20 +119,20 @@ function LearnNumbers() {
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{input}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>|</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '10vh'}}>{output}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}> 
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                             setInput(input + '•');
                                             playDot();
                                         }}>•</button>
@@ -110,7 +142,7 @@ function LearnNumbers() {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                         }}>-</button>
