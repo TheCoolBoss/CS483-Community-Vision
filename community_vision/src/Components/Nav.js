@@ -47,6 +47,8 @@ function Nav() {
   return (
     <div>
       <div style={{gridArea: 'header',
+        position: 'relative',
+        zIndex: 4,
         display: 'flex',
         justifContent: 'space-around',
         alignItems: 'center',
@@ -93,13 +95,12 @@ function Nav() {
       </div>
       <animated.div style={{gridArea: 'header',
         display: 'flex',
-        justifContent: 'space-around',
-        alignSelf: 'center',
-        alignItems: 'center',
         position: 'relative',
-        minHeight: x.interpolate({ range: [0, 1], output: ['0vh', '70vh']}),
-        background: 'grey',
-        color: 'white'}}>
+        zIndex: 3,
+        height: 0,
+        top: x.interpolate({ range: [0, 1], output: ['-100vh', '0vh']}),
+        opacity: x.interpolate({ range: [0, 1], output: [0, 0.95]})}}>
+        <Settings/>
       </animated.div>
     </div>
   );

@@ -13,7 +13,7 @@ function initial(type){
     }
 }
 
-function  SettingsPage() {
+function SettingsPage() {
     const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     return(
         <div style={{backgroundColor: backgroundColor, minHeight: '90vh', marginTop: '-1.5vh'}}>
@@ -21,9 +21,9 @@ function  SettingsPage() {
             <Grid justify='center'>
                 <Link to="/games">
                     <button style={{width: '50vw',
-                        minHeight: '7vh',
+                        minHeight: '5vh',
                         marginBottom: '1.5vh',
-                        fontSize: '6vh',
+                        fontSize: '3vw',
                         textDecoration: 'none'}}>
                         Play Games!
                     </button>
