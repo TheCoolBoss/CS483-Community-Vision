@@ -16,7 +16,9 @@ function initial(type){
 function SettingsPage() {
     const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     return(
-        <div style={{backgroundColor: backgroundColor, minHeight: '90vh', marginTop: '-1.5vh'}}>
+        <div style={{backgroundColor: backgroundColor,
+            minHeight: '90vh',
+            marginTop: '-1.5vh'}}>
             <Settings/>
             <Grid justify='center'>
                 <Link to="/games">

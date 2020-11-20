@@ -72,7 +72,9 @@ function Settings() {
 
     return (
         <div style={{position: 'relative',
-            marginTop: '1.1vh',
+            marginTop: '1.5vh',
+            top: '1vh',
+            marginBottom: '2vh',
             width: '100vw'}}>
             <Grid style={{ marginBottom: '1vh'}} container>
                 <Grid style={{ marginLeft: '2px'}} container direction='column' xs={6} spacing={1}>
@@ -97,23 +99,6 @@ function Settings() {
                     </Grid>
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE TEXT SIZE</h1>
-                            <Grid container spacing={0} alignItems='center' style={{marginTop: '-8vh'}}>
-                                <Grid item xs={1} />
-                                <Grid item xs={7}>
-                                    <Slider value={size} onChange={changeSize}
-                                        valueLabelDisplay='auto' marks
-                                        step={1} min={19} max={29} />
-                                </Grid>
-                                <Grid item xs={1} />
-                                <Grid item xs={3}>
-                                    <h1 style={{ fontSize: fSize, margin: fMargin }}>A</h1>
-                                </Grid>
-                            </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh'}}>CHOOSE GAME SPEED</h1>
                             <Grid container spacing={0} alignItems='center'>
                                 <Grid item xs={1}>
@@ -128,6 +113,23 @@ function Settings() {
                                 </Grid>
                                 <Grid item xs={1}>
                                     <VolumeUp />
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE TEXT SIZE</h1>
+                            <Grid container spacing={0} alignItems='center' style={{marginTop: '-8vh'}}>
+                                <Grid item xs={1} />
+                                <Grid item xs={7}>
+                                    <Slider value={size} onChange={changeSize}
+                                        valueLabelDisplay='auto' marks
+                                        step={1} min={19} max={29} />
+                                </Grid>
+                                <Grid item xs={1} />
+                                <Grid item xs={3}>
+                                    <h1 style={{ fontSize: fSize, margin: fMargin }}>A</h1>
                                 </Grid>
                             </Grid>
                         </Card>
