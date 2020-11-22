@@ -7,27 +7,15 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import Display from "./Common/Display";
+import {initial} from "./Common/Functions";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 //import { useTransition, animated } from 'react-spring'
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-function initial(type){
-    if(localStorage.getItem(type) != null){
-        return localStorage.getItem(type);
-    }
-    if(type === 'volume'){
-        return 50;
-    } else if(type === 'size'){
-        return 29;
-    } else if(type === 'speed'){
-        return 1.5;
-    } else if(type === 'backgroundColor'){
-        return 'blue';
-    } else if(type === 'fontColor'){
-        return 'white';
-    }
-}
 
 function LearnAlphabet() {
     var [index, setIndex] = useState(0);
