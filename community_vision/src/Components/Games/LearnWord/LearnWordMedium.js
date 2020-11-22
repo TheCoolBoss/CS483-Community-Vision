@@ -78,7 +78,7 @@ function LearnWordMedium () {
     const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = size +'vh';
+    const fSize = (size-5) +'vh';
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
@@ -144,9 +144,9 @@ function LearnWordMedium () {
     };
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
-            <div style={{gridArea: 'top'}}>
-                <Container>
+        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw'}}>
+            <Grid container spacing={0} justify='center'>
+                <Grid item xs={4} sm={6}>
                     <Transition
                         native
                         reset
@@ -158,44 +158,50 @@ function LearnWordMedium () {
                     >
                         {show => show && (props => 
                             <animated.image style={props}>
-                                <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
+                                <img src={img} alt={currentWord.toLowerCase()} style={{width: '50%', height: '80%'}}/>
                             </animated.image>
                         )}
                     </Transition>
-                    {isValidLetter 
+                </Grid>
+                <Grid container item xs={4} spacing={0}>
+                    <Grid container spaceing={0} item xs={12}>
+                        {isValidLetter 
                         ?
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, padding: 0}}>{correct}</p>
+                            <Grid container item xs={12} justify='center'>
+                                <Grid>
+                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{correct}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, textDecoration: 'underline'}}>{currentLetter}</p>
+                                </Grid>
+                                <Grid>
+                                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentWord.substr(wordIndex+1)}</p>
+                                </Grid>
                             </Grid>
-                            <Grid>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
-                            </Grid>
-                            <Grid>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 0}}>{currentWord.substr(wordIndex+1)}</p>
-                            </Grid>
-                        </Grid>
                         :
-                        <Grid container justify='center'>
-                            <Grid>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 0}}>{currentWord}</p>
+                            <Grid item justify='center'>
+                                <Grid>
+                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</p>
+                                </Grid>
                             </Grid>
+                        }
+                        <Grid item justify='center'>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
                         </Grid>
-                    }
-                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
-                </Container>
-            </div>
-            <div style={{gridArea: 'bottom'}}>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <div>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{input}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>|</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{output}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
