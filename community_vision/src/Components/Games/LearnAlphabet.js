@@ -12,7 +12,7 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 //import { useTransition, animated } from 'react-spring'
 
 var t;
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function initial(type){
     if(localStorage.getItem(type) != null){
@@ -46,7 +46,7 @@ function LearnAlphabet() {
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
-    const sfSize = size/3 +'vh'
+    const sfSize = size/3 +'vh';
 
     const [playDash] = useSound(
         dashSound,
