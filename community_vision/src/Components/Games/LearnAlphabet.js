@@ -72,7 +72,7 @@ function updateTutorial() {
         textIndex++;
     } else if(textIndex == 4) {
         document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'Have Fun Learning the Morse Alphabet!';
+        document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
         textIndex = 0;
     }
 }
