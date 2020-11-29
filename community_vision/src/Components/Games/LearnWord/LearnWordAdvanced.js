@@ -76,11 +76,11 @@ function LearnWordAdvanced () {
     const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = (size-5) +'vh';
+    const fSize = (size-3) +'vh';
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
-    var [playCurrWordSound] = useSound(soundSrc);
+    var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
 

@@ -76,11 +76,11 @@ function LearnWordBeginner () {
     const [backgroundColor] = React.useState(() => initial('backgroundColor'));
     const [fontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = (size-5) +'vh';
+    const fSize = (size-3) +'vh';
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
-    var [playCurrWordSound] = useSound(soundSrc);
+    var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
 
@@ -145,7 +145,7 @@ function LearnWordBeginner () {
                 <div style={{width: '55vw', height:'40vh', float: 'right'}}>
                     {isCorrect
                     ?
-                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentWord}</p>
                     :
                     <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
                         <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
