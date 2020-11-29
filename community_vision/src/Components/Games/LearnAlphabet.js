@@ -85,11 +85,11 @@ function LearnAlphabet() {
     var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
-    const [volume] = React.useState(() => initial('volume'));
-    const [size] = React.useState(() => initial('size'));
+    const [volume] = useState(() => initial('volume'));
+    const [size] = useState(() => initial('size'));
     const [speed] = React.useState(() => initial('speed'));
-    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor] = React.useState(() => initial('fontColor'));
+    const [backgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
@@ -142,7 +142,7 @@ function LearnAlphabet() {
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
             
             <div style={{gridArea: 'top'}}>
-                <div style={{gidArea: 'top'}}>
+                <div style={{position: 'absolute'}}>
                     <Container>
                         <Grid container justify='left'>
                             <Grid item>
@@ -241,7 +241,7 @@ const Radio = () => {
   
   const RadioContent = () => {
     return (
-      <div className="radiocontent">
+      <div className="radiocontent" >
         <a href="#" alt="Home">
         </a>
         <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
