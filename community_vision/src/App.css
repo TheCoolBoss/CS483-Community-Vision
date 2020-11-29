@@ -49,3 +49,37 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  text-align: center;
+}
+
+.radiowrapper {
+  width: 300px;
+  border: none;
+  border-radius: 7px;
+  font-size: 22px;
+  padding: 0 20px;
+  outline: none;
+}
+
+.radio {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radiocontent {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  background: #ebebeb;
+  border-radius: 7px;
+}
+
+.radiocontent a {
+  text-decoration: none;
+  color: #4e4e4e;
+  padding: 6px 0;
+}
