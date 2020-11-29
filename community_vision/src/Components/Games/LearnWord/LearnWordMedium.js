@@ -144,9 +144,9 @@ function LearnWordMedium () {
     };
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw'}}>
-            <Grid container spacing={0} justify='center'>
-                <Grid item xs={4} sm={6}>
+        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+            <div style={{gridArea: 'top'}}>
+                <div style={{width: '45vw', height:'40vh', float: 'left'}}>
                     <Transition
                         native
                         reset
@@ -158,40 +158,26 @@ function LearnWordMedium () {
                     >
                         {show => show && (props => 
                             <animated.image style={props}>
-                                <img src={img} alt={currentWord.toLowerCase()} style={{width: '50%', height: '80%'}}/>
+                                <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
                             </animated.image>
                         )}
                     </Transition>
-                </Grid>
-                <Grid container item xs={4} spacing={0}>
-                    <Grid container spaceing={0} item xs={12}>
+                </div>
+                <div style={{width: '55vw', height:'40vh', float: 'right'}}>
                         {isValidLetter 
                         ?
-                            <Grid container item xs={12} justify='center'>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{correct}</p>
-                                </Grid>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, textDecoration: 'underline'}}>{currentLetter}</p>
-                                </Grid>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentWord.substr(wordIndex+1)}</p>
-                                </Grid>
-                            </Grid>
+                        <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
+                            <span style={{color: '#00FF00'}}>{correct}</span>
+                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                            <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
+                        </p>
                         :
-                            <Grid item justify='center'>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</p>
-                                </Grid>
-                            </Grid>
+                        <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentWord}</p>
                         }
-                        <Grid item justify='center'>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <div>
+                        <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentMorse}</p>
+                </div>
+            </div>
+            <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>

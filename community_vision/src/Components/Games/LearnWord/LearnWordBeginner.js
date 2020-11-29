@@ -22,7 +22,23 @@ import dotSound from '../../Assets/Sounds/dot.mp3'
 
 //Variables for time
 var t;
-var resetTimer = 1500; //reset timer in milliseconds
+
+function initial(type){
+    if(localStorage.getItem(type) != null){
+        return localStorage.getItem(type);
+    }
+    if(type === 'volume'){
+        return 50;
+    } else if(type === 'size'){
+        return 29;
+    } else if(type === 'speed'){
+        return 1.5;
+    } else if(type === 'backgroundColor'){
+        return 'blue';
+    } else if(type === 'fontColor'){
+        return 'white';
+    }
+}
 
 
 function LearnWordBeginner () {
@@ -53,11 +69,20 @@ function LearnWordBeginner () {
     //Current morse code the user is typing                  
     var currentMorse = charToMorse(currentLetter);
 
+    //Settings
+    const [volume] = React.useState(() => initial('volume'));
+    const [size] = React.useState(() => initial('size'));
+    const [speed] = React.useState(() => initial('speed'));
+    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [fontColor] = React.useState(() => initial('fontColor'));
+    const resetTimer = speed*1000; //reset timer in milliseconds
+    const fSize = (size-5) +'vh';
+
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
     var [playCurrWordSound] = useSound(soundSrc);
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
+    const [playDash] = useSound(dashSound, {volume: volume/100});
+    const [playDot] = useSound(dotSound, {volume: volume/100});
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -98,64 +123,56 @@ function LearnWordBeginner () {
     };
 
     return (
-        <div style={{backgroundColor: '#01214f', height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
-            <div style={{gridArea: 'middle'}}>
-                <div>
-                    <Container>
-                        <Transition
-                            native
-                            reset
-                            unique
-                            items={img}
-                            from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
-                            enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
-                            leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
-                            >
-                            {show => show && (props => 
-                                <animated.image style={props}>
-                                    <img src={img} alt={currentWord.toLowerCase()} style={{width: '25%', height: '20%', padding: 0}}/>
-                                </animated.image>
-                            )}
-                        </Transition>
-                        {isCorrect
-                            ?
-                            <Grid container justify='center'>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
-                                </Grid>
-                            </Grid>
-                            :
-                            <Grid container justify='center'>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: '#ffaba6', fontSize: 60, padding: 0, textDecoration: 'underline'}}>{currentLetter}</p>
-                                </Grid>
-                                <Grid>
-                                    <p style={{lineHeight: 0, color: '#ffaba690', fontSize: 60, padding: 0}}>{currentWord.substr(1)}</p>
-                                </Grid>
-                            </Grid>
-                        }
-                        <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '7vh'}}>{currentMorse}</p>
-                    </Container>
+        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+            <div style={{gridArea: 'top'}}>
+                <div style={{width: '45vw', height:'40vh', float: 'left'}}>
+                    <Transition
+                        native
+                        reset
+                        unique
+                        items={img}
+                        from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                        enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
+                        leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                    >
+                        {show => show && (props => 
+                            <animated.image style={props}>
+                                <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
+                            </animated.image>
+                        )}
+                    </Transition>
+                </div>
+                <div style={{width: '55vw', height:'40vh', float: 'right'}}>
+                    {isCorrect
+                    ?
+                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: 60, padding: 0}}>{currentWord}</p>
+                    :
+                    <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
+                        <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                        <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
+                    </p>
+                    }
+                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentMorse}</p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{input}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>|</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
                         </Grid>
                         <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: '#ffaba6', fontSize: '6vh'}}>{output}</p>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                             setInput(input + '•');
                                             playDot();
                                     }}>•</button>
@@ -165,7 +182,7 @@ function LearnWordBeginner () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: '#01214f', width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
