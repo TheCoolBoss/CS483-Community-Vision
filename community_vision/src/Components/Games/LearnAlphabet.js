@@ -1,35 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
-import {charToMorse, morseToChar} from "./charMorseConv";
+import { charToMorse, morseToChar } from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-//import { useTransition, animated } from 'react-spring'
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
 
-function initial(type){
-    if(localStorage.getItem(type) != null){
+function initial(type) {
+    if (localStorage.getItem(type) != null) {
         return localStorage.getItem(type);
     }
-    if(type === 'volume'){
+    if (type === 'volume') {
         return 50;
-    } else if(type === 'size'){
+    } else if (type === 'size') {
         return 29;
-    } else if(type === 'speed'){
+    } else if (type === 'speed') {
         return 1.5;
-    } else if(type === 'backgroundColor'){
+    } else if (type === 'backgroundColor') {
         return 'blue';
-    } else if(type === 'fontColor'){
+    } else if (type === 'fontColor') {
         return 'white';
     }
 }
@@ -48,36 +47,36 @@ function updateTutorial() {
     var space = document.getElementById('spaceImage');
     var enter = document.getElementById('enterImage');
 
-    if(textIndex == 0) {
+    if (textIndex == 0) {
         document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
-        
+
         textIndex++;
-    } else if(textIndex  == 1) {
+    } else if (textIndex == 1) {
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
         document.getElementById('dotButton').style.backgroundColor = "yellow";
         space.style.display = "block";
         textIndex++;
-    } else if(textIndex == 2) {
+    } else if (textIndex == 2) {
         document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
         document.getElementById('dashButton').style.backgroundColor = "yellow";
         space.style.display = "none";
         enter.style.display = "block";
         textIndex++;
-    } else if(textIndex == 3) {
+    } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
         document.getElementById('sampleMorse').style.backgroundColor = "yellow";
         enter.style.display = "none";
         textIndex++;
-    } else if(textIndex == 4) {
+    } else if (textIndex == 4) {
         document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
         textIndex = 0;
     }
 }
 
-function LearnAlphabet() {
+const LearnAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -85,39 +84,39 @@ function LearnAlphabet() {
     var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
-    const [volume] = useState(() => initial('volume'));
-    const [size] = useState(() => initial('size'));
-    const [speed] = React.useState(() => initial('speed'));
-    const [backgroundColor] = useState(() => initial('backgroundColor'));
-    const [fontColor] = useState(() => initial('fontColor'));
-    const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = size +'vh';
-    const sfSize = size/3 +'vh';
+    const [volume, setVolume] = useState(() => initial('volume'));
+    const [size, setSize] = useState(() => initial('size'));
+    const [speed, setSpeed] = useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
+    const resetTimer = speed * 1000; //reset timer in milliseconds
+    const fSize = size + 'vh';
+    const sfSize = size / 3 + 'vh';
 
     const [playDash] = useSound(
         dashSound,
-        { volume: volume/100}
+        { volume: volume / 100 }
     );
     const [playDot] = useSound(
         dotSound,
-        { volume: volume/100}
+        { volume: volume / 100 }
     );
 
     clearTimeout(t);
-    t = setTimeout(function(){
+    t = setTimeout(function () {
         setInput('');
     }, resetTimer);
 
-    if (input.length > 6){
+    if (input.length > 6) {
         setInput('');
     }
-    if (input === currentMorse){
+    if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
     }
-    
+
     // tracks keycodes for space button  and enter button input 
-    document.onkeydown = function(evt) {
+    document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
@@ -129,20 +128,33 @@ function LearnAlphabet() {
     };
 
     var d = 2000;
-    if (!anim){
+    if (!anim) {
         d = 0;
-        t = setTimeout(function(){
+        t = setTimeout(function () {
             setAnim(!anim)
         }, 100);
     }
-    var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } });
-    
+    var { x } = useSpring({ from: { x: 0 }, x: anim ? 1 : 0, config: { duration: d } });
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
+
     return (
-        
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
-            
-            <div style={{gridArea: 'top'}}>
-                <div style={{position: 'absolute'}}>
+
+        <div style={{ backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom' }}>
+
+            <div style={{ gridArea: 'top' }}>
+                <div style={{ position: 'absolute' }}>
                     <Container>
                         <Grid container justify='left'>
                             <Grid item>
@@ -152,47 +164,51 @@ function LearnAlphabet() {
                     </Container>
                 </div>
                 <div id="sampleMorse">
-                    <animated.h1 style={{lineHeight: 0,
+                    <animated.h1 style={{
+                        lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize,
-                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
-                    <animated.p style={{lineHeight: 0,
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
+                    }}>{currentLetter}</animated.h1>
+                    <animated.p style={{
+                        lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
-                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentMorse}</animated.p>
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
+                    }}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{gridArea: 'bottom'}}>
+            <div style={{ gridArea: 'bottom' }}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right'}}>{input}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh' }}>|</p>
                         </Grid>
                         <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left'}}>{output}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}> 
+                        <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                            setInput(input + '•');
-                                            playDot();
-                                        }}>•</button>
+                                    <button id="dotButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                        setInput(input + '•');
+                                        playDot();
+                                    }}>•</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                    <button id="dashButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
                                         setInput(input + '-');
                                         playDash();
-                                        }}>-</button>
+                                    }}>-</button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
@@ -201,57 +217,57 @@ function LearnAlphabet() {
             </div>
         </div>
     );
-}
+})
 
 const Radio = () => {
     const [isToggled, setToggle] = useState(false);
     const menubg = useSpring({ background: isToggled ? "#6ce2ff" : "#ebebeb" });
     const { y } = useSpring({
-      y: isToggled ? 180 : 0
+        y: isToggled ? 180 : 0
     });
     const menuAppear = useSpring({
-      transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
-      opacity: isToggled ? 1 : 0
+        transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
+        opacity: isToggled ? 1 : 0
     });
-  
+
     return (
-      <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
-        <animated.button
-          style={menubg}
-          className="radiowrapper"
-          onClick={() => setToggle(!isToggled)}
-        >
-          <div className="radio">
-            <p>Tutorial</p>
-            <animated.p
-              style={{
-                transform: y.interpolate(y => `rotateX(${y}deg)`)
-              }}
+        <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
+            <animated.button
+                style={menubg}
+                className="radiowrapper"
+                onClick={() => setToggle(!isToggled)}
             >
-              ▼
+                <div className="radio">
+                    <p>Tutorial</p>
+                    <animated.p
+                        style={{
+                            transform: y.interpolate(y => `rotateX(${y}deg)`)
+                        }}
+                    >
+                        ▼
             </animated.p>
-          </div>
-        </animated.button>
-        <animated.div style={menuAppear}>
-          {isToggled ? <RadioContent /> : null}
-        </animated.div>
-      </div>
+                </div>
+            </animated.button>
+            <animated.div style={menuAppear}>
+                {isToggled ? <RadioContent /> : null}
+            </animated.div>
+        </div>
     );
-  };
-  
-  const RadioContent = () => {
+};
+
+const RadioContent = () => {
     return (
-      <div className="radiocontent" >
-        <a href="#" alt="Home">
-        </a>
-        <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-        <img src={spacebar} alt="Spacebar" id="spaceImage" style={{display: "none"}}></img>
-        <img src={enterButton} alt="Enter Button" id="enterImage" style={{display: "none"}}></img>
-        <button onClick={function(){
-            updateTutorial();
-        }}style={{fontSize: '5vh'}}>Next</button>
-      </div>
+        <div className="radiocontent" >
+            <a href="#" alt="Home">
+            </a>
+            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            <button onClick={function () {
+                updateTutorial();
+            }} style={{ fontSize: '5vh' }}>Next</button>
+        </div>
     );
-  };
+};
 
 export default LearnAlphabet;
