@@ -30,7 +30,7 @@ function App() {
         <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
           <Route path="/" exact>
-            <Home />
+            <Home ref={currentRef} />
           </Route>
           <Route path="/games">
             <Games ref={currentRef} />

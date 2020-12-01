@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { forwardRef, useState, useImperativeHandle } from 'react';
 import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 import pencils from './home/pencils.jpg';
 
-function Home() {
+const Home = forwardRef((props, ref) => {
+  useImperativeHandle(
+    ref,
+    () => ({
+      update() {
+        //does nothing to homepage for now
+      }
+    }),
+  )
   return (
     <div style={{position: 'relative',
       zIndex: 0,
@@ -48,6 +56,6 @@ function Home() {
       </div>
     </div>
   );
-}
+})
 
 export default Home;
