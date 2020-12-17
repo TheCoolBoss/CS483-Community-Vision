@@ -8,6 +8,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import Display from "./Common/Display";
 import {initial} from "./Common/Functions";
+import {useEvents} from "./Common/Functions";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
