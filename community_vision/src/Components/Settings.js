@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -8,62 +8,74 @@ import VolumeUp from '@material-ui/icons/VolumeUp';
 import { SketchPicker } from 'react-color';
 import reactCSS from 'reactcss'
 
-function initial(type){
-    if(localStorage.getItem(type) != null){
+function initial(type) {
+    if (localStorage.getItem(type) != null) {
         return localStorage.getItem(type);
     }
-    if(type === 'volume'){
+    if (type === 'volume') {
         return 50;
-    } else if(type === 'size'){
+    } else if (type === 'size') {
         return 29;
-    } else if(type === 'speed'){
+    } else if (type === 'speed') {
         return 1.5;
-    } else if(type === 'backgroundColor'){
+    } else if (type === 'backgroundColor') {
         return 'blue';
-    } else if(type === 'fontColor'){
+    } else if (type === 'fontColor') {
         return 'white';
     }
 }
 
-function Settings() {
-    const [volume, setVolume] = React.useState(() => initial('volume'));
+function Settings(props) {
+    const [volume, setVolume] = useState(() => initial('volume'));
     const changeVolume = (event, newValue) => {
+        localStorage.setItem('volume', newValue);
         setVolume(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
     };
-    const [size, setSize] = React.useState(() => initial('size'));
+    const [size, setSize] = useState(() => initial('size'));
     const changeSize = (event, newValue) => {
+        localStorage.setItem('size', newValue);
         setSize(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
     };
-    const [speed, setSpeed] = React.useState(() => initial('speed'));
+    const [speed, setSpeed] = useState(() => 3 - initial('speed'));
     const changeSpeed = (event, newValue) => {
+        localStorage.setItem('speed', (3 - newValue).toFixed(1));
         setSpeed(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
     };
-    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const changeBackgroundColor = (newValue) => {
+        localStorage.setItem('backgroundColor', newValue);
         setBackgroundColor(newValue);
+        props.updateNavBackgroundColor(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
     };
-    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const changeFontColor = (newValue) => {
+        localStorage.setItem('fontColor', newValue);
         setFontColor(newValue);
+        props.updateNavFontColor(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
     };
-    localStorage.setItem('volume', volume);
-    localStorage.setItem('size', size);
-    localStorage.setItem('speed', (3-speed).toFixed(1));
-    localStorage.setItem('backgroundColor', backgroundColor);
-    localStorage.setItem('fontColor', fontColor);
-    const fSize = size +'vh';
-    const fMargin = -size/5 +'vh';
+    const fSize = size + 'vh';
+    const fMargin = -size / 5 + 'vh';
     const isChecked = (type, color) => {
-        if(type === color){
+        if (type === color) {
             return true;
-        } else if(type === 'theme'){
-            if(color === 'grayScale' && backgroundColor === 'gray' && fontColor === 'black'){
+        } else if (type === 'theme') {
+            if (color === 'grayScale' && backgroundColor === 'gray' && fontColor === 'black') {
                 return true;
-            } else if(color === 'protan' && backgroundColor === '#A7B8F8' && fontColor === '#AE9C45'){
+            } else if (color === 'protan' && backgroundColor === '#A7B8F8' && fontColor === '#AE9C45') {
                 return true;
-            } else if(color === 'deutran' && backgroundColor === '#030303' && fontColor === '#D0A15D'){
+            } else if (color === 'deutran' && backgroundColor === '#030303' && fontColor === '#D0A15D') {
                 return true;
-            } else if(color === 'tritan' && backgroundColor === '#89CFF0' && fontColor === '#FC0FC0'){
+            } else if (color === 'tritan' && backgroundColor === '#89CFF0' && fontColor === '#FC0FC0') {
                 return true;
             }
         }
@@ -71,13 +83,14 @@ function Settings() {
     };
 
     return (
-        <div style={{position: 'relative',
+        <div style={{
+            position: 'relative',
             marginTop: '1.5vh',
             top: '1vh',
             marginBottom: '2vh',
             width: '100vw'}}>
-            <Grid style={{ marginBottom: '1vh'}} container>
-                <Grid style={{ marginLeft: '2px'}} container direction='column' xs={6} spacing={1}>
+            <Grid style={{ marginBottom: '1vh' }} container>
+                <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE GAME VOLUME</h1>
@@ -99,7 +112,7 @@ function Settings() {
                     </Grid>
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh'}}>CHOOSE GAME SPEED</h1>
+                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE GAME SPEED</h1>
                             <Grid container spacing={0} alignItems='center'>
                                 <Grid item xs={1}>
                                     <VolumeDown />
@@ -120,7 +133,7 @@ function Settings() {
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE TEXT SIZE</h1>
-                            <Grid container spacing={0} alignItems='center' style={{marginTop: '-8vh'}}>
+                            <Grid container spacing={0} alignItems='center' style={{ marginTop: '-8vh' }}>
                                 <Grid item xs={1} />
                                 <Grid item xs={7}>
                                     <Slider value={size} onChange={changeSize}
@@ -135,7 +148,7 @@ function Settings() {
                         </Card>
                     </Grid>
                 </Grid>
-                <Grid style={{ marginLeft: '2px'}} container direction='column' xs={6} spacing={1}>
+                <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>PICK A THEME!</h1>
@@ -148,15 +161,15 @@ function Settings() {
                                             gridTemplateAreas: '"1" "2"',
                                             width: '6vh',
                                             height: '6vh',
-                                            marginLeft: '-1.5vh'
+                                            marginBottom: '-1vh'
                                         }} onClick={function () {
                                             changeBackgroundColor('gray');
                                             changeFontColor('black');
                                         }}>
-                                            <div style={{ gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -181,15 +194,15 @@ function Settings() {
                                             gridTemplateAreas: '"1" "2"',
                                             width: '6vh',
                                             height: '6vh',
-                                            marginLeft: '-1.5vh'
+                                            marginBottom: '-1vh'
                                         }} onClick={function () {
                                             changeBackgroundColor('#A7B8F8');
                                             changeFontColor('#AE9C45');
                                         }}>
-                                            <div style={{ gridArea: '1', backgroundColor: '#AE9C45', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '1', backgroundColor: '#6073B1', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: '#A7B8F8', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: '#052955', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#AE9C45', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#6073B1', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#A7B8F8', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#052955', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -207,22 +220,22 @@ function Settings() {
                                     </Grid>
                                 </Grid>
                                 <Grid container direction='column' alignItems='center' xs={3}>
-                                    <Grid item xs={3}>
+                                    <Grid item>
                                         <div style={{
                                             display: 'grid',
                                             gridTemplate: '1fr 1fr / 1fr',
                                             gridTemplateAreas: '"1" "2"',
                                             width: '6vh',
                                             height: '6vh',
-                                            marginLeft: '-1.5vh'
+                                            marginBottom: '-1vh'
                                         }} onClick={function () {
                                             changeBackgroundColor('#030303');
                                             changeFontColor('#D0A15D');
                                         }}>
-                                            <div style={{ gridArea: '1', backgroundColor: '#030303', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '1', backgroundColor: '#D0A15D', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: '#A48978', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: '#030303', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#030303', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#D0A15D', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#A48978', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#030303', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -240,22 +253,22 @@ function Settings() {
                                     </Grid>
                                 </Grid>
                                 <Grid container direction='column' alignItems='center' xs={3}>
-                                    <Grid item xs={3}>
+                                    <Grid item>
                                         <div style={{
                                             display: 'grid',
                                             gridTemplate: '1fr 1fr / 1fr',
                                             gridTemplateAreas: '"1" "2"',
                                             width: '6vh',
                                             height: '6vh',
-                                            marginLeft: '-1.5vh'
+                                            marginBottom: '-1vh'
                                         }} onClick={function () {
                                             changeBackgroundColor('#89CFF0');
                                             changeFontColor('#FC0FC0');
                                         }}>
-                                            <div style={{ gridArea: '1', backgroundColor: '#89CFF0', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '1', backgroundColor: '#FFC0CB', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <div style={{ gridArea: '2', backgroundColor: '#FC0FC0', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#89CFF0', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '1', backgroundColor: '#FFC0CB', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#FC0FC0', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -379,75 +392,75 @@ function Settings() {
 
 class ColorPicker extends React.Component {
     state = {
-      displayColorPicker: false,
-      color: this.props.color
+        displayColorPicker: false,
+        color: this.props.color
     };
 
-    componentDidUpdate(prevProps){
-        if(this.props.color !== prevProps.color){
+    componentDidUpdate(prevProps) {
+        if (this.props.color !== prevProps.color) {
             this.setState({ color: this.props.color })
         }
     }
 
     handleClick = () => {
-      this.setState({ displayColorPicker: !this.state.displayColorPicker })
+        this.setState({ displayColorPicker: !this.state.displayColorPicker })
     };
-  
+
     handleClose = () => {
-      this.setState({ displayColorPicker: false })
+        this.setState({ displayColorPicker: false })
     };
-  
+
     handleChange = (color) => {
-      this.props.onColorChange(color.hex)
+        this.props.onColorChange(color.hex)
     };
-  
+
     render() {
-  
-      const styles = reactCSS({
-        'default': {
-          color: {
-            width: '5vh',
-            height: '5vh',
-            borderRadius: '2px',
-            background: this.state.color,
-          },
-          swatch: {
-            background: '#fff',
-            borderRadius: '2px',
-            boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-            display: 'inline-block',
-            cursor: 'pointer',
-          },
-          popover: {
-            position: 'absolute',
-            marginTop: '-305px',
-            marginLeft: '-110px',
-            zIndex: '2',
-          },
-          cover: {
-            position: 'fixed',
-            top: '0px',
-            right: '0px',
-            bottom: '0px',
-            left: '0px',
-          },
-        },
-      });
-  
-      return (
-        <div>
-          <div style={ styles.swatch } onClick={ this.handleClick }>
-            <div style={ styles.color } />
-          </div>
-          { this.state.displayColorPicker ? <div style={ styles.popover }>
-            <div style={ styles.cover } onClick={ this.handleClose }/>
-            <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
-          </div> : null }
-  
-        </div>
-      )
+
+        const styles = reactCSS({
+            'default': {
+                color: {
+                    width: '5vh',
+                    height: '5vh',
+                    borderRadius: '2px',
+                    background: this.state.color,
+                },
+                swatch: {
+                    background: '#fff',
+                    borderRadius: '2px',
+                    boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+                    display: 'inline-block',
+                    cursor: 'pointer',
+                },
+                popover: {
+                    position: 'absolute',
+                    marginTop: '-305px',
+                    marginLeft: '-110px',
+                    zIndex: '2',
+                },
+                cover: {
+                    position: 'fixed',
+                    top: '0px',
+                    right: '0px',
+                    bottom: '0px',
+                    left: '0px',
+                },
+            },
+        });
+
+        return (
+            <div>
+                <div style={styles.swatch} onClick={this.handleClick}>
+                    <div style={styles.color} />
+                </div>
+                { this.state.displayColorPicker ? <div style={styles.popover}>
+                    <div style={styles.cover} onClick={this.handleClose} />
+                    <SketchPicker color={this.state.color} onChange={this.handleChange} />
+                </div> : null}
+
+            </div>
+        )
     }
 }
-  
+
 
 export default Settings;

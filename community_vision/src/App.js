@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './App.css';
 import Home from './Components/Home';
 import Nav from './Components/Nav';
@@ -13,26 +13,58 @@ import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
 import LearnNumbers from "./Components/Games/learnNumbers";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
+  const currentRef = useRef();
+  const navRef = useRef();
+  const updatePage = (value) => {
+    currentRef.current.update();
+  }
+  const updateNav = (value) => {
+    navRef.current.update();
+  }
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/games" component={Games}/>
-          <Route path="/about" component={About}/>
-          <Route path="/settings" component={SettingsPage}/>
-          <Route path="/learnAlphabet" component={LearnAlphabet}/>
-          <Route path="/learnWordBeginner" component={LearnWordBeginner}/>
-          <Route path="/learnWordAdvanced" component={LearnWordAdvanced}/>
-          <Route path="/learnWordMedium" component={LearnWordMedium}/>
-          <Route path="/noHelpAlphabet" component={AlphabetNoHelp}/>
-          <Route path="/sandboxLetters" component={SandboxLetters}/>
-          <Route path="/sandboxWords" component={SandboxWords}/>
-          <Route path="/learnNumbers" component={LearnNumbers}/>
+          <Route path="/" exact>
+            <Home ref={currentRef} />
+          </Route>
+          <Route path="/games">
+            <Games ref={currentRef} />
+          </Route>
+          <Route path="/about">
+            <About ref={currentRef} />
+          </Route>
+          <Route path="/settings">
+            <SettingsPage updateAppState={updateNav} />
+          </Route>
+          <Route path="/learnAlphabet">
+            <LearnAlphabet ref={currentRef} />
+          </Route>
+          <Route path="/learnWordBeginner">
+            <LearnWordBeginner />
+          </Route>
+          <Route path="/learnWordAdvanced">
+            <LearnWordAdvanced />
+          </Route>
+          <Route path="/learnWordMedium">
+            <LearnWordMedium />
+          </Route>
+          <Route path="/noHelpAlphabet">
+            <AlphabetNoHelp />
+          </Route>
+          <Route path="/sandboxLetters">
+            <SandboxLetters />
+          </Route>
+          <Route path="/sandboxWords">
+            <SandboxWords />
+          </Route>
+          <Route path="/learnNumbers">
+            <LearnNumbers />
+          </Route>
         </Switch>
       </div>
     </Router>

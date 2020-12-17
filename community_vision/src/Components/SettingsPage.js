@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import Settings from './Settings'
 import Grid from '@material-ui/core/Grid';
@@ -10,16 +10,22 @@ function initial(type){
     }
     if(type === 'backgroundColor'){
         return 'blue';
+    } else if (type === 'fontColor') {
+        return 'white';
     }
 }
 
-function SettingsPage() {
-    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
+function SettingsPage(props) {
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     return(
         <div style={{backgroundColor: backgroundColor,
             minHeight: '90vh',
             marginTop: '-1.5vh'}}>
-            <Settings/>
+            <Settings updateNavBackgroundColor={setBackgroundColor}
+                updateNavFontColor={setFontColor}
+                updateSettingsPageState={props.updateAppState}
+                updateNavState={() => void 0} />
             <Grid justify='center'>
                 <Link to="/games">
                     <button style={{width: '50vw',
