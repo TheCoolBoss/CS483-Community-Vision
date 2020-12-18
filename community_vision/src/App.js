@@ -54,13 +54,13 @@ function App() {
             <LearnWordMedium />
           </Route>
           <Route path="/noHelpAlphabet">
-            <AlphabetNoHelp />
+            <AlphabetNoHelp ref={currentRef}/>
           </Route>
           <Route path="/sandboxLetters">
-            <SandboxLetters />
+            <SandboxLetters ref={currentRef}/>
           </Route>
           <Route path="/sandboxWords">
-            <SandboxWords />
+            <SandboxWords ref={currentRef}/>
           </Route>
           <Route path="/learnNumbers">
             <LearnNumbers />

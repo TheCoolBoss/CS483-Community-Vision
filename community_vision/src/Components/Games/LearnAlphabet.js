@@ -11,27 +11,11 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
+import {initial} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
-
-function initial(type) {
-    if (localStorage.getItem(type) != null) {
-        return localStorage.getItem(type);
-    }
-    if (type === 'volume') {
-        return 50;
-    } else if (type === 'size') {
-        return 29;
-    } else if (type === 'speed') {
-        return 1.5;
-    } else if (type === 'backgroundColor') {
-        return 'blue';
-    } else if (type === 'fontColor') {
-        return 'white';
-    }
-}
 
 function showImage() {
     var x = document.getElementById("tutorialImage");
@@ -151,7 +135,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
 
     return (
 
-        <div style={{ backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom' }}>
+        <div style={{
+            backgroundColor: backgroundColor,
+            height: '90vh',
+            width: '100vw',
+            display: 'grid',
+            gridTemplate: '8fr 8fr / 1fr',
+            gridTemplateAreas: '"top" "bottom'
+        }}>
 
             <div style={{ gridArea: 'top' }}>
                 <div style={{ position: 'absolute' }}>
