@@ -45,13 +45,13 @@ function App() {
             <LearnAlphabet ref={currentRef} />
           </Route>
           <Route path="/learnWordBeginner">
-            <LearnWordBeginner />
+            <LearnWordBeginner ref={currentRef} />
           </Route>
           <Route path="/learnWordAdvanced">
-            <LearnWordAdvanced />
+            <LearnWordAdvanced ref={currentRef} />
           </Route>
           <Route path="/learnWordMedium">
-            <LearnWordMedium />
+            <LearnWordMedium ref={currentRef} />
           </Route>
           <Route path="/noHelpAlphabet">
             <AlphabetNoHelp />

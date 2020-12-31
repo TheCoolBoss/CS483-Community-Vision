@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef, useImperativeHandle} from 'react';
 import '../../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -41,7 +41,7 @@ function initial(type){
 }
 
 
-function LearnWordBeginner () {
+const LearnWordBeginner = forwardRef((props, ref) => {
     //Get the data
     var gameData = require('./WordGameData.json');
     
@@ -70,11 +70,11 @@ function LearnWordBeginner () {
     var currentMorse = charToMorse(currentLetter);
 
     //Settings
-    const [volume] = React.useState(() => initial('volume'));
-    const [size] = React.useState(() => initial('size'));
-    const [speed] = React.useState(() => initial('speed'));
-    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = React.useState(() => initial('volume'));
+    const [size, setSize] = React.useState(() => initial('size'));
+    const [speed, setSpeed] = React.useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = (size-3) +'vh';
 
@@ -121,6 +121,19 @@ function LearnWordBeginner () {
             playDash();
         }
     };
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
 
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
@@ -172,7 +185,7 @@ function LearnWordBeginner () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                             setInput(input + '•');
                                             playDot();
                                     }}>•</button>
@@ -182,7 +195,7 @@ function LearnWordBeginner () {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: '#ffaba6'}} onClick={function(){
+                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
@@ -194,6 +207,6 @@ function LearnWordBeginner () {
             </div>
         </div>
     )
-}
+})
 
 export default LearnWordBeginner

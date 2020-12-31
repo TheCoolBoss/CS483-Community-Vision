@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef, useImperativeHandle} from 'react';
 import '../../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -38,7 +38,7 @@ function initial(type){
     }
 }
 
-function LearnWordAdvanced () {
+const LearnWordAdvanced = forwardRef((props, ref) => {
     //Get the data
     var gameData = require('./WordGameData.json');
 
@@ -70,11 +70,11 @@ function LearnWordAdvanced () {
     var img = require('' + gameData[gameIndex].imagePath);
 
     //Settings
-    const [volume] = React.useState(() => initial('volume'));
-    const [size] = React.useState(() => initial('size'));
-    const [speed] = React.useState(() => initial('speed'));
-    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = React.useState(() => initial('volume'));
+    const [size, setSize] = React.useState(() => initial('size'));
+    const [speed, setSpeed] = React.useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = (size-3) +'vh';
 
@@ -138,6 +138,19 @@ function LearnWordAdvanced () {
             playDash();
         }
     };
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
 
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
@@ -211,6 +224,6 @@ function LearnWordAdvanced () {
             </div>
         </div>
     )
-}
+})
 
 export default LearnWordAdvanced
