@@ -90,6 +90,7 @@ const SandboxLetters = forwardRef((props, ref) => {
                     }}>{input}</animated.h1>
                 </div>
             </div>
+
             <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>

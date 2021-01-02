@@ -3,8 +3,6 @@ import dashSound from "../../Assets/Sounds/dash.mp3";
 import dotSound from "../../Assets/Sounds/dot.mp3";
 import {useState} from "react";
 
-
-
 //Gets game values fom local storage
 export function initial(type){
     if(localStorage.getItem(type) != null){

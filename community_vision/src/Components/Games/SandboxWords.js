@@ -71,51 +71,81 @@ const SandboxWords = forwardRef((props, ref) => {
     )
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '1fr 10fr 7fr / 1fr', gridTemplateAreas: '"top" "middle" "bottom'}}>
+        <div style={{
+            backgroundColor: backgroundColor,
+            height: '90vh',
+            width: '100vw',
+            display: 'grid',
+            gridTemplate: '1fr 10fr 7fr / 1fr',
+            gridTemplateAreas: '"top" "middle" "bottom'
+        }}>
             <div style={{gridArea: 'middle'}}>
                 <div>
                     <animated.h1 id = "textbox" style={{lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize}}>{""}</animated.h1>
-                    {/*<animated.h1 style={{lineHeight: 0,*/}
-                    {/*    color: fontColor,*/}
-                    {/*    fontSize: fSize}}>{output}</animated.h1>*/}
-                    {/*<animated.p style={{lineHeight: 0,*/}
-                    {/*    color: fontColor,*/}
-                    {/*    fontSize: fSize}}>{input}</animated.p>*/}
                 </div>
             </div>
+
             <div style={{gridArea: 'bottom'}}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right'}}>{input}</p>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                textAlign: 'right'
+                            }}>{input}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh'
+                            }}>|</p>
                         </Grid>
                         <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left'}}>{output}</p>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                textAlign: 'left'
+                            }}>{output}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                    <button id="dotButton" style={{
+                                        backgroundColor: backgroundColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        fontSize: '20vh',
+                                        color: fontColor
+                                    }} onClick={function(){
                                         setInput(input + '•');
                                         playDot();
-                                    }}>•</button>
+                                    }}>•
+                                    </button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                    <button id="dashButton" style={{
+                                        backgroundColor: backgroundColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        fontSize: '20vh',
+                                        color: fontColor
+                                    }} onClick={function(){
                                         setInput(input + '-');
                                         playDash();
-                                    }}>-</button>
+                                    }}>-
+                                    </button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
