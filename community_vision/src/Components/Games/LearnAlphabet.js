@@ -245,7 +245,7 @@ const Radio = () => {
                         }}
                     >
                         ▼
-            </animated.p>
+                    </animated.p>
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>

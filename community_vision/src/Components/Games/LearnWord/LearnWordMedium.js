@@ -1,14 +1,17 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import '../../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import {charToMorse, morseToChar} from "./../charMorseConv";
+import { charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
-import {Transition, animated} from 'react-spring/renderprops';
+import { useSpring, animated } from 'react-spring'
+import { Transition} from 'react-spring/renderprops';
 import dashSound from '../../Assets/Sounds/dash.mp3'
 import dotSound from '../../Assets/Sounds/dot.mp3'
+import spacebar from '../../Assets/Images/spacebar.png'
+import enterButton from '../../Assets/Images/enterButton.png'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -45,16 +48,16 @@ const LearnWordMedium = forwardRef((props, ref) => {
     var gameData = require('./WordGameData.json');
 
     //The correct words that the user got so far
-    var [correct, setCorrect] = React.useState('');  
+    var [correct, setCorrect] = useState('');  
 
     //Keeping track of current letter in current word       
-    var [wordIndex, setWordIndex] = React.useState(0); 
+    var [wordIndex, setWordIndex] = useState(0); 
     
     //Track user input
-    var [input, setInput] = React.useState('');  
+    var [input, setInput] = useState('');  
     
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0); 
+    var [gameIndex, setGameIndex] = useState(0); 
     
     //Word that the user needs to type
     var currentWord = gameData[gameIndex].name; 
@@ -72,11 +75,11 @@ const LearnWordMedium = forwardRef((props, ref) => {
     var img = require('' + gameData[gameIndex].imagePath);
 
     //Settings
-    const [volume, setVolume] = React.useState(() => initial('volume'));
-    const [size, setSize] = React.useState(() => initial('size'));
-    const [speed, setSpeed] = React.useState(() => initial('speed'));
-    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = useState(() => initial('volume'));
+    const [size, setSize] = useState(() => initial('size'));
+    const [speed, setSpeed] = useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = (size-3) +'vh';
 
@@ -100,7 +103,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
     }
     
     //Check for correct character after each input
-    React.useEffect (() => {
+    useEffect (() => {
         //Check for matching current morse sequence to current letter
         if (input === currentMorse) {
             setCorrect(correct + currentWord[wordIndex]);
@@ -159,35 +162,39 @@ const LearnWordMedium = forwardRef((props, ref) => {
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
             <div style={{gridArea: 'top'}}>
+                <div style={{ position: 'absolute' }}>
+                    <Container>
+                        <Grid container justify='left'>
+                            <Grid item>
+                                <Radio />
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </div>
                 <div style={{width: '45vw', height:'40vh', float: 'left'}}>
                     <Transition
-                        native
-                        reset
-                        unique
                         items={img}
-                        from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
-                        enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
-                        leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                        from={{opacity: 0}}
+                        enter={{opacity: 1}}
+                        leave={{opacity: 0 }}
                     >
-                        {show => show && (props => 
-                            <animated.image style={props}>
+                        {(props => <animated.image style={props}>
                                 <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                            </animated.image>
-                        )}
+                            </animated.image> )}
                     </Transition>
                 </div>
                 <div style={{width: '55vw', height:'40vh', float: 'right'}}>
                         {isValidLetter 
                         ?
-                        <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
+                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
                             <span style={{color: '#00FF00'}}>{correct}</span>
                             <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
                             <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
-                        </p>
+                        </h1>
                         :
-                        <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentWord}</p>
+                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
                         }
-                        <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentMorse}</p>
+                        <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 50}}>{currentMorse}</p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>
@@ -228,7 +235,90 @@ const LearnWordMedium = forwardRef((props, ref) => {
                 </Container>
             </div>
         </div>
-    )
-})
+    );
+});
+
+const Radio = () => {
+    const [isToggled, setToggle] = useState(false);
+    const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb"});
+    const { y } = useSpring({
+        y: isToggled ? 180 : 0
+    });
+    const menuAppear = useSpring({
+        transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
+        opacity: isToggled ? 1 : 0
+    });
+
+    return (
+        <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
+            <animated.button
+                style={menubg}
+                className="radiowrapper"
+                onClick={() => setToggle(!isToggled)}
+            >
+                <div className="radio">
+                    <p>Tutorial</p>
+                    <animated.p
+                        style={{
+                            transform: y.interpolate(y => `rotateX(${y}deg)`)
+                        }}
+                    >
+                        ▼
+                    </animated.p>
+                </div>
+            </animated.button>
+            <animated.div style={menuAppear}>
+                {isToggled ? <RadioContent /> : null}
+            </animated.div>
+        </div>
+    );
+};
+
+const RadioContent = () => {
+    var textIndex = 0;
+    function updateTutorial() {
+        var space = document.getElementById('spaceImage');
+        var enter = document.getElementById('enterImage');
+    
+        if (textIndex == 0) {
+            document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
+            textIndex++;
+        } else if (textIndex == 1) {
+            document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
+            document.getElementById('dotButton').style.backgroundColor = "yellow";
+            space.style.display = "block";
+            textIndex++;
+        } else if (textIndex == 2) {
+            document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+            document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
+            document.getElementById('dashButton').style.backgroundColor = "yellow";
+            space.style.display = "none";
+            enter.style.display = "block";
+            textIndex++;
+        } else if (textIndex == 3) {
+            document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
+            document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
+            document.getElementById('sampleMorse').style.border = 'double';
+            enter.style.display = "none";
+            textIndex++;
+        } else if (textIndex == 4) {
+            document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+            document.getElementById('sampleMorse').style.border = 'none';
+            textIndex = 0;
+        }
+    }
+    return (
+        <div className="radiocontent" >
+            <a href="#" alt="Home">
+            </a>
+            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            <button onClick={function () {
+                updateTutorial();
+            }} style={{ fontSize: '5vh' }}>Next</button>
+        </div>
+    );
+};
 
 export default LearnWordMedium
