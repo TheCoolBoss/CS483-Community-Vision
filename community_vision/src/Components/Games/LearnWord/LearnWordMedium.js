@@ -89,7 +89,6 @@ const LearnWordMedium = forwardRef((props, ref) => {
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
     
-    
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -172,16 +171,21 @@ const LearnWordMedium = forwardRef((props, ref) => {
                     </Container>
                 </div>
                 <div style={{width: '45vw', height:'40vh', float: 'left'}}>
-                    <Transition
-                        items={img}
-                        from={{opacity: 0}}
-                        enter={{opacity: 1}}
-                        leave={{opacity: 0 }}
-                    >
-                        {(props => <animated.image style={props}>
-                                <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                            </animated.image> )}
-                    </Transition>
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0}}
+                            enter={{opacity: 1}}
+                            leave={{opacity: 0}}
+                        >
+                            {img => img && (props => 
+                                <animated.image style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
+                                </animated.image>
+                            )}
+                        </Transition>
                 </div>
                 <div style={{width: '55vw', height:'40vh', float: 'right'}}>
                         {isValidLetter 
@@ -194,7 +198,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                         :
                         <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
                         }
-                        <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 50}}>{currentMorse}</p>
+                        <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 70}}>{currentMorse}</p>
                 </div>
             </div>
             <div style={{gridArea: 'bottom'}}>

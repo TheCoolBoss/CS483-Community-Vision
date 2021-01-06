@@ -96,6 +96,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         setInput('');
     }
 
+    var finished = false;
+
     React.useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (input === currentMorse) {
@@ -138,79 +140,77 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     return (
         <div>
-        <div style={{position: 'absolute'}}>
-            <EndGame />
-        </div>
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
-            <div style={{gridArea: 'top'}}>
-                <div style={{width: '45vw', height:'40vh', float: 'left'}}>
-                    <Transition
-                        native
-                        reset
-                        unique
-                        items={img}
-                        from={{opacity: 0}}
-                        enter={{opacity: 1}}
-                        leave={{opacity: 0}}
-                    >
-                        {img => img && (props => 
-                            <animated.image style={props}>
-                                <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                            </animated.image>
-                        )}
-                    </Transition>
+            {finished ? <EndGame /> : null}
+            <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+                <div style={{gridArea: 'top'}}>
+                    <div style={{width: '45vw', height:'40vh', float: 'left'}}>
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0}}
+                            enter={{opacity: 1}}
+                            leave={{opacity: 0}}
+                        >
+                            {img => img && (props => 
+                                <animated.image style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
+                                </animated.image>
+                            )}
+                        </Transition>
+                    </div>
+                    <div style={{width: '55vw', height:'40vh', float: 'right'}}>
+                        {isCorrect
+                        ?
+                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                        :
+                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
+                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                            <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
+                        </h1>
+                        }
+                        <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
+                    </div>
                 </div>
-                <div style={{width: '55vw', height:'40vh', float: 'right'}}>
-                    {isCorrect
-                    ?
-                    <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentWord}</p>
-                    :
-                    <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
-                        <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                        <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
-                    </p>
-                    }
-                    <p style={{lineHeight: 0, color: fontColor, fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentMorse}</p>
+                <div style={{gridArea: 'bottom'}}>
+                    <Container>
+                        <Grid container justify='center' spacing={0}>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
+                            </Grid>
+                            <Grid item xs={0}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                            </Grid>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
+                            </Grid>
+                        </Grid>
+                        <Grid container justify='center' spacing={2}>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                                setInput(input + '•');
+                                                playDot();
+                                        }}>•</button>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                            setInput(input + '-');
+                                            playDash();
+                                        }}>-</button>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    </Container>
                 </div>
             </div>
-            <div style={{gridArea: 'bottom'}}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
-                        </Grid>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                            setInput(input + '•');
-                                            playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
-        </div>
         </div>
     )
 })

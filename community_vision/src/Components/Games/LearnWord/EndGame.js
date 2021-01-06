@@ -16,10 +16,19 @@ function EndGame() {
         padding: 75, 
         display: 'inline-block',
         position: 'relative',
-        top: '25vh'
+        top: '20vh'
     };
+
+    const overlayStyle = {
+        backgroundColor: 'rgba(120, 120, 120, 0.7)',
+        height: '90vh',
+        width: '100vw',
+        position: 'fixed', 
+        zIndex: 2
+    }
+
     return (
-        <div style={{backgroundColor: 'rgba(120, 120, 120, 0.7)' , height: '90vh', width: '100vw'}}>
+        <div style={overlayStyle}>
             <div style={btnContainerStyle}>
                 <button style={buttonStyle}>Next Level</button>
                 <button style={buttonStyle}>Replay</button>

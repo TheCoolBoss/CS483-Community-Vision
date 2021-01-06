@@ -175,13 +175,13 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                 <div style={{width: '55vw', height:'40vh', float: 'right'}}>
                         {isValidLetter 
                         ?
-                        <p style={{lineHeight: 0, fontSize: fSize, position: 'relative', bottom: '50px'}}>
+                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
                             <span style={{color: '#00FF00'}}>{correct}</span>
                             <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
                             <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
-                        </p>
+                        </h1>
                         :
-                        <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, position: 'relative', bottom: '50px'}}>{currentWord}</p>
+                        <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</p>
                         }
                 </div>
             </div>
