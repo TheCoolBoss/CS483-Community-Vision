@@ -1,5 +1,6 @@
 {
   "name": "community_vision",
+  "homepage": "http://playmorse.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
