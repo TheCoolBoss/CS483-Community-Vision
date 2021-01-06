@@ -244,7 +244,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
 
 const Radio = () => {
     const [isToggled, setToggle] = useState(false);
-    const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb"});
+    const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb", width: '15vw'});
     const { y } = useSpring({
         y: isToggled ? 180 : 0
     });
@@ -254,7 +254,7 @@ const Radio = () => {
     });
 
     return (
-        <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
+        <div style={{ position: "relative", width: '15vw', margin: "0 auto" }}>
             <animated.button
                 style={menubg}
                 className="radiowrapper"

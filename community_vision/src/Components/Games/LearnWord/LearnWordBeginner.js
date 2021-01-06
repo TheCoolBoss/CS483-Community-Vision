@@ -96,7 +96,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         setInput('');
     }
 
-    var finished = false;
+    var finished = true;
 
     React.useEffect(() => {
         //Check for matching current morse sequence to current letter
@@ -140,7 +140,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     return (
         <div>
-            {finished ? <EndGame /> : null}
+            {finished ? <EndGame level='beginner'/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
                     <div style={{width: '45vw', height:'40vh', float: 'left'}}>
