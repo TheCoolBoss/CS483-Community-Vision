@@ -2,9 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function EndGame(props) {
-    //history instance to navigate pages
-    // let history = useHistory();
-
     const buttonStyle = {
         backgroundColor: 'white',
         height: '10%',
