@@ -1,7 +1,7 @@
 {
   "name": "community_vision",
-  "homepage": "http://playmorse.com/",
   "version": "0.1.0",
+  "homepage": "http://playmorse.com/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
