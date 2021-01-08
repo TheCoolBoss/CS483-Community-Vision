@@ -30,18 +30,14 @@ function EndGame(props) {
 
     //Set levels
     var nextLevelPath;
-    var currentLevelPath;
     if (props.level === 'beginner') {
         nextLevelPath = '/learnWordMedium';
-        currentLevelPath = 'learnWordBeginner';
     }
     if (props.level === 'medium') {
         nextLevelPath = '/learnWordAdvanced';
-        currentLevelPath = 'learnWordMedium';
     }
     if (props.level === 'advanced') {
         nextLevelPath = '/';
-        currentLevelPath = 'learnWordAdvanced';
     }
 
     return (
@@ -50,9 +46,7 @@ function EndGame(props) {
                 <Link to={nextLevelPath}>
                     <button style={buttonStyle}>Next Level</button>
                 </Link>
-                <Link to={currentLevelPath}>
-                    <button style={buttonStyle}>Replay</button>
-                </Link>
+                <button style={buttonStyle} onClick={() => {window.location.reload()}}>Replay</button>
                 <Link to='/'>
                     <button style={buttonStyle}>Home Page</button>
                 </Link>

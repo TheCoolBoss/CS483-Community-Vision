@@ -56,7 +56,9 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var output = morseToChar(input);
 
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0);
+    var [gameIndex, setGameIndex] = React.useState(25);
+
+    var [finished, setFinished] = React.useState(() => initial(false));
 
     //Get the image source
     var img = require('' + gameData[gameIndex].imagePath);
@@ -96,8 +98,6 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         setInput('');
     }
 
-    var finished = true;
-
     React.useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (input === currentMorse) {
@@ -106,7 +106,13 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             setIsCorrect(true);
             //Move to the next word
             setTimeout(function () {
-                setGameIndex(prevState => prevState + 1);
+                if(gameIndex < 25) {
+                    setGameIndex(prevState => prevState + 1);
+                }
+                else {
+                    setGameIndex(25);
+                    setFinished(true);
+                }
                 setInput('');
                 setIsCorrect(false);
             }, 2000);
