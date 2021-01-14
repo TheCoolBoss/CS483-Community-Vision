@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import '../../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -44,18 +44,18 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     var gameData = require('./WordGameData.json');
 
     //The correct words that the user got so far
-    var [correct, setCorrect] = React.useState('');  
+    var [correct, setCorrect] = useState('');  
 
     //Keeping track of current letter in current word       
-    var [wordIndex, setWordIndex] = React.useState(0); 
+    var [wordIndex, setWordIndex] = useState(0); 
     
     //Track user input
-    var [input, setInput] = React.useState('');  
+    var [input, setInput] = useState('');  
     
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0);
+    var [gameIndex, setGameIndex] = useState(0);
 
-    var [finished, setFinished] = React.useState(() => initial(false));
+    var [finished, setFinished] = useState(() => initial(false));
     
     //Word that the user needs to type
     var currentWord = gameData[gameIndex].name; 
@@ -73,11 +73,11 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     var img = require('' + gameData[gameIndex].imagePath);
 
     //Settings
-    const [volume, setVolume] = React.useState(() => initial('volume'));
-    const [size, setSize] = React.useState(() => initial('size'));
-    const [speed, setSpeed] = React.useState(() => initial('speed'));
-    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = useState(() => initial('volume'));
+    const [size, setSize] = useState(() => initial('size'));
+    const [speed, setSpeed] = useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = (size-3) +'vh';
 
@@ -99,7 +99,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     }
 
     //Check for correct character after each input
-    React.useEffect (() => {
+    useEffect (() => {
         //Check for matching current morse sequence to current letter
         if (input === currentMorse) {
             setCorrect(correct + currentWord[wordIndex]);

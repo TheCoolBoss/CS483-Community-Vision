@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import '../../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -47,18 +47,18 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var gameData = require('./WordGameData.json');
     
     //Track user input
-    var [input, setInput] = React.useState('');
+    var [input, setInput] = useState('');
 
     //correct input tracker
-    var [isCorrect, setIsCorrect] = React.useState(false);
+    var [isCorrect, setIsCorrect] = useState(false);
     
     //Get current character from user input
     var output = morseToChar(input);
 
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0);
+    var [gameIndex, setGameIndex] = useState(0);
 
-    var [finished, setFinished] = React.useState(() => initial(false));
+    var [finished, setFinished] = useState(() => initial(false));
 
     //Get the image source
     var img = require('' + gameData[gameIndex].imagePath);
@@ -73,11 +73,11 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var currentMorse = charToMorse(currentLetter);
 
     //Settings
-    const [volume, setVolume] = React.useState(() => initial('volume'));
-    const [size, setSize] = React.useState(() => initial('size'));
-    const [speed, setSpeed] = React.useState(() => initial('speed'));
-    const [backgroundColor, setBackgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor, setFontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = useState(() => initial('volume'));
+    const [size, setSize] = useState(() => initial('size'));
+    const [speed, setSpeed] = useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = (size-3) +'vh';
 
@@ -98,7 +98,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         setInput('');
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (input === currentMorse) {
             //Play current sound of word
