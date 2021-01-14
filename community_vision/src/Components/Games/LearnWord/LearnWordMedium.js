@@ -10,7 +10,7 @@ import { Transition, animated} from 'react-spring/renderprops';
 import dashSound from '../../Assets/Sounds/dash.mp3'
 import dotSound from '../../Assets/Sounds/dot.mp3'
 import EndGame from './EndGame'
-import Radio from './WordGameTutorial'
+import Tutorial from './WordGameTutorial'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -174,7 +174,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                         <Container>
                             <Grid container justify='left'>
                                 <Grid item>
-                                    <Radio />
+                                    <Tutorial />
                                 </Grid>
                             </Grid>
                         </Container>

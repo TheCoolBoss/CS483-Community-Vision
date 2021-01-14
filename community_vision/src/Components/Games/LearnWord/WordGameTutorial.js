@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring'
 import spacebar from '../../Assets/Images/spacebar.png';
 import enterButton from '../../Assets/Images/enterButton.png';
 
-const Radio = () => {
+function WordGameTutorial() {
     const [isToggled, setToggle] = useState(false);
     const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb", width: '15vw'});
     const { y } = useSpring({
@@ -33,13 +33,13 @@ const Radio = () => {
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>
-                {isToggled ? <RadioContent /> : null}
+                {isToggled ? <TutorialContent /> : null}
             </animated.div>
         </div>
     );
 };
 
-const RadioContent = () => {
+function TutorialContent() {
     var textIndex = 0;
     function updateTutorial() {
         var space = document.getElementById('spaceImage');
@@ -86,4 +86,4 @@ const RadioContent = () => {
     );
 };
 
-export default Radio;
+export default WordGameTutorial;
