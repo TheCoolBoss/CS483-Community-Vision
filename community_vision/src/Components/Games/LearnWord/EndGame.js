@@ -1,4 +1,3 @@
-import { unsupportedProp } from '@material-ui/core';
 import React from 'react'
 import {Link} from 'react-router-dom'
 
@@ -11,7 +10,7 @@ function EndGame(props) {
     else {
         backgroundColor = props.background;
     }
-    
+
     //font color to match current font color in settings
     var fColor;
     if(props.fontColor === undefined) {
@@ -57,17 +56,18 @@ function EndGame(props) {
 
     //Set levels
     var nextLevelPath;
+    var button1Content;
     if (props.level === 'beginner') {
         nextLevelPath = '/learnWordMedium';
+        button1Content = 'Play Next Level';
     }
     else if (props.level === 'medium') {
         nextLevelPath = '/learnWordAdvanced';
-    }
-    else if (props.level === 'advanced') {
-        nextLevelPath = '/games';
+        button1Content = 'Play Next Level';
     }
     else {
         nextLevelPath = '/games';
+        button1Content = 'Games Page'
     }
 
     return (
@@ -75,7 +75,7 @@ function EndGame(props) {
             <div style={btnContainerStyle}>
                 <h1 style={{color: fColor}}>{msg}</h1>
                 <Link to={nextLevelPath}>
-                    <button style={buttonStyle}>Play Next Level</button>
+                    <button style={buttonStyle}>{button1Content}</button>
                 </Link>
                 <Link>
                     <button style={buttonStyle} onClick={() => {window.location.reload()}}>Replay This Level</button>

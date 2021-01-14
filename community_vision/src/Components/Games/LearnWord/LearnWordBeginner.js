@@ -56,7 +56,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var output = morseToChar(input);
 
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(25);
+    var [gameIndex, setGameIndex] = React.useState(0);
 
     var [finished, setFinished] = React.useState(() => initial(false));
 

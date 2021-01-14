@@ -12,6 +12,7 @@ import dashSound from '../../Assets/Sounds/dash.mp3'
 import dotSound from '../../Assets/Sounds/dot.mp3'
 import spacebar from '../../Assets/Images/spacebar.png'
 import enterButton from '../../Assets/Images/enterButton.png'
+import EndGame from './EndGame'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -57,7 +58,9 @@ const LearnWordMedium = forwardRef((props, ref) => {
     var [input, setInput] = useState('');  
     
     //Index to track the current word
-    var [gameIndex, setGameIndex] = useState(0); 
+    var [gameIndex, setGameIndex] = useState(0);
+
+    var [finished, setFinished] = useState(() => initial(false));
     
     //Word that the user needs to type
     var currentWord = gameData[gameIndex].name; 
@@ -115,7 +118,13 @@ const LearnWordMedium = forwardRef((props, ref) => {
                 //Delay 2 sec
                 setTimeout(function () {
                     //Set the new word
-                    setGameIndex(prevState => prevState + 1);
+                    if(gameIndex < 25) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        setGameIndex(25);
+                        setFinished(true);
+                    }
                     //Reset word index
                     setWordIndex(0);
                     //Reset correct
@@ -159,84 +168,87 @@ const LearnWordMedium = forwardRef((props, ref) => {
     )
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
-            <div style={{gridArea: 'top'}}>
-                <div style={{ position: 'absolute' }}>
+        <div>
+            {finished ? <EndGame level='medium' background={backgroundColor} fontColor={fontColor}/> : null}
+            <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+                <div style={{gridArea: 'top'}}>
+                    <div style={{ position: 'absolute' }}>
+                        <Container>
+                            <Grid container justify='left'>
+                                <Grid item>
+                                    <Radio />
+                                </Grid>
+                            </Grid>
+                        </Container>
+                    </div>
+                    <div style={{width: '45vw', height:'40vh', float: 'left'}}>
+                            <Transition
+                                native
+                                reset
+                                unique
+                                items={img}
+                                from={{opacity: 0}}
+                                enter={{opacity: 1}}
+                                leave={{opacity: 0}}
+                            >
+                                {img => img && (props => 
+                                    <animated.image style={props}>
+                                        <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
+                                    </animated.image>
+                                )}
+                            </Transition>
+                    </div>
+                    <div style={{width: '55vw', height:'40vh', float: 'right'}}>
+                            {isValidLetter 
+                            ?
+                            <h1 style={{lineHeight: 0, fontSize: fSize}}>
+                                <span style={{color: '#00FF00'}}>{correct}</span>
+                                <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                                <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
+                            </h1>
+                            :
+                            <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                            }
+                            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 70}}>{currentMorse}</p>
+                    </div>
+                </div>
+                <div style={{gridArea: 'bottom'}}>
                     <Container>
-                        <Grid container justify='left'>
-                            <Grid item>
-                                <Radio />
+                        <Grid container justify='center' spacing={0}>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
+                            </Grid>
+                            <Grid item xs={0}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                            </Grid>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
+                            </Grid>
+                        </Grid>
+                        <Grid container justify='center' spacing={2}>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                                setInput(prevInput => prevInput + '•');
+                                                playDot();
+                                        }}>•</button>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                            setInput(prevInput => prevInput + '-');
+                                            playDash();
+                                        }}>-</button>
+                                    </CardActionArea>
+                                </Card>
                             </Grid>
                         </Grid>
                     </Container>
                 </div>
-                <div style={{width: '45vw', height:'40vh', float: 'left'}}>
-                        <Transition
-                            native
-                            reset
-                            unique
-                            items={img}
-                            from={{opacity: 0}}
-                            enter={{opacity: 1}}
-                            leave={{opacity: 0}}
-                        >
-                            {img => img && (props => 
-                                <animated.image style={props}>
-                                    <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                                </animated.image>
-                            )}
-                        </Transition>
-                </div>
-                <div style={{width: '55vw', height:'40vh', float: 'right'}}>
-                        {isValidLetter 
-                        ?
-                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                            <span style={{color: '#00FF00'}}>{correct}</span>
-                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                            <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
-                        </h1>
-                        :
-                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
-                        }
-                        <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 70}}>{currentMorse}</p>
-                </div>
-            </div>
-            <div style={{gridArea: 'bottom'}}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
-                        </Grid>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                            setInput(prevInput => prevInput + '•');
-                                            playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                        setInput(prevInput => prevInput + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
             </div>
         </div>
     );

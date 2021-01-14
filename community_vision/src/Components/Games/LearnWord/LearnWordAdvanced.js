@@ -9,6 +9,7 @@ import useSound from 'use-sound';
 import { Transition, animated} from 'react-spring/renderprops';
 import dashSound from '../../Assets/Sounds/dash.mp3'
 import dotSound from '../../Assets/Sounds/dot.mp3'
+import EndGame from './EndGame'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -52,7 +53,9 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     var [input, setInput] = React.useState('');  
     
     //Index to track the current word
-    var [gameIndex, setGameIndex] = React.useState(0); 
+    var [gameIndex, setGameIndex] = React.useState(0);
+
+    var [finished, setFinished] = React.useState(() => initial(false));
     
     //Word that the user needs to type
     var currentWord = gameData[gameIndex].name; 
@@ -109,7 +112,13 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                 //Delay 2 sec
                 setTimeout(function () {
                     //Set the new word
-                    setGameIndex(prevState => prevState + 1);
+                    if(gameIndex < 25) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        setGameIndex(25);
+                        setFinished(true);
+                    }
                     //Reset word index
                     setWordIndex(0);
                     //Reset correct
@@ -153,74 +162,77 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     )
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
-            <div style={{gridArea: 'top'}}>
-                <div style={{width: '45vw', height:'40vh', float: 'left'}}>
-                    <Transition
-                        native
-                        reset
-                        unique
-                        items={img}
-                        from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
-                        enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
-                        leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
-                    >
-                        {show => show && (props => 
-                            <animated.image style={props}>
-                                <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                            </animated.image>
-                        )}
-                    </Transition>
+        <div>
+            {finished ? <EndGame level='advanced' background={backgroundColor} fontColor={fontColor}/> : null}
+            <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+                <div style={{gridArea: 'top'}}>
+                    <div style={{width: '45vw', height:'40vh', float: 'left'}}>
+                        <Transition
+                            native
+                            reset
+                            unique
+                            items={img}
+                            from={{opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                            enter={{opacity: 1, transform: 'translate3d(0%,0,0)'}}
+                            leave={{opacity: 0, transform: 'translate3d(-50%,0,0)'}}
+                        >
+                            {show => show && (props => 
+                                <animated.image style={props}>
+                                    <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
+                                </animated.image>
+                            )}
+                        </Transition>
+                    </div>
+                    <div style={{width: '55vw', height:'40vh', float: 'right'}}>
+                            {isValidLetter 
+                            ?
+                            <h1 style={{lineHeight: 0, fontSize: fSize}}>
+                                <span style={{color: '#00FF00'}}>{correct}</span>
+                                <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                                <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
+                            </h1>
+                            :
+                            <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                            }
+                    </div>
                 </div>
-                <div style={{width: '55vw', height:'40vh', float: 'right'}}>
-                        {isValidLetter 
-                        ?
-                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                            <span style={{color: '#00FF00'}}>{correct}</span>
-                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                            <span style={{color: fontColor}}>{currentWord.substr(wordIndex+1)}</span>
-                        </h1>
-                        :
-                        <p style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</p>
-                        }
+                <div style={{gridArea: 'bottom'}}>
+                    <Container>
+                        <Grid container justify='center' spacing={0}>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
+                            </Grid>
+                            <Grid item xs={0}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                            </Grid>
+                            <Grid item xs={3} sm={2}>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
+                            </Grid>
+                        </Grid>
+                        <Grid container justify='center' spacing={2}>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                                setInput(prevInput => prevInput + '•');
+                                                playDot();
+                                        }}>•</button>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Card>
+                                    <CardActionArea>
+                                        <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                            setInput(prevInput => prevInput + '-');
+                                            playDash();
+                                        }}>-</button>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    </Container>
                 </div>
-            </div>
-            <div style={{gridArea: 'bottom'}}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
-                        </Grid>
-                        <Grid item xs={3} sm={2}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                            setInput(prevInput => prevInput + '•');
-                                            playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                        setInput(prevInput => prevInput + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
             </div>
         </div>
     )
