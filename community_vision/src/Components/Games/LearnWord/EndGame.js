@@ -1,9 +1,27 @@
+import { unsupportedProp } from '@material-ui/core';
 import React from 'react'
 import {Link} from 'react-router-dom'
 
 function EndGame(props) {
-    const msg = 'Congratulations, you completed ' + props.level + ' level!!'
+    //background to match the current background in settings
+    var backgroundColor;
+    if(props.background === undefined) {
+        backgroundColor = 'red';
+    }
+    else {
+        backgroundColor = props.background;
+    }
+    
+    //font color to match current font color in settings
+    var fColor;
+    if(props.fontColor === undefined) {
+        fColor = 'white';
+    }
+    else {
+        fColor = props.fontColor;
+    }
 
+    //Style
     const overlayStyle = {
         backgroundColor: 'rgba(120, 120, 120, 0.7)',
         height: '90vh',
@@ -16,7 +34,7 @@ function EndGame(props) {
     }
 
     const btnContainerStyle = {
-        backgroundColor: 'red', 
+        backgroundColor: backgroundColor, 
         padding: 50, 
         display: 'inline-block',
         width: '50%',
@@ -24,31 +42,38 @@ function EndGame(props) {
     };
 
     const buttonStyle = {
-        backgroundColor: 'white',
+        backgroundColor: backgroundColor,
         height: '10%',
         width: '100%',
         fontSize: '7vh',
+        color: fColor,
         marginBottom: 10,
         padding: 10,
         display: 'block'
     };
+
+    //Complete level message display
+    const msg = 'Congratulations, you completed ' + props.level + ' level!!'
 
     //Set levels
     var nextLevelPath;
     if (props.level === 'beginner') {
         nextLevelPath = '/learnWordMedium';
     }
-    if (props.level === 'medium') {
+    else if (props.level === 'medium') {
         nextLevelPath = '/learnWordAdvanced';
     }
-    if (props.level === 'advanced') {
-        nextLevelPath = '/';
+    else if (props.level === 'advanced') {
+        nextLevelPath = '/games';
+    }
+    else {
+        nextLevelPath = '/games';
     }
 
     return (
         <div style={overlayStyle}>
             <div style={btnContainerStyle}>
-                <h1>{msg}</h1>
+                <h1 style={{color: fColor}}>{msg}</h1>
                 <Link to={nextLevelPath}>
                     <button style={buttonStyle}>Play Next Level</button>
                 </Link>
