@@ -3,7 +3,8 @@ import { useSpring, animated } from 'react-spring'
 import spacebar from '../../Assets/Images/spacebar.png';
 import enterButton from '../../Assets/Images/enterButton.png';
 
-function WordGameTutorial() {
+var textIndex = 0;
+function WordGameTutorial(props) {
     const [isToggled, setToggle] = useState(false);
     const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb", width: '15vw'});
     const { y } = useSpring({
@@ -19,7 +20,10 @@ function WordGameTutorial() {
             <animated.button
                 style={menubg}
                 className="radiowrapper"
-                onClick={() => setToggle(!isToggled)}
+                onClick={() => {
+                    setToggle(!isToggled);
+                    reset(props.background);
+                }}
             >
                 <div className="radio">
                     <p>Tutorial</p>
@@ -37,10 +41,9 @@ function WordGameTutorial() {
             </animated.div>
         </div>
     );
-};
+}
 
 function TutorialContent() {
-    var textIndex = 0;
     function updateTutorial() {
         var space = document.getElementById('spaceImage');
         var enter = document.getElementById('enterImage');
@@ -63,12 +66,10 @@ function TutorialContent() {
         } else if (textIndex == 3) {
             document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
             document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-            document.getElementById('sampleMorse').style.border = 'double';
             enter.style.display = "none";
             textIndex++;
         } else if (textIndex == 4) {
             document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
-            document.getElementById('sampleMorse').style.border = 'none';
             textIndex = 0;
         }
     }
@@ -84,6 +85,12 @@ function TutorialContent() {
             }} style={{ fontSize: '5vh' }}>Next</button>
         </div>
     );
-};
+}
+
+function reset(bgColor) {
+    document.getElementById('dotButton').style.backgroundColor = bgColor;
+    document.getElementById('dashButton').style.backgroundColor = bgColor;
+    textIndex = 0;
+}
 
 export default WordGameTutorial;

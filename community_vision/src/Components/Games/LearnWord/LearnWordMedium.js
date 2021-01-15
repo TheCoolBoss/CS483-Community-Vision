@@ -174,7 +174,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                         <Container>
                             <Grid container justify='left'>
                                 <Grid item>
-                                    <Tutorial />
+                                    <Tutorial background={backgroundColor}/>
                                 </Grid>
                             </Grid>
                         </Container>
@@ -207,7 +207,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                             :
                             <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
                             }
-                            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, padding: 50, position: 'relative', bottom: 70}}>{currentMorse}</p>
+                            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
