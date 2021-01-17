@@ -174,7 +174,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                         <Container>
                             <Grid container justify='left'>
                                 <Grid item>
-                                    <Tutorial background={backgroundColor}/>
+                                    <Tutorial background={backgroundColor} level='medium'/>
                                 </Grid>
                             </Grid>
                         </Container>

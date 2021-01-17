@@ -1,9 +1,23 @@
 import React , {useState} from 'react';
 import { useSpring, animated } from 'react-spring'
 import spacebar from '../../Assets/Images/spacebar.png';
-import enterButton from '../../Assets/Images/enterButton.png';
+import enterButton from '../../Assets/Images/enterButton2.jpg';
 
-var textIndex = 0;
+const tutorialData = {
+    medTutContent : [
+        {
+            "text": "first", 
+            "showSpace": "none", 
+            "showEnter": "none"
+        },
+        {
+            "text": "second",
+            "showSpace": "block",
+            "showEnter": "none"
+        }
+    ]
+};
+
 function WordGameTutorial(props) {
     const [isToggled, setToggle] = useState(false);
     const menubg = useSpring({background: isToggled ? "#6ce2ff" : "#ebebeb", width: '15vw'});
@@ -37,60 +51,46 @@ function WordGameTutorial(props) {
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>
-                {isToggled ? <TutorialContent /> : null}
+                {isToggled ? <TutorialContent level={props.level}/> : null}
             </animated.div>
         </div>
     );
 }
 
-function TutorialContent() {
-    function updateTutorial() {
-        var space = document.getElementById('spaceImage');
-        var enter = document.getElementById('enterImage');
-    
-        if (textIndex == 0) {
-            document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
-            textIndex++;
-        } else if (textIndex == 1) {
-            document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
-            document.getElementById('dotButton').style.backgroundColor = "yellow";
-            space.style.display = "block";
-            textIndex++;
-        } else if (textIndex == 2) {
-            document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
-            document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
-            document.getElementById('dashButton').style.backgroundColor = "yellow";
-            space.style.display = "none";
-            enter.style.display = "block";
-            textIndex++;
-        } else if (textIndex == 3) {
-            document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
-            document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-            enter.style.display = "none";
-            textIndex++;
-        } else if (textIndex == 4) {
-            document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
-            textIndex = 0;
-        }
+function TutorialContent(props) {
+    var [index, setIndex] = useState(0);
+    const medTutLength = tutorialData.medTutContent.length;
+    var tutorialText;
+    var spaceDisplay;
+    var enterDisplay;
+    if(props.level === 'medium') {
+        tutorialText = tutorialData.medTutContent[index].text;
+        spaceDisplay = tutorialData.medTutContent[index].showSpace;
+        enterDisplay = tutorialData.medTutContent[index].showEnter;
     }
     return (
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            <p id="tutorialText" value="Change Text">{tutorialText}</p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: spaceDisplay }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: enterDisplay }}></img>
             <button onClick={function () {
-                updateTutorial();
+                if(index === medTutLength - 1) {
+                    setIndex(0);
+                }
+                else {
+                    setIndex(prevIndex => prevIndex + 1);
+                }
             }} style={{ fontSize: '5vh' }}>Next</button>
         </div>
     );
 }
 
-function reset(bgColor) {
-    document.getElementById('dotButton').style.backgroundColor = bgColor;
-    document.getElementById('dashButton').style.backgroundColor = bgColor;
-    textIndex = 0;
+//reset the colors when closing the tutorial tab
+function reset(defaultColor) {
+    document.getElementById('dotButton').style.backgroundColor = defaultColor;
+    document.getElementById('dashButton').style.backgroundColor = defaultColor;
 }
 
 export default WordGameTutorial;
