@@ -3,55 +3,7 @@ import { useSpring, animated } from 'react-spring'
 import spacebar from '../../Assets/Images/spacebar.png';
 import enterButton from '../../Assets/Images/enterButton2.jpg';
 
-const tutorialData = {
-    medTutContent : [
-        {
-            "text": "Welcome to the Word Game Medium Intermediate Level!", 
-            "showSpace": "none", 
-            "showEnter": "none"
-        },
-        {
-            "text": "This game will teach you about the Morse code of certain words",
-            "showSpace": "none",
-            "showEnter": "none"
-        },
-        {
-            "text": "This game consists of two buttons at the bottom of the page",
-            "showSpace": "none",
-            "showEnter": "none"
-        },
-        {
-            "text": "Along with the picture and its definition at the top of the page",
-            "showSpace": "none",
-            "showEnter": "none"
-        },
-        {
-            "text": "This button is used for the dots and can be accessed through the space button or by clicking here!",
-            "showSpace": "block",
-            "showEnter": "none"
-        },
-        {
-            "text": "This button is used for the dashes and can be accessed through the space button or by clicking here!",
-            "showSpace": "none",
-            "showEnter": "block"
-        },
-        {
-            "text": "Enter the morse of the underlined character until you go through all the letters and move on to the next word",
-            "showSpace": "none",
-            "showEnter": "none"
-        },
-        {
-            "text": "There are a total 26 words, each starts with a different character",
-            "showSpace": "none",
-            "showEnter": "none"
-        },
-        {
-            "text": "Complete all 26 words to beat the game, have fun!",
-            "showSpace": "none",
-            "showEnter": "none"
-        }
-    ]
-};
+const tutorialData = require('./TutorialData.json');
 
 function WordGameTutorial(props) {
     const [isToggled, setToggle] = useState(false);
@@ -99,10 +51,20 @@ function TutorialContent(props) {
     var spaceDisplay;
     var enterDisplay;
 
-    if(props.level === 'medium') {
+    if(props.level === 'beginner') {
+        tutorialText = tutorialData.bgnTutContent[index].text;
+        spaceDisplay = tutorialData.bgnTutContent[index].showSpace;
+        enterDisplay = tutorialData.bgnTutContent[index].showEnter;
+    }
+    else if(props.level === 'medium') {
         tutorialText = tutorialData.medTutContent[index].text;
         spaceDisplay = tutorialData.medTutContent[index].showSpace;
         enterDisplay = tutorialData.medTutContent[index].showEnter;
+    }
+    else if(props.level === 'advanced') {
+        tutorialText = tutorialData.advTutContent[index].text;
+        spaceDisplay = tutorialData.advTutContent[index].showSpace;
+        enterDisplay = tutorialData.advTutContent[index].showEnter;
     }
     else {
         tutorialText = 'Nothing to see here';
