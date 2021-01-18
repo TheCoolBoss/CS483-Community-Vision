@@ -6,13 +6,48 @@ import enterButton from '../../Assets/Images/enterButton2.jpg';
 const tutorialData = {
     medTutContent : [
         {
-            "text": "first", 
+            "text": "Welcome to the Word Game Medium Intermediate Level!", 
             "showSpace": "none", 
             "showEnter": "none"
         },
         {
-            "text": "second",
+            "text": "This game will teach you about the Morse code of certain words",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "This game consists of two buttons at the bottom of the page",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "Along with the picture and its definition at the top of the page",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "This button is used for the dots and can be accessed through the space button or by clicking here!",
             "showSpace": "block",
+            "showEnter": "none"
+        },
+        {
+            "text": "This button is used for the dashes and can be accessed through the space button or by clicking here!",
+            "showSpace": "none",
+            "showEnter": "block"
+        },
+        {
+            "text": "Enter the morse of the underlined character until you go through all the letters and move on to the next word",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "There are a total 26 words, each starts with a different character",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "Complete all 26 words to beat the game, have fun!",
+            "showSpace": "none",
             "showEnter": "none"
         }
     ]
@@ -51,7 +86,7 @@ function WordGameTutorial(props) {
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>
-                {isToggled ? <TutorialContent level={props.level}/> : null}
+                {isToggled ? <TutorialContent level={props.level} background={props.background}/> : null}
             </animated.div>
         </div>
     );
@@ -63,11 +98,32 @@ function TutorialContent(props) {
     var tutorialText;
     var spaceDisplay;
     var enterDisplay;
+
     if(props.level === 'medium') {
         tutorialText = tutorialData.medTutContent[index].text;
         spaceDisplay = tutorialData.medTutContent[index].showSpace;
         enterDisplay = tutorialData.medTutContent[index].showEnter;
     }
+    else {
+        tutorialText = 'Nothing to see here';
+        spaceDisplay = 'none';
+        enterDisplay = 'none';
+    }
+
+    if (enterDisplay === 'block') {
+        document.getElementById('dashButton').style.backgroundColor = 'yellow';
+    }
+    else {
+        document.getElementById('dashButton').style.backgroundColor = props.background;
+    }
+
+    if (spaceDisplay === 'block') {
+        document.getElementById('dotButton').style.backgroundColor = 'yellow';
+    }
+    else {
+        document.getElementById('dotButton').style.backgroundColor = props.background;
+    }
+
     return (
         <div className="radiocontent" >
             <a href="#" alt="Home">
