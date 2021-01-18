@@ -10,6 +10,7 @@ import { Transition, animated} from 'react-spring/renderprops';
 import dashSound from '../../Assets/Sounds/dash.mp3'
 import dotSound from '../../Assets/Sounds/dot.mp3'
 import EndGame from './EndGame'
+import Tutorial from './WordGameTutorial'
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -166,6 +167,15 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
             {finished ? <EndGame level='advanced' background={backgroundColor} fontColor={fontColor}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
+                    <div style={{ position: 'absolute' }}>
+                        <Container>
+                            <Grid container justify='left'>
+                                <Grid item>
+                                    <Tutorial background={backgroundColor} level='advanced'/>
+                                </Grid>
+                            </Grid>
+                        </Container>
+                    </div>
                     <div style={{width: '45vw', height:'40vh', float: 'left'}}>
                         <Transition
                             native

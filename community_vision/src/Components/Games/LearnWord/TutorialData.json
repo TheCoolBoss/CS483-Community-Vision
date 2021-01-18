@@ -1,7 +1,7 @@
 {
     "bgnTutContent" : [
         {
-            "text": "Welcome to the Word Game Medium Beginner Level!", 
+            "text": "Welcome to the Word Game Beginner Level!", 
             "showSpace": "none", 
             "showEnter": "none"
         },
@@ -31,7 +31,7 @@
             "showEnter": "block"
         },
         {
-            "text": "Enter the morse of the underlined character and the rest of the word will autocomplete",
+            "text": "Enter the Morse code of the underlined character and the rest of the word will autocomplete",
             "showSpace": "none",
             "showEnter": "none"
         },
