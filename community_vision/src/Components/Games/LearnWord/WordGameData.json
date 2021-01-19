@@ -4,7 +4,7 @@
     {"name":"CAT","imagePath":"./Images/cat.png"},
     {"name":"DOG","imagePath":"./Images/dog.png"},
     {"name":"EGGS","imagePath":"./Images/eggs.png"},
-    {"name":"FLOWERS","imagePath":"./Images/flowers.png"},
+    {"name":"FLOWER","imagePath":"./Images/flower.png"},
     {"name":"GIFT","imagePath":"./Images/gift.png"},
     {"name":"HAT","imagePath":"./Images/hat.png"},
     {"name":"ISLAND","imagePath":"./Images/island.png"},
