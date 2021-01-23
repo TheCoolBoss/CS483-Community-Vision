@@ -7,6 +7,7 @@ import useSound from "use-sound";
 import dashSound from "../../Assets/Sounds/dash.mp3";
 import dotSound from "../../Assets/Sounds/dot.mp3";
 
+//Unused
 class Buttons extends React.Component
 {
     render()

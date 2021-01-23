@@ -9,16 +9,12 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import { useTransition, animated } from 'react-spring';
-import {initial} from "./Common/Functions";
+import {Buttons, initial} from "./Common/Functions";
 
 var t;
-var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 const SandboxLetters = forwardRef((props, ref) => {
-    var [index, setIndex] = React.useState(0);
-    var currentLetter = list[index];
-    var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
     const [playDash] = useSound(dashSound);
@@ -34,15 +30,16 @@ const SandboxLetters = forwardRef((props, ref) => {
     const sfSize = size / 3 + 'vh';
 
     clearTimeout(t);
-    t = setTimeout(function () {
-        setInput('');
-    }, resetTimer);
+    t = setTimeout(() =>
+        {
+            setInput('')
+        }
+        , resetTimer);
 
     if (input.length > 6) {
         setInput('');
     }
 
-    // tracks keycodes for space button  and enter button input
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
@@ -91,71 +88,14 @@ const SandboxLetters = forwardRef((props, ref) => {
                 </div>
             </div>
 
-            <div style={{gridArea: 'bottom'}}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                textAlign: 'right'
-                            }}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh'
-                            }}>|</p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                textAlign: 'left'
-                            }}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{
-                                        backgroundColor: backgroundColor,
-                                        width: '100%',
-                                        height: '20vh',
-                                        fontSize: '20vh',
-                                        color: fontColor
-                                    }} onClick={function () {
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•
-                                    </button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{
-                                        backgroundColor: backgroundColor,
-                                        width: '100%',
-                                        height: '20vh',
-                                        fontSize: '20vh',
-                                        color: fontColor
-                                    }} onClick={function () {
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-
-                                    </button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                volume={volume}
+                input={input}
+                newInput={setInput}
+                output={output}
+            />
         </div>
     );
 })

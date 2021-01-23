@@ -6,7 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
 
-
+//Unused
 class Display extends React.Component
 {
     render()

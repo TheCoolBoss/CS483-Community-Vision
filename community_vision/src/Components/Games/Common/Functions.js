@@ -6,6 +6,10 @@ import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import {morseToChar} from "../charMorseConv";
+import {animated} from "react-spring";
+
+
 
 //Gets game values fom local storage
 export function initial(type){
@@ -28,76 +32,76 @@ export function initial(type){
 
 export function Buttons(props)
 {
-    const [input, setInput] = useState('');
+    const input = props.input;
     const [playDash] = useSound(dashSound);
     const [playDot] = useSound(dotSound);
 
     return(
         <div style={{gridArea: 'bottom'}}>
-        <Container>
-            <Grid container justify='center' spacing={0}>
-                <Grid item sm={5}>
-                    <p style={{
-                        lineHeight: 0,
-                        color: props.fontColor,
-                        fontSize: '10vh',
-                        textAlign: 'right'
-                    }}>{input}</p>
+            <Container>
+                <Grid container justify='center' spacing={0}>
+                    <Grid item sm={5}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh',
+                            textAlign: 'right'
+                        }}>{props.input}</p>
+                    </Grid>
+                    <Grid item xs={0}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh'
+                        }}>|</p>
+                    </Grid>
+                    <Grid item sm={5}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh',
+                            textAlign: 'left'
+                        }}>{props.output}</p>
+                    </Grid>
                 </Grid>
-                <Grid item xs={0}>
-                    <p style={{
-                        lineHeight: 0,
-                        color: props.fontColor,
-                        fontSize: '10vh'
-                    }}>|</p>
+                <Grid container justify='center' spacing={2}>
+                    <Grid item xs={4}>
+                        <Card>
+                            <CardActionArea>
+                                <button id="dotButton" style={{
+                                    backgroundColor: props.backgroundColor,
+                                    width: '100%',
+                                    height: '20vh',
+                                    fontSize: '20vh',
+                                    color: props.fontColor
+                                }} onClick={function(){
+                                    props.newInput(input + '•');
+                                    playDot();
+                                }}>•
+                                </button>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card>
+                            <CardActionArea>
+                                <button id="dashButton" style={{
+                                    backgroundColor: props.backgroundColor,
+                                    width: '100%',
+                                    height: '20vh',
+                                    fontSize: '20vh',
+                                    color: props.fontColor
+                                }} onClick={function(){
+                                    props.newInput(input + '-');
+                                    playDash();
+                                }}>-
+                                </button>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
                 </Grid>
-                <Grid item sm={5}>
-                    <p style={{
-                        lineHeight: 0,
-                        color: props.fontColor,
-                        fontSize: '10vh',
-                        textAlign: 'left'
-                    }}>{props.out}</p>
-                </Grid>
-            </Grid>
-            <Grid container justify='center' spacing={2}>
-                <Grid item xs={4}>
-                    <Card>
-                        <CardActionArea>
-                            <button id="dotButton" style={{
-                                backgroundColor: props.backgroundColor,
-                                width: '100%',
-                                height: '20vh',
-                                fontSize: '20vh',
-                                color: props.fontColor
-                            }} onClick={function(){
-                                setInput(input + '•');
-                                playDot();
-                            }}>•
-                            </button>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item xs={4}>
-                    <Card>
-                        <CardActionArea>
-                            <button id="dashButton" style={{
-                                backgroundColor: props.backgroundColor,
-                                width: '100%',
-                                height: '20vh',
-                                fontSize: '20vh',
-                                color: props.fontColor
-                            }} onClick={function(){
-                                setInput(input + '-');
-                                playDash();
-                            }}>-
-                            </button>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            </Grid>
-        </Container>
-    </div>);
+            </Container>
+        </div>);
 }
 
 
