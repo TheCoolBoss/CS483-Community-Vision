@@ -22,6 +22,8 @@ function initial(type) {
         return 'blue';
     } else if (type === 'fontColor') {
         return 'white';
+    } else if (type === 'buttonColor'){
+        return 'blue'
     }
 }
 
@@ -52,6 +54,13 @@ function Settings(props) {
         localStorage.setItem('backgroundColor', newValue);
         setBackgroundColor(newValue);
         props.updateNavBackgroundColor(newValue);
+        props.updateNavState(newValue);
+        props.updateSettingsPageState(newValue);
+    };
+    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
+    const changeButtonColor = (newValue) => {
+        localStorage.setItem('buttonColor', newValue);
+        setButtonColor(newValue);
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
     };
@@ -343,40 +352,40 @@ function Settings(props) {
                             <Grid container direction='row'>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue' }} onClick={() => changeBackgroundColor('blue')}></button>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue' }} onClick={() => changeButtonColor('blue')}></button>
                                     </Grid>
                                     <Grid item>
-                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('blue')}>BLUE</p>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeButtonColor('blue')}>BLUE</p>
                                     </Grid>
                                     <Grid item>
-                                        <input checked={isChecked(backgroundColor, 'blue')} type="radio" id="blueBackgroundColor" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')} />
-                                    </Grid>
-                                </Grid>
-                                <Grid container xs={3} direction='column'>
-                                    <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'red' }} onClick={() => changeBackgroundColor('red')}></button>
-                                    </Grid>
-                                    <Grid item>
-                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('red')}>RED</p>
-                                    </Grid>
-                                    <Grid item>
-                                        <input checked={isChecked(backgroundColor, 'red')} type="radio" id="redBackgroundColor" name="backgroundColor" value="red" onClick={() => changeBackgroundColor('red')} />
+                                        <input checked={isChecked(buttonColor, 'blue')} type="radio" id="blueButtonColor" name="buttonColor" value="blue" onClick={() => changeBackgroundColor('blue')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'green' }} onClick={() => changeBackgroundColor('green')}></button>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'red' }} onClick={() => changeButtonColor('red')}></button>
                                     </Grid>
                                     <Grid item>
-                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('green')}>GREEN</p>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeButtonColor('red')}>RED</p>
                                     </Grid>
                                     <Grid item>
-                                        <input checked={isChecked(backgroundColor, 'green')} type="radio" id="greenBackgroundColor" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')} />
+                                        <input checked={isChecked(buttonColor, 'red')} type="radio" id="redButtonColor" name="buttonColor" value="red" onClick={() => changeBackgroundColor('red')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'green' }} onClick={() => changeButtonColor('green')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeButtonColor('green')}>GREEN</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input checked={isChecked(buttonColor, 'green')} type="radio" id="greenButtonColor" name="buttonColor" value="green" onClick={() => changeBackgroundColor('green')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
                                     <Grid item>
-                                        <ColorPicker color={backgroundColor} onColorChange={(value) => changeBackgroundColor(value)} />
+                                        <ColorPicker color={buttonColor} onColorChange={(value) => changeButtonColor(value)} />
                                     </Grid>
                                     <Grid item>
                                         <p style={{ margin: -2, cursor: 'default' }}>Custom color!</p>
