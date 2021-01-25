@@ -1,14 +1,13 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
-import {charToMorse, morseToChar} from "./charMorseConv";
+import {morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
-import { useTransition, animated } from 'react-spring';
+import {animated} from 'react-spring';
 import {Buttons, initial} from "./Common/Functions";
 
 var t;
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 const SandboxLetters = forwardRef((props, ref) => {
     var [input, setInput] = React.useState('');

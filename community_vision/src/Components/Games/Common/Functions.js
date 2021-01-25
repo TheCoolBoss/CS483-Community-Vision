@@ -6,10 +6,6 @@ import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import {morseToChar} from "../charMorseConv";
-import {animated} from "react-spring";
-
-
 
 //Gets game values fom local storage
 export function initial(type){
@@ -29,7 +25,7 @@ export function initial(type){
     }
 }
 
-
+//Button code
 export function Buttons(props)
 {
     const input = props.input;

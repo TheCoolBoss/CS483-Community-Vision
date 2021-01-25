@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
-import {charToMorse, morseToChar} from "./charMorseConv";
-import { useTransition, animated } from 'react-spring';
+import {morseToChar} from "./charMorseConv";
+import {animated} from 'react-spring';
 import useSound from "use-sound";
 import dashSound from "../Assets/Sounds/dash.mp3";
 import dotSound from "../Assets/Sounds/dot.mp3";
