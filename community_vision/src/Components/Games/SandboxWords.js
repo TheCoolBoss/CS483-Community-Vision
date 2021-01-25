@@ -1,9 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./charMorseConv";
 import { useTransition, animated } from 'react-spring';
 import useSound from "use-sound";
