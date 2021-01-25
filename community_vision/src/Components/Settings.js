@@ -339,6 +339,54 @@ function Settings(props) {
                     </Grid>
                     <Grid item>
                         <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE BUTTON COLOR</h1>
+                            <Grid container direction='row'>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue' }} onClick={() => changeBackgroundColor('blue')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('blue')}>BLUE</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input checked={isChecked(backgroundColor, 'blue')} type="radio" id="blueBackgroundColor" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'red' }} onClick={() => changeBackgroundColor('red')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('red')}>RED</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input checked={isChecked(backgroundColor, 'red')} type="radio" id="redBackgroundColor" name="backgroundColor" value="red" onClick={() => changeBackgroundColor('red')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'green' }} onClick={() => changeBackgroundColor('green')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'default' }} onClick={() => changeBackgroundColor('green')}>GREEN</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input checked={isChecked(backgroundColor, 'green')} type="radio" id="greenBackgroundColor" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column' alignItems='center'>
+                                    <Grid item>
+                                        <ColorPicker color={backgroundColor} onColorChange={(value) => changeBackgroundColor(value)} />
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'default' }}>Custom color!</p>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE COLOR FOR WORDS</h1>
                             <Grid container direction='row'>
                                 <Grid container xs={3} direction='column'>
