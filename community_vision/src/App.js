@@ -13,6 +13,7 @@ import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
 import LearnNumbers from "./Components/Games/learnNumbers";
+import EndGame from "./Components/Games/LearnWord/EndGame";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
       <div className="App">
         <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
+          <Route path="/EndGame">
+            <EndGame/>
+          </Route>
           <Route path="/" exact>
             <Home ref={currentRef} />
           </Route>
@@ -45,13 +49,13 @@ function App() {
             <LearnAlphabet ref={currentRef} />
           </Route>
           <Route path="/learnWordBeginner">
-            <LearnWordBeginner />
+            <LearnWordBeginner ref={currentRef} />
           </Route>
           <Route path="/learnWordAdvanced">
-            <LearnWordAdvanced />
+            <LearnWordAdvanced ref={currentRef} />
           </Route>
           <Route path="/learnWordMedium">
-            <LearnWordMedium />
+            <LearnWordMedium ref={currentRef} />
           </Route>
           <Route path="/noHelpAlphabet">
             <AlphabetNoHelp />
