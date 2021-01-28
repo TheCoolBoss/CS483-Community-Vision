@@ -186,7 +186,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                             <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
                         </h1>
                         }
-                        <p style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
+                        <p id="sampleMorse" style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
