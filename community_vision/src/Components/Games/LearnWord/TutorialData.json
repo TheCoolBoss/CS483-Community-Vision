@@ -1,0 +1,161 @@
+{
+    "bgnTutContent" : [
+        {
+            "text": "Welcome to the Word Game Beginner Level!", 
+            "showSpace": "none", 
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This game will teach you about the Morse code of certain words",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This game consists of two buttons at the bottom of the page",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "Along with the picture and its definition at the top of the page",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This button is used for the dots and can be accessed through the space button or by clicking here!",
+            "showSpace": "block",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This button is used for the dashes and can be accessed through the space button or by clicking here!",
+            "showSpace": "none",
+            "showEnter": "block",
+            "showMorse": "none"
+        },
+        {
+            "text": "Enter the Morse code of the underlined character and the rest of the word will autocomplete",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "show"
+        },
+        {
+            "text": "There are a total 26 words, each starts with a different character",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "Complete all 26 words to beat the game, have fun!",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        }
+    ],
+    "medTutContent" : [
+        {
+            "text": "Welcome to the Word Game Medium Intermediate Level!", 
+            "showSpace": "none", 
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This game will teach you about the Morse code of certain words",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This game consists of two buttons at the bottom of the page",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "Along with the picture and its definition at the top of the page",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This button is used for the dots and can be accessed through the space button or by clicking here!",
+            "showSpace": "block",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "This button is used for the dashes and can be accessed through the space button or by clicking here!",
+            "showSpace": "none",
+            "showEnter": "block",
+            "showMorse": "none"
+        },
+        {
+            "text": "Enter the morse of the underlined character until you go through all the letters and move on to the next word",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "show"
+        },
+        {
+            "text": "There are a total 26 words, each starts with a different character",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        },
+        {
+            "text": "Complete all 26 words to beat the game, have fun!",
+            "showSpace": "none",
+            "showEnter": "none",
+            "showMorse": "none"
+        }
+    ],
+    "advTutContent" : [
+        {
+            "text": "Welcome to the Word Game Medium Advanced Level!", 
+            "showSpace": "none", 
+            "showEnter": "none"
+        },
+        {
+            "text": "This game will teach you about the Morse code of certain words without help",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "This game consists of two buttons at the bottom of the page",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "Along with the picture and its definition at the top of the page",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "This button is used for the dots and can be accessed through the space button or by clicking here!",
+            "showSpace": "block",
+            "showEnter": "none"
+        },
+        {
+            "text": "This button is used for the dashes and can be accessed through the space button or by clicking here!",
+            "showSpace": "none",
+            "showEnter": "block"
+        },
+        {
+            "text": "Enter the morse of the underlined character until you go through all the letters and move on to the next word",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "There are a total 26 words, each starts with a different character",
+            "showSpace": "none",
+            "showEnter": "none"
+        },
+        {
+            "text": "Complete all 26 words to beat the game, have fun!",
+            "showSpace": "none",
+            "showEnter": "none"
+        }
+    ]
+}
