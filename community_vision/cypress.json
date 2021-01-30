@@ -1,3 +1,9 @@
 {
-  "projectId": "qy7rdq"
+  "projectId": "qy7rdq",
+  "experimentalComponentTesting": true,
+  "componentFolder": "cypress/components",
+  "integrationFolder": "cypress/integration",
+  "supportFile": "cypress/support/index.js",
+  "plugins": "cypress/plugins/index.js",
+  "fixturesFolder": false
 }

@@ -14,6 +14,7 @@ describe('Learning Alphabet Game Test', function () {
         // - interact with that element
         cy.contains('Play Morse!')
         cy.contains('Play Games!').click()
+        cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
         cy.contains('Learn The Alphabet').click()
