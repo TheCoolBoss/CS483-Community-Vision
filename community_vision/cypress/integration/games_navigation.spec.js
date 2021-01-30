@@ -1,5 +1,5 @@
-describe('Learning Alphabet Game Test', function () {
-    it('Navigates to Learn Alph Game and tests functionality', function () {
+describe('Learning Alphabet Game Test', () => {
+    it('Navigates to Learn Alph Game and tests functionality', () => {
         // Arrange - setup initial app state
         // - visit Learning Alphabet game page
         // - query for an element
@@ -21,7 +21,7 @@ describe('Learning Alphabet Game Test', function () {
         // Assert - make an assertion
         // - make an assertion about page content
     })
-    it('Navigates to Learn Alph No Help Game and tests functionality', function () {
+    it('Navigates to Learn Alph No Help Game and tests functionality', () => {
         // Arrange - setup initial app state
         // - visit Learning Alphabet game page
         // - query for an element
@@ -45,8 +45,8 @@ describe('Learning Alphabet Game Test', function () {
     })
 })
 
-describe('Sandbox Games Navigation Test', function() {
-    it('Navigate from home page to sandbox words game', function() {
+describe('Sandbox Games Navigation Test', () => {
+    it('Navigate from home page to sandbox words game', () => {
         cy.visit('http://localhost:3000');
         cy.contains('Play Games!').click();
         cy.url()
@@ -59,7 +59,7 @@ describe('Sandbox Games Navigation Test', function() {
             .should('include', '/sandboxWords');
     })
 
-    it('Navigate from home page to sandbox letters game', function() {
+    it('Navigate from home page to sandbox letters game', () => {
         cy.visit('http://localhost:3000');
         cy.contains('Play Games!').click();
         cy.url()
@@ -74,8 +74,8 @@ describe('Sandbox Games Navigation Test', function() {
     })
 })
 
-describe('Numbers Game Navigation Test', function() {
-    it('Navigate from home page to numbers game', function() {
+describe('Numbers Game Navigation Test', () => {
+    it('Navigate from home page to numbers game', () => {
         cy.visit('http://localhost:3000');
         cy.contains('Play Games!').click();
         cy.url()
@@ -89,8 +89,8 @@ describe('Numbers Game Navigation Test', function() {
     })
 })
 
-describe('Word Games Navigation Test', function() {
-    it('Navigate from home page to word game beginner page', function() {
+describe('Word Games Navigation Test', () => {
+    it('Navigate from home page to word game beginner page', () => {
         //Visit home page
         cy.visit('http://localhost:3000');
         //Look for element that contains 'Play Games!' and click on it
@@ -110,7 +110,7 @@ describe('Word Games Navigation Test', function() {
             .should('include', '/learnWordBeginner')
     })
 
-    it('Navigate from home page to word game medium page', function() {
+    it('Navigate from home page to word game medium page', () => {
         //Visit home page
         cy.visit('http://localhost:3000');
         //Look for element that contains 'Play Games!' and click on it
@@ -130,7 +130,7 @@ describe('Word Games Navigation Test', function() {
             .should('include', '/learnWordMedium')
     }) 
 
-    it('Navigate from home page to word game advanced page', function() {
+    it('Navigate from home page to word game advanced page', () => {
         //Visit home page
         cy.visit('http://localhost:3000');
         //Look for element that contains 'Play Games!' and click on it
