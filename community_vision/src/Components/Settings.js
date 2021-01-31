@@ -22,7 +22,7 @@ function initial(type) {
         return 'blue';
     } else if (type === 'fontColor') {
         return 'white';
-    } else if (type === 'buttonColor'){
+    } else if (type === 'buttonColor') {
         return 'blue'
     }
 }
@@ -73,7 +73,7 @@ function Settings(props) {
         props.updateSettingsPageState(newValue);
     };
     const fSize = size + 'vh';
-    const fMargin = -size / 5 + 'vh';
+    const fMargin = -size / 4 + 'vh';
     const isChecked = (type, color) => {
         if (type === color) {
             return true;
@@ -95,15 +95,16 @@ function Settings(props) {
         <div style={{
             position: 'relative',
             marginTop: '1.5vh',
-            top: '1vh',
+            top: '0vh',
             marginBottom: '2vh',
-            width: '100vw'}}>
-            <Grid style={{ marginBottom: '1vh' }} container>
-                <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+            width: '100vw'
+        }}>
+            <Card borderRadius='1vh'>
+                <Grid style={{ marginBottom: '1vh' }} container>
+                    <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE GAME VOLUME</h1>
-                            <Grid container spacing={0} alignItems='center'>
+                            <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
                                     <VolumeDown />
                                 </Grid>
@@ -117,12 +118,10 @@ function Settings(props) {
                                     <VolumeUp />
                                 </Grid>
                             </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                        </Grid>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE GAME SPEED</h1>
-                            <Grid container spacing={0} alignItems='center'>
+                            <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
                                     <VolumeDown />
                                 </Grid>
@@ -137,32 +136,29 @@ function Settings(props) {
                                     <VolumeUp />
                                 </Grid>
                             </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                        </Grid>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE TEXT SIZE</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-2vh' }}>
                                 <Grid item xs={1} />
-                                <Grid item xs={4}>
+                                <Grid item xs={10}>
                                     <Slider value={size} onChange={changeSize}
                                         valueLabelDisplay='auto' marks
                                         step={1} min={19} max={29} />
                                 </Grid>
-                                <Grid item xs={2} />
-                                <Grid item xs={3}>
+                                <Grid item xs={1} />
+                                <Grid item xs={4} />
+                                <Grid item xs={4}>
                                     <h1 style={{ fontSize: fSize, margin: fMargin }}>A</h1>
                                 </Grid>
                                 <Grid item xs={2} />
                             </Grid>
-                        </Card>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                    <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>PICK A THEME!</h1>
-                            <Grid container direction='row'>
+                            <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container direction='column' alignItems='center' xs={3}>
                                     <Grid item>
                                         <div style={{
@@ -296,12 +292,13 @@ function Settings(props) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                        </Grid>
+                        <Grid item>
+                            <h1 style={{ fontSize: '3vw', margin: '-0.5vh' }}>OR</h1>
+                        </Grid>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE BACKGROUND COLOR</h1>
-                            <Grid container direction='row'>
+                            <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
                                         <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue' }} onClick={() => changeBackgroundColor('blue')}></button>
@@ -344,12 +341,10 @@ function Settings(props) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                        </Grid>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE BUTTON COLOR</h1>
-                            <Grid container direction='row'>
+                            <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
                                         <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue' }} onClick={() => changeButtonColor('blue')}></button>
@@ -392,12 +387,10 @@ function Settings(props) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Card>
-                    </Grid>
-                    <Grid item>
-                        <Card style={{ borderRadius: '0px', minHeight: '0vh' }}>
+                        </Grid>
+                        <Grid item>
                             <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh' }}>CHOOSE COLOR FOR WORDS</h1>
-                            <Grid container direction='row'>
+                            <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
                                         <button style={{ height: '5vh', width: '5vh', backgroundColor: 'white' }} onClick={() => changeFontColor('white')}></button>
@@ -440,10 +433,10 @@ function Settings(props) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Card>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Card>
         </div>
     )
 }
@@ -491,9 +484,9 @@ class ColorPicker extends React.Component {
                 },
                 popover: {
                     position: 'absolute',
-                    marginTop: '-305px',
-                    marginLeft: '-110px',
-                    zIndex: '2',
+                    marginTop: '-250px',
+                    marginLeft: '-180px',
+                    zIndex: '10',
                 },
                 cover: {
                     position: 'fixed',

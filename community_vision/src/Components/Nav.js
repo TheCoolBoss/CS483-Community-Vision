@@ -112,9 +112,9 @@ const Nav = forwardRef((props, ref) => {
         gridArea: 'header',
         display: 'flex',
         position: 'relative',
-        zIndex: 3,
+        zIndex: x.interpolate({ range: [0, 1], output: [3, 4] }),
         height: 0,
-        top: x.interpolate({ range: [0, 1], output: ['-100vh', '0vh'] }),
+        top: x.interpolate({ range: [0, 1], output: ['-100vh', '-1.4vh'] }),
         opacity: x.interpolate({ range: [0, 1], output: [0, 0.95] })
       }}>
         <Settings updateNavBackgroundColor={setBackgroundColor}
