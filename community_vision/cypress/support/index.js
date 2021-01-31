@@ -14,7 +14,9 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import { requirePropFactory } from '@material-ui/core'
 import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+require('cypress-react-unit-test/support');

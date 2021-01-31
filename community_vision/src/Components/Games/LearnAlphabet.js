@@ -11,6 +11,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
+import {initial} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -155,7 +156,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
 
     return (
 
-        <div style={{ backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom' }}>
+        <div style={{
+            backgroundColor: backgroundColor,
+            height: '90vh',
+            width: '100vw',
+            display: 'grid',
+            gridTemplate: '8fr 8fr / 1fr',
+            gridTemplateAreas: '"top" "bottom'
+        }}>
 
             <div style={{ gridArea: 'top' }}>
                 <div style={{ position: 'absolute' }}>
@@ -249,7 +257,7 @@ const Radio = () => {
                         }}
                     >
                         ▼
-            </animated.p>
+                    </animated.p>
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -9,30 +9,15 @@ import { useSpring, animated } from 'react-spring';
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
+import {initial} from "./Common/Functions";
+import {Buttons} from "./Common/Functions";
 
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-function initial(type){
-    if(localStorage.getItem(type) != null){
-        return localStorage.getItem(type);
-    }
-    if(type === 'volume'){
-        return 50;
-    } else if(type === 'size'){
-        return 29;
-    } else if(type === 'speed'){
-        return 1.5;
-    } else if(type === 'backgroundColor'){
-        return 'blue';
-    } else if(type === 'fontColor'){
-        return 'white';
-    }
-}
-
-function NoHelpAlphabet() {
+const NoHelpAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = React.useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -44,11 +29,11 @@ function NoHelpAlphabet() {
     const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
 
-    const [volume] = React.useState(() => initial('volume'));
-    const [size] = React.useState(() => initial('size'));
-    const [speed] = React.useState(() => initial('speed'));
-    const [backgroundColor] = React.useState(() => initial('backgroundColor'));
-    const [fontColor] = React.useState(() => initial('fontColor'));
+    const [volume, setVolume] = useState(() => initial('volume'));
+    const [size, setSize] = useState(() => initial('size'));
+    const [speed, setSpeed] = useState(() => initial('speed'));
+    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
@@ -88,6 +73,19 @@ function NoHelpAlphabet() {
 
     var { x } = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: { duration: d } });
 
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
+
     return (
         <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
             <div style={{gridArea: 'top'}}>
@@ -98,45 +96,16 @@ function NoHelpAlphabet() {
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })}}>{currentLetter}</animated.h1>
                 </div>
             </div>
-            <div style={{gridArea: 'bottom'}}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right'}}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left'}}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                volume={volume}
+                input={input}
+                newInput={setInput}
+                output={output}
+            />
         </div>
     );
-}
+})
 
 export default NoHelpAlphabet;
