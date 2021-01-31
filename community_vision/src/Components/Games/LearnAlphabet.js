@@ -17,6 +17,25 @@ var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
 
+function initial(type) {
+    if (localStorage.getItem(type) != null) {
+        return localStorage.getItem(type);
+    }
+    if (type === 'volume') {
+        return 50;
+    } else if (type === 'size') {
+        return 29;
+    } else if (type === 'speed') {
+        return 1.5;
+    } else if (type === 'backgroundColor') {
+        return 'blue';
+    } else if (type === 'fontColor') {
+        return 'white';
+    } else if (type === 'button') {
+        return 'blue';
+    }
+}
+
 function showImage() {
     var x = document.getElementById("tutorialImage");
     if (x.style.display === "none") {
@@ -72,6 +91,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
     const fSize = size + 'vh';
@@ -128,6 +148,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
+                setButtonColor(initial('buttonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
@@ -186,7 +207,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
                                         setInput(input + '•');
                                         playDot();
                                     }}>•</button>
@@ -196,7 +217,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
