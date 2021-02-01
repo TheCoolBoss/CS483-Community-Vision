@@ -29,8 +29,14 @@ export function initial(type){
 export function Buttons(props)
 {
     const input = props.input;
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
+    const [playDash] = useSound(
+        dashSound,
+        { volume: props.volume / 100 }
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: props.volume / 100 }
+    );
 
     return(
         <div style={{gridArea: 'bottom'}}>

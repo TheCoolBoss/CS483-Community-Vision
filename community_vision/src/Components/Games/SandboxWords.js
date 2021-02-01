@@ -13,15 +13,20 @@ var t;
 const SandboxWords = forwardRef((props, ref) => {
     const [input, setInput] = React.useState('');
     const output = morseToChar(input);
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
-
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
+    const [playDash] = useSound(
+        dashSound,
+        { volume: volume / 100 }
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: volume / 100 }
+    );
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
 
