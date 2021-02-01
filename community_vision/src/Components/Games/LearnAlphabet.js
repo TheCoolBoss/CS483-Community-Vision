@@ -12,6 +12,7 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
 import {initial} from "./Common/Functions";
+import {Buttons} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -171,43 +172,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
                     }}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{ gridArea: 'bottom' }}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh' }}>|</p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                volume={volume}
+                input={input}
+                newInput={setInput}
+                output={output}
+            />
         </div>
     );
 })
