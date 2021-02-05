@@ -161,12 +161,16 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
                     <animated.p style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentMorse}</animated.p>
                 </div>
@@ -175,13 +179,13 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{input}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{output}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh' }}>|</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0 }}>|</p>
                         </Grid>
                         <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{output}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{input}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>

@@ -34,15 +34,6 @@ const Nav = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const [fontColor, setFontColor] = useState(() => initial('fontColor'));
   var navbarColor = '#f8ac2e'
-  if (backgroundColor === 'gray' && fontColor === 'black') {
-    navbarColor = 'lightGray';
-  } else if (backgroundColor === '#A7B8F8' && fontColor === '#AE9C45') {
-    navbarColor = '#052955';
-  } else if (backgroundColor === '#030303' && fontColor === '#D0A15D') {
-    navbarColor = '#a48978';
-  } else if (backgroundColor === '#89CFF0' && fontColor === '#FC0FC0') {
-    navbarColor = '#ffc0cb';
-  }
 
   useImperativeHandle(
     ref,
@@ -102,7 +93,7 @@ const Nav = forwardRef((props, ref) => {
             </Grid>
           </Container>
         </div>
-        <button style={{ position: 'relative', right: '2px' }} onClick={function () { toggle(!dropdownState) }}>
+        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer' }} onMouseDown={function () { toggle(!dropdownState) }}>
           <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
         </button>
       </div>

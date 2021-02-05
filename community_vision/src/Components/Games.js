@@ -50,16 +50,10 @@ const Games = forwardRef((props, ref) => {
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Hard' />
+            <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Advanced' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Hard' />
-          </Grid>
-          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Medium' img={LearnABCIMG} link='/learnWordMedium' difficulty='Medium' />
-          </Grid>
-          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Easy' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Easy' />
+            <GameSelection name='Learn Numbers' img={LearnAlphabetIMG} link='/learnNumbers' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Sandbox Letters' img={sandboxIMG} link='/sandboxLetters' difficulty='Beginner' />
@@ -68,13 +62,16 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Sandbox Words' img={sandboxIMG} link='/sandboxWords' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
+            <GameSelection name='Learn Word Easy' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Easy' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
+            <GameSelection name='Learn Word Medium' img={LearnABCIMG} link='/learnWordMedium' difficulty='Medium' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Numbers' img={LearnAlphabetIMG} link='/learnNumbers' difficulty='Beginner' />
+            <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Hard' />
+          </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+            <GameSelection name='Learn Word Advanced' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Hard' />
           </Grid>
         </Grid>
       </Container>
