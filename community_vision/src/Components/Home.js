@@ -35,20 +35,22 @@ const Home = forwardRef((props, ref) => {
           textDecoration: 'underline',
           position: 'relative',
           bottom: '-1vh',
+          userSelect: 'none',
+          cursor: 'default',
           fontWeight: 900}}>
           Play Morse!</h1>
       </div>
       <div style={{gridArea: 'middleBottom'}}>
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
             <Grid item xs={11} style={{height: '80%'}}>
-              <h1 style={{height: '100%', color: 'black', fontWeight: 900}}>
+              <h1 style={{height: '100%', color: 'black', fontWeight: 900, userSelect: 'none', cursor: 'default'}}>
                 Welcome to Community Vision Morse Code Games!
               </h1>
             </Grid>
             <Grid item xs={5} style={{height: '20%'}}>
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/settings">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900}}>Play Games!</button>
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>Play Games!</button>
                 </Link>
               </Card>
             </Grid>

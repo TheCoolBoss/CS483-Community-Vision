@@ -162,12 +162,16 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
                     <animated.p style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentMorse}</animated.p>
                 </div>
