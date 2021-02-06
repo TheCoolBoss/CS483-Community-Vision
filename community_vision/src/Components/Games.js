@@ -62,16 +62,16 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Sandbox Words' img={sandboxIMG} link='/sandboxWords' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Easy' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Easy' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Easy' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Medium' img={LearnABCIMG} link='/learnWordMedium' difficulty='Medium' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordMedium' difficulty='Medium' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Hard' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Advanced' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Hard' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Hard' />
           </Grid>
         </Grid>
       </Container>

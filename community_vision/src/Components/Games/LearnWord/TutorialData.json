@@ -1,7 +1,7 @@
 {
     "bgnTutContent" : [
         {
-            "text": "Welcome to the Word Game Beginner Level!", 
+            "text": "Welcome to the Words Game Beginner Level!", 
             "showSpace": "none", 
             "showEnter": "none",
             "showMorse": "none"
@@ -57,7 +57,7 @@
     ],
     "medTutContent" : [
         {
-            "text": "Welcome to the Word Game Medium Intermediate Level!", 
+            "text": "Welcome to the Words Game Intermediate Level!", 
             "showSpace": "none", 
             "showEnter": "none",
             "showMorse": "none"
@@ -113,7 +113,7 @@
     ],
     "advTutContent" : [
         {
-            "text": "Welcome to the Word Game Medium Advanced Level!", 
+            "text": "Welcome to the Words Game Advanced Level!", 
             "showSpace": "none", 
             "showEnter": "none"
         },
