@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
 import LearnABCIMG from "./Games/apple.jpg"
 import alphabetIMG from "./Games/letters.jpg"
-import sandboxIMG from "./Games/sandbox.jpg"
+import sandboxIMG from "./Games/sandbox1.jpg"
 import numbersIMG from "./Games/numbers.jpg"
 
 import { Container } from '@material-ui/core';
