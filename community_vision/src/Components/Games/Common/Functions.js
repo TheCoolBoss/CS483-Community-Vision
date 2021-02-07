@@ -48,14 +48,14 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'right'
-                        }}>{props.input}</p>
+                        }}>{props.input2}</p>
                     </Grid>
                     <Grid item xs={0}>
                         <p style={{
                             lineHeight: 0,
                             color: props.fontColor,
                             fontSize: '10vh'
-                        }}>|</p>
+                        }}> _ </p>
                     </Grid>
                     <Grid item sm={5}>
                         <p style={{
@@ -63,7 +63,7 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'left'
-                        }}>{props.output}</p>
+                        }}>{props.output2}</p>
                     </Grid>
                 </Grid>
                 <Grid container justify='center' spacing={2}>

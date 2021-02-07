@@ -181,8 +181,10 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 backgroundColor={backgroundColor}
                 volume={volume}
                 input={input}
+                input2={input}
                 newInput={setInput}
                 output={output}
+                output2={output}
             />
         </div>
     );

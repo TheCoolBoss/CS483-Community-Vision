@@ -15,6 +15,7 @@ import SandboxWords from "./Components/Games/SandboxWords";
 import LearnNumbers from "./Components/Games/learnNumbers";
 import EndGame from "./Components/Games/LearnWord/EndGame";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ButtonsTutorial from "./Components/Games/buttonTutorial";
 
 function App() {
   const currentRef = useRef();
@@ -68,6 +69,9 @@ function App() {
           </Route>
           <Route path="/learnNumbers">
             <LearnNumbers />
+          </Route>
+          <Route path="/buttons">
+            <ButtonsTutorial ref={currentRef} />
           </Route>
         </Switch>
       </div>

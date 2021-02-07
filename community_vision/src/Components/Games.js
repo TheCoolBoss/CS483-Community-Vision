@@ -50,6 +50,9 @@ const Games = forwardRef((props, ref) => {
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+            <GameSelection name='Learn Buttons' img={alphabetIMG} link='/buttons' difficulty='Beginner' />
+          </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
@@ -99,7 +102,7 @@ class GameSelection extends React.Component {
               <img style={{ height: '100%', width: '100%', margin: '0%', padding: '0%', display: 'block' }} src={this.props.img} alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*/ />
               <p style={{ color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color, fontSize: '2vh', textDecoration: 'underline' }} >{this.props.name}</p>
               <div style={{ backgroundColor: color }}>
-                <text style={{ color: 'black', fontWeight: 'bold' }}>Difficulty: {this.props.difficulty}</text>
+                <text style={{ color: 'black', fontWeight: 'bold' }}>{this.props.difficulty}</text>
               </div>
             </CardActionArea>
           </Card>
