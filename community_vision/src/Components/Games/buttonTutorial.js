@@ -11,7 +11,6 @@ var t;
 
 const ButtonsTutorial = forwardRef((props, ref) => {
     var [input, setInput] = React.useState('');
-    var output = morseToChar(input);
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
