@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
+//Help received from https://stackoverflow.com/questions/46656476/rendering-empty-space-in-react
+//for making empty elements take space
+
 //Gets game values fom local storage
 export function initial(type){
     if(localStorage.getItem(type) != null){
@@ -55,7 +58,7 @@ export function Buttons(props)
                             lineHeight: 0,
                             color: props.fontColor,
                             fontSize: '10vh'
-                        }}> _ </p>
+                        }}> &nbsp; </p>
                     </Grid>
                     <Grid item sm={5}>
                         <p style={{
