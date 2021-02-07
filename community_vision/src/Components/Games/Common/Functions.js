@@ -28,6 +28,25 @@ export function initial(type){
     }
 }
 
+//Reset input on input > 5
+export function resetInputLength(input, setInput)
+{
+    if (input.length > 5) {
+        setInput('');
+    }
+}
+
+//Clear input after timer expires
+export function resetInputTime(t, input, setInput, resetTimer)
+{
+    t = setTimeout(() =>
+        {
+            setInput('');
+        }
+        , resetTimer);
+    return t;
+}
+
 //Button code
 export function Buttons(props)
 {
@@ -42,7 +61,7 @@ export function Buttons(props)
     );
 
     return(
-        <div style={{gridArea: 'bottom'}}>
+        <div style={{gridArea: 'middle'}}>
             <Container>
                 <Grid container justify='center' spacing={0}>
                     <Grid item sm={5}>
@@ -51,7 +70,7 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'right'
-                        }}>{props.input2}</p>
+                        }}>{props.output2}</p>
                     </Grid>
                     <Grid item xs={0}>
                         <p style={{
@@ -66,7 +85,7 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'left'
-                        }}>{props.output2}</p>
+                        }}>{props.input2}</p>
                     </Grid>
                 </Grid>
                 <Grid container justify='center' spacing={2}>

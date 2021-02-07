@@ -1,8 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { charToMorse, morseToChar } from "./charMorseConv";
@@ -11,8 +9,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import {initial} from "./Common/Functions";
-import {Buttons} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 var t;
 var list = "ETIANMSURWDKGOHVFLPJBXCYZQ";
@@ -88,14 +85,10 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = setTimeout(function () {
-        setInput('');
-    }, resetTimer);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input.length > 6) {
-        setInput('');
-    }
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);

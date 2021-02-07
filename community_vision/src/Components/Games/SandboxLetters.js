@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import {animated} from 'react-spring';
-import {Buttons, initial} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 var t;
 
@@ -29,16 +29,10 @@ const SandboxLetters = forwardRef((props, ref) => {
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
+    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = setTimeout(() =>
-        {
-            setInput('')
-        }
-        , resetTimer);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input.length > 6) {
-        setInput('');
-    }
 
     document.onkeydown = function (evt) {
         evt = evt || window.event;
@@ -71,7 +65,7 @@ const SandboxLetters = forwardRef((props, ref) => {
             width: '100vw',
             display: 'grid',
             gridTemplate: '8fr 8fr / 1fr',
-            gridTemplateAreas: '"top" "bottom'
+            gridTemplateAreas: '"top" "middle" "bottom'
         }}>
             <div style={{gridArea: 'top'}}>
                 <div>

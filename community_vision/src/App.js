@@ -69,7 +69,7 @@ function App() {
             <SandboxWords ref={currentRef}/>
           </Route>
           <Route path="/learnNumbers">
-            <LearnNumbers />
+            <LearnNumbers ref={currentRef}/>
           </Route>
           <Route path="/buttons">
             <ButtonsTutorial ref={currentRef} />
