@@ -80,7 +80,7 @@ function Settings(props) {
         } else if (type === 'theme') {
             if (color === 'grayScale' && backgroundColor === 'gray' && fontColor === 'black') {
                 return true;
-            } else if (color === 'protan' && backgroundColor === '#A7B8F8' && fontColor === '#AE9C45') {
+            } else if (color === 'protan' && backgroundColor === '#052955' && fontColor === '#AE9C45') {
                 return true;
             } else if (color === 'deutran' && backgroundColor === '#030303' && fontColor === '#D0A15D') {
                 return true;
@@ -202,13 +202,13 @@ function Settings(props) {
                                             height: '6vh',
                                             marginBottom: '-1vh'
                                         }} onClick={function () {
-                                            changeBackgroundColor('#A7B8F8');
+                                            changeBackgroundColor('#052955');
                                             changeFontColor('#AE9C45');
                                         }}>
                                             <button style={{ gridArea: '1', backgroundColor: '#AE9C45', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                             <button style={{ gridArea: '1', backgroundColor: '#6073B1', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
-                                            <button style={{ gridArea: '2', backgroundColor: '#A7B8F8', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                             <button style={{ gridArea: '2', backgroundColor: '#052955', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
+                                            <button style={{ gridArea: '2', backgroundColor: '#A7B8F8', width: '3vh', height: '3vh', borderStyle: 'solid' }} />
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -220,7 +220,7 @@ function Settings(props) {
                                     <Grid item>
                                         <input checked={isChecked('theme', 'protan')} type="radio" id="protanTheme" name="theme" value="blue"
                                             onClick={() => {
-                                                changeBackgroundColor('#A7B8F8');
+                                                changeBackgroundColor('#052955');
                                                 changeFontColor('#AE9C45');
                                             }} />
                                     </Grid>

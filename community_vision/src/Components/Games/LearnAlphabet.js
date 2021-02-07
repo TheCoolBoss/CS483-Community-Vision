@@ -50,12 +50,15 @@ function updateTutorial() {
     } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorse').style.backgroundColor = "yellow";
+        document.getElementById('sampleMorseCode').style.color = "yellow";
         enter.style.display = "none";
         textIndex++;
     } else if (textIndex == 4) {
+        // change this in your tutorials to change the color of the divs
         document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+        // how to use this.state to toggle menu
+        //this.useState(setToggle)
         textIndex = 0;
     }
 }
@@ -163,7 +166,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         fontSize: fSize,
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
-                    <animated.p style={{
+                    <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
