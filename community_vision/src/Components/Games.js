@@ -6,9 +6,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
-import LearnABCIMG from "./Games/abc.jpg"
-import alphabetIMG from "./Games/alphabet.jpg"
+import LearnABCIMG from "./Games/apple.jpg"
+import alphabetIMG from "./Games/letters.jpg"
 import sandboxIMG from "./Games/sandbox.jpg"
+import numbersIMG from "./Games/numbers.jpg"
 
 import { Container } from '@material-ui/core';
 
@@ -74,7 +75,7 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Numbers' img={LearnAlphabetIMG} link='/learnNumbers' difficulty='Beginner' />
+            <GameSelection name='Learn Numbers' img={numbersIMG} link='/learnNumbers' difficulty='Beginner' />
           </Grid>
         </Grid>
       </Container>
