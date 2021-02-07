@@ -33,25 +33,31 @@ const About = forwardRef((props, ref) => {
       color: fontColor,
       backgroundColor: backgroundColor
     }}>
-      <h1 style={{ fontWeight: 900 }}>At Community Vision</h1>
+      <h1 style={{ fontWeight: 900 }}>Who We Are</h1>
 
-      <p >* we value individuals * value whole lives * we begin with "yes" * we are future-oriented *
-      we value independence * we value expanding the conversation * we value community *
-         we value callaboration * we value innovation * </p>
+      <p >The Community Vision Assitive Technology (AT) Lab is an education and 
+      resource center in Portland, Oregon that promotes accessibility & inclusive 
+      in our community. We collaborate with people with disabilities, families, 
+      caregivers, professionals, and community partners. We want more people to 
+      see, access, and feel comfortable with AT. The Lab offers AT Consultations,
+      Trainings & Workshops, Social Groups, a free Loan Closet, Equipment, Scholarships
+      and more. </p>
 
-      <p1>We work with natural support systems including an individual’s family, friends,
-      and local community to build a network that provides the means for an individual
-        to be a valued and contributing member of their community.</p1>
+      <p>To learn more, visit us at: </p>
+      <p><a href="https://cv-atlab.org/" target="_blank">www.cv-atlab.org</a></p>
+      <p>or</p>
+      <p><a href="http://www.facebook.com/CVATLab" target="_blank">www.facebook.com/CVATLab</a></p>
 
-      <p2>Our work is rooted in the belief that all people, regardless of perceived ability,
-      deserve the freedom to make the basic choices that define their lives. We offer a
-      variety of services to provide the tools for people to live as independently as
-      possible, while pursuing their goals and dreams. These services include: supported
-      living, employment services, financial education and savings plans, affordable housing
-        resources, family support, and assistive technology consultations and training.</p2>
+      <h2 style={{ fontWeight: 900 }}>Why Morse?</h2>
 
-      <p3>Visit our webpage:</p3>
-      <p4>https://cvision.org/</p4>
+      <p>Morse code is an old technolody that is having a resurgence in the world
+      AT. Many children with physical dissabilities, especially those who use adaptive
+      switches, have difficulty accessing the alphabet and, therefore, are not often taught 
+      the shills they need to read and write. Morse code offers a quicker way to access
+      the alphabet with the use of only 2 switches. A simple 'dot' and 'dash' can open 
+      the world of letters and literacy. This website offers games to learn Morse Code. 
+      Remember, children learn and explore the alphabet when they are very young, so it is
+      never too early to start playing with Morse!</p>
     </div>
   );
 })
