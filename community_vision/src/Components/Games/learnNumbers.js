@@ -9,12 +9,14 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3';
 import dotSound from '../Assets/Sounds/dot.mp3';
+import spacebar from '../Assets/Images/spacebar.png';
+import enterButton from '../Assets/Images/enterButton.png';
 
-//import { useTransition, animated } from 'react-spring'
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
 var list = "0123456789"
+var textIndex = 0;
 
 function initial(type){
     if(localStorage.getItem(type) != null){
@@ -32,6 +34,48 @@ function initial(type){
         return 'white';
     }
 }
+
+// function showImage() {
+//     var x = document.getElementById("tutorialImage");
+//     if(x.style.display === "none") {
+//         x.style.display = "block";
+//     } else {
+//         x.style.displau = "none";
+//     }
+// }
+
+// function updatetutorial() {
+//     var text = document.getElementById('tutorialText').innerHTML;
+//     var space = document.getElementById('spaceImage');
+//     var enter = document.getElementById('enterImage');
+
+//     if (textIndex == 0) {
+//         document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
+//         textIndex++;
+//     } else if (textIndex == 1) {
+//         document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
+//         document.getElementById('dotButton').style.backgroundColor = "yellow";
+//         document.style.display = "block";
+//         textIndex++;
+//     } else if (textIndex == 2) {
+//         document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+//         document.getElementById('tutorialText').innerHTML = 'THis button is used for the dashes and can be accessed through the enter button or by clicking here!';
+//         document.getElementById('dashButton').style.background = "yellow";
+//         space.style.display = "none";
+//         enter.style.display = "block";
+//         textIndex++;
+//     } else if (textIndex == 3) {
+//         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
+//         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
+//         document.getElementById('sampleMorse').style.backgroundColor = "yellow";
+//         enter.style.display = "none";
+//         textIndex++;
+//     } else if (textIndex == 4) {
+//         document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+//         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+//         textIndex = 0;
+//     }
+// }
 
 function LearnNumbers() {
     var [randomNumber, setRandomNumber] = useState(0);
