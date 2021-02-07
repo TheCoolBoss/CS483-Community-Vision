@@ -55,10 +55,13 @@ function updateTutorial() {
         textIndex++;
     } else if (textIndex == 4) {
         // change this in your tutorials to change the color of the divs
-        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.color;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
-        // how to use this.state to toggle menu
-        //this.useState(setToggle)
+        textIndex++;
+        // change color back to regular
+    } else if(textIndex == 5) {
+        // changes smaple morse back to normal color
+        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
     }
 }
@@ -251,17 +254,20 @@ const Radio = () => {
     );
 };
 
+
+// use state object and set it to 0 initially 
 const RadioContent = () => {
     return (
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
             <button onClick={function () {
                 updateTutorial();
             }} style={{ fontSize: '5vh' }}>Next</button>
+            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            
         </div>
     );
 };
