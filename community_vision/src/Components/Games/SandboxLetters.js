@@ -33,7 +33,6 @@ const SandboxLetters = forwardRef((props, ref) => {
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
-
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {

@@ -127,21 +127,3 @@ export function Buttons(props)
             </Container>
         </div>);
 }
-
-
-//Keyboard event handler
-//Currently doesn't work
-export function useEvents(evt) {
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
-    const [input, setInput] = useState('');
-
-    evt = evt || window.event;
-    if (evt.keyCode === 32) {
-        setInput(input + '•');
-        playDot();
-    } else if (evt.keyCode === 13) {
-        setInput(input + '-');
-        playDash();
-    }
-}
