@@ -11,27 +11,11 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
+import {initial} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
-
-function initial(type) {
-    if (localStorage.getItem(type) != null) {
-        return localStorage.getItem(type);
-    }
-    if (type === 'volume') {
-        return 50;
-    } else if (type === 'size') {
-        return 29;
-    } else if (type === 'speed') {
-        return 1.5;
-    } else if (type === 'backgroundColor') {
-        return 'blue';
-    } else if (type === 'fontColor') {
-        return 'white';
-    }
-}
 
 function showImage() {
     var x = document.getElementById("tutorialImage");
@@ -88,6 +72,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
     const fSize = size + 'vh';
@@ -144,6 +129,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
+                setButtonColor(initial('buttonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
@@ -151,7 +137,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
 
     return (
 
-        <div style={{ backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom' }}>
+        <div style={{
+            backgroundColor: backgroundColor,
+            height: '90vh',
+            width: '100vw',
+            display: 'grid',
+            gridTemplate: '8fr 8fr / 1fr',
+            gridTemplateAreas: '"top" "bottom'
+        }}>
 
             <div style={{ gridArea: 'top' }}>
                 <div style={{ position: 'absolute' }}>
@@ -168,12 +161,16 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
                     <animated.p style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentMorse}</animated.p>
                 </div>
@@ -182,20 +179,20 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 <Container>
                     <Grid container justify='center' spacing={0}>
                         <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{input}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{output}</p>
                         </Grid>
                         <Grid item xs={0}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh' }}>|</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0 }}>|</p>
                         </Grid>
                         <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{output}</p>
+                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{input}</p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
                                         setInput(input + '•');
                                         playDot();
                                     }}>•</button>
@@ -205,7 +202,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
@@ -245,7 +242,7 @@ const Radio = () => {
                         }}
                     >
                         ▼
-            </animated.p>
+                    </animated.p>
                 </div>
             </animated.button>
             <animated.div style={menuAppear}>
