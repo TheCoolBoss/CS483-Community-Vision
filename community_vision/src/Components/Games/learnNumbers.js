@@ -50,6 +50,7 @@ const LearnNumbers = forwardRef((props, ref) => {
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setInput("");
         setRandomNumber(Math.floor(Math.random() * 10));
     }
 

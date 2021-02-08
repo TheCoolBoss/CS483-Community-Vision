@@ -92,6 +92,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setInput("");
     }
 
     // tracks keycodes for space button  and enter button input
