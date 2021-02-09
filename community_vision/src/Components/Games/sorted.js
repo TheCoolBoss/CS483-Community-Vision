@@ -138,7 +138,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
             width: '100vw',
             display: 'grid',
             gridTemplate: '8fr 8fr / 1fr',
-            gridTemplateAreas: '"top" "bottom'
+            gridTemplateAreas: '"top" "middle" "bottom'
         }}>
 
             <div style={{ gridArea: 'top' }}>
@@ -173,6 +173,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
                 volume={volume}
                 input={input}
                 input2={input}

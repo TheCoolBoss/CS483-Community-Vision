@@ -173,6 +173,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
                 volume={volume}
                 input={input}
                 input2={input}

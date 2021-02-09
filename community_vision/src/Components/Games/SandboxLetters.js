@@ -16,6 +16,7 @@ const SandboxLetters = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
     const [playDash] = useSound(
@@ -53,6 +54,7 @@ const SandboxLetters = forwardRef((props, ref) => {
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
                 setFontColor(initial('fontColor'));
+                setButtonColor(initial("buttonColor"));
             }
         }),
     )
@@ -84,6 +86,7 @@ const SandboxLetters = forwardRef((props, ref) => {
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
                 volume={volume}
                 input={input}
                 newInput={setInput}

@@ -25,6 +25,8 @@ export function initial(type){
         return 'blue';
     } else if(type === 'fontColor'){
         return 'white';
+    } else if (type === 'buttonColor') {
+        return 'blue';
     }
 }
 
@@ -93,7 +95,7 @@ export function Buttons(props)
                         <Card>
                             <CardActionArea>
                                 <button id="dotButton" style={{
-                                    backgroundColor: props.backgroundColor,
+                                    backgroundColor: props.buttonColor,
                                     width: '100%',
                                     height: '20vh',
                                     fontSize: '20vh',
@@ -110,7 +112,7 @@ export function Buttons(props)
                         <Card>
                             <CardActionArea>
                                 <button id="dashButton" style={{
-                                    backgroundColor: props.backgroundColor,
+                                    backgroundColor: props.buttonColor,
                                     width: '100%',
                                     height: '20vh',
                                     fontSize: '20vh',
