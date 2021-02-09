@@ -38,12 +38,12 @@ const Nav = forwardRef((props, ref) => {
   useImperativeHandle(
     ref,
     () => ({
-        update() {
-            setBackgroundColor(initial('backgroundColor'));
-            setFontColor(initial('fontColor'));
-        }
+      update() {
+        setBackgroundColor(initial('backgroundColor'));
+        setFontColor(initial('fontColor'));
+      }
     }),
-)
+  )
 
 
   return (
@@ -103,11 +103,23 @@ const Nav = forwardRef((props, ref) => {
         gridArea: 'header',
         display: 'flex',
         position: 'relative',
-        zIndex: x.interpolate({ range: [0, 1], output: [3, 4] }),
+        zIndex: 4,
+        top: '-1vh',
         height: 0,
-        top: x.interpolate({ range: [0, 1], output: ['-100vh', '-1.4vh'] }),
+        left: x.interpolate({ range: [0, 1], output: ['100vw', '0vw'] }),
         opacity: x.interpolate({ range: [0, 1], output: [0, 0.95] })
       }}>
+        <p style={{
+          fontSize: '10vh',
+          position: 'absolute',
+          background: 'white',
+          top: '-20vh',
+          width: '100%',
+          zIndex: 5,
+          cursor: 'pointer',
+          userSelect: 'none',
+          textAlign: 'right',
+        }} onMouseDown={function () { toggle(!dropdownState) }}>X</p>
         <Settings updateNavBackgroundColor={setBackgroundColor}
           updateNavFontColor={setFontColor}
           updateSettingsPageState={() => void 0}

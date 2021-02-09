@@ -6,9 +6,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
-import LearnABCIMG from "./Games/abc.jpg"
-import alphabetIMG from "./Games/alphabet.jpg"
-import sandboxIMG from "./Games/sandbox.jpg"
+import LearnABCIMG from "./Games/apple.jpg"
+import alphabetIMG from "./Games/letters.jpg"
+import sandboxIMG from "./Games/sandbox1.jpg"
+import numbersIMG from "./Games/numbers.jpg"
 
 import { Container } from '@material-ui/core';
 
@@ -60,24 +61,26 @@ const Games = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Numbers' img={LearnAlphabetIMG} link='/learnNumbers' difficulty='Beginner' />
+
+            <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Sandbox Letters' img={sandboxIMG} link='/sandboxLetters' difficulty='Beginner' />
+            <GameSelection name='Learn Numbers' img={numbersIMG} link='/learnNumbers' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Sandbox Words' img={sandboxIMG} link='/sandboxWords' difficulty='Beginner' />
+            <GameSelection name='Sandbox Letters' img={sandboxIMG} link='/sandboxLetters' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Easy' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Easy' />
+            <GameSelection name='Sandbox Words' img={sandboxIMG} link='/sandboxWords' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Medium' img={LearnABCIMG} link='/learnWordMedium' difficulty='Medium' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Beginner' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Hard' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordMedium' difficulty='Intermediate' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Word Advanced' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Hard' />
+            <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Expert' />
           </Grid>
         </Grid>
       </Container>
@@ -88,13 +91,13 @@ const Games = forwardRef((props, ref) => {
 class GameSelection extends React.Component {
   render() {
     var color;
-    if (this.props.difficulty === 'Hard') {
+    if (this.props.difficulty === 'Expert') {
       color = '#FF0000'
-    } else if (this.props.difficulty === 'Medium') {
+    } else if (this.props.difficulty === 'Intermediate') {
       color = 'yellow'
-    } else if (this.props.difficulty === 'Easy') {
-      color = '#39ff14'
     } else if (this.props.difficulty === 'Beginner') {
+      color = '#39ff14'
+    } else if (this.props.difficulty === 'Explore') {
       color = '#0cbfe9'
     }
     return (
