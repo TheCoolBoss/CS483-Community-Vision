@@ -48,12 +48,18 @@ function updateTutorial() {
     } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorse').style.backgroundColor = "yellow";
+        document.getElementById('sampleMorseCode').style.color = "yellow";
         enter.style.display = "none";
         textIndex++;
     } else if (textIndex == 4) {
-        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+        // change this in your tutorials to change the color of the divs
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.color;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+        textIndex++;
+        // change color back to regular
+    } else if(textIndex == 5) {
+        // changes smaple morse back to normal color
+        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
     }
 }
@@ -160,7 +166,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
-                    <animated.p style={{
+                    <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
@@ -221,17 +227,20 @@ const Radio = () => {
     );
 };
 
+
+// use state object and set it to 0 initially 
 const RadioContent = () => {
     return (
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
             <button onClick={function () {
                 updateTutorial();
             }} style={{ fontSize: '5vh' }}>Next</button>
+            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            
         </div>
     );
 };
