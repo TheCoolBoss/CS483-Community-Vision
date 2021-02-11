@@ -22,7 +22,7 @@ const CurrentWord = (props) => {
 
     return (
         <div>
-        {isValidLetter
+            {isValidLetter
             ?
             <h1 style={{lineHeight: 0, fontSize: fontSize}}>
                 <span style={{color: '#00FF00'}}>{correct}</span>
