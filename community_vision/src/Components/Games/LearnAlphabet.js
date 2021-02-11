@@ -11,7 +11,8 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import {initial} from "./Common/Functions";
+import { initial } from "./Common/Functions";
+import { BlurLinearOutlined } from '@material-ui/icons';
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -106,9 +107,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
         if (evt.keyCode === 32) {
             setInput(input + '•');
             playDot();
+            document.getElementById('dotButton').focus();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
             playDash();
+            document.getElementById('dashButton').focus();
         }
     };
 
@@ -192,7 +195,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onMouseDown={function () {
                                         setInput(input + '•');
                                         playDot();
                                     }}>•</button>
@@ -202,7 +205,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         <Grid item xs={4}>
                             <Card>
                                 <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
+                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onMouseDown={function () {
                                         setInput(input + '-');
                                         playDash();
                                     }}>-</button>
@@ -232,7 +235,7 @@ const Radio = () => {
             <animated.button
                 style={menubg}
                 className="radiowrapper"
-                onClick={() => setToggle(!isToggled)}
+                onMouseDown={() => setToggle(!isToggled)}
             >
                 <div className="radio">
                     <p>Tutorial</p>
@@ -260,7 +263,7 @@ const RadioContent = () => {
             <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
             <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
             <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
-            <button onClick={function () {
+            <button id='4' onMouseDown={function () {
                 updateTutorial();
             }} style={{ fontSize: '5vh' }}>Next</button>
         </div>
