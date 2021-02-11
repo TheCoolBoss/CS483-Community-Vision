@@ -12,11 +12,9 @@ import LearnWordMedium from './Components/Games/LearnWord/LearnWordMedium';
 import AlphabetNoHelp from "./Components/Games/NoHelpAlphabet";
 import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
-import SortedAlphabet from "./Components/Games/sorted";
 import LearnNumbers from "./Components/Games/learnNumbers";
 import EndGame from "./Components/Games/LearnWord/EndGame";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ButtonsTutorial from "./Components/Games/buttonTutorial";
 
 function App() {
   const currentRef = useRef();
@@ -69,13 +67,7 @@ function App() {
             <SandboxWords ref={currentRef}/>
           </Route>
           <Route path="/learnNumbers">
-            <LearnNumbers ref={currentRef}/>
-          </Route>
-          <Route path="/buttons">
-            <ButtonsTutorial ref={currentRef} />
-          </Route>
-          <Route path="/sorted">
-            <SortedAlphabet ref={currentRef} />
+            <LearnNumbers />
           </Route>
         </Switch>
       </div>

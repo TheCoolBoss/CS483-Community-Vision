@@ -5,34 +5,35 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import {animated} from 'react-spring';
-import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
+import {Buttons, initial} from "./Common/Functions";
 
 var t;
 
 const SandboxLetters = forwardRef((props, ref) => {
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
+    const [playDash] = useSound(dashSound);
+    const [playDot] = useSound(dotSound);
+
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
-    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
-    const [playDash] = useSound(
-        dashSound,
-        { volume: volume / 100 }
-    );
-    const [playDot] = useSound(
-        dotSound,
-        { volume: volume / 100 }
-    );
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
-    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = resetInputTime(t, input, setInput, resetTimer);
+    t = setTimeout(() =>
+        {
+            setInput('')
+        }
+        , resetTimer);
+
+    if (input.length > 6) {
+        setInput('');
+    }
 
     document.onkeydown = function (evt) {
         evt = evt || window.event;
@@ -54,7 +55,6 @@ const SandboxLetters = forwardRef((props, ref) => {
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
                 setFontColor(initial('fontColor'));
-                setButtonColor(initial("buttonColor"));
             }
         }),
     )
@@ -66,7 +66,7 @@ const SandboxLetters = forwardRef((props, ref) => {
             width: '100vw',
             display: 'grid',
             gridTemplate: '8fr 8fr / 1fr',
-            gridTemplateAreas: '"top" "middle" "bottom'
+            gridTemplateAreas: '"top" "bottom'
         }}>
             <div style={{gridArea: 'top'}}>
                 <div>
@@ -86,7 +86,6 @@ const SandboxLetters = forwardRef((props, ref) => {
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
-                buttonColor={buttonColor}
                 volume={volume}
                 input={input}
                 newInput={setInput}
