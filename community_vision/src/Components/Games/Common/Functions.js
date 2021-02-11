@@ -100,7 +100,7 @@ export function Buttons(props)
                                     height: '20vh',
                                     fontSize: '20vh',
                                     color: props.fontColor
-                                }} onClick={function(){
+                                }} onMouseDown={function(){
                                     props.newInput(input + '•');
                                     playDot();
                                 }}>•
@@ -117,7 +117,7 @@ export function Buttons(props)
                                     height: '20vh',
                                     fontSize: '20vh',
                                     color: props.fontColor
-                                }} onClick={function(){
+                                }} onMouseDown={function(){
                                     props.newInput(input + '-');
                                     playDash();
                                 }}>-
