@@ -1,16 +1,11 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./charMorseConv";
 import { useSpring, animated } from 'react-spring';
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
-import {initial} from "./Common/Functions";
-import {Buttons} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 
 var t;
@@ -21,34 +16,35 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = React.useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
-
     var [input, setInput] = React.useState('');
     var output = morseToChar(input);
-
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
     const [anim, setAnim] = useState(true);
-
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
+    const [playDash] = useSound(
+        dashSound,
+        { volume: volume / 100 }
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: volume / 100 }
+    );
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
 
+    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = setTimeout(function(){
-        setInput('');
-    }, resetTimer);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input.length > 6){
-        setInput('');
-    }
     if (input === currentMorse){
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setInput("");
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -82,12 +78,20 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
                 setFontColor(initial('fontColor'));
+                setButtonColor(initial("buttonColor"));
             }
         }),
     )
 
     return (
-        <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
+        <div style={{
+            backgroundColor: backgroundColor,
+            height: '90vh',
+            width: '100vw',
+            display: 'grid',
+            gridTemplate: '8fr 8fr / 1fr',
+            gridTemplateAreas: '"top" "middle" "bottom'
+        }}>
             <div style={{gridArea: 'top'}}>
                 <div>
                     <animated.h1 style={{lineHeight: 0,
@@ -99,10 +103,13 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
                 volume={volume}
                 input={input}
+                input2={input}
                 newInput={setInput}
                 output={output}
+                output2={output}
             />
         </div>
     );

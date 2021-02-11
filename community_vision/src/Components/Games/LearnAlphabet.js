@@ -1,8 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { charToMorse, morseToChar } from "./charMorseConv";
@@ -11,7 +9,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import {initial} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -66,7 +64,7 @@ function updateTutorial() {
     }
 }
 
-const LearnAlphabet = forwardRef((props, ref) => {
+const SortedAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -93,17 +91,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = setTimeout(function () {
-        setInput('');
-    }, resetTimer);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input.length > 6) {
-        setInput('');
-    }
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setInput("");
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -149,7 +144,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
             width: '100vw',
             display: 'grid',
             gridTemplate: '8fr 8fr / 1fr',
-            gridTemplateAreas: '"top" "bottom'
+            gridTemplateAreas: '"top" "middle" "bottom'
         }}>
 
             <div style={{ gridArea: 'top' }}>
@@ -167,53 +162,31 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
                     <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
+                        pointer: 'default',
+                        userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{ gridArea: 'bottom' }}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{input}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh' }}>|</p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{output}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
+                volume={volume}
+                input={input}
+                input2={input}
+                newInput={setInput}
+                output={output}
+                output2={output}
+            />
         </div>
     );
 })
@@ -272,4 +245,4 @@ const RadioContent = () => {
     );
 };
 
-export default LearnAlphabet;
+export default SortedAlphabet;

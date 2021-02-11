@@ -204,6 +204,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                             :
                             <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
                             }
+                            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fSize, display: 'none'}}>{currentMorse}</p>
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
