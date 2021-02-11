@@ -12,7 +12,7 @@ import enterButton from '../Assets/Images/enterButton.png'
 import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 var t;
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var list = "ETIANMSURWDKGOHVFLPJBXCYZQ";
 var textIndex = 0;
 
 function showImage() {
@@ -53,12 +53,12 @@ function updateTutorial() {
         textIndex++;
     } else if (textIndex == 4) {
         document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+        document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the sorted Morse Alphabet!';
         textIndex = 0;
     }
 }
 
-const SortedAlphabet = forwardRef((props, ref) => {
+const LearnAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -95,7 +95,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
         setInput("");
     }
 
-    // tracks keycodes for space button  and enter button input 
+    // tracks keycodes for space button  and enter button input
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
@@ -226,7 +226,7 @@ const RadioContent = () => {
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
+            <p id="tutorialText" value="Change Text">Welcome to the sorted Alphabet Game! This game teaches you the Morse Code Alphabet, sorted by length! </p>
             <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
             <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
             <button onClick={function () {
@@ -236,4 +236,4 @@ const RadioContent = () => {
     );
 };
 
-export default SortedAlphabet;
+export default LearnAlphabet;
