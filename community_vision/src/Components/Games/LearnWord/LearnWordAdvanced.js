@@ -107,28 +107,31 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
             setCorrect(correct + currentWord[wordIndex]);
             setInput('');
             setWordIndex(prevWordIndex => prevWordIndex + 1);
-            //Check when the user complete the whole word
-            if (correct.localeCompare(currentWord) === 0) {
-                //Play the pronunciation of the current word
-                playCurrWordSound();
-                //Delay 2 sec
-                setTimeout(function () {
-                    //Set the new word
-                    if(gameIndex < 25) {
-                        setGameIndex(prevState => prevState + 1);
-                    }
-                    else {
-                        setGameIndex(25);
-                        setFinished(true);
-                    }
-                    //Reset word index
-                    setWordIndex(0);
-                    //Reset correct
-                    setCorrect('');
-                }, 2000)
-            }
         }
     }, [input]);
+
+    useEffect(() => {
+        //Check when the user complete the whole word
+        if (correct.localeCompare(currentWord) === 0) {
+            //Play the pronunciation of the current word
+            playCurrWordSound();
+            //Delay 2 sec
+            setTimeout(function () {
+                //Set the new word
+                if(gameIndex < 25) {
+                    setGameIndex(prevState => prevState + 1);
+                }
+                else {
+                    setGameIndex(25);
+                    setFinished(true);
+                }
+                //Reset word index
+                setWordIndex(0);
+                //Reset correct
+                setCorrect('');
+            }, 2000)
+        }
+    }, [wordIndex]);
     
     var isValidLetter;
     if (typeof(currentLetter) == 'undefined') {
@@ -184,10 +187,10 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} md={4} lg={6}>
+                                <Grid item xs={12} sm={4} md={4} lg={5}>
                                     <Picture img={img} currentWord={currentWord}/>
                                 </Grid>
-                                <Grid item xs={12} sm={4} md={4} lg={6}>
+                                <Grid item xs={12} sm={4} md={4} lg={5}>
                                     <CurrentWord 
                                         level='advanced' 
                                         fColor={fontColor}
