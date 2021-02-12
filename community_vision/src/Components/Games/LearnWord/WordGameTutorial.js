@@ -124,9 +124,6 @@ function TutorialContent(props) {
 
     return (
         <div className="radiocontent" >
-            <p id="tutorialText" value="Change Text">{tutorialText}</p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: spaceDisplay }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: enterDisplay }}></img>
             <button onClick={function () {
                 if(index === bgnTutLength - 1 && props.level === 'beginner' ) {
                     setIndex(0);
@@ -141,6 +138,9 @@ function TutorialContent(props) {
                     setIndex(prevIndex => prevIndex + 1);
                 }
             }} style={{ fontSize: '5vh' }}>Next</button>
+            <p id="tutorialText" value="Change Text">{tutorialText}</p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: spaceDisplay }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: enterDisplay }}></img>
         </div>
     );
 }
