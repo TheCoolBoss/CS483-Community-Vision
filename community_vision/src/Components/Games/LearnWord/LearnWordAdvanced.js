@@ -187,7 +187,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                                 <Grid item xs={12} md={6}>
                                     <Picture img={img} currentWord={currentWord}/>
                                 </Grid>
-                                <Grid item xs={12} md={5}>
+                                <Grid item xs={12} md={6}>
                                     <CurrentWord 
                                         level='advanced' 
                                         fColor={fontColor}
