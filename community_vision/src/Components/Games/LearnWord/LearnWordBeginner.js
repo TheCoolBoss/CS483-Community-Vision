@@ -106,7 +106,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             playCurrWordSound();
             setIsCorrect(true);
             //Move to the next word
-            setTimeout(function () {
+            setTimeout(() => {
                 if(gameIndex < 25) {
                     setGameIndex(prevState => prevState + 1);
                 }

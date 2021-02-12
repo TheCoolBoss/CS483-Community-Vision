@@ -81,7 +81,10 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = (size-3) +'vh';
+    const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
+    const fSize = (size-sizeAdjust) +'vh';
+    const [picHeight, setPicHeight] = React.useState('');
+    const [picWidth, setPicWidth] = React.useState('');
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
@@ -166,6 +169,43 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
         }),
     )
 
+    
+
+    const updateSize = () => {
+        //For readjusting image
+        if(window.innerWidth < 700) {
+            setPicHeight('30vh');
+            setPicWidth('20vw');
+        }
+        else {
+            setPicHeight('40vh');
+            setPicWidth('25vw');
+        }
+
+        //For readjusting font
+        if(window.innerWidth < 900 && window.innerWidth > 700) {
+            setSizeAdjust(5);
+        }
+        else if(window.innerWidth < 600) {
+            setSizeAdjust(8);
+        }
+        else {
+            setSizeAdjust(3);
+        }
+    }
+
+    //On mount, make sure that the correct size of image is display
+    React.useEffect(() => {
+        updateSize();
+    }, [])
+
+    //Resize image when the browser is being resize
+    React.useEffect(() => {
+        window.addEventListener('resize', updateSize);
+        //clean up event listener
+        return () => window.removeEventListener('resize', updateSize);
+    })
+
     return (
         <div>
             {finished ? <EndGame level='advanced' background={backgroundColor} fontColor={fontColor}/> : null}
@@ -188,7 +228,12 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                         <Container>
                             <Grid container justify='center' spacing={0}>
                                 <Grid item xs={12} sm={4} md={4} lg={5}>
-                                    <Picture img={img} currentWord={currentWord}/>
+                                    <Picture 
+                                        img={img} 
+                                        currentWord={currentWord}
+                                        picWidth={picWidth}
+                                        picHeight={picHeight}
+                                    />
                                 </Grid>
                                 <Grid item xs={12} sm={4} md={4} lg={5}>
                                     <CurrentWord 
