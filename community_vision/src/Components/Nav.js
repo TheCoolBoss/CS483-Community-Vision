@@ -90,6 +90,16 @@ const Nav = forwardRef((props, ref) => {
                   </CardActionArea>
                 </Card>
               </Grid>
+              <Grid item xs={4} />
+              <Grid item xs={2}>
+                <Card style={{ borderRadius: '20px' }}>
+                  <CardActionArea>
+                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/GettingStarted">
+                      GettingStarted
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
             </Grid>
           </Container>
         </div>
