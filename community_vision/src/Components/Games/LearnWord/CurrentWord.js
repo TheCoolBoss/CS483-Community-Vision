@@ -32,7 +32,7 @@ const CurrentWord = (props) => {
             :
             <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fontSize}}>{currentWord}</h1>
             }
-            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fontSize, display: display}}>{currentMorse}</p>
+            <p id='sampleMorse' style={{lineHeight: 0, color: fontColor, fontSize: fontSize, display: display, margin: 0}}>{currentMorse}</p>
         </div>
     );
 }

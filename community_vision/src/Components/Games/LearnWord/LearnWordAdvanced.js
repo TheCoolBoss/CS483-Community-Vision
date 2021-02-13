@@ -170,12 +170,12 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     )
 
     
-
+    //Adjust size base on the window size(still needs a bit of work)
     const updateSize = () => {
         //For readjusting image
         if(window.innerWidth < 700) {
-            setPicHeight('30vh');
-            setPicWidth('20vw');
+            setPicHeight('25vh');
+            setPicWidth('25vw');
         }
         else {
             setPicHeight('40vh');
@@ -183,14 +183,22 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
         }
 
         //For readjusting font
-        if(window.innerWidth < 900 && window.innerWidth > 700) {
-            setSizeAdjust(5);
+        if(window.innerWidth < 1000 && window.innerWidth > 700) {
+            setSizeAdjust(7);
         }
-        else if(window.innerWidth < 600) {
-            setSizeAdjust(8);
+        else if(window.innerWidth <= 700 && window.innerWidth > 600) {
+            setSizeAdjust(9);
+        }
+        else if(window.innerWidth <= 600) {
+            if(size < 24) {
+                setSizeAdjust(11);
+            }
+            else {
+                setSizeAdjust(15);
+            }
         }
         else {
-            setSizeAdjust(3);
+            setSizeAdjust(5);
         }
     }
 
@@ -227,7 +235,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} md={4} lg={5}>
+                                <Grid item xs={12} sm={4} md={4} lg={4}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -235,7 +243,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} md={4} lg={5}>
+                                <Grid item xs={12} sm={4} md={4} lg={4}>
                                     <CurrentWord 
                                         level='advanced' 
                                         fColor={fontColor}
