@@ -7,10 +7,12 @@ import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
 import {Transition, animated} from 'react-spring/renderprops';
-import dashSound from '../../Assets/Sounds/dash.mp3'
-import dotSound from '../../Assets/Sounds/dot.mp3'
-import Tutorial from './WordGameTutorial'
-import EndGame from './EndGame'
+import dashSound from '../../Assets/Sounds/dash.mp3';
+import dotSound from '../../Assets/Sounds/dot.mp3';
+import Tutorial from './WordGameTutorial';
+import EndGame from './EndGame';
+import Picture from './Picure';
+import CurrentWord from './CurrentWord';
 
 
 /*
@@ -80,7 +82,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const fSize = (size-3) +'vh';
+    const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
+    const fSize = (size-sizeAdjust) +'vh';
+    const [picHeight, setPicHeight] = React.useState('');
+    const [picWidth, setPicWidth] = React.useState('');
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
@@ -145,6 +150,50 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         }),
     )
 
+    //Adjust size base on the window size(still needs a bit of work)
+    const updateSize = () => {
+        //For readjusting image
+        if(window.innerWidth < 700) {
+            setPicHeight('25vh');
+            setPicWidth('25vw');
+        }
+        else {
+            setPicHeight('40vh');
+            setPicWidth('25vw');
+        }
+
+        //For readjusting font
+        if(window.innerWidth < 1000 && window.innerWidth > 700) {
+            setSizeAdjust(7);
+        }
+        else if(window.innerWidth <= 700 && window.innerWidth > 600) {
+            setSizeAdjust(9);
+        }
+        else if(window.innerWidth <= 600) {
+            if(size < 24) {
+                setSizeAdjust(11);
+            }
+            else {
+                setSizeAdjust(15);
+            }
+        }
+        else {
+            setSizeAdjust(5);
+        }
+    }
+
+    //On mount, make sure that the correct size of image is display
+    React.useEffect(() => {
+        updateSize();
+    }, [])
+
+    //Resize image when the browser is being resize
+    React.useEffect(() => {
+        window.addEventListener('resize', updateSize);
+        //clean up event listener
+        return () => window.removeEventListener('resize', updateSize);
+    })
+
     return (
         <div>
             {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
@@ -159,34 +208,33 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                             </Grid>
                         </Container>
                     </div>
-                    <div style={{width: '45vw', height:'40vh', float: 'left'}}>
-                        <Transition
-                            native
-                            reset
-                            unique
-                            items={img}
-                            from={{opacity: 0}}
-                            enter={{opacity: 1}}
-                            leave={{opacity: 0}}
-                        >
-                            {img => img && (props => 
-                                <animated.image style={props}>
-                                    <img src={img} alt={currentWord.toLowerCase()} style={{float: 'right', width: '50%', height: '100%'}}/>
-                                </animated.image>
-                            )}
-                        </Transition>
-                    </div>
-                    <div style={{width: '55vw', height:'40vh', float: 'right'}}>
-                        {isCorrect
-                        ?
-                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
-                        :
-                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                            <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
-                        </h1>
-                        }
-                        <p id="sampleMorse" style={{lineHeight: 0, color: fontColor, fontSize: fSize}}>{currentMorse}</p>
+                    <div style={{width: '100vw', height:'40vh'}}>
+                        <Container>
+                            <Grid container justify='center' spacing={0}>
+                                <Grid item xs={12} sm={4}>
+                                    <Picture 
+                                        img={img} 
+                                        currentWord={currentWord}
+                                        picWidth={picWidth}
+                                        picHeight={picHeight}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <div>
+                                        {isCorrect
+                                        ?
+                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                                        :
+                                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
+                                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                                            <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
+                                        </h1>
+                                        }
+                                        <p id="sampleMorse" style={{lineHeight: 0, color: fontColor, fontSize: fSize, margin: 0}}>{currentMorse}</p>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </Container>
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
@@ -196,7 +244,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                 <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                             </Grid>
                             <Grid item xs={0}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>|</p>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0}}>|</p>
                             </Grid>
                             <Grid item xs={3} sm={2}>
                                 <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>

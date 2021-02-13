@@ -6,12 +6,12 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
-import dashSound from '../../Assets/Sounds/dash.mp3'
-import dotSound from '../../Assets/Sounds/dot.mp3'
-import EndGame from './EndGame'
-import Tutorial from './WordGameTutorial'
-import Picture from './Picure'
-import CurrentWord from './CurrentWord'
+import dashSound from '../../Assets/Sounds/dash.mp3';
+import dotSound from '../../Assets/Sounds/dot.mp3';
+import EndGame from './EndGame';
+import Tutorial from './WordGameTutorial';
+import Picture from './Picure';
+import CurrentWord from './CurrentWord';
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -235,7 +235,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} md={4} lg={4}>
+                                <Grid item xs={12} sm={4}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -243,7 +243,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} md={4} lg={4}>
+                                <Grid item xs={12} sm={4}>
                                     <CurrentWord 
                                         level='advanced' 
                                         fColor={fontColor}
