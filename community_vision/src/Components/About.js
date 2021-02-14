@@ -1,5 +1,6 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
 import '../App.css';
+import appInfo from "../../package.json"
 
 function initial(type) {
   if (localStorage.getItem(type) != null) {
@@ -52,6 +53,8 @@ const About = forwardRef((props, ref) => {
 
       <p3 style={{ userSelect: 'none', cursor: 'default' }}>Visit our webpage:</p3>
       <p4 style={{ userSelect: 'none', cursor: 'default' }}>https://cvision.org/</p4>
+
+      <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
     </div>
   );
 })
