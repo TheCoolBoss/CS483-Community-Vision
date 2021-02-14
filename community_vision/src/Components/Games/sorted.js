@@ -29,31 +29,32 @@ function updateTutorial() {
     var space = document.getElementById('spaceImage');
     var enter = document.getElementById('enterImage');
 
-    if (textIndex == 0) {
+    if (textIndex === 0) {
         document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
 
         textIndex++;
-    } else if (textIndex == 1) {
+    } else if (textIndex === 1) {
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
         document.getElementById('dotButton').style.backgroundColor = "yellow";
         space.style.display = "block";
         textIndex++;
-    } else if (textIndex == 2) {
+    } else if (textIndex === 2) {
         document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
         document.getElementById('dashButton').style.backgroundColor = "yellow";
         space.style.display = "none";
         enter.style.display = "block";
         textIndex++;
-    } else if (textIndex == 3) {
+    } else if (textIndex === 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorse').style.backgroundColor = "yellow";
+        document.getElementById('currentCode').style.color = document.getElementById('dotButton').style.backgroundColor;
         enter.style.display = "none";
         textIndex++;
-    } else if (textIndex == 4) {
-        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+    } else if (textIndex === 4) {
+        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('root').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the sorted Morse Alphabet!';
+        document.getElementById('currentCode').style.color = document.getElementById('root').style.backgroundColor;
         textIndex = 0;
     }
 }
@@ -160,7 +161,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
-                    <animated.p style={{
+                    <animated.p  id="currentCode" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
