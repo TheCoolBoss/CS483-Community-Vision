@@ -48,7 +48,7 @@ function updateTutorial() {
     } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorseCode').style.color = "yellow";
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.backgroundColor;
         enter.style.display = "none";
         textIndex++;
     } else if (textIndex == 4) {
