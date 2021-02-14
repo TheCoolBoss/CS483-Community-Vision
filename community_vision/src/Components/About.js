@@ -13,6 +13,8 @@ function initial(type) {
   }
 }
 
+//Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
+
 const About = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const [fontColor, setFontColor] = useState(() => initial('fontColor'));
@@ -53,7 +55,7 @@ const About = forwardRef((props, ref) => {
 
       <p3 style={{ userSelect: 'none', cursor: 'default' }}>Visit our webpage:</p3>
       <p4 style={{ userSelect: 'none', cursor: 'default' }}>https://cvision.org/</p4>
-
+        
       <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
     </div>
   );
