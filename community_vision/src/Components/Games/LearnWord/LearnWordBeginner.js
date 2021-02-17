@@ -211,7 +211,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={4} lg={6}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -219,7 +219,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={4} lg={6}>
                                     <div>
                                         {isCorrect
                                         ?
