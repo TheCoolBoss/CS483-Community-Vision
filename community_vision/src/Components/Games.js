@@ -51,10 +51,16 @@ const Games = forwardRef((props, ref) => {
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+            <GameSelection name='Learn Buttons' img={alphabetIMG} link='/buttons' difficulty='Explore' />
+          </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Numbers' img={LearnAlphabetIMG} link='/learnNumbers' difficulty='Explore' />
+            <GameSelection name='Learn The Sorted Alphabet' img={alphabetIMG} link='/sorted' difficulty='Explore' />
+          </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+            <GameSelection name='Learn Numbers' img={numbersIMG} link='/learnNumbers' difficulty='Explore' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Sandbox Letters' img={sandboxIMG} link='/sandboxLetters' difficulty='Explore' />
@@ -69,13 +75,10 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordMedium' difficulty='Intermediate' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Alphabet No Help' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Expert' />
+            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Expert' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet' img={alphabetIMG} link='/learnAlphabet' difficulty='Beginner' />
-          </Grid>
-          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Numbers' img={numbersIMG} link='/learnNumbers' difficulty='Beginner' />
+            <GameSelection name='Learn the Alphabet' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Expert' />
           </Grid>
         </Grid>
       </Container>

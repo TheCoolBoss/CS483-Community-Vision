@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
+//Help received from https://stackoverflow.com/questions/46656476/rendering-empty-space-in-react
+//for making empty elements take space
+
 //Gets game values fom local storage
 export function initial(type){
     if(localStorage.getItem(type) != null){
@@ -22,18 +25,45 @@ export function initial(type){
         return 'blue';
     } else if(type === 'fontColor'){
         return 'white';
+    } else if (type === 'buttonColor') {
+        return 'blue';
     }
+}
+
+//Reset input on input > 5
+export function resetInputLength(input, setInput)
+{
+    if (input.length > 5) {
+        setInput('');
+    }
+}
+
+//Clear input after timer expires
+export function resetInputTime(t, input, setInput, resetTimer)
+{
+    t = setTimeout(() =>
+        {
+            setInput('');
+        }
+        , resetTimer);
+    return t;
 }
 
 //Button code
 export function Buttons(props)
 {
     const input = props.input;
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
+    const [playDash] = useSound(
+        dashSound,
+        { volume: props.volume / 100 }
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: props.volume / 100 }
+    );
 
     return(
-        <div style={{gridArea: 'bottom'}}>
+        <div style={{gridArea: 'middle'}}>
             <Container>
                 <Grid container justify='center' spacing={0}>
                     <Grid item sm={5}>
@@ -42,14 +72,14 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'right'
-                        }}>{props.input}</p>
+                        }}>{props.output2}</p>
                     </Grid>
                     <Grid item xs={0}>
                         <p style={{
                             lineHeight: 0,
                             color: props.fontColor,
                             fontSize: '10vh'
-                        }}>|</p>
+                        }}> &nbsp; </p>
                     </Grid>
                     <Grid item sm={5}>
                         <p style={{
@@ -57,7 +87,7 @@ export function Buttons(props)
                             color: props.fontColor,
                             fontSize: '10vh',
                             textAlign: 'left'
-                        }}>{props.output}</p>
+                        }}>{props.input2}</p>
                     </Grid>
                 </Grid>
                 <Grid container justify='center' spacing={2}>
@@ -65,12 +95,12 @@ export function Buttons(props)
                         <Card>
                             <CardActionArea>
                                 <button id="dotButton" style={{
-                                    backgroundColor: props.backgroundColor,
+                                    backgroundColor: props.buttonColor,
                                     width: '100%',
                                     height: '20vh',
                                     fontSize: '20vh',
                                     color: props.fontColor
-                                }} onClick={function(){
+                                }} onMouseDown={function(){
                                     props.newInput(input + '•');
                                     playDot();
                                 }}>•
@@ -82,12 +112,12 @@ export function Buttons(props)
                         <Card>
                             <CardActionArea>
                                 <button id="dashButton" style={{
-                                    backgroundColor: props.backgroundColor,
+                                    backgroundColor: props.buttonColor,
                                     width: '100%',
                                     height: '20vh',
                                     fontSize: '20vh',
                                     color: props.fontColor
-                                }} onClick={function(){
+                                }} onMouseDown={function(){
                                     props.newInput(input + '-');
                                     playDash();
                                 }}>-
@@ -98,22 +128,4 @@ export function Buttons(props)
                 </Grid>
             </Container>
         </div>);
-}
-
-
-//Keyboard event handler
-//Currently doesn't work
-export function useEvents(evt) {
-    const [playDash] = useSound(dashSound);
-    const [playDot] = useSound(dotSound);
-    const [input, setInput] = useState('');
-
-    evt = evt || window.event;
-    if (evt.keyCode === 32) {
-        setInput(input + '•');
-        playDot();
-    } else if (evt.keyCode === 13) {
-        setInput(input + '-');
-        playDash();
-    }
 }

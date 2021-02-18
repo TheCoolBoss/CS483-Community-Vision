@@ -1,6 +1,7 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
 import '../App.css';
 import morse from '../Components/Assets/Images/morse.png'
+import appInfo from "../../package.json"
 
 function initial(type) {
   if (localStorage.getItem(type) != null) {
@@ -12,6 +13,8 @@ function initial(type) {
     return 'white';
   }
 }
+
+//Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
 
 const About = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
@@ -51,6 +54,7 @@ const About = forwardRef((props, ref) => {
 
       <h2 style={{ fontWeight: 900 }}>Why Morse?</h2>
 
+
       <p style={{paddingLeft: "10vw", paddingRight: "10vw"}}>Morse code represents numbers and letters using dots, dashes, and spaces and
         was invented in the 1800s to use on a telegraph machine. It was later used as a 
         communication method for some people who did not have speech in the early 1970s. 
@@ -68,6 +72,10 @@ const About = forwardRef((props, ref) => {
         literacy. This website offers games to learn Morse code. Remember, children learn 
         and explore the alphabet when they are very young, so it is never too early to 
         start playing with Morse!</p>
+      <p3 style={{ userSelect: 'none', cursor: 'default' }}>Visit our webpage:</p3>
+      <p4 style={{ userSelect: 'none', cursor: 'default' }}>https://cvision.org/</p4>
+        
+      <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
     </div>
   );
 })

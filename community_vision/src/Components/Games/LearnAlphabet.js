@@ -1,8 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { charToMorse, morseToChar } from "./charMorseConv";
@@ -11,7 +9,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import {initial} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -50,17 +48,23 @@ function updateTutorial() {
     } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorse').style.backgroundColor = "yellow";
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.backgroundColor;
         enter.style.display = "none";
         textIndex++;
     } else if (textIndex == 4) {
-        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+        // change this in your tutorials to change the color of the divs
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.color;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
+        textIndex++;
+        // change color back to regular
+    } else if(textIndex == 5) {
+        // changes smaple morse back to normal color
+        document.getElementById('sampleMorse').style.color = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
     }
 }
 
-const LearnAlphabet = forwardRef((props, ref) => {
+const SortedAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -87,17 +91,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    resetInputLength(input, setInput);
     clearTimeout(t);
-    t = setTimeout(function () {
-        setInput('');
-    }, resetTimer);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input.length > 6) {
-        setInput('');
-    }
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
+        setInput("");
     }
 
     // tracks keycodes for space button  and enter button input 
@@ -106,9 +107,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
         if (evt.keyCode === 32) {
             setInput(input + '•');
             playDot();
+            document.getElementById('dotButton').focus();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
             playDash();
+            document.getElementById('dashButton').focus();
         }
     };
 
@@ -143,7 +146,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
             width: '100vw',
             display: 'grid',
             gridTemplate: '8fr 8fr / 1fr',
-            gridTemplateAreas: '"top" "bottom'
+            gridTemplateAreas: '"top" "middle" "bottom'
         }}>
 
             <div style={{ gridArea: 'top' }}>
@@ -165,7 +168,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
                     }}>{currentLetter}</animated.h1>
-                    <animated.p style={{
+                    <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: sfSize,
@@ -175,43 +178,17 @@ const LearnAlphabet = forwardRef((props, ref) => {
                     }}>{currentMorse}</animated.p>
                 </div>
             </div>
-            <div style={{ gridArea: 'bottom' }}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'right' }}>{output}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0 }}>|</p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{ lineHeight: 0, color: fontColor, fontSize: '10vh', textAlign: 'left' }}>{input}</p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dotButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '•');
-                                        playDot();
-                                    }}>•</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{ backgroundColor: buttonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor }} onClick={function () {
-                                        setInput(input + '-');
-                                        playDash();
-                                    }}>-</button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
+                volume={volume}
+                input={input}
+                input2={input}
+                newInput={setInput}
+                output={output}
+                output2={output}
+            />
         </div>
     );
 })
@@ -232,7 +209,7 @@ const Radio = () => {
             <animated.button
                 style={menubg}
                 className="radiowrapper"
-                onClick={() => setToggle(!isToggled)}
+                onMouseDown={() => setToggle(!isToggled)}
             >
                 <div className="radio">
                     <p>Tutorial</p>
@@ -252,19 +229,21 @@ const Radio = () => {
     );
 };
 
+
+// use state object and set it to 0 initially 
 const RadioContent = () => {
     return (
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
+            <button id='4' onMouseDown={function () {
+                updateTutorial();
+            }} style={{ fontSize: '5vh' }}>Next</button>
             <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
             <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
             <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
-            <button onClick={function () {
-                updateTutorial();
-            }} style={{ fontSize: '5vh' }}>Next</button>
         </div>
     );
 };
 
-export default LearnAlphabet;
+export default SortedAlphabet;
