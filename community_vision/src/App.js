@@ -14,7 +14,6 @@ import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
 import SortedAlphabet from "./Components/Games/sorted";
 import LearnNumbers from "./Components/Games/learnNumbers";
-import EndGame from "./Components/Games/LearnWord/EndGame";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
 
@@ -32,9 +31,6 @@ function App() {
       <div className="App">
         <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
-          <Route path="/EndGame">
-            <EndGame/>
-          </Route>
           <Route path="/" exact>
             <Home ref={currentRef} />
           </Route>
