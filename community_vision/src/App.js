@@ -17,6 +17,7 @@ import SortedAlphabet from "./Components/Games/sorted";
 import LearnNumbers from "./Components/Games/learnNumbers";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
+import AlphabetRace from './Components/Games/AlphabetRace';
 
 function App() {
   const currentRef = useRef();
@@ -73,6 +74,9 @@ function App() {
           </Route>
           <Route path="/sorted">
             <SortedAlphabet ref={currentRef} />
+          </Route>
+          <Route path="/alphabetRace">
+            <AlphabetRace ref={currentRef} />
           </Route>
           <Route path="/GettingStarted">
             <GettingStarted />

@@ -9,7 +9,7 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
+import { initial, Buttons, resetInputTime, resetInputLength } from "./Common/Functions";
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -57,7 +57,7 @@ function updateTutorial() {
         document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next letter. Have Fun Learning the Morse Alphabet!';
         textIndex++;
         // change color back to regular
-    } else if(textIndex == 5) {
+    } else if (textIndex == 5) {
         // changes smaple morse back to normal color
         document.getElementById('sampleMorse').style.color = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
@@ -98,7 +98,9 @@ const SortedAlphabet = forwardRef((props, ref) => {
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
-        setInput("");
+        setTimeout(function () {
+            setInput("");
+        }, resetTimer);
     }
 
     // tracks keycodes for space button  and enter button input 

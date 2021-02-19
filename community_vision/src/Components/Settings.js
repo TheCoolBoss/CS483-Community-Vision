@@ -103,7 +103,7 @@ function Settings(props) {
                 <Grid style={{ marginBottom: '1vh' }} container>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME VOLUME</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME VOLUME</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
                                     <VolumeDown />
@@ -120,7 +120,7 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME SPEED</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME SPEED</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
                                     <VolumeDown />
@@ -138,7 +138,7 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE TEXT SIZE</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE TEXT SIZE</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-2vh' }}>
                                 <Grid item xs={1} />
                                 <Grid item xs={10}>
@@ -157,7 +157,7 @@ function Settings(props) {
                     </Grid>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>PICK A THEME!</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>PICK A THEME!</h1>
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container direction='column' alignItems='center' xs={3}>
                                     <Grid item>
@@ -294,10 +294,16 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', margin: '-0.5vh' }}>OR</h1>
+                            <h1 style={{ fontSize: '1.5vh', margin: '-0.5vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>OR CHOOSE</h1>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE BACKGROUND COLOR</h1>
+                            <h1 style={{ fontSize: '3vh', margin: '-0.5vh', cursor: 'default', userSelect: 'none' }}>OR CHOOSE</h1>
+                        </Grid>
+                        <Grid item>
+                            <h1 style={{ fontSize: '3vh', margin: '-0.5vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>OR CHOOSE</h1>
+                        </Grid>
+                        <Grid item>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>BACKGROUND COLOR</h1>
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
@@ -343,7 +349,7 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE BUTTON COLOR</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>BUTTON COLOR</h1>
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
@@ -389,7 +395,7 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <h1 style={{ fontSize: '3vw', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE COLOR FOR WORDS</h1>
+                            <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>Text Color</h1>
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
