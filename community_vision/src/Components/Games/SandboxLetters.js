@@ -14,27 +14,26 @@ import Grid from "@material-ui/core/Grid";
 var textIndex = 0;
 
 function updateTutorial() {
-    var text = document.getElementById('tutorialText').innerHTML;
     var space = document.getElementById('spaceImage');
     var enter = document.getElementById('enterImage');
 
-    if (textIndex == 0) {
+    if (textIndex === 0) {
         document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page.';
 
         textIndex++;
-    } else if (textIndex == 1) {
+    } else if (textIndex === 1) {
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
         document.getElementById('dotButton').style.backgroundColor = "yellow";
         space.style.display = "block";
         textIndex++;
-    } else if (textIndex == 2) {
+    } else if (textIndex === 2) {
         document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
         document.getElementById('dashButton').style.backgroundColor = "yellow";
         space.style.display = "none";
         enter.style.display = "block";
         textIndex++;
-    } else if (textIndex == 3) {
+    } else if (textIndex === 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter any Morse code and see what letter or number it is!';
         //document.getElementById('sampleMorse').style.backgroundColor = "yellow";

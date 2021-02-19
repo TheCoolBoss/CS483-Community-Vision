@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/static/css/main.0ad5f728.chunk.css",
-    "main.js": "/static/js/main.4b8cf3cf.chunk.js",
-    "main.js.map": "/static/js/main.4b8cf3cf.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.bc21383b.js",
-    "runtime-main.js.map": "/static/js/runtime-main.bc21383b.js.map",
-    "static/js/2.6a804bc5.chunk.js": "/static/js/2.6a804bc5.chunk.js",
-    "static/js/2.6a804bc5.chunk.js.map": "/static/js/2.6a804bc5.chunk.js.map",
-    "static/js/3.a4c7b6e8.chunk.js": "/static/js/3.a4c7b6e8.chunk.js",
-    "static/js/3.a4c7b6e8.chunk.js.map": "/static/js/3.a4c7b6e8.chunk.js.map",
+    "main.js": "/static/js/main.39cfd0f9.chunk.js",
+    "main.js.map": "/static/js/main.39cfd0f9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f04de235.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f04de235.js.map",
+    "static/js/2.6b242781.chunk.js": "/static/js/2.6b242781.chunk.js",
+    "static/js/2.6b242781.chunk.js.map": "/static/js/2.6b242781.chunk.js.map",
+    "static/js/3.72f52cc6.chunk.js": "/static/js/3.72f52cc6.chunk.js",
+    "static/js/3.72f52cc6.chunk.js.map": "/static/js/3.72f52cc6.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.4322df7f181cffbe5c86abdecb5a7287.js": "/precache-manifest.4322df7f181cffbe5c86abdecb5a7287.js",
+    "precache-manifest.7f7c5e0109eab22985740fb4559ea857.js": "/precache-manifest.7f7c5e0109eab22985740fb4559ea857.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.0ad5f728.chunk.css.map": "/static/css/main.0ad5f728.chunk.css.map",
-    "static/js/2.6a804bc5.chunk.js.LICENSE.txt": "/static/js/2.6a804bc5.chunk.js.LICENSE.txt",
-    "static/js/3.a4c7b6e8.chunk.js.LICENSE.txt": "/static/js/3.a4c7b6e8.chunk.js.LICENSE.txt",
+    "static/js/2.6b242781.chunk.js.LICENSE.txt": "/static/js/2.6b242781.chunk.js.LICENSE.txt",
+    "static/js/3.72f52cc6.chunk.js.LICENSE.txt": "/static/js/3.72f52cc6.chunk.js.LICENSE.txt",
     "static/media/LearnAlphabet.jpg": "/static/media/LearnAlphabet.d6505bc9.jpg",
     "static/media/apple.jpg": "/static/media/apple.3f6b89c9.jpg",
     "static/media/apple.flac": "/static/media/apple.4d074692.flac",
@@ -82,9 +82,9 @@
     "static/media/zebra.flac": "/static/media/zebra.96d2af33.flac"
   },
   "entrypoints": [
-    "static/js/runtime-main.bc21383b.js",
-    "static/js/2.6a804bc5.chunk.js",
+    "static/js/runtime-main.f04de235.js",
+    "static/js/2.6b242781.chunk.js",
     "static/css/main.0ad5f728.chunk.css",
-    "static/js/main.4b8cf3cf.chunk.js"
+    "static/js/main.39cfd0f9.chunk.js"
   ]
 }

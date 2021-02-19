@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import Nav from './Components/Nav';
 import Games from './Components/Games';
 import About from './Components/About';
+import GettingStarted from './Components/GettingStarted';
 import SettingsPage from './Components/SettingsPage'
 import LearnAlphabet from './Components/Games/LearnAlphabet';
 import LearnWordAdvanced from './Components/Games/LearnWord/LearnWordAdvanced';
@@ -14,7 +15,6 @@ import SandboxLetters from "./Components/Games/SandboxLetters";
 import SandboxWords from "./Components/Games/SandboxWords";
 import SortedAlphabet from "./Components/Games/sorted";
 import LearnNumbers from "./Components/Games/learnNumbers";
-import EndGame from "./Components/Games/LearnWord/EndGame";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
 import AlphabetRace from './Components/Games/AlphabetRace';
@@ -33,9 +33,6 @@ function App() {
       <div className="App">
         <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
-          <Route path="/EndGame">
-            <EndGame/>
-          </Route>
           <Route path="/" exact>
             <Home ref={currentRef} />
           </Route>
@@ -80,6 +77,9 @@ function App() {
           </Route>
           <Route path="/alphabetRace">
             <AlphabetRace ref={currentRef} />
+          </Route>
+          <Route path="/GettingStarted">
+            <GettingStarted />
           </Route>
         </Switch>
       </div>

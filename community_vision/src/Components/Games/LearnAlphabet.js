@@ -48,7 +48,7 @@ function updateTutorial() {
     } else if (textIndex == 3) {
         document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
         document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorseCode').style.color = "yellow";
+        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.backgroundColor;
         enter.style.display = "none";
         textIndex++;
     } else if (textIndex == 4) {
@@ -59,7 +59,7 @@ function updateTutorial() {
         // change color back to regular
     } else if (textIndex == 5) {
         // changes smaple morse back to normal color
-        document.getElementById('sampleMorse').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
+        document.getElementById('sampleMorse').style.color = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
     }
 }
@@ -238,9 +238,6 @@ const RadioContent = () => {
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
             <button id='4' onMouseDown={function () {
                 updateTutorial();
             }} style={{ fontSize: '5vh' }}>Next</button>
