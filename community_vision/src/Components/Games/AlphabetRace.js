@@ -5,7 +5,6 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import { initial, Buttons, resetInputTime, resetInputLength } from "./Common/Functions";
-import { useSpring, useTransition, config, animated } from "react-spring";
 import { Transition } from 'react-spring/renderprops'
 
 var t;
@@ -35,9 +34,6 @@ const AlphabetRace = forwardRef((props, ref) => {
     var [item1, setItem1] = useState('');
     var [item2, setItem2] = useState('');
     var [item3, setItem3] = useState('');
-    var [ILS1, setILS1] = useState(0);
-    var [ILS2, setILS2] = useState(0);
-    var [ILS3, setILS3] = useState(0);
     var item1Morse = charToMorse(item1);
     var item2Morse = charToMorse(item2);
     var item3Morse = charToMorse(item3);
@@ -159,8 +155,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                         delay={resetTimer}
                         from={{ transform: 'translate3d(100vw,10vh,0)' }}
                         enter={{ transform: 'translate3d(0vw,10vh,0)' }}
-                        leave={{ opacity: 0 }}
-                        onStart={() => setILS2(score)}>
+                        leave={{ opacity: 0 }}>
                         {item => styles => (
                             <p style={{ ...styles, position: 'absolute' }}>
                                 {item}

@@ -78,8 +78,8 @@ function App() {
           <Route path="/alphabetRace">
             <AlphabetRace ref={currentRef} />
           </Route>
-          <Route path="/GettingStarted">
-            <GettingStarted />
+          <Route path="/gettingStarted">
+            <GettingStarted ref={currentRef} />
           </Route>
         </Switch>
       </div>
