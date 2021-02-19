@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import Nav from './Components/Nav';
 import Games from './Components/Games';
 import About from './Components/About';
+import GettingStarted from './Components/GettingStarted';
 import SettingsPage from './Components/SettingsPage'
 import LearnAlphabet from './Components/Games/LearnAlphabet';
 import LearnWordAdvanced from './Components/Games/LearnWord/LearnWordAdvanced';
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route path="/sorted">
             <SortedAlphabet ref={currentRef} />
+          </Route>
+          <Route path="/GettingStarted">
+            <GettingStarted />
           </Route>
         </Switch>
       </div>
