@@ -34,6 +34,9 @@ const Nav = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const [fontColor, setFontColor] = useState(() => initial('fontColor'));
   var navbarColor = '#f8ac2e'
+  if (backgroundColor === 'gray' && fontColor === 'black'){
+    navbarColor = 'black'
+  }
 
   useImperativeHandle(
     ref,
