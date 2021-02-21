@@ -23,7 +23,7 @@ function initial(type) {
     } else if (type === 'backgroundColor') {
         return 'blue';
     } else if (type === 'fontColor') {
-        return 'white';
+        return 'black';
     } else if (type === 'buttonColor') {
         return 'blue'
     }
