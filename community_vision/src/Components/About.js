@@ -37,9 +37,9 @@ const About = forwardRef((props, ref) => {
       color: fontColor,
       backgroundColor: 'white'
     }}>
-      <h1 style={{ fontWeight: 900 }}>Who We Are</h1>
+      <h1 style={{ fontWeight: 900, textSize: "60px" }}>Who We Are</h1>
 
-      <p style={{paddingLeft: "10vw", paddingRight: "10vw"}} >The Community Vision Assitive Technology (AT) Lab is an education and 
+      <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}} >The Community Vision Assitive Technology (AT) Lab is an education and 
       resource center in Portland, Oregon that promotes accessibility & inclusive 
       in our community. We collaborate with people with disabilities, families, 
       caregivers, professionals, and community partners. We want more people to 
@@ -47,15 +47,15 @@ const About = forwardRef((props, ref) => {
       Trainings & Workshops, Social Groups, a free Loan Closet, Equipment, Scholarships
       and more. </p>
 
-      <p style={{ paddingLeft: "10vw", paddingRight: "10vw"}}>To learn more, visit us at: </p>
-      <p style={{ paddingLeft: "10vw", paddingRight: "10vw"}}><a href="https://cv-atlab.org/" target="_blank">www.cv-atlab.org</a></p>
-      <p style={{ paddingLeft: "10vw", paddingRight: "10vw"}}>or</p>
-      <p style={{ paddingLeft: "10vw", paddingRight: "10vw"}}><a href="http://www.facebook.com/CVATLab" target="_blank">www.facebook.com/CVATLab</a></p>
+      <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px"}}>To learn more, visit us at: </p>
+      <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px"}}><a href="https://cv-atlab.org/" target="_blank">www.cv-atlab.org</a></p>
+      <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px"}}>or</p>
+      <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px"}}><a href="http://www.facebook.com/CVATLab" target="_blank">www.facebook.com/CVATLab</a></p>
 
-      <h2 style={{ fontWeight: 900 }}>Why Morse?</h2>
+      <h2 style={{ fontWeight: 900, fontSize: "30px" }}>Why Morse?</h2>
 
 
-      <p style={{paddingLeft: "10vw", paddingRight: "10vw"}}>Morse code represents numbers and letters using dots, dashes, and spaces and
+      <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}}>Morse code represents numbers and letters using dots, dashes, and spaces and
         was invented in the 1800s to use on a telegraph machine. It was later used as a 
         communication method for some people who did not have speech in the early 1970s. 
         The technology begane to improve in the 1990s and is now being used on mobile devices.
@@ -64,7 +64,7 @@ const About = forwardRef((props, ref) => {
 
       <img src={morse} alt="Morse" id="morseimage" width="500" height="333"></img>
 
-      <p style={{paddingLeft: "10vw", paddingRight: "10vw"}}>Children are now being included in the Morse conversation. Many children with 
+      <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}}>Children are now being included in the Morse conversation. Many children with 
         physical disabilities, especially those who use adaptive switches, have difficulty
         accessing the alphabet and therefore, are not often taught the skills they need to 
         read and write. Morse code offers a quicker way to access the alphabet with the use
@@ -72,8 +72,8 @@ const About = forwardRef((props, ref) => {
         literacy. This website offers games to learn Morse code. Remember, children learn 
         and explore the alphabet when they are very young, so it is never too early to 
         start playing with Morse!</p>
-      <p3 style={{ userSelect: 'none', cursor: 'default' }}>Visit our webpage:</p3>
-      <p4 style={{ userSelect: 'none', cursor: 'default' }}>https://cvision.org/</p4>
+      <p style={{ userSelect: 'none', cursor: 'default', fontSize: "20px" }}>Visit our webpage:</p>
+      <p style={{ userSelect: 'none', cursor: 'default', fontSize: "20px" }}>https://cvision.org/</p>
         
       <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
     </div>

@@ -3,8 +3,10 @@ import '../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Slider from '@material-ui/core/Slider';
-import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
+import volumeDown from '../Components/Assets/Images/noSound.png'
+import volumeUp from '../Components/Assets/Images/sound.png'
+import hare from '../Components/Assets/Images/hare.png'
+import tortoise from '../Components/Assets/Images/tortoise.png'
 import { SketchPicker } from 'react-color';
 import reactCSS from 'reactcss'
 
@@ -106,7 +108,7 @@ function Settings(props) {
                             <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME VOLUME</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
-                                    <VolumeDown />
+                                    <img src={volumeDown} alt="volumeDown" id="volumeDownimg" width="15" height="20"></img>
                                 </Grid>
                                 <Grid item xs={10}>
                                     <Slider value={volume} onChange={changeVolume}
@@ -115,7 +117,7 @@ function Settings(props) {
                                         scale={x => x + '%'} />
                                 </Grid>
                                 <Grid item xs={1}>
-                                    <VolumeUp />
+                                    <img src={volumeUp} alt="volumeUp" id="volumeUpimg" width="20" height="20"></img>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -123,7 +125,7 @@ function Settings(props) {
                             <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>CHOOSE GAME SPEED</h1>
                             <Grid container spacing={0} alignItems='center' style={{ marginTop: '-1vh' }}>
                                 <Grid item xs={1}>
-                                    <VolumeDown />
+                                    <img src={tortoise} alt="tortoise" id="tortoiseimg" width="20" height="20"></img>
                                 </Grid>
                                 <Grid item xs={10}>
                                     <Slider value={speed} onChange={changeSpeed}
@@ -133,7 +135,7 @@ function Settings(props) {
                                     />
                                 </Grid>
                                 <Grid item xs={1}>
-                                    <VolumeUp />
+                                    <img src={hare} alt="hare" id="hareimg" width="20" height="20"></img>
                                 </Grid>
                             </Grid>
                         </Grid>
