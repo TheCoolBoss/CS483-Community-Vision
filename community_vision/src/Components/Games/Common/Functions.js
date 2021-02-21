@@ -22,7 +22,7 @@ export function initial(type){
     } else if(type === 'speed'){
         return 1.5;
     } else if(type === 'backgroundColor'){
-        return 'blue';
+        return 'white';
     } else if(type === 'fontColor'){
         return 'black';
     } else if (type === 'buttonColor') {

@@ -10,19 +10,8 @@ import LearnABCIMG from "./Games/apple.jpg"
 import alphabetIMG from "./Games/letters.jpg"
 import sandboxIMG from "./Games/sandbox1.jpg"
 import numbersIMG from "./Games/numbers.jpg"
-
+import { initial } from "./Games/Common/Functions"
 import { Container } from '@material-ui/core';
-
-function initial(type) {
-  if (localStorage.getItem(type) != null) {
-    return localStorage.getItem(type);
-  }
-  if (type === 'backgroundColor') {
-    return 'blue';
-  } else if (type === 'fontColor') {
-    return 'white';
-  }
-}
 
 const Games = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
