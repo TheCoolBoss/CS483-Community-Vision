@@ -11,7 +11,7 @@ import dashSound from '../../Assets/Sounds/dash.mp3';
 import dotSound from '../../Assets/Sounds/dot.mp3';
 import Tutorial from './WordGameTutorial';
 import EndGame from './EndGame';
-import Picture from './Picure';
+import Picture from './Picture';
 import CurrentWord from './CurrentWord';
 
 
