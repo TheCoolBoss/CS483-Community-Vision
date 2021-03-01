@@ -59,7 +59,7 @@ function updateTutorial() {
     }
 }
 
-const LearnAlphabet = forwardRef((props, ref) => {
+const SortedAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -237,4 +237,4 @@ const RadioContent = () => {
     );
 };
 
-export default LearnAlphabet;
+export default SortedAlphabet;
