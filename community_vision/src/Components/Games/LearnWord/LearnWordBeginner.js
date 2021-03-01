@@ -241,13 +241,13 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     <Container>
                         <Grid container justify='center' spacing={0}>
                             <Grid item xs={3} sm={2}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
                             </Grid>
                             <Grid item xs={0}>
                                 <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0}}>|</p>
                             </Grid>
                             <Grid item xs={3} sm={2}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
+                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
                             </Grid>
                         </Grid>
                         <Grid container justify='center' spacing={2}>
