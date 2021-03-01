@@ -89,17 +89,29 @@ const LearnNumbers = forwardRef((props, ref) => {
         dotSound,
         {volume: volume / 100}
     );
+    //number sound
+    var soundSrc = require('../Assets/Sounds/Numbers/' + currentNumber + '.mp3');
+    const [playCurrentNumberSound] = useSound(
+        soundSrc,
+        { volume: volume / 100 }
+    );
 
     resetInputLength(input, setInput);
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input === currentMorse) {
-        setAnim(!anim);
-        setIndex(prevState => prevState + 1);
-        setInput("");
-        setRandomNumber(Math.floor(Math.random() * 10));
-    }
+    React.useEffect(() => {
+        if (input === currentMorse) {
+            playCurrentNumberSound();
+            setTimeout(() => {
+                setAnim(!anim);
+                setIndex(prevState => prevState + 1);
+                setInput("");
+                setRandomNumber(Math.floor(Math.random() * 10));
+            }, 1800)
+        }
+    }, [input])
+    
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function (evt) {

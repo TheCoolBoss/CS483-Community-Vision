@@ -59,7 +59,7 @@ function updateTutorial() {
     }
 }
 
-const LearnAlphabet = forwardRef((props, ref) => {
+const SortedAlphabet = forwardRef((props, ref) => {
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -85,16 +85,29 @@ const LearnAlphabet = forwardRef((props, ref) => {
         dotSound,
         { volume: volume / 100 }
     );
+    //sound of letter
+    var soundSrc = require('../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    const [playCurrentLetterSound] = useSound(
+        soundSrc,
+        { volume: volume / 100 }
+    );
 
     resetInputLength(input, setInput);
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
-    if (input === currentMorse) {
-        setAnim(!anim);
-        setIndex(prevState => prevState + 1);
-        setInput("");
-    }
+    React.useEffect(() => {
+        if (input === currentMorse) {
+            playCurrentLetterSound();
+            setTimeout(() => {
+                setAnim(!anim);
+                setIndex(prevState => prevState + 1);
+                setTimeout(function () {
+                    setInput("");
+                }, resetTimer);
+            }, 2000)
+        }
+    }, [input])
 
     // tracks keycodes for space button  and enter button input
     document.onkeydown = function (evt) {
@@ -237,4 +250,4 @@ const RadioContent = () => {
     );
 };
 
-export default LearnAlphabet;
+export default SortedAlphabet;
