@@ -9,11 +9,18 @@ import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Funct
 import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
 
-var t;
-var list = "0123456789"
+/*
+* Game that teaches the numbers in Morse Code
+*
+* 
+* Created : 10/20/2020
+* Modified: 10/30/2020
+*/
+
+
+var t; //timeout
+var list = "0123456789" //list that you go through
 var textIndex = 0;
-
-
 
 
 // function showImage() {
@@ -57,13 +64,15 @@ var textIndex = 0;
 //         textIndex = 0;
 //     }
 // }
+
+//
 const LearnNumbers = forwardRef((props, ref) => {
     var [randomNumber, setRandomNumber] = useState(0);
-    var [index, setIndex] = useState(0);
+    var [index, setIndex] = useState(0); //hooks: everytime you change a hook the page reloads
     var currentNumber;
     if (index < list.length) {
         currentNumber = list[index];
-    } else {
+    } else { //once they finish the all the number, it randomly selects another number
         currentNumber = list[randomNumber];
     }
     var currentMorse = charToMorse(currentNumber);
@@ -71,6 +80,7 @@ const LearnNumbers = forwardRef((props, ref) => {
     var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
+    //setting stuff
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
@@ -81,6 +91,7 @@ const LearnNumbers = forwardRef((props, ref) => {
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
+    //sounds of buttons
     const [playDash] = useSound(
         dashSound,
         {volume: volume / 100}
@@ -90,18 +101,24 @@ const LearnNumbers = forwardRef((props, ref) => {
         {volume: volume / 100}
     );
 
-    resetInputLength(input, setInput);
+    
+    //resets the length of the input if its too long
+    resetInputLength(input, setInput); 
+    //clears the timeout function
     clearTimeout(t);
+    //resets the input from the user after time
     t = resetInputTime(t, input, setInput, resetTimer);
 
+    // the right morse code is inputted, move to next number
     if (input === currentMorse) {
         setAnim(!anim);
         setIndex(prevState => prevState + 1);
         setInput("");
+        //gets a random number for the next number after theyre finished
         setRandomNumber(Math.floor(Math.random() * 10));
     }
 
-    // tracks keycodes for space button  and enter button input 
+    // tracks keycodes for space button and enter button input 
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
@@ -113,15 +130,20 @@ const LearnNumbers = forwardRef((props, ref) => {
         }
     };
 
+    //takes 2 sec for the animation to delete 
     var d = 2000;
+    //if not, then it will set the animation to 0 and doesnt do anything, doesnt animate 
+    //when its not suppose to be animating
     if (!anim) {
         d = 0;
         t = setTimeout(function () {
             setAnim(!anim)
         }, 100);
     }
+    //the animation itself
     var {x} = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: {duration: d}})
 
+    //sets all the settings the user wants
     useImperativeHandle(
         ref,
         () => ({
@@ -135,6 +157,7 @@ const LearnNumbers = forwardRef((props, ref) => {
             }
         }),
     )
+    //styling of the page
     return (
         <div style={{
             backgroundColor: backgroundColor,

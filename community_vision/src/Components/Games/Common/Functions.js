@@ -26,7 +26,7 @@ export function initial(type){
     } else if(type === 'fontColor'){
         return 'white';
     } else if (type === 'buttonColor') {
-        return 'blue';
+        return 'gray';
     }
 }
 
