@@ -54,7 +54,7 @@ const GettingStarted = forwardRef((props, ref) => {
         <p style={{ textAlign:"left" , paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px"}}>
           You will need a switch interface that can produce keyboard command to use
           switches on this website. If you have a switch interface and 2 switches, set 
-          you switch interface keyboard commands to 'space' and 'enter'.
+          your switch interface keyboard commands to 'space' and 'enter'.
         </p>
 
         <p style={{ paddingLeft: "10vw", paddingRight: "10vw", textAlign: "Left", fontSize: "20px"}}>If you are using left and right sides of the body for switch placement, place
@@ -81,7 +81,7 @@ const GettingStarted = forwardRef((props, ref) => {
           <li>Color of background, buttons, and text</li>
           <li>Size of Text</li>
           <li>Sound Level</li>
-          <li>How quickley switches need to be hit to make a letter</li>
+          <li>How quickly switches need to be hit to make a letter</li>
         </ol>
 
         <h2 style={{ fontweight: 900, fontSize: "40px", textAlign: "left", paddingLeft: "10vw"}}>Description of the Games</h2>
