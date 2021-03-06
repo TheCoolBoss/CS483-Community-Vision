@@ -12,7 +12,7 @@ import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Fun
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops'
 
-var alphabet = "ABCDE";
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var t;
 var interval;
 
