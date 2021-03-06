@@ -27,6 +27,8 @@ export function initial(type){
         return 'black';
     } else if (type === 'buttonColor') {
         return 'blue';
+    } else if (type === 'alphabetRaceHS'){
+        return 0;
     }
 }
 

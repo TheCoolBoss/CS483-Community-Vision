@@ -10,11 +10,7 @@ import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
 
 var t;
-var list = "0123456789"
-var textIndex = 0;
-
-
-
+var list = "0123456789";
 
 // function showImage() {
 //     var x = document.getElementById("tutorialImage");

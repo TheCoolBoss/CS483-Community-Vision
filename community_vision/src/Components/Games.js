@@ -37,7 +37,7 @@ const Games = forwardRef((props, ref) => {
       gridTemplateAreas: '"top" "bottom'
     }}>
       <h1 style={{ fontSize: '7vh', color: fontColor, textDecoration: 'underline', position: 'relative', bottom: '-2vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
-      <Container maxWidth='xl' style={{ backgroundColor: backgroundColor }}>
+      <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Buttons' img={alphabetIMG} link='/buttons' difficulty='Explore' />
@@ -69,9 +69,9 @@ const Games = forwardRef((props, ref) => {
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn the Alphabet' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Expert' />
           </Grid>
-          {/* <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='AlphabetRace' img={alphabetIMG} link='/alphabetRace' difficulty='Expert' />
-          </Grid> */}
+          </Grid>
         </Grid>
       </Container>
     </div>

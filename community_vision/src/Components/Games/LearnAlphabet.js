@@ -101,6 +101,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
+<<<<<<< Updated upstream
     React.useEffect(() => {
         if (input === currentMorse) {
             playCurrentLetterSound();
@@ -113,6 +114,15 @@ const LearnAlphabet = forwardRef((props, ref) => {
             }, 2000)
         }
     }, [input])
+=======
+    if (input === currentMorse) {
+        setAnim(!anim);
+        setIndex(index => index + 1);
+        setTimeout(function () {
+            setInput("");
+        }, resetTimer);
+    }
+>>>>>>> Stashed changes
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function (evt) {
