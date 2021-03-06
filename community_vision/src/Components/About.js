@@ -5,6 +5,19 @@ import appInfo from "../../package.json"
 import { initial } from "./Games/Common/Functions"
 
 
+//this function gets the local data 
+function initial(type) {
+  if (localStorage.getItem(type) != null) {
+    return localStorage.getItem(type);
+  }
+  if (type === 'backgroundColor') {
+    return 'white';
+  } else if (type === 'fontColor') {
+    return 'black';
+  }
+}
+
+
 //Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
 
 const About = forwardRef((props, ref) => {
@@ -21,11 +34,12 @@ const About = forwardRef((props, ref) => {
   )
   return (
     <div style={{
+      // the inital styles of the page
       position: 'relative',
       marginTop: '-3vh',
       height: '90vh',
       width: '100vw',
-      color: fontColor,
+      color: 'black',
       backgroundColor: 'white'
     }}>
       <h1 style={{ fontWeight: 900, textSize: "60px" }}>Who We Are</h1>
@@ -49,7 +63,7 @@ const About = forwardRef((props, ref) => {
       <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}}>Morse code represents numbers and letters using dots, dashes, and spaces and
         was invented in the 1800s to use on a telegraph machine. It was later used as a 
         communication method for some people who did not have speech in the early 1970s. 
-        The technology begane to improve in the 1990s and is now being used on mobile devices.
+        The technology began to improve in the 1990s and is now being used on mobile devices.
         It has even caught the eye of Google in their <u>Hello Morse</u> project.
       </p>
 
@@ -63,8 +77,9 @@ const About = forwardRef((props, ref) => {
         literacy. This website offers games to learn Morse code. Remember, children learn 
         and explore the alphabet when they are very young, so it is never too early to 
         start playing with Morse!</p>
-      <p style={{ userSelect: 'none', cursor: 'default', fontSize: "20px" }}>Visit our webpage:</p>
-      <p style={{ userSelect: 'none', cursor: 'default', fontSize: "20px" }}>https://cvision.org/</p>
+
+      <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAligh: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
+
         
       <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
     </div>

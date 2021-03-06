@@ -77,16 +77,6 @@ const Nav = forwardRef((props, ref) => {
               <Grid item xs={2}>
                 <Card style={{ borderRadius: '20px' }}>
                   <CardActionArea>
-                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/games">
-                      Games
-                    </Link>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item xs={1} />
-              <Grid item xs={2}>
-                <Card style={{ borderRadius: '20px' }}>
-                  <CardActionArea>
                     <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/about">
                       About
                     </Link>
@@ -99,6 +89,16 @@ const Nav = forwardRef((props, ref) => {
                   <CardActionArea>
                     <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/GettingStarted">
                       Getting Started
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                <Card style={{ borderRadius: '20px' }}>
+                  <CardActionArea>
+                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/Games">
+                      Games
                     </Link>
                   </CardActionArea>
                 </Card>
