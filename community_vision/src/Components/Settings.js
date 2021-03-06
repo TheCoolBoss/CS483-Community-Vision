@@ -46,7 +46,7 @@ function Settings(props) {
     };
     const [speed, setSpeed] = useState(() => 3 - initial('speed'));
     const changeSpeed = (event, newValue) => {
-        localStorage.setItem('speed', (3 - newValue).toFixed(1));
+        localStorage.setItem('speed', (4.5 - newValue).toFixed(1));
         setSpeed(newValue);
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
@@ -130,8 +130,8 @@ function Settings(props) {
                                 <Grid item xs={10}>
                                     <Slider value={speed} onChange={changeSpeed}
                                         valueLabelDisplay="auto" marks
-                                        step={0.2} min={0.5} max={2.5}
-                                        scale={x => (3 - x).toFixed(1)}
+                                        step={0.2} min={0.5} max={4}
+                                        scale={x => (4.5 - x).toFixed(1)}
                                     />
                                 </Grid>
                                 <Grid item xs={1}>
