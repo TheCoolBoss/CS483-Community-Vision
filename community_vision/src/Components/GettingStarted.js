@@ -1,17 +1,8 @@
 import React, { forwardRef, useState, useImperativeHandle } from 'react';
 import '../App.css';
 import buttons from '../Components/Assets/Images/buttons.png'
+import { initial } from "./Games/Common/Functions"
 
-function initial(type) {
-    if (localStorage.getItem(type) != null) {
-      return localStorage.getItem(type);
-    }
-    if (type === 'backgroundColor') {
-      return 'white';
-    } else if (type === 'fontColor') {
-      return 'black';
-    }
-}
 
 const GettingStarted = forwardRef((props, ref) => {
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
@@ -31,7 +22,7 @@ const GettingStarted = forwardRef((props, ref) => {
         marginTop: '-3vh',
         height: '90vh',
         width: '100vw',
-        color: fontColor,
+        color: 'black',
         backgroundColor: 'white',
         paddingBottom: "10vw"
         

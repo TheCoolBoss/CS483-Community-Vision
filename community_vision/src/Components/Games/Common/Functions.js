@@ -22,11 +22,13 @@ export function initial(type){
     } else if(type === 'speed'){
         return 1.5;
     } else if(type === 'backgroundColor'){
-        return 'blue';
-    } else if(type === 'fontColor'){
         return 'white';
+    } else if(type === 'fontColor'){
+        return 'black';
     } else if (type === 'buttonColor') {
         return 'gray';
+    } else if (type === 'alphabetRaceHS'){
+        return 0;
     }
 }
 

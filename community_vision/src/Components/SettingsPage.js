@@ -11,7 +11,7 @@ function initial(type){
     if(type === 'backgroundColor'){
         return 'blue';
     } else if (type === 'fontColor') {
-        return 'white';
+        return 'black';
     }
 }
 

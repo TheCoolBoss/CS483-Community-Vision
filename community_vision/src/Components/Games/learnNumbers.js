@@ -11,6 +11,7 @@ import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Funct
 import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
 
+
 /*
 * Game that teaches the numbers in Morse Code
 *
@@ -108,6 +109,12 @@ const LearnNumbers = forwardRef((props, ref) => {
         dotSound,
         {volume: volume / 100}
     );
+    //number sound
+    var soundSrc = require('../Assets/Sounds/Numbers/' + currentNumber + '.mp3');
+    const [playCurrentNumberSound] = useSound(
+        soundSrc,
+        { volume: volume / 100 }
+    );
 
     
     //resets the length of the input if its too long
@@ -117,14 +124,19 @@ const LearnNumbers = forwardRef((props, ref) => {
     //resets the input from the user after time
     t = resetInputTime(t, input, setInput, resetTimer);
 
-    // the right morse code is inputted, move to next number
-    if (input === currentMorse) {
-        setAnim(!anim);
-        setIndex(prevState => prevState + 1);
-        setInput("");
-        //gets a random number for the next number after theyre finished
-        setRandomNumber(Math.floor(Math.random() * 10));
-    }
+
+    React.useEffect(() => {
+        if (input === currentMorse) {
+            playCurrentNumberSound();
+            setTimeout(() => {
+                setAnim(!anim);
+                setIndex(prevState => prevState + 1);
+                setInput("");
+                setRandomNumber(Math.floor(Math.random() * 10));
+            }, 1800)
+        }
+    }, [input])
+
 
     // tracks keycodes for space button and enter button input 
     document.onkeydown = function (evt) {

@@ -2,6 +2,8 @@ import React, { forwardRef, useState, useImperativeHandle } from 'react';
 import '../App.css';
 import morse from '../Components/Assets/Images/morse.png'
 import appInfo from "../../package.json"
+import { initial } from "./Games/Common/Functions"
+
 
 //this function gets the local data 
 function initial(type) {
@@ -14,6 +16,7 @@ function initial(type) {
     return 'black';
   }
 }
+
 
 //Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
 

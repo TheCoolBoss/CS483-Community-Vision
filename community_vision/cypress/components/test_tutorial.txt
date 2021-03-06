@@ -1,0 +1,8 @@
+tutorial for using the cypress software
+
+be sure you are located in the community_vision folder
+using the following command to start cypress:
+./node_modules/.bin/cypress open
+
+after this step a new window for cypress should open. be sure to check for new updates and install them accordingly using npm
+
