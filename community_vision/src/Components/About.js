@@ -4,20 +4,6 @@ import morse from '../Components/Assets/Images/morse.png'
 import appInfo from "../../package.json"
 import { initial } from "./Games/Common/Functions"
 
-
-//this function gets the local data 
-function initial(type) {
-  if (localStorage.getItem(type) != null) {
-    return localStorage.getItem(type);
-  }
-  if (type === 'backgroundColor') {
-    return 'white';
-  } else if (type === 'fontColor') {
-    return 'black';
-  }
-}
-
-
 //Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
 
 const About = forwardRef((props, ref) => {
