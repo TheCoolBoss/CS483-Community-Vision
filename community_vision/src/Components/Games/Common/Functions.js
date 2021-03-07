@@ -141,7 +141,7 @@ export function BackButton(props)
             <Link to={link}>
                 <button style={{
                     backgroundColor: props.buttonColor,
-                    width: '200%',
+                    width: '100%',
                     height: '10vh',
                     fontSize: '5vh',
                     color: props.fontColor

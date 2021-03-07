@@ -165,11 +165,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
             <div style={{ gridArea: 'top' }}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
-                        <Grid container justify="right" spacing = {2}>
-                            <Grid item>
-                                <BackButton />
-                            </Grid>
-                        </Grid>
+                        <BackButton />
                         <Grid container justify='left'>
                             <Grid item>
                                 <Radio />
