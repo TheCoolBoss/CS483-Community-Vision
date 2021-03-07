@@ -15,6 +15,7 @@ var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
 
+
 function showImage() {
     var x = document.getElementById("tutorialImage");
     if (x.style.display === "none") {
@@ -28,6 +29,7 @@ function updateTutorial() {
     var text = document.getElementById('tutorialText').innerHTML;
     var space = document.getElementById('spaceImage');
     var enter = document.getElementById('enterImage');
+
 
     if (textIndex == 0) {
         document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
@@ -61,6 +63,7 @@ function updateTutorial() {
         // changes smaple morse back to normal color
         document.getElementById('sampleMorse').style.color = document.getElementById('dashButton').style.backgroundColor;
         textIndex = 0;
+        document.getElementById("tutorialMenu").onMouseDown();
     }
 }
 
@@ -221,8 +224,10 @@ const Radio = () => {
         <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
             <animated.button
                 style={menubg}
+                value="!toggled"
                 className="radiowrapper"
                 onMouseDown={() => setToggle(!isToggled)}
+                id="tutorialMenu"
             >
                 <div className="radio">
                     <p>Tutorial</p>
