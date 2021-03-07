@@ -4,8 +4,11 @@ import { charToMorse, morseToChar } from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
-import { initial, Buttons, resetInputTime, resetInputLength } from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import { Transition } from 'react-spring/renderprops'
+import {Container} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Tutorial from "./LearnWord/WordGameTutorial";
 
 var t;
 var alphabet = "ABCDE";

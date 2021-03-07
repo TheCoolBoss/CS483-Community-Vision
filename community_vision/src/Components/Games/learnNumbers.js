@@ -5,9 +5,11 @@ import {charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3';
 import dotSound from '../Assets/Sounds/dot.mp3';
-import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
+import {Container} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 var t;
 var list = "0123456789"
@@ -157,6 +159,12 @@ const LearnNumbers = forwardRef((props, ref) => {
             gridTemplateAreas: '"top" "middle" "bottom'
         }}>
             <div style={{gridArea: 'top'}}>
+                <div style={{ position: 'absolute' }}>
+                    <Container>
+                        <BackButton />
+                    </Container>
+                </div>
+
                 <div>
                     <animated.h1 style={{
                         lineHeight: 0,
