@@ -12,7 +12,7 @@ import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Fun
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops'
 
-var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var alphabet = "ABCDE";
 var t;
 var interval;
 
@@ -86,7 +86,7 @@ const AlphabetRace = forwardRef((props, ref) => {
             if (startScreen) {
                 interval = setInterval(() => {
                     gameTick();
-                }, 10);
+                }, 20);
                 setStartScreen(false);
             } else if (endScreen) {
                 setLives(3);
@@ -97,7 +97,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                 setNewSpawn(0);
                 interval = setInterval(() => {
                     gameTick();
-                }, 10);
+                }, 20);
             } else {
                 setInput(input + '-');
                 playDash();
@@ -121,20 +121,23 @@ const AlphabetRace = forwardRef((props, ref) => {
     var [endScreen, setEndScreen] = useState(false);
     var [newHighScore, setNewHighScore] = useState(false);
     var [newSpawn, setNewSpawn] = useState(0);
+    var [currentInterval, setCurrentInterval] = useState(20);
+
+
+    if ( currentInterval != (20 - (score - score%10)/10) && (20 - (score - score%10)/10) > 0 ) {
+        console.log((20 - (score - score%10)/10));
+        clearInterval(interval);
+        interval = setInterval(() => {
+            gameTick();
+        }, (20 - (score - score%10)/10) );
+        setCurrentInterval((20 - (score - score%10)/10));
+    }
 
     function gameTick() {
         setNewSpawn(curr => curr + 1);
         setLetters(currLetters => {
             for (var j = 0; j < currLetters.length; j++) {
-                if (currLetters[j]['x'] < 0) {
-                    if (currLetters.length > 1) {
-                        currLetters.splice(j, 1);
-                    } else {
-                        currLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
-                    }
-                    setLives(currLives => currLives - 1);
-                }
-                currLetters[j]['x'] = currLetters[j]['x'] - 0.05;
+                currLetters[j]['x'] = currLetters[j]['x'] - 0.10;
             }
             return [...currLetters];
         });
@@ -183,20 +186,35 @@ const AlphabetRace = forwardRef((props, ref) => {
     }
 
     if ( newSpawn > 250 ) {
-        setNewSpawn(0);
         addLetter();
+        setNewSpawn(0);
     }
 
     for (var j = 0; j < letters.length; j++) {
-        if (letters[j].letter === output) {
-            if (letters.length > 1) {
-                letters.splice(j, 1);
+        var tempLetters = [...letters];
+        if (tempLetters[j].letter === output) {
+            if (tempLetters.length > 1) {
+                tempLetters.splice(j, 1);
             } else {
-                letters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
+                setNewSpawn(0);
+                tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
             }
-            setLetters(letters);
-            setScore(curr => curr + 1);
+            setScore(currScore => currScore + 10);
+            setLetters(tempLetters);
             setTimeout(function () { setInput(''); }, resetTimer / 2);
+            break;
+        }
+        if (tempLetters[j].x < 0) {
+            if (tempLetters.length > 1) {
+                tempLetters.splice(j, 1);
+            } else {   
+                setNewSpawn(0);    
+                tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
+            }
+            setLives(currLives => currLives - 1);
+            setLetters(tempLetters);
+            setTimeout(function () { setInput(''); }, resetTimer / 2);
+            break;
         }
     }
 
@@ -274,7 +292,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                                 if (startScreen) {
                                                     interval = setInterval(() => {
                                                         gameTick();
-                                                    }, 10);
+                                                    }, 20);
                                                     setStartScreen(false);
                                                 }
                                             }}>
@@ -313,21 +331,23 @@ const AlphabetRace = forwardRef((props, ref) => {
                                 opacity: 0.7
                             }} />
                             <Grid container justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
-                                <Grid item xs={12} style={{ userSelect: 'none', color: fontColor }}>
-                                    <h1 style={{
-                                        marginBottom: '0vh',
-                                        fontSize: '8vh'
-                                    }}>{highScoreText(newHighScore)}
-                                    </h1>
-                                    <br />
-                                    <p style={{
-                                        marginTop: '0vh',
-                                        paddingLeft: '2vw',
-                                        paddingRight: '2vw',
-                                        fontSize: '8vh',
-                                        marginBottom: '0vh'
-                                    }}>{highScore}
-                                    </p>
+                                <Grid item xs={9} style={{ userSelect: 'none', color: fontColor }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>{highScoreText(newHighScore)}
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '8vh',
+                                            marginBottom: '0vh'
+                                        }}>{highScore}
+                                        </p>
+                                    </Card>
                                 </Grid>
                                 <Grid item xs={4} style={{ userSelect: 'none' }}>
                                     <Card>
@@ -355,7 +375,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                                     setNewSpawn(0);
                                                     interval = setInterval(() => {
                                                         gameTick();
-                                                    }, 10);
+                                                    }, 20);
                                                 }
                                             }}>
                                             Try Again (-)
