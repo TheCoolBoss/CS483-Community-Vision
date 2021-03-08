@@ -24,13 +24,14 @@ const Home = forwardRef((props, ref) => {
       gridTemplate: '18fr 10fr 42fr 20fr/ 1fr',
       gridTemplateAreas: '"top" "middleTop" "middleBottom" "bottom"'}}>
       
-      <img src={pencils} alt="pencils"
+      <img src={pencils} alt="pencils" //background image
       style={{gridRowStart: 'top', gridRowEnd: 'bottom', position: 'absolute', height: '100%', width: '100%', objectFit: 'cover', zIndex: -1}}
       />
-
+      {/* styling for the home page */}
       <div style={{gridArea: 'top',
         height: '80%',
         alignSelf: 'center', alignItems: 'center'}}>
+          {/* title */}
         <h1 style={{fontSize: '10vh',
           color: '#003087',
           textDecoration: 'underline',
@@ -42,6 +43,7 @@ const Home = forwardRef((props, ref) => {
           Play Morse!</h1>
       </div>
       <div style={{gridArea: 'middleBottom'}}>
+        {/* welcome statement */}
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
             <Grid item xs={11} style={{height: '80%'}}>
               <h1 style={{height: '100%', color: 'black', fontWeight: 900, userSelect: 'none', cursor: 'default'}}>
@@ -49,6 +51,7 @@ const Home = forwardRef((props, ref) => {
               </h1>
             </Grid>
             <Grid item xs={5} style={{height: '20%'}}>
+              {/* play games button, directs it to the games page */}
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/settings">
                   <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>Play Games!</button>
