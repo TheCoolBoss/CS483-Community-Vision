@@ -36,7 +36,7 @@ describe('Learning Alphabet Game Test', () => {
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.get("[id^=hardAlph]").contains('Learn the Alphabet').click()
+        cy.contains('Alphabet No Help').click()
         cy.url()
             .should('include','/noHelpAlphabet')
         
@@ -104,7 +104,7 @@ describe('Word Games Navigation Test', () => {
         cy.url()
             .should('include', '/games')
         //Look for element that contains 'Learn Word Easy' and click on it
-        cy.get("[id^=ezWords]").contains('LearnWords').click();
+        cy.contains('Learn Word Easy').click();
         //Check that we are on the correct URL
         cy.url()
             .should('include', '/learnWordBeginner')
@@ -124,7 +124,7 @@ describe('Word Games Navigation Test', () => {
         cy.url()
             .should('include', '/games')
         //Look for element that contains 'Learn Word Medium' and click on it
-        cy.get("[id^=medWords]").contains('Learn Words').click();
+        cy.contains('Learn Word Medium').click();
         //Check that we are on the correct URL
         cy.url()
             .should('include', '/learnWordMedium')
@@ -143,8 +143,8 @@ describe('Word Games Navigation Test', () => {
         //Assert that we are in the '/games' page
         cy.url()
             .should('include', '/games')
-        //Look for element that contains 'Learn Word Advanced' and click on it
-        cy.get("[id^=hardWords]").contains("Learn Words").click();
+        //Look for element that contains 'Learn Word Advanded' and click on it
+        cy.contains('Learn Word Advanced').click();
         //Check that we are on the correct URL
         cy.url()
             .should('include', '/learnWordAdvanced')

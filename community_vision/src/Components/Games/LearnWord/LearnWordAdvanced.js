@@ -12,7 +12,6 @@ import EndGame from './EndGame';
 import Tutorial from './WordGameTutorial';
 import Picture from './Picture';
 import CurrentWord from './CurrentWord';
-import {BackButton} from "../Common/Functions";
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -222,9 +221,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                 <div style={{gridArea: 'top'}}>
                     <div style={{ position: 'absolute' }}>
                         <Container>
-                            <BackButton />
                             <Grid container justify='left'>
-
                                 <Grid item>
                                     <Tutorial 
                                         background={backgroundColor} 
