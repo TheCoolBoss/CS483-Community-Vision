@@ -23,5 +23,12 @@ describe('Learning Alphabet Game Test', function () {
         
         // Assert - make an assertion
         // - make an assertion about page content
+
+        //Should have dot/dash buttons
+        cy.get("[id^=dotButton]").contains("•")
+        cy.get("[id^=dashButton]").contains("-")
+
+        cy.contains("Go back").click()
+        cy.url().should("include", "/games")
     })
 })

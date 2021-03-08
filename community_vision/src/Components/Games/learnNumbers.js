@@ -7,9 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3';
 import dotSound from '../Assets/Sounds/dot.mp3';
-import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
+import {Container} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 
 /*
@@ -193,13 +195,19 @@ const LearnNumbers = forwardRef((props, ref) => {
             <div style={{gridArea: 'top'}}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
-                        <Grid container justify='left'>
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
+                        <BackButton />
                     </Container>
                 </div>
+
+            //This tutorial wasn't on my (Stephen's) branch as I merged this so I commented it out for now
+            //    <div>
+              //          <Grid container justify='left'>
+              //              <Grid item>
+              //                  <Radio />
+             //               </Grid>
+             //           </Grid>
+              //      </Container>
+             //   </div>
                 <div id="sampleMorse">
                     <animated.h1 style={{
                         lineHeight: 0,
