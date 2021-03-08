@@ -4,7 +4,7 @@ import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import {animated, useSpring} from 'react-spring';
-import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
+import {initial, Buttons, resetInputTime, resetInputLength} from "./Common/Functions";
 import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
 import {Container} from "@material-ui/core";
@@ -105,7 +105,6 @@ const ButtonsTutorial = forwardRef((props, ref) => {
             <div style={{gridArea: 'top'}}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
-                        <BackButton />
                         <Grid container justify='left'>
                             <Grid item>
                                 <Radio />

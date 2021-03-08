@@ -4,16 +4,13 @@ import { charToMorse, morseToChar } from "./charMorseConv";
 import useSound from 'use-sound';
 import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
-import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import { Container } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Functions";
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops'
-import {Container} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Tutorial from "./LearnWord/WordGameTutorial";
 
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var t;
