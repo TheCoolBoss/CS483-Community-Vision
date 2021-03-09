@@ -48,7 +48,8 @@ const AlphabetRace = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
-    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const [highScore, setHighScore] = useState(() => initial('alphabetRaceHS'))
     const resetTimer = speed * 1000; //reset timer in milliseconds
@@ -226,7 +227,8 @@ const AlphabetRace = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
-                setButtonColor(initial('buttonColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
@@ -454,7 +456,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                             <Card>
                                 <CardActionArea>
                                     <button id="dotButton" style={{
-                                        backgroundColor: buttonColor,
+                                        backgroundColor: dotButtonColor,
                                         width: '100%',
                                         height: '20vh',
                                         cursor: 'pointer'
@@ -484,7 +486,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                             <Card>
                                 <CardActionArea>
                                     <button id="dashButton" style={{
-                                        backgroundColor: buttonColor,
+                                        backgroundColor: dashButtonColor,
                                         width: '100%',
                                         height: '20vh',
                                         fontSize: '20vh',
