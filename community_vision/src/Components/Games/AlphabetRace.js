@@ -10,9 +10,9 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Functions";
 import { useHistory } from "react-router-dom";
-import { Transition } from 'react-spring/renderprops'
+import { Transition } from 'react-spring/renderprops';
 
-var alphabet = "ABCDE";
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var t;
 var interval;
 
@@ -93,11 +93,11 @@ const AlphabetRace = forwardRef((props, ref) => {
                 setScore(0);
                 setEndScreen(false);
                 setLetters([{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }]);
-                setNewHighScore(false);
                 setNewSpawn(0);
                 interval = setInterval(() => {
                     gameTick();
                 }, 20);
+                setTimeout(function () { setNewHighScore(false); }, 600);
             } else {
                 setInput(input + '-');
                 playDash();
@@ -199,7 +199,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                 setNewSpawn(0);
                 tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
             }
-            setScore(currScore => currScore + 10);
+            setScore(currScore => currScore + 1);
             setLetters(tempLetters);
             setTimeout(function () { setInput(''); }, resetTimer / 2);
             break;
@@ -357,7 +357,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                                     backToGames();
                                                 }
                                             }}>
-                                            Other Games (.)
+                                            Other Games (•)
                                         </button>
                                     </Card>
                                 </Grid>
@@ -371,11 +371,11 @@ const AlphabetRace = forwardRef((props, ref) => {
                                                     setScore(0);
                                                     setEndScreen(false);
                                                     setLetters([{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }]);
-                                                    setNewHighScore(false);
                                                     setNewSpawn(0);
                                                     interval = setInterval(() => {
                                                         gameTick();
                                                     }, 20);
+                                                    setTimeout(function () { setNewHighScore(false); }, 600);
                                                 }
                                             }}>
                                             Try Again (-)
@@ -457,8 +457,6 @@ const AlphabetRace = forwardRef((props, ref) => {
                                         backgroundColor: buttonColor,
                                         width: '100%',
                                         height: '20vh',
-                                        fontSize: '20vh',
-                                        color: fontColor,
                                         cursor: 'pointer'
                                     }} onMouseDown={function () {
                                         if (!startScreen) {
@@ -467,7 +465,17 @@ const AlphabetRace = forwardRef((props, ref) => {
                                             clearTimeout(t);
                                             t = resetInputTime(t, input, setInput, resetTimer);
                                         }
-                                    }}>•
+                                    }}>
+                                        <p style={{
+                                            position: 'absolute',
+                                            fontSize: '55vh',
+                                            margin: 0,
+                                            top: '-21.25vh',
+                                            width: '100%',
+                                            right: '0.25%',
+                                            textAlign: 'center',
+                                            color: fontColor
+                                        }}>•</p>
                                 </button>
                                 </CardActionArea>
                             </Card>
@@ -489,7 +497,17 @@ const AlphabetRace = forwardRef((props, ref) => {
                                             clearTimeout(t);
                                             t = resetInputTime(t, input, setInput, resetTimer);
                                         }
-                                    }}>-
+                                    }}>
+                                        <p style={{
+                                            position: 'absolute',
+                                            fontSize: '50vh',
+                                            margin: 0,
+                                            top: '-23vh',
+                                            width: '100%',
+                                            right: '0.25%',
+                                            textAlign: 'center',
+                                            color: fontColor
+                                        }}>-</p>
                                     </button>
                                 </CardActionArea>
                             </Card>

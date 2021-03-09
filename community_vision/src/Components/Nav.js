@@ -106,7 +106,7 @@ const Nav = forwardRef((props, ref) => {
             </Grid>
           </Container>
         </div>
-        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer' }} onMouseDown={function () { toggle(!dropdownState) }}>
+        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer', userSelect: 'none' }} onMouseDown={function () { toggle(!dropdownState) }}>
           <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
         </button>
       </div>
@@ -133,6 +133,19 @@ const Nav = forwardRef((props, ref) => {
           userSelect: 'none',
           textAlign: 'right',
         }} onMouseDown={function () { toggle(!dropdownState) }}>X</p>
+        <h1 style={{
+          fontSize: '10vh',
+          position: 'absolute',
+          top: '-17vh',
+          width: '100%',
+          zIndex: 5,
+          cursor: 'pointer',
+          userSelect: 'none',
+          textAlign: 'center',
+        }} onMouseDown={function () { toggle(!dropdownState) }}>
+          <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
+          Settings
+        </h1>
         <Settings updateNavBackgroundColor={setBackgroundColor}
           updateNavFontColor={setFontColor}
           updateSettingsPageState={() => void 0}
