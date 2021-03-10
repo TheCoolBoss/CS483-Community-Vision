@@ -6,6 +6,8 @@ import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import {Link} from "react-router-dom";
+import {spacing} from "@material-ui/system";
 
 //Help received from https://stackoverflow.com/questions/46656476/rendering-empty-space-in-react
 //for making empty elements take space
@@ -131,3 +133,20 @@ export function Buttons(props)
             </Container>
         </div>);
 }
+
+export function BackButton()
+    {
+        return (
+            <Link className='nav-link' to="/games">
+                <button style={{
+                    height: '100%',
+                    width: '100%',
+                    fontSize: '5vh',
+                    fontWeight: 900,
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                    marginBottom: "20px"
+                }}>Go back</button>
+            </Link>
+        );
+    }
