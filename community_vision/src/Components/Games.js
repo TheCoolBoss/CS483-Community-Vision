@@ -38,6 +38,7 @@ const Games = forwardRef((props, ref) => {
     }}>
       {/* this section of code is for the images of each game, their tiles */}
       <h1 style={{ fontSize: '7vh', color: fontColor, textDecoration: 'underline', position: 'relative', bottom: '-2vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
@@ -75,7 +76,19 @@ const Games = forwardRef((props, ref) => {
           </Grid>
         </Grid>
       </Container>
+      <Link className='nav-link' to="/">
+        <button style={{
+          height: '80%',
+          width: '40%',
+          fontSize: '5vh',
+          fontWeight: 900,
+          userSelect: 'none',
+          cursor: 'pointer',
+          marginBottom: "20px"
+        }}>Go back</button>
+      </Link>
     </div>
+
   );
 })
 
