@@ -125,13 +125,13 @@ const AlphabetRace = forwardRef((props, ref) => {
     var [currentInterval, setCurrentInterval] = useState(20);
 
 
-    if ( currentInterval != (20 - (score - score%10)/10) && (20 - (score - score%10)/10) > 0 ) {
-        console.log((20 - (score - score%10)/10));
+    if (currentInterval != (20 - (score - score % 10) / 10) && (20 - (score - score % 10) / 10) > 0) {
+        console.log((20 - (score - score % 10) / 10));
         clearInterval(interval);
         interval = setInterval(() => {
             gameTick();
-        }, (20 - (score - score%10)/10) );
-        setCurrentInterval((20 - (score - score%10)/10));
+        }, (20 - (score - score % 10) / 10));
+        setCurrentInterval((20 - (score - score % 10) / 10));
     }
 
     function gameTick() {
@@ -186,7 +186,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         clearInterval(interval);
     }
 
-    if ( newSpawn > 250 ) {
+    if (newSpawn > 250) {
         addLetter();
         setNewSpawn(0);
     }
@@ -208,8 +208,8 @@ const AlphabetRace = forwardRef((props, ref) => {
         if (tempLetters[j].x < 0) {
             if (tempLetters.length > 1) {
                 tempLetters.splice(j, 1);
-            } else {   
-                setNewSpawn(0);    
+            } else {
+                setNewSpawn(0);
                 tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
             }
             setLives(currLives => currLives - 1);
@@ -421,7 +421,7 @@ const AlphabetRace = forwardRef((props, ref) => {
             <div style={{ gridArea: 'middle' }}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
-                        <Grid item sm={5}>
+                        {/* <Grid item sm={5}>
                             <p style={{
                                 lineHeight: 0,
                                 color: fontColor,
@@ -449,6 +449,34 @@ const AlphabetRace = forwardRef((props, ref) => {
                                 pointer: 'default',
                                 userSelect: 'none'
                             }}>{input}</p>
+                        </Grid> */}
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
+                        </Grid>
+                        <Grid item sm={10}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                textAlign: 'center',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}>{input}</p>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
                         </Grid>
                     </Grid>
                     <Grid container justify='center' spacing={2}>
@@ -461,12 +489,10 @@ const AlphabetRace = forwardRef((props, ref) => {
                                         height: '20vh',
                                         cursor: 'pointer'
                                     }} onMouseDown={function () {
-                                        if (!startScreen) {
-                                            setInput(input + '•');
-                                            playDot();
-                                            clearTimeout(t);
-                                            t = resetInputTime(t, input, setInput, resetTimer);
-                                        }
+                                        setInput(input + '•');
+                                        playDot();
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
                                         <p style={{
                                             position: 'absolute',
@@ -478,7 +504,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                             textAlign: 'center',
                                             color: fontColor
                                         }}>•</p>
-                                </button>
+                                    </button>
                                 </CardActionArea>
                             </Card>
                         </Grid>
@@ -493,12 +519,10 @@ const AlphabetRace = forwardRef((props, ref) => {
                                         color: fontColor,
                                         cursor: 'pointer'
                                     }} onMouseDown={function () {
-                                        if (!startScreen) {
-                                            setInput(input + '-');
-                                            playDash();
-                                            clearTimeout(t);
-                                            t = resetInputTime(t, input, setInput, resetTimer);
-                                        }
+                                        setInput(input + '-');
+                                        playDash();
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
                                         <p style={{
                                             position: 'absolute',

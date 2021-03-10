@@ -9,19 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import Settings from './Settings';
-
-function initial(type) {
-  if (localStorage.getItem(type) != null) {
-    return localStorage.getItem(type);
-  }
-  if (type === 'volume') {
-    return 50;
-  } else if (type === 'backgroundColor') {
-    return 'blue';
-  } else if (type === 'fontColor') {
-    return 'black';
-  }
-}
+import { initial } from "./Games/Common/Functions";
 
 const Nav = forwardRef((props, ref) => {
   var [dropdownState, toggle] = useState(false);
@@ -34,9 +22,6 @@ const Nav = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const [fontColor, setFontColor] = useState(() => initial('fontColor'));
   var navbarColor = '#f8ac2e'
-  if (backgroundColor === 'gray' && fontColor === 'black'){
-    navbarColor = 'black'
-  }
 
   useImperativeHandle(
     ref,
