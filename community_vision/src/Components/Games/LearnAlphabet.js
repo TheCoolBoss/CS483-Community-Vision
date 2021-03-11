@@ -11,9 +11,10 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
-import { initial, Buttons, resetInputTime, resetInputLength } from "./Common/Functions";
+import { initial, Buttons, resetInputTime, resetInputLength, BackButton } from "./Common/Functions";
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
+
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -328,7 +329,8 @@ const LearnAlphabet = forwardRef((props, ref) => {
             <div style={{ gridArea: 'top' }}>
                 {/* <div style={{ position: 'absolute' }}>
                     <Container>
-                        <Grid container justify='left'>
+                        <BackButton />
+                        <Grid container justify='left' >
                             <Grid item>
                                 <Radio />
                             </Grid>
