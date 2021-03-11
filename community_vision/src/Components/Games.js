@@ -7,7 +7,12 @@ import Grid from '@material-ui/core/Grid';
 
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
 import LearnABCIMG from "./Games/apple.jpg"
-import alphabetIMG from "./Games/letters.jpg"
+import buttonsImg from "./Games/buttons.jpg"
+import needleImg from "./Games/needle.jpg"
+import sandBocWords from "./Games/sandboxWord.jpg"
+import stackABC from "./Games/stack_abc.jpg"
+import unicycleImg from "./Games/unicycle.jpg"
+import alphabetIMG from "./Games/abc.jpg"
 import sandboxIMG from "./Games/sandbox1.jpg"
 import numbersIMG from "./Games/numbers.jpg"
 import { initial } from "./Games/Common/Functions"
@@ -40,7 +45,7 @@ const Games = forwardRef((props, ref) => {
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Explore Dot and Dash' img={alphabetIMG} link='/buttons' difficulty='Level 1' />
+            <GameSelection name='Explore Dot and Dash' img={buttonsImg} link='/buttons' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn The Alphabet In Morse' img={alphabetIMG} link='/learnAlphabet' difficulty='Level 1' />
@@ -55,19 +60,19 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Sandbox Letters' img={sandboxIMG} link='/sandboxLetters' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Sandbox Words' img={sandboxIMG} link='/sandboxWords' difficulty='Level 1' />
+            <GameSelection name='Sandbox Words' img={sandBocWords} link='/sandboxWords' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Level 2' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordMedium' difficulty='Level 3' />
+            <GameSelection name='Learn Words' img={needleImg} link='/learnWordMedium' difficulty='Level 3' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordAdvanced' difficulty='Level 4' />
+            <GameSelection name='Learn Words' img={unicycleImg} link='/learnWordAdvanced' difficulty='Level 4' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn the Alphabet In Morse' img={alphabetIMG} link='/noHelpAlphabet' difficulty='Level 4' />
+            <GameSelection name='Learn the Alphabet In Morse' img={stackABC} link='/noHelpAlphabet' difficulty='Level 4' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Alphabet Race Game' img={alphabetIMG} link='/alphabetRace' difficulty='Level 4' />
