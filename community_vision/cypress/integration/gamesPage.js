@@ -1,7 +1,7 @@
 const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
 const { interpolate } = require("react-spring")
-import {charToMorse} from "../../src/Components/Games/charMorseConv";
+
 // ./node_modules/.bin/cypress open
 
 describe('Learning Alphabet Game Test', function () {
@@ -17,18 +17,13 @@ describe('Learning Alphabet Game Test', function () {
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.contains('Learn The Alphabet').click()
-        cy.url()
-            .should('include','/learnAlphabet')
-        
+
         // Assert - make an assertion
         // - make an assertion about page content
-        cy.contains("•")
-        cy.contains("-")
 
-        //Go back button should go back to games page
+        //Go back button should go back to home page
         cy.contains("Go back").click()
-        cy.url().should("include", "/games")
+        cy.url().should("include", "/")
 
     })
 })

@@ -13,6 +13,7 @@ import Tutorial from './WordGameTutorial';
 import EndGame from './EndGame';
 import Picture from './Picture';
 import CurrentWord from './CurrentWord';
+import {BackButton} from "../Common/Functions";
 
 
 /*
@@ -201,6 +202,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 <div style={{gridArea: 'top'}}>
                      <div style={{ position: 'absolute' }}>
                         <Container>
+                            <BackButton />
                             <Grid container justify='left'>
                                 <Grid item>
                                     <Tutorial background={backgroundColor} level='beginner' fColor={fontColor}/>
