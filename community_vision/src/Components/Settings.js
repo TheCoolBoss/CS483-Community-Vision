@@ -374,6 +374,7 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                     </Grid>
+                    </Grid>
                 </Grid>
             </Card>
         </div>
