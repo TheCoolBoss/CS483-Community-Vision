@@ -93,6 +93,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var letterSoundSrc = require('../../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
@@ -114,8 +116,12 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         if (output === currentLetter) {
             setTimeout(() => {
                 setIsCorrect(true);
-                //Play current sound of word
-                playCurrWordSound();
+                //Play current letter sound
+                playCurrLetterSound();
+                setTimeout(() => {
+                    //Play current sound of word
+                    playCurrWordSound();
+                }, 1550)
             }, 1000);
             //Move to the next word
             setTimeout(() => {
@@ -128,7 +134,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 }
                 setInput('');
                 setIsCorrect(false);
-            }, 3000);
+            }, 4550);
         }
     }, [input]);
 
