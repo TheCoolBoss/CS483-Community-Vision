@@ -26,7 +26,6 @@ const About = forwardRef((props, ref) => {
       height: '90vh',
       width: '100vw',
       color: 'black',
-      backgroundColor: 'white'
     }}>
       <h1 style={{ fontWeight: 900, textSize: "60px" }}>Who We Are</h1>
 
@@ -67,7 +66,7 @@ const About = forwardRef((props, ref) => {
       <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAligh: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
 
         
-      <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
+      <p style={{ userSelect: 'none', cursor: 'default', paddingBottom: '10vh' }}>Version {appInfo.version}</p>
     </div>
   );
 })
