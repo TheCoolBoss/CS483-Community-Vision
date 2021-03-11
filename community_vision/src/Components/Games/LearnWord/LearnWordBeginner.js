@@ -57,7 +57,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var [isCorrect, setIsCorrect] = useState(false);
     
     //Get current character from user input
-    var output = morseToChar(input);
+    var [output,setOutput] = useState('');
 
     //Index to track the current word
     var [gameIndex, setGameIndex] = useState(0);
@@ -81,15 +81,20 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
     const fSize = (size-sizeAdjust) +'vh';
     const [picHeight, setPicHeight] = React.useState('');
     const [picWidth, setPicWidth] = React.useState('');
+    const notCurrLetterSize = (size - sizeAdjust - 7) + 'vh';
 
     //Get the sound of current word
     var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var letterSoundSrc = require('../../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
@@ -97,6 +102,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
     t = setTimeout(function(){
+        setOutput(morseToChar(input));
         setInput('');
     }, resetTimer);
 
@@ -107,10 +113,16 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     useEffect(() => {
         //Check for matching current morse sequence to current letter
-        if (input === currentMorse) {
-            //Play current sound of word
-            playCurrWordSound();
-            setIsCorrect(true);
+        if (output === currentLetter) {
+            setTimeout(() => {
+                setIsCorrect(true);
+                //Play current letter sound
+                playCurrLetterSound();
+                setTimeout(() => {
+                    //Play current sound of word
+                    playCurrWordSound();
+                }, 1550)
+            }, 1000);
             //Move to the next word
             setTimeout(() => {
                 if(gameIndex < 25) {
@@ -122,7 +134,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 }
                 setInput('');
                 setIsCorrect(false);
-            }, 2000);
+            }, 4550);
         }
     }, [input]);
 
@@ -131,9 +143,11 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
+            setOutput('');
             playDot();
         } else if (evt.keyCode === 13) {
             setInput(input + '-');
+            setOutput('');
             playDash();
         }
     };
@@ -146,6 +160,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
@@ -195,6 +211,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         return () => window.removeEventListener('resize', updateSize);
     })
 
+    
+
     return (
         <div>
             {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
@@ -229,7 +247,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                         :
                                         <h1 style={{lineHeight: 0, fontSize: fSize}}>
                                             <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                                            <span style={{color: fontColor, opacity: 0.5}}>{currentWord.substr(1)}</span>
+                                            <span style={{color: fontColor, opacity: 0.5, fontSize: notCurrLetterSize}}>{currentWord.substr(1)}</span>
                                         </h1>
                                         }
                                         <p id="sampleMorse" style={{lineHeight: 0, color: fontColor, fontSize: fSize, margin: 0}}>{currentMorse}</p>
@@ -241,35 +259,51 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 </div>
                 <div style={{gridArea: 'bottom'}}>
                     <Container>
-                        <Grid container justify='center' spacing={0}>
-                            <Grid item xs={3} sm={2}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output}</p>
-                            </Grid>
-                            <Grid item xs={0}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh', opacity: 0}}>|</p>
-                            </Grid>
-                            <Grid item xs={3} sm={2}>
-                                <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{input}</p>
-                            </Grid>
-                        </Grid>
+                        <div style={{height: '10vh'}}>
+                            <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output + input}</p>
+                        </div>
                         <Grid container justify='center' spacing={2}>
                             <Grid item xs={4}>
                                 <Card>
                                     <CardActionArea>
-                                        <button id="dotButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                        <button id="dotButton" style={{backgroundColor: dotButtonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                                 setInput(input + '•');
+                                                setOutput('');
                                                 playDot();
-                                        }}>•</button>
+                                        }}>
+                                            <p style={{
+                                                position: 'absolute',
+                                                fontSize: '55vh',
+                                                margin: 0,
+                                                top: '-21.25vh',
+                                                width: '100%',
+                                                right: '0.25%',
+                                                textAlign: 'center',
+                                                color: fontColor
+                                            }}>•</p>
+                                        </button>
                                     </CardActionArea>
                                 </Card>
                             </Grid>
                             <Grid item xs={4}>
                                 <Card>
                                     <CardActionArea>
-                                        <button id="dashButton" style={{backgroundColor: backgroundColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
+                                        <button id="dashButton" style={{backgroundColor: dashButtonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
                                             setInput(input + '-');
+                                            setOutput('');
                                             playDash();
-                                        }}>-</button>
+                                        }}>
+                                            <p style={{
+                                                position: 'absolute',
+                                                fontSize: '50vh',
+                                                margin: 0,
+                                                top: '-23vh',
+                                                width: '100%',
+                                                right: '0.25%',
+                                                textAlign: 'center',
+                                                color: fontColor
+                                            }}>-</p>
+                                        </button>
                                     </CardActionArea>
                                 </Card>
                             </Grid>

@@ -35,7 +35,7 @@ export function morseToChar(x) {
         return 'N';
     } else if (x === '---'){
         return 'O';
-    } else if (x === '.--.'){
+    } else if (x === '•--•'){
         return 'P';
     } else if (x === '--•-'){
         return 'Q';

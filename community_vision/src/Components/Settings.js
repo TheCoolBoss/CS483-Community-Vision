@@ -146,7 +146,7 @@ function Settings(props) {
                     </Grid>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
-                        <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>PICK A THEME!</h1>
+                        <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>Pick a Theme!</h1>
                             <Grid container direction='column' alignContent='center' style={{ marginTop: '-1vh' }}>
                                 <Grid container alignItems='center' justify='center'>
                                     <Grid item>
@@ -157,7 +157,6 @@ function Settings(props) {
                                                 changeDotButtonColor('yellow');
                                                 changeDashButtonColor('red');
                                             }} />
-                                    </Grid>
                                     <Grid item>
                                         <div style={{
                                             display: 'grid',
@@ -374,6 +373,7 @@ function Settings(props) {
                                 </Grid>
                             </Grid>
                         </Grid>
+                    </Grid>
                     </Grid>
                 </Grid>
             </Card>
