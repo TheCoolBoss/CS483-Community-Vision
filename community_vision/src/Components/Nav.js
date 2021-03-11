@@ -9,19 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import Settings from './Settings';
-
-function initial(type) {
-  if (localStorage.getItem(type) != null) {
-    return localStorage.getItem(type);
-  }
-  if (type === 'volume') {
-    return 50;
-  } else if (type === 'backgroundColor') {
-    return 'blue';
-  } else if (type === 'fontColor') {
-    return 'black';
-  }
-}
+import { initial } from "./Games/Common/Functions";
 
 const Nav = forwardRef((props, ref) => {
   var [dropdownState, toggle] = useState(false);
@@ -34,9 +22,6 @@ const Nav = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const [fontColor, setFontColor] = useState(() => initial('fontColor'));
   var navbarColor = '#f8ac2e'
-  if (backgroundColor === 'gray' && fontColor === 'black'){
-    navbarColor = 'black'
-  }
 
   useImperativeHandle(
     ref,
@@ -77,16 +62,6 @@ const Nav = forwardRef((props, ref) => {
               <Grid item xs={2}>
                 <Card style={{ borderRadius: '20px' }}>
                   <CardActionArea>
-                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/games">
-                      Games
-                    </Link>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item xs={1} />
-              <Grid item xs={2}>
-                <Card style={{ borderRadius: '20px' }}>
-                  <CardActionArea>
                     <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/about">
                       About
                     </Link>
@@ -103,10 +78,20 @@ const Nav = forwardRef((props, ref) => {
                   </CardActionArea>
                 </Card>
               </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                <Card style={{ borderRadius: '20px' }}>
+                  <CardActionArea>
+                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/games">
+                      Games
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
             </Grid>
           </Container>
         </div>
-        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer' }} onMouseDown={function () { toggle(!dropdownState) }}>
+        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer', userSelect: 'none' }} onMouseDown={function () { toggle(!dropdownState) }}>
           <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
         </button>
       </div>
@@ -133,6 +118,19 @@ const Nav = forwardRef((props, ref) => {
           userSelect: 'none',
           textAlign: 'right',
         }} onMouseDown={function () { toggle(!dropdownState) }}>X</p>
+        <h1 style={{
+          fontSize: '10vh',
+          position: 'absolute',
+          top: '-17vh',
+          width: '100%',
+          zIndex: 5,
+          cursor: 'pointer',
+          userSelect: 'none',
+          textAlign: 'center',
+        }} onMouseDown={function () { toggle(!dropdownState) }}>
+          <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
+          Settings
+        </h1>
         <Settings updateNavBackgroundColor={setBackgroundColor}
           updateNavFontColor={setFontColor}
           updateSettingsPageState={() => void 0}
