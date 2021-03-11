@@ -1,6 +1,8 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import { Container } from '@material-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { charToMorse, morseToChar } from "./charMorseConv";
@@ -10,6 +12,9 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
 import { initial, Buttons, resetInputTime, resetInputLength, BackButton } from "./Common/Functions";
+import { useHistory } from "react-router-dom";
+import { Transition } from 'react-spring/renderprops';
+
 
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -65,6 +70,12 @@ function updateTutorial() {
 }
 
 const LearnAlphabet = forwardRef((props, ref) => {
+
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
+
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -76,7 +87,8 @@ const LearnAlphabet = forwardRef((props, ref) => {
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
-    const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
     const fSize = size + 'vh';
@@ -97,19 +109,22 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    var [startScreen, setStartScreen] = useState(true);
+    var [endScreen, setEndScreen] = useState(false);
+
     resetInputLength(input, setInput);
-    clearTimeout(t);
-    t = resetInputTime(t, input, setInput, resetTimer);
 
     React.useEffect(() => {
         if (input === currentMorse) {
             playCurrentLetterSound();
             setTimeout(() => {
                 setAnim(!anim);
-                setIndex(prevState => prevState + 1);
-                setTimeout(function () {
-                    setInput("");
-                }, resetTimer);
+                if ( index != list.length - 1 ) {
+                    setIndex(prevState => prevState + 1);
+                } else {
+                    setIndex(0);
+                    setEndScreen(true);
+                }
             }, 2000)
         }
     }, [input])
@@ -118,13 +133,29 @@ const LearnAlphabet = forwardRef((props, ref) => {
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
-            document.getElementById('dotButton').focus();
+            if (startScreen) {
+
+            } else if (endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
-            document.getElementById('dashButton').focus();
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         }
     };
 
@@ -145,14 +176,14 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
-                setButtonColor(initial('buttonColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
     )
 
     return (
-
         <div style={{
             backgroundColor: backgroundColor,
             height: '90vh',
@@ -161,9 +192,139 @@ const LearnAlphabet = forwardRef((props, ref) => {
             gridTemplate: '8fr 8fr / 1fr',
             gridTemplateAreas: '"top" "middle" "bottom'
         }}>
-
+            <Transition
+                items={startScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container direction='column' justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item style={{ userSelect: 'none', cursor: 'default' }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Learn Alphabet
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '4vh'
+                                        }}>Type the morse of all the letters in the alphabet.
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <br />
+                                <Grid item style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
+                                            onMouseDown={function () {
+                                                if (startScreen) {
+                                                    setStartScreen(false);
+                                                }
+                                            }}>
+                                            Start (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
+            <Transition
+                items={endScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item xs={9} style={{ userSelect: 'none', color: fontColor }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Yay!
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '8vh',
+                                            marginBottom: '0vh'
+                                        }}>You have learned the alphabet in morse.
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: 'pointer', height: '100%', width: '100%' }}
+                                            onMouseDown={function () {
+                                                backToGames();
+                                            }}>
+                                            Other Games (•)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={1}></Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: ' pointer', height: '100%', width: '100%' }}
+                                            onMouseDown={function () {
+                                                setEndScreen(false);
+                                            }}>
+                                            More Practice (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
             <div style={{ gridArea: 'top' }}>
-                <div style={{ position: 'absolute' }}>
+                {/* <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton />
                         <Grid container justify='left' >
@@ -172,7 +333,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                             </Grid>
                         </Grid>
                     </Container>
-                </div>
+                </div> */}
                 <div id="sampleMorse">
                     <animated.h1 style={{
                         lineHeight: 0,
@@ -188,22 +349,105 @@ const LearnAlphabet = forwardRef((props, ref) => {
                         fontSize: sfSize,
                         pointer: 'default',
                         userSelect: 'none',
-                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
+                        opacity: x.interpolate({ range: [0, 1], output: [0, 1] }),
+                        marginBottom: '0vh'
                     }}>{currentMorse}</animated.p>
                 </div>
             </div>
-
-            <Buttons
-                fontColor={fontColor}
-                backgroundColor={backgroundColor}
-                buttonColor={buttonColor}
-                volume={volume}
-                input={input}
-                input2={input}
-                newInput={setInput}
-                output={output}
-                output2={output}
-            />
+            <div style={{ gridArea: 'middle' }}>
+                <Container>
+                    <Grid container justify='center' spacing={0}>
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
+                        </Grid>
+                        <Grid item sm={10}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                textAlign: 'center',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}>{input}</p>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
+                        </Grid>
+                    </Grid>
+                    <Grid container justify='center' spacing={2}>
+                        <Grid item xs={4}>
+                            <Card>
+                                <CardActionArea>
+                                    <button id="dotButton" style={{
+                                        backgroundColor: dotButtonColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        cursor: 'pointer'
+                                    }} onMouseDown={function () {
+                                        setInput(input + '•');
+                                        playDot();
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
+                                    }}>
+                                        <p style={{
+                                            position: 'absolute',
+                                            fontSize: '55vh',
+                                            margin: 0,
+                                            top: '-21.25vh',
+                                            width: '100%',
+                                            right: '0.25%',
+                                            textAlign: 'center',
+                                            color: fontColor
+                                        }}>•</p>
+                                    </button>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Card>
+                                <CardActionArea>
+                                    <button id="dashButton" style={{
+                                        backgroundColor: dashButtonColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        fontSize: '20vh',
+                                        color: fontColor,
+                                        cursor: 'pointer'
+                                    }} onMouseDown={function () {
+                                        setInput(input + '-');
+                                        playDash();
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
+                                    }}>
+                                        <p style={{
+                                            position: 'absolute',
+                                            fontSize: '50vh',
+                                            margin: 0,
+                                            top: '-23vh',
+                                            width: '100%',
+                                            right: '0.25%',
+                                            textAlign: 'center',
+                                            color: fontColor
+                                        }}>-</p>
+                                    </button>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </div>
         </div>
     );
 })

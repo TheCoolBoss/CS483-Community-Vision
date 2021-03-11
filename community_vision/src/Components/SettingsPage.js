@@ -3,17 +3,7 @@ import '../App.css';
 import Settings from './Settings'
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
-
-function initial(type){
-    if(localStorage.getItem(type) != null){
-        return localStorage.getItem(type);
-    }
-    if(type === 'backgroundColor'){
-        return 'blue';
-    } else if (type === 'fontColor') {
-        return 'black';
-    }
-}
+import { initial } from "./Games/Common/Functions";
 
 function SettingsPage(props) {
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
