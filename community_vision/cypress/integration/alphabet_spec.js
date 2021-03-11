@@ -14,6 +14,7 @@ describe('Learning Alphabet Game Test', function () {
         // - interact with that element
         cy.contains('Play Morse!')
         cy.contains('Play Games!').click()
+        cy.contains('Game Volume')
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
@@ -27,8 +28,8 @@ describe('Learning Alphabet Game Test', function () {
         cy.contains("-")
 
         //Go back button should go back to games page
-        cy.contains("Go back").click()
-        cy.url().should("include", "/games")
+        //cy.contains("Go back").click()
+        //cy.url().should("include", "/games")
 
     })
 })
