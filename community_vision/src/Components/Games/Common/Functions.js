@@ -139,14 +139,14 @@ export function BackButton()
         return (
             <Link className='nav-link' to="/games">
                 <button style={{
-                    height: '100%',
+                    height: '90%',
                     width: '100%',
-                    fontSize: '5vh',
-                    fontWeight: 900,
+                    fontSize: '4vh',
+                    fontWeight: 800,
                     userSelect: 'none',
                     cursor: 'pointer',
                     marginBottom: "20px"
-                }}>Go back</button>
+                }}>Go back to games</button>
             </Link>
         );
     }

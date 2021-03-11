@@ -23,6 +23,8 @@ describe('Learning Alphabet Game Test', function () {
         
         // Assert - make an assertion
         // - make an assertion about page content
+        cy.contains("•")
+        cy.contains("-")
 
         //Go back button should go back to games page
         cy.contains("Go back").click()

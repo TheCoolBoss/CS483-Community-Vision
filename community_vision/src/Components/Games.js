@@ -76,7 +76,9 @@ const Games = forwardRef((props, ref) => {
           </Grid>
         </Grid>
       </Container>
-      <Link className='nav-link' to="/">
+      <Link className='nav-link' to="/" style ={{
+        backgroundColor: backgroundColor
+      }}>
         <button style={{
           height: '80%',
           width: '40%',
@@ -85,7 +87,7 @@ const Games = forwardRef((props, ref) => {
           userSelect: 'none',
           cursor: 'pointer',
           marginBottom: "20px"
-        }}>Go back</button>
+        }}>Go back to Home</button>
       </Link>
     </div>
 
