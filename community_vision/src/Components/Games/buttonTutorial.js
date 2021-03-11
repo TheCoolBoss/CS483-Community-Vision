@@ -41,6 +41,7 @@ function updateTutorial() {
         //document.getElementById('sampleMorse').style.backgroundColor = "yellow";
         enter.style.display = "none";
         textIndex = 0;
+        
     }
 }
 
@@ -174,12 +175,13 @@ const RadioContent = () => {
         <div className="radiocontent" >
             <a href="#" alt="Home">
             </a>
-            <p id="tutorialText" value="Change Text">Welcome to the Buttons tutorial! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
             <button onClick={function () {
                 updateTutorial();
             }} style={{ fontSize: '5vh' }}>Next</button>
+            <p id="tutorialText" value="Change Text">Welcome to the Explore Dot and Dash tutorial! </p>
+            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
+            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
+            
         </div>
     );
 };
