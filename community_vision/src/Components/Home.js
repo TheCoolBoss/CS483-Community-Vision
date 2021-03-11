@@ -3,7 +3,7 @@ import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import pencils from './home/pencils.jpg';
+
 
 const Home = forwardRef((props, ref) => {
   
@@ -24,9 +24,6 @@ const Home = forwardRef((props, ref) => {
       gridTemplate: '18fr 10fr 42fr 20fr/ 1fr',
       gridTemplateAreas: '"top" "middleTop" "middleBottom" "bottom"'}}>
       
-      <img src={pencils} alt="pencils" //background image
-      style={{gridRowStart: 'top', gridRowEnd: 'bottom', position: 'absolute', height: '100%', width: '100%', objectFit: 'cover', zIndex: -1}}
-      />
       {/* styling for the home page */}
       <div style={{gridArea: 'top',
         height: '80%',
@@ -45,12 +42,28 @@ const Home = forwardRef((props, ref) => {
       <div style={{gridArea: 'middleBottom'}}>
         {/* welcome statement */}
         <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
-            <Grid item xs={11} style={{height: '80%'}}>
+            <Grid item xs={11} style={{height: '20%'}}>
               <h1 style={{height: '100%', color: 'black', fontWeight: 900, userSelect: 'none', cursor: 'default'}}>
                 Welcome to Community Vision Morse Code Games!
               </h1>
             </Grid>
-            <Grid item xs={5} style={{height: '20%'}}>
+            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
+              {/* directs it to the about page */}
+              <Card style={{minHeight: '100%'}}>
+                <Link className='nav-link' to="/about">
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>About</button>
+                </Link>
+              </Card>
+            </Grid>
+            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
+              {/* directs it to the getting started page */}
+              <Card style={{minHeight: '100%'}}>
+                <Link className='nav-link' to="/GettingStarted">
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>Getting Started</button>
+                </Link>
+              </Card>
+            </Grid>
+            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
               {/* play games button, directs it to the games page */}
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/settings">

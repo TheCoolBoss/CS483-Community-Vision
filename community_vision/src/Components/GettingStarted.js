@@ -23,12 +23,10 @@ const GettingStarted = forwardRef((props, ref) => {
         height: '90vh',
         width: '100vw',
         color: 'black',
-        backgroundColor: 'white',
-        paddingBottom: "10vw"
-        
+      
         
       }}>
-        <h1 style={{ fontWeight: 900, fontSize: "50px"}}>Lets Get Started!</h1>
+        <h1 style={{ fontWeight: 900, fontSize: "50px"}}>Typing with Morse on this Website</h1>
 
         <h2 style={{ fontWeight: 900, fontSize: "30px", textAlign: "left", paddingLeft: "10vw" }}>How to type with Morse on this Website:</h2>
   
@@ -99,7 +97,7 @@ const GettingStarted = forwardRef((props, ref) => {
 
         <h2 style={{ fontweight: 900, color: "blue", fontSize: "30px", textAlign: "left", paddingLeft: "10vw"}}><i>Advanced Levels</i></h2>
 
-        <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px", textAlign: "left"}}>"Learn Letters" or "Learn Words"
+        <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px", textAlign: "left", paddingBottom: '10vh'}}>"Learn Letters" or "Learn Words"
         as above but without any visual cues on the 'dot' and 'dash' combinations
         so you have to rely on your Morse code knowledge/memory!</p> 
   
