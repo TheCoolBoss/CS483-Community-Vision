@@ -421,35 +421,6 @@ const AlphabetRace = forwardRef((props, ref) => {
             <div style={{ gridArea: 'middle' }}>
                 <Container>
                     <Grid container justify='center' spacing={0}>
-                        {/* <Grid item sm={5}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                textAlign: 'right',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}>{output}</p>
-                        </Grid>
-                        <Grid item xs={0}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}> &nbsp; </p>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                textAlign: 'left',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}>{input}</p>
-                        </Grid> */}
                         <Grid item xs={1}>
                             <p style={{
                                 lineHeight: 0,
@@ -482,28 +453,28 @@ const AlphabetRace = forwardRef((props, ref) => {
                     <Grid container justify='center' spacing={2}>
                         <Grid item xs={4}>
                             <Card>
+                                {/* button updates */}
                                 <CardActionArea>
                                     <button id="dotButton" style={{
                                         backgroundColor: dotButtonColor,
                                         width: '100%',
                                         height: '20vh',
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        textAlign: 'center',
+                                        fontSize: '35vh',
+                                        color: fontColor,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
                                     }} onMouseDown={function () {
                                         setInput(input + '•');
                                         playDot();
                                         clearTimeout(t);
                                         t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
-                                        <p style={{
-                                            position: 'absolute',
-                                            fontSize: '55vh',
-                                            margin: 0,
-                                            top: '-21.25vh',
-                                            width: '100%',
-                                            right: '0.25%',
-                                            textAlign: 'center',
-                                            color: fontColor
-                                        }}>•</p>
+                                        <span
+                                        >•
+                                        </span>
                                     </button>
                                 </CardActionArea>
                             </Card>
@@ -515,25 +486,20 @@ const AlphabetRace = forwardRef((props, ref) => {
                                         backgroundColor: dashButtonColor,
                                         width: '100%',
                                         height: '20vh',
-                                        fontSize: '20vh',
+                                        cursor: 'pointer',
+                                        textAlign: 'center',
+                                        fontSize: '35vh',
                                         color: fontColor,
-                                        cursor: 'pointer'
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
                                     }} onMouseDown={function () {
                                         setInput(input + '-');
                                         playDash();
                                         clearTimeout(t);
                                         t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
-                                        <p style={{
-                                            position: 'absolute',
-                                            fontSize: '50vh',
-                                            margin: 0,
-                                            top: '-23vh',
-                                            width: '100%',
-                                            right: '0.25%',
-                                            textAlign: 'center',
-                                            color: fontColor
-                                        }}>-</p>
+                                        -
                                     </button>
                                 </CardActionArea>
                             </Card>
