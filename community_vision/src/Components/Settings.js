@@ -146,45 +146,44 @@ function Settings(props) {
                     </Grid>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
-                        <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>Pick a Theme!</h1>
-                            <Grid container direction='column' alignContent='center' style={{ marginTop: '-1vh' }}>
-                                <Grid container alignItems='center' justify='center'>
-                                    <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked('theme', 'default')} type="radio" id="defaultTheme" name="theme" value="default"
-                                            onClick={() => {
-                                                changeBackgroundColor('#e8e8e8');
-                                                changeFontColor('black');
-                                                changeDotButtonColor('yellow');
-                                                changeDashButtonColor('red');
-                                            }} />
-                                    <Grid item>
-                                        <div style={{
-                                            display: 'grid',
-                                            gridTemplate: '1fr 1fr / 1fr',
-                                            gridTemplateAreas: '"1" "2"',
-                                            width: '6vh',
-                                            height: '6vh',
-                                            marginBottom: '-1vh'
-                                        }} onClick={function () {
+                            <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>Pick a Theme!</h1>
+                            <Grid container direction='row' alignItems='center' justify='center'>
+                                <Grid item>
+                                    <input style={{ cursor: 'pointer' }} checked={isChecked('theme', 'default')} type="radio" id="defaultTheme" name="theme" value="default"
+                                        onClick={() => {
                                             changeBackgroundColor('#e8e8e8');
                                             changeFontColor('black');
                                             changeDotButtonColor('yellow');
                                             changeDashButtonColor('red');
-                                        }}>
-                                            <button style={{ gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                            <button style={{ gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                            <button style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                            <button style={{ gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                        </div>
-                                    </Grid>
-                                    <Grid item>
-                                        <h1 style={{ marginTop: '1vh', marginBottom: '-0.5vh', cursor: 'pointer', userSelect: 'none' }} onClick={function () {
-                                            changeBackgroundColor('#e8e8e8');
-                                            changeFontColor('black');
-                                            changeDotButtonColor('yellow');
-                                            changeDashButtonColor('red');
-                                        }}>Default</h1>
-                                    </Grid>
+                                        }} />
+                                </Grid>
+                                <Grid item>
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplate: '1fr 1fr / 1fr',
+                                        gridTemplateAreas: '"1" "2"',
+                                        width: '6vh',
+                                        height: '6vh',
+                                        marginBottom: '-1vh'
+                                    }} onClick={function () {
+                                        changeBackgroundColor('#e8e8e8');
+                                        changeFontColor('black');
+                                        changeDotButtonColor('yellow');
+                                        changeDashButtonColor('red');
+                                    }}>
+                                        <button style={{ gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                    </div>
+                                </Grid>
+                                <Grid item>
+                                    <h1 style={{ marginTop: '1vh', marginBottom: '-0.5vh', cursor: 'pointer', userSelect: 'none' }} onClick={function () {
+                                        changeBackgroundColor('#e8e8e8');
+                                        changeFontColor('black');
+                                        changeDotButtonColor('yellow');
+                                        changeDashButtonColor('red');
+                                    }}>Default</h1>
                                 </Grid>
                             </Grid>
                             <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>PICK A THEME!</h1>
@@ -374,10 +373,9 @@ function Settings(props) {
                             </Grid>
                         </Grid>
                     </Grid>
-                    </Grid>
                 </Grid>
             </Card>
-        </div>
+        </div >
     )
 }
 
