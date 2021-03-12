@@ -36,8 +36,10 @@ describe('Sandbox Letters Game Test', function () {
         cy.wait(initial("speed"))
         cy.contains(morseToChar("•"))
 
-        cy.contains("•").click()
-        cy.contains("•").click()
+        cy.wait(initial("speed"))
+
+        cy.get("button[id^='dotButton']").click()
+        cy.get("button[id^='dotButton']").click()
         cy.contains(morseToChar("••"))
 
         //Go back button should go back to games page
