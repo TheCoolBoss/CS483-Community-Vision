@@ -31,7 +31,6 @@ const Home = forwardRef((props, ref) => {
           {/* title */}
         <h1 style={{fontSize: '10vh',
           color: '#003087',
-          textDecoration: 'underline',
           position: 'relative',
           bottom: '-1vh',
           userSelect: 'none',
