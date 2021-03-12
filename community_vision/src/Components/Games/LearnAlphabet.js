@@ -241,7 +241,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                 <br />
                                 <Grid item style={{ userSelect: 'none' }}>
                                     <Card>
-                                        <button style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
+                                        <button id = "start" style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
                                             onMouseDown={function () {
                                                 if (startScreen) {
                                                     setStartScreen(false);
