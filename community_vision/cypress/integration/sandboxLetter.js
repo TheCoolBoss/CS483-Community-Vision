@@ -5,6 +5,9 @@ import {charToMorse, morseToChar} from "../../src/Components/Games/charMorseConv
 import {initial} from "../../src/Components/Games/Common/Functions";
 // ./node_modules/.bin/cypress open
 
+//Easy access to dot
+var dot = "•";
+
 describe('Sandbox Letters Game Test', function () {
     it('Navigates to Sandbox Letters Game and tests functionality', function () {
         // Arrange - setup initial app state
@@ -32,6 +35,10 @@ describe('Sandbox Letters Game Test', function () {
         cy.contains("•").click()
         cy.wait(initial("speed"))
         cy.contains(morseToChar("•"))
+
+        cy.contains("•").click()
+        cy.contains("•").click()
+        cy.contains(morseToChar("••"))
 
         //Go back button should go back to games page
         cy.contains("Go back").click()
