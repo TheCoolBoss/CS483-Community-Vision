@@ -4,8 +4,8 @@ const { interpolate } = require("react-spring")
 
 // ./node_modules/.bin/cypress open
 
-describe('Learning Alphabet Game Test', function () {
-    it('Navigates to Learn Alph Game and tests functionality', function () {
+describe('Games page', function () {
+    it('Navigates to Games page and tests back button', function () {
         // Arrange - setup initial app state
         // - visit Learning Alphabet game page
         // - query for an element
