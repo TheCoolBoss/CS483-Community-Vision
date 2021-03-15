@@ -53,6 +53,8 @@ const SandboxWords = forwardRef((props, ref) => {
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const [playDash] = useSound(
@@ -69,7 +71,7 @@ const SandboxWords = forwardRef((props, ref) => {
     //This cannot be imported due to the additional functionality of adding to the textbox
     clearTimeout(t);
     t = setTimeout(function(){
-        document.getElementById("textbox").innerHTML += output;
+        document.getElementById("textbox").innerHTML += input;
         setInput('');
     }, resetTimer);
 
@@ -97,6 +99,8 @@ const SandboxWords = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
                 setButtonColor(initial("buttonColor"));
             }
@@ -132,15 +136,14 @@ const SandboxWords = forwardRef((props, ref) => {
             </div>
 
             <Buttons
-                fontColor={fontColor}
-                backgroundColor={backgroundColor}
-                buttonColor={buttonColor}
-                volume={volume}
-                input={input}
-                input2={input}
-                newInput={setInput}
-                output={output}
-                output2={output}
+                fontColor = {fontColor}
+                input = {input}
+                dotButtonColor = {dotButtonColor}
+                dashButtonColor = {dashButtonColor}
+                t = {t}
+                setInput = {setInput}
+                volume = {volume}
+                resetTimer={resetTimer}
             />
         </div>
     );

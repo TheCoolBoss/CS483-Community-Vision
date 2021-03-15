@@ -418,95 +418,16 @@ const AlphabetRace = forwardRef((props, ref) => {
                     </p>
                 </div>
             </div>
-            <div style={{ gridArea: 'middle' }}>
-                <Container>
-                    <Grid container justify='center' spacing={0}>
-                        <Grid item xs={1}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}> &nbsp; </p>
-                        </Grid>
-                        <Grid item sm={10}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                textAlign: 'center',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}>{input}</p>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <p style={{
-                                lineHeight: 0,
-                                color: fontColor,
-                                fontSize: '10vh',
-                                pointer: 'default',
-                                userSelect: 'none'
-                            }}> &nbsp; </p>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify='center' spacing={2}>
-                        <Grid item xs={4}>
-                            <Card>
-                                {/* button updates */}
-                                <CardActionArea>
-                                    <button id="dotButton" style={{
-                                        backgroundColor: dotButtonColor,
-                                        width: '100%',
-                                        height: '20vh',
-                                        cursor: 'pointer',
-                                        textAlign: 'center',
-                                        fontSize: '35vh',
-                                        color: fontColor,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }} onMouseDown={function () {
-                                        setInput(input + '•');
-                                        playDot();
-                                        clearTimeout(t);
-                                        t = resetInputTime(t, input, setInput, resetTimer);
-                                    }}>
-                                        <span
-                                        >•
-                                        </span>
-                                    </button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Card>
-                                <CardActionArea>
-                                    <button id="dashButton" style={{
-                                        backgroundColor: dashButtonColor,
-                                        width: '100%',
-                                        height: '20vh',
-                                        cursor: 'pointer',
-                                        textAlign: 'center',
-                                        fontSize: '35vh',
-                                        color: fontColor,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }} onMouseDown={function () {
-                                        setInput(input + '-');
-                                        playDash();
-                                        clearTimeout(t);
-                                        t = resetInputTime(t, input, setInput, resetTimer);
-                                    }}>
-                                        -
-                                    </button>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
+            <Buttons
+                fontColor = {fontColor}
+                input = {input}
+                dotButtonColor = {dotButtonColor}
+                dashButtonColor = {dashButtonColor}
+                t = {t}
+                setInput = {setInput}
+                volume = {volume}
+                resetTimer={resetTimer}
+            />
         </div>
     );
 })

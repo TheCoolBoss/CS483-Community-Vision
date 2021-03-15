@@ -55,8 +55,115 @@ export function resetInputTime(t, input, setInput, resetTimer)
     return t;
 }
 
-//Button code
 export function Buttons(props)
+{
+    var t = props.t;
+    const input = props.input;
+    const [playDash] = useSound(
+        dashSound,
+        { volume: props.volume / 100 }
+    );
+    const [playDot] = useSound(
+        dotSound,
+        { volume: props.volume / 100 }
+    );
+    return (
+        <div style={{ gridArea: 'middle' }}>
+            <Container>
+                <Grid container justify='center' spacing={0}>
+                    <Grid item xs={1}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh',
+                            pointer: 'default',
+                            userSelect: 'none'
+                        }}> &nbsp; </p>
+                    </Grid>
+                    <Grid item sm={10}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh',
+                            textAlign: 'center',
+                            pointer: 'default',
+                            userSelect: 'none'
+                        }}>{input}</p>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <p style={{
+                            lineHeight: 0,
+                            color: props.fontColor,
+                            fontSize: '10vh',
+                            pointer: 'default',
+                            userSelect: 'none'
+                        }}> &nbsp; </p>
+                    </Grid>
+                </Grid>
+                <Grid container justify='center' spacing={2}>
+                    <Grid item xs={4}>
+                        <Card>
+                            {/* button updates */}
+                            <CardActionArea>
+                                <button id="dotButton" style={{
+                                    backgroundColor: props.dotButtonColor,
+                                    width: '100%',
+                                    height: '20vh',
+                                    cursor: 'pointer',
+                                    textAlign: 'center',
+                                    fontSize: '35vh',
+                                    color: props.fontColor,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }} onMouseDown={function () {
+                                    props.setInput(input + '•');
+                                    playDot();
+                                    clearTimeout(props.t);
+                                    t = resetInputTime(props.t, input, props.setInput, props.resetTimer);
+                                }}>
+                                        <span
+                                        >•
+                                        </span>
+                                </button>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card>
+                            <CardActionArea>
+                                <button id="dashButton" style={{
+                                    backgroundColor: props.dashButtonColor,
+                                    width: '100%',
+                                    height: '20vh',
+                                    cursor: 'pointer',
+                                    textAlign: 'center',
+                                    fontSize: '35vh',
+                                    color: props.fontColor,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }} onMouseDown={function () {
+                                    props.setInput(input + '-');
+                                    playDash();
+                                    clearTimeout(t);
+                                    t = resetInputTime(t, input, props.setInput, props.resetTimer);
+                                }}>
+                                    -
+                                </button>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Container>
+        </div>
+    )
+}
+
+
+
+//Button code
+export function ButtonsOld(props)
 {
     const input = props.input;
     const [playDash] = useSound(
