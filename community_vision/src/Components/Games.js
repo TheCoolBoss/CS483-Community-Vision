@@ -11,10 +11,12 @@ import buttonsImg from "./Games/buttons.jpg"
 import needleImg from "./Games/needle.jpg"
 import sandBocWords from "./Games/sandboxWord.jpg"
 import stackABC from "./Games/stack_abc.jpg"
+import abceyes from "./Games/abc_eyes.jpg"
 import unicycleImg from "./Games/unicycle.jpg"
 import alphabetIMG from "./Games/abc.jpg"
 import sandboxIMG from "./Games/sandbox1.jpg"
 import numbersIMG from "./Games/numbers.jpg"
+import raceLevel4 from "./Games/racez.jpg"
 import { initial } from "./Games/Common/Functions"
 import { Container } from '@material-ui/core';
 
@@ -48,7 +50,7 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Explore Dot and Dash' img={buttonsImg} link='/buttons' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet In Morse' img={alphabetIMG} link='/learnAlphabet' difficulty='Level 1' />
+            <GameSelection name='Learn The Alphabet In Morse' img={abceyes} link='/learnAlphabet' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Morse Patterns' img={alphabetIMG} link='/sorted' difficulty='Level 1' />
@@ -75,7 +77,7 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Learn the Alphabet In Morse' img={stackABC} link='/noHelpAlphabet' difficulty='Level 4' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Alphabet Race Game' img={alphabetIMG} link='/alphabetRace' difficulty='Level 4' />
+            <GameSelection name='Alphabet Race Game' img={raceLevel4} link='/alphabetRace' difficulty='Level 4' />
           </Grid>
         </Grid>
       </Container>
