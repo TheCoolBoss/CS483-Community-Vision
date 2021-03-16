@@ -17,6 +17,7 @@ import alphabetIMG from "./Games/abc.jpg"
 import sandboxIMG from "./Games/sandbox1.jpg"
 import numbersIMG from "./Games/numbers.jpg"
 import raceLevel4 from "./Games/racez.jpg"
+import raceLevel3 from "./Games/raceq.jpg"
 import { initial } from "./Games/Common/Functions"
 import { Container } from '@material-ui/core';
 
@@ -71,7 +72,7 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Learn Words' img={needleImg} link='/learnWordMedium' difficulty='Level 3' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Alphabet Race Game with Morse' img={raceLevel4} link='/alphabetRacePractice' difficulty='Level 3' />
+            <GameSelection name='Alphabet Race Game with Morse' img={raceLevel3} link='/alphabetRacePractice' difficulty='Level 3' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Words' img={unicycleImg} link='/learnWordAdvanced' difficulty='Level 4' />
