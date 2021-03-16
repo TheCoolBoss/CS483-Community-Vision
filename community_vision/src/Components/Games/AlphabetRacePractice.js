@@ -1,168 +1,81 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../../App.css';
-import { useSpring, animated } from 'react-spring';
-import {charToMorse, morseToChar} from "./charMorseConv";
-import { Container } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { charToMorse, morseToChar } from "./charMorseConv";
+import useSound from 'use-sound';
+import dashSound from '../Assets/Sounds/dash.mp3'
+import dotSound from '../Assets/Sounds/dot.mp3'
+import { Container } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import useSound from 'use-sound';
-import dashSound from '../Assets/Sounds/dash.mp3';
-import dotSound from '../Assets/Sounds/dot.mp3';
-import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
-import spacebar from '../Assets/Images/spacebar.png';
-import enterButton from '../Assets/Images/enterButton.png';
-import {useHistory} from "react-router-dom";
+import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Functions";
+import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var t;
+var interval;
 
-/*
-* Game that teaches the numbers in Morse Code
-*
-* 
-* Created : 10/20/2020
-* Modified: 3/15/2021
-*/
+function getRandomLetter() {
+    return alphabet[Math.floor(Math.random() * alphabet.length)]
+}
 
+function getRandomHeight() {
+    return Math.floor(Math.random() * 20) + 20;
+}
 
-var t; //timeout
-var list = "0123456789" //list that you go through
-var textIndex = 0;
-
-
-function showImage() {
-    var x = document.getElementById("tutorialImage");
-    if(x.style.display === "none") {
-        x.style.display = "block";
+function isVisible(bool) {
+    if (bool) {
+        return 'visible';
     } else {
-        x.style.displau = "none";
+        return 'hidden'
     }
 }
 
-//each textIndex is a "slide" in the tutorial
-function updateTutorial() {
-    var space = document.getElementById('spaceImage');
-    var enter = document.getElementById('enterImage');
-
-    if (textIndex == 0) {
-        document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page';
-        textIndex++;
-    } else if (textIndex == 1) {
-        document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
-        document.getElementById('dotButton').style.backgroundColor = "yellow";
-        space.style.display = "block";
-        textIndex++;
-    } else if (textIndex == 2) {
-        document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
-        document.getElementById('dashButton').style.backgroundColor = "yellow";
-        space.style.display = "none";
-        enter.style.display = "block";
-        textIndex++;
-    } else if (textIndex == 3) {
-        document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'Enter the correct Morse Code shown here!';
-        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.backgroundColor;
-        enter.style.display = "none";
-        textIndex++;
-    } else if (textIndex == 4) {
-        // change this in your tutorials to change the color of the divs
-        document.getElementById('sampleMorseCode').style.color = document.getElementById('dotButton').style.color;
-        document.getElementById('tutorialText').innerHTML = 'Enter the correct code and move onto the next number. Have Fun Learning Morse Numbers!';
-        textIndex++;
-        // change color back to regular
-    } else if (textIndex == 5) {
-        // changes smaple morse back to normal color
-        document.getElementById('sampleMorse').style.color = document.getElementById('dashButton').style.backgroundColor;
-        textIndex = 0;
-        document.getElementById("tutorialMenu").onMouseDown();
-    }
-}
-
-
-const LearnNumbers = forwardRef((props, ref) => {
+const AlphabetRacePractice = forwardRef((props, ref) => {
 
     const history = useHistory();
     function backToGames() {
         history.push("/games");
     }
 
-    var [index, setIndex] = useState(0);
-    //var [index, setIndex] = useState(0); //hooks: everytime you change a hook the page reloads
-    var currentNumber = list[index];
-    // if (index < list.length) {
-    //     currentNumber = list[index];
-    // } else { //once they finish the all the number, it randomly selects another number
-    //     currentNumber = list[randomNumber];
-    // }
-    var currentMorse = charToMorse(currentNumber);
+    // user input
     var [input, setInput] = useState('');
     var output = morseToChar(input);
-    const [anim, setAnim] = useState(true);
 
-    //setting stuff
+    // local variables
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
-    const [dashButtonColor, setdashButtonColor] = useState(() => initial('dashButtonColor'));
-    const [dotButtonColor, setdotButtonColor] = useState(() => initial('dotButtonColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
+    const [highScore, setHighScore] = useState(() => initial('alphabetRacePracticeHS'))
     const resetTimer = speed * 1000; //reset timer in milliseconds
-    const fSize = size + 'vh';
-    const sfSize = size / 3 + 'vh';
+    const fSize = size / 2 + 'vh';
+    const hSize = size / 6 + 'vh';
 
-    //sounds of buttons
+    // dot and dash sounds
     const [playDash] = useSound(
         dashSound,
-        {volume: volume / 100}
+        { volume: volume / 100 }
     );
     const [playDot] = useSound(
         dotSound,
-        {volume: volume / 100}
-    );
-    //number sound
-    var soundSrc = require('../Assets/Sounds/Numbers/' + currentNumber + '.mp3');
-    const [playCurrentNumberSound] = useSound(
-        soundSrc,
         { volume: volume / 100 }
     );
 
-    var [startScreen, setStartScreen] = useState(true);
-    var [endScreen, setEndScreen] = useState(false);
+    // input resetting on timeout and length over max morse length
+    resetInputLength(input, setInput);
 
-    
-    //resets the length of the input if its too long
-    resetInputLength(input, setInput); 
-    //clears the timeout function
-    clearTimeout(t);
-    //resets the input from the user after time
-    t = resetInputTime(t, input, setInput, resetTimer);
-
-
-    React.useEffect(() => {
-        if (input === currentMorse) {
-            playCurrentNumberSound();
-            setTimeout(() => {
-                setAnim(!anim);
-                if(index != list.length -1) {
-                    setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                    setEndScreen(true);
-                }
-            }, 2000)
-        }
-    }, [input])
-
-
-    // tracks keycodes for space button and enter button input 
+    // tracks keycodes for space button  and enter button input 
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            if(startScreen){
+            if (startScreen) {
 
-            } else if(endScreen) {
+            } else if (endScreen) {
                 backToGames();
             } else {
                 setInput(input + '•');
@@ -173,9 +86,20 @@ const LearnNumbers = forwardRef((props, ref) => {
             }
         } else if (evt.keyCode === 13) {
             if (startScreen) {
+                interval = setInterval(() => {
+                    gameTick();
+                }, 20);
                 setStartScreen(false);
             } else if (endScreen) {
+                setLives(3);
+                setScore(0);
                 setEndScreen(false);
+                setLetters([{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }]);
+                setNewSpawn(0);
+                interval = setInterval(() => {
+                    gameTick();
+                }, 20);
+                setTimeout(function () { setNewHighScore(false); }, 600);
             } else {
                 setInput(input + '-');
                 playDash();
@@ -186,21 +110,127 @@ const LearnNumbers = forwardRef((props, ref) => {
         }
     };
 
-    //takes 2 sec for the animation to delete 
-    var d = 2000;
-    //if not, then it will set the animation to 0 and doesnt do anything, doesnt animate 
-    //when its not suppose to be animating
-    //animation for the number displayed
-    if (!anim) {
-        d = 0;
-        t = setTimeout(function () {
-            setAnim(!anim)
-        }, 100);
+    //var [startScreen, setStartScreen] = useState(true);
+    var [lives, setLives] = useState(3);
+    var livesDisplay = "";
+    for (var i = 0; i < lives; i++) {
+        livesDisplay = livesDisplay + "♥";
     }
-    //the animation itself
-    var {x} = useSpring({from: {x: 0}, x: anim ? 1 : 0, config: {duration: d}})
+    var [score, setScore] = useState(0);
+    const scoreDisplay = 'Score: ' + score;
+    var [letters, setLetters] = useState([{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }]);
+    var [startScreen, setStartScreen] = useState(true);
+    var [endScreen, setEndScreen] = useState(false);
+    var [newHighScore, setNewHighScore] = useState(false);
+    var [newSpawn, setNewSpawn] = useState(0);
+    var [currentInterval, setCurrentInterval] = useState(20);
 
-    //sets all the settings the user wants
+
+    if (currentInterval != (20 - (score - score % 10) / 10) && (20 - (score - score % 10) / 10) > 0) {
+        console.log((20 - (score - score % 10) / 10));
+        clearInterval(interval);
+        interval = setInterval(() => {
+            gameTick();
+        }, (20 - (score - score % 10) / 10));
+        setCurrentInterval((20 - (score - score % 10) / 10));
+    }
+
+    function gameTick() {
+        setNewSpawn(curr => curr + 1);
+        setLetters(currLetters => {
+            for (var j = 0; j < currLetters.length; j++) {
+                currLetters[j]['x'] = currLetters[j]['x'] - 0.10;
+            }
+            return [...currLetters];
+        });
+    }
+
+    function highScoreText(bool) {
+        if (bool) {
+            return 'New Best Score!';
+        } else {
+            return 'Best Score:'
+        }
+    }
+
+    function addLetter() {
+        setLetters(currLetters => {
+            var temp = [...currLetters];
+            temp.push({ letter: getRandomLetter(), height: getRandomHeight(), x: 100 });
+            return temp;
+        });
+    }
+
+    const lettersList = letters.map((letter, index) =>
+        <div style={{
+            position: 'absolute',
+            left: letters[index].x + 'vw',
+            top: letters[index].height + 'vh',
+            fontSize: fSize,
+            pointer: 'default',
+            userSelect: 'none',
+            color: fontColor,
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center'
+        }}>
+            {letter.letter}
+            <div style={{
+                position: 'absolute',
+                fontSize: hSize,
+                textAlign: 'center',
+                top: fSize
+            }}>
+                {charToMorse(letter.letter)}
+            </div>
+        </div>
+    );
+
+    if (lives === 0) {
+        if (!endScreen) {
+            setEndScreen(true);
+        }
+        if (score > highScore) {
+            localStorage.setItem('alphabetRacePracticeHS', score);
+            setHighScore(score);
+            setNewHighScore(true);
+        }
+        clearInterval(interval);
+    }
+
+    if (newSpawn > 250) {
+        addLetter();
+        setNewSpawn(0);
+    }
+
+    for (var j = 0; j < letters.length; j++) {
+        var tempLetters = [...letters];
+        if (tempLetters[j].letter === output) {
+            if (tempLetters.length > 1) {
+                tempLetters.splice(j, 1);
+            } else {
+                setNewSpawn(0);
+                tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
+            }
+            setScore(currScore => currScore + 1);
+            setLetters(tempLetters);
+            setTimeout(function () { setInput(''); }, resetTimer / 2);
+            break;
+        }
+        if (tempLetters[j].x < 0) {
+            if (tempLetters.length > 1) {
+                tempLetters.splice(j, 1);
+            } else {
+                setNewSpawn(0);
+                tempLetters = [{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }];
+            }
+            setLives(currLives => currLives - 1);
+            setLetters(tempLetters);
+            setTimeout(function () { setInput(''); }, resetTimer / 2);
+            break;
+        }
+    }
+
     useImperativeHandle(
         ref,
         () => ({
@@ -209,13 +239,13 @@ const LearnNumbers = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
-                setdashButtonColor(initial('dashButtonColor'));
-                setdotButtonColor(initial('dotButtonColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
             }
         }),
     )
-    //styling of the page
+
     return (
         <div style={{
             backgroundColor: backgroundColor,
@@ -256,7 +286,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                         <h1 style={{
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
-                                        }}>Learn Alphabet
+                                        }}>Alphabet Race Practice
                                         </h1>
                                         <br />
                                         <p style={{
@@ -264,16 +294,19 @@ const LearnNumbers = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of all the letters in the alphabet.
+                                        }}>Type the morse of the letters before they reach you.
                                         </p>
                                     </Card>
                                 </Grid>
                                 <br />
                                 <Grid item style={{ userSelect: 'none' }}>
                                     <Card>
-                                        <button id = "start" style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
+                                        <button style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
                                             onMouseDown={function () {
                                                 if (startScreen) {
+                                                    interval = setInterval(() => {
+                                                        gameTick();
+                                                    }, 20);
                                                     setStartScreen(false);
                                                 }
                                             }}>
@@ -317,7 +350,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                         <h1 style={{
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
-                                        }}>Yay!
+                                        }}>{highScoreText(newHighScore)}
                                         </h1>
                                         <br />
                                         <p style={{
@@ -326,7 +359,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in morse.
+                                        }}>{highScore}
                                         </p>
                                     </Card>
                                 </Grid>
@@ -334,7 +367,9 @@ const LearnNumbers = forwardRef((props, ref) => {
                                     <Card>
                                         <button style={{ fontSize: '8vh', cursor: 'pointer', height: '100%', width: '100%' }}
                                             onMouseDown={function () {
-                                                backToGames();
+                                                if (endScreen) {
+                                                    backToGames();
+                                                }
                                             }}>
                                             Other Games (•)
                                         </button>
@@ -345,7 +380,17 @@ const LearnNumbers = forwardRef((props, ref) => {
                                     <Card>
                                         <button style={{ fontSize: '8vh', cursor: ' pointer', height: '100%', width: '100%' }}
                                             onMouseDown={function () {
-                                                setEndScreen(false);
+                                                if (endScreen) {
+                                                    setLives(3);
+                                                    setScore(0);
+                                                    setEndScreen(false);
+                                                    setLetters([{ letter: getRandomLetter(), height: getRandomHeight(), x: 100 }]);
+                                                    setNewSpawn(0);
+                                                    interval = setInterval(() => {
+                                                        gameTick();
+                                                    }, 20);
+                                                    setTimeout(function () { setNewHighScore(false); }, 600);
+                                                }
                                             }}>
                                             More Practice (-)
                                         </button>
@@ -356,34 +401,33 @@ const LearnNumbers = forwardRef((props, ref) => {
                         : props => <div />
                 }
             </Transition>
-            <div style={{gridArea: 'top'}}>
-                {/* <div style={{ position: 'absolute' }}>
-                    <Container>
-                        <BackButton />
-                        <Grid container justify='left'>
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
-                    </Container>
-                </div> */}
-                <div id="sampleMorse">
-                    <animated.h1 style={{
-                        lineHeight: 0,
-                        color: fontColor,
-                        fontSize: fSize,
-                        pointer: 'default',
-                        userSelect: 'none',
-                        opacity: x.interpolate({range: [0, 1], output: [0, 1]})
-                    }}>{currentNumber}</animated.h1>
-                    <animated.p id="sampleMorseCode" style={{
-                        lineHeight: 0,
-                        color: fontColor,
-                        fontSize: sfSize,
-                        pointer: 'default',
-                        userSelect: 'none',
-                        opacity: x.interpolate({range: [0, 1], output: [0, 1]})
-                    }}>{currentMorse}</animated.p>
+            <div style={{ gridArea: 'top' }}>
+                {lettersList}
+                <div style={{
+                    position: 'absolute',
+                    right: '2vw',
+                    top: '5vh',
+                    fontSize: '7vh',
+                    pointer: 'default',
+                    userSelect: 'none',
+                    color: fontColor
+                }}>
+                    <p>
+                        {livesDisplay}
+                    </p>
+                </div>
+                <div style={{
+                    position: 'absolute',
+                    left: '2vw',
+                    top: '5vh',
+                    fontSize: '7vh',
+                    pointer: 'default',
+                    userSelect: 'none',
+                    color: fontColor
+                }}>
+                    <p>
+                        {scoreDisplay}
+                    </p>
                 </div>
             </div>
             <div style={{ gridArea: 'middle' }}>
@@ -479,57 +523,4 @@ const LearnNumbers = forwardRef((props, ref) => {
     );
 })
 
-const Radio =() => {
-    const [isToggled, setToggle] = useState(false);
-    const menubg = useSpring({ background: isToggled ? "#6ce2ff" : "#ebebeb" });
-    const { y } = useSpring({
-        y: isToggled ? 180 :0
-    });
-    const menuAppear = useSpring({
-        transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
-        opacity: isToggled ? 1 : 0
-    });
-    return (
-        <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
-            <animated.button
-                style={menubg}
-                value="!toggled"
-                className="radiowrapper"
-                onMouseDown={() => setToggle(!isToggled)}
-                id="tutorialMenu"
-            >
-                <div className="radio">
-                    <p>Tutorial</p>
-                    <animated.p
-                        style={{
-                            transform: y.interpolate(y => `rotateX(${y}deg)`)
-                        }}
-                    >
-                        ▼
-                    </animated.p>
-                </div>
-            </animated.button>
-            <animated.div style={menuAppear}>
-                {isToggled ? <RadioContent /> : null}
-            </animated.div>
-        </div>
-    );
-};
-
-// use state object and set it to 0 initially 
-const RadioContent = () => {
-    return (
-        <div className="radiocontent" >
-            <a href="#" alt="Home">
-            </a>
-            <button id='4' onMouseDown={function () {
-                updateTutorial();
-            }} style={{ fontSize: '5vh' }}>Next</button>
-            <p id="tutorialText" value="Change Text">Welcome to the Learn Alphabet Game! This game teaches you the Morse Code Alphabet! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
-        </div>
-    );
-};
-
-export default LearnNumbers;
+export default AlphabetRacePractice;
