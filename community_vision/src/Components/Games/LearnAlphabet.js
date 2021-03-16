@@ -112,11 +112,12 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    // creates starts and end screen 
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
 
     resetInputLength(input, setInput);
-
+    
     React.useEffect(() => {
         if (input === currentMorse) {
             playCurrentLetterSound();
