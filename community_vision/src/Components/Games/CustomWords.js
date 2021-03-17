@@ -18,10 +18,18 @@ import { Transition } from 'react-spring/renderprops';
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
+var customLetters;
+var customMorse;
 
 function parseInput() {
-
+    var customWord = document.getElementById("customInput").innerHTML;
+    window.alert(customWord);
+    if(customWord.length > 6) {
+        window.alert("Custom Word must be less than 6 letters");
+    }
+    customLetters = customWord;
 }
+
 
 const CustomWords = forwardRef((props, ref) => {
     const history = useHistory();
@@ -107,7 +115,7 @@ const CustomWords = forwardRef((props, ref) => {
                         pointer: 'default',
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
-                    }}>{'custom'}</animated.h1>
+                    }}>{'customLetters'}</animated.h1>
                     <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
@@ -145,12 +153,15 @@ const CustomWords = forwardRef((props, ref) => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 fontSize: '8vh',
-                            }} id='customInput'></TextField>
+                            }} 
+                            id='customInput' label='Enter Custom Word Here'
+                            variant='outlined'></TextField>
                             <button style={{
-                                fontSize: '2.5vh'
+                                fontSize: '4vh'
                             }} onClick={function(){
                                 parseInput();
-                            }}>Enter</button>
+                            }}
+                            variant='outline-secondary'>Enter</button>
                         </Grid>
                         <Grid item xs={1}>
                             <p style={{
