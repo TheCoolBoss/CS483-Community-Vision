@@ -25,6 +25,7 @@ const Home = forwardRef((props, ref) => {
       }
     }),
   )
+  
   return (
     <div style={{
       position: 'relative',
@@ -48,21 +49,23 @@ const Home = forwardRef((props, ref) => {
           userSelect: 'none',
           cursor: 'default',
           fontWeight: 900,
-          margin: 0
+          margin: 0,
+          lineHeight: '100%',
+          paddingTop: '2vh'
         }}>
           Play Morse!</h1>
         {/* welcome statement */}
         <Grid container justify='center' alignItems='flex-start'>
           <Grid item xs={11} style={{ height: '20%' }}>
-            <h1 style={{ height: '100%', color: fontColor, fontWeight: 900, userSelect: 'none', cursor: 'default' }}>
+            <h1 style={{ height: '100%', color: fontColor, fontWeight: 900, userSelect: 'none', cursor: 'default', lineHeight:'100%' }}>
               Welcome to Community Vision Morse Code Games!
               </h1>
           </Grid>
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* directs it to the about page */}
             <Card style={{ minHeight: '100%' }} onMouseDown={() => {
-                    moveTo('/about');
-                  }}>
+              moveTo('/about');
+            }}>
               <CardActionArea>
                 <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "2vh", borderColor: "red" }}>About</button>
               </CardActionArea>
@@ -71,8 +74,8 @@ const Home = forwardRef((props, ref) => {
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* directs it to the getting started page */}
             <Card style={{ minHeight: '100%' }} onMouseDown={() => {
-                    moveTo('/gettingStarted');
-                  }}>
+              moveTo('/gettingStarted');
+            }}>
               <CardActionArea>
                 <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "2vh", borderColor: 'lightgreen' }}>Getting Started</button>
               </CardActionArea>
@@ -81,8 +84,8 @@ const Home = forwardRef((props, ref) => {
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* play games button, directs it to the games page */}
             <Card style={{ minHeight: '100%' }} onMouseDown={() => {
-                    moveTo('/settings');
-                  }}>
+              moveTo('/settings');
+            }}>
               <CardActionArea>
                 <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'blue', borderWidth: "2vh" }}>Play Games!</button>
               </CardActionArea>
