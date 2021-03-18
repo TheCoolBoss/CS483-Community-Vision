@@ -1,76 +1,94 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../App.css';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import {Link} from 'react-router-dom';
-
+import { initial } from "./Games/Common/Functions";
+import { CardActionArea } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
 
 const Home = forwardRef((props, ref) => {
-  
+
+  const history = useHistory();
+  function moveTo(input) {
+    history.push(input);
+  }
+
+  const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
+  const [fontColor, setFontColor] = useState(() => initial('fontColor'));
+
   useImperativeHandle(
     ref,
     () => ({
       update() {
-        //does nothing to homepage for now
+        setBackgroundColor(initial('backgroundColor'));
+        setFontColor(initial('fontColor'));
       }
     }),
   )
   return (
-    <div style={{position: 'relative',
+    <div style={{
+      position: 'relative',
       zIndex: 0,
       height: '90vh',
       width: '100vw',
-      display: 'grid',
-      gridTemplate: '18fr 10fr 42fr 20fr/ 1fr',
-      gridTemplateAreas: '"top" "middleTop" "middleBottom" "bottom"'}}>
-      
+      backgroundColor: backgroundColor
+    }}>
+
       {/* styling for the home page */}
-      <div style={{gridArea: 'top',
-        height: '80%',
-        alignSelf: 'center', alignItems: 'center'}}>
-          {/* title */}
-        <h1 style={{fontSize: '10vh',
-          color: '#003087',
-          position: 'relative',
+      <div style={{
+        alignSelf: 'center',
+        alignItems: 'center'
+      }}>
+        {/* title */}
+        <h1 style={{
+          fontSize: '10vh',
+          color: fontColor,
+          //color: '#003087',
           bottom: '-1vh',
           userSelect: 'none',
           cursor: 'default',
-          fontWeight: 900}}>
+          fontWeight: 900,
+          margin: 0
+        }}>
           Play Morse!</h1>
-      </div>
-      <div style={{gridArea: 'middleBottom'}}>
         {/* welcome statement */}
-        <Grid container justify='center' alignItems='flex-start' style={{height: '100%'}}>
-            <Grid item xs={11} style={{height: '20%'}}>
-              <h1 style={{height: '100%', color: 'black', fontWeight: 900, userSelect: 'none', cursor: 'default'}}>
-                Welcome to Community Vision Morse Code Games!
+        <Grid container justify='center' alignItems='flex-start'>
+          <Grid item xs={11} style={{ height: '20%' }}>
+            <h1 style={{ height: '100%', color: fontColor, fontWeight: 900, userSelect: 'none', cursor: 'default' }}>
+              Welcome to Community Vision Morse Code Games!
               </h1>
-            </Grid>
-            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
-              {/* directs it to the about page */}
-              <Card style={{minHeight: '100%'}}>
-                <Link className='nav-link' to="/about">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "13px", borderColor: "red"}}>About</button>
-                </Link>
-              </Card>
-            </Grid>
-            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
-              {/* directs it to the getting started page */}
-              <Card style={{minHeight: '100%'}}>
-                <Link className='nav-link' to="/GettingStarted">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "13px", borderColor: 'lightgreen'}}>Getting Started</button>
-                </Link>
-              </Card>
-            </Grid>
-            <Grid item xs={8} style={{height: '20%', paddingBottom: '6vh'}}>
-              {/* play games button, directs it to the games page */}
-              <Card style={{minHeight: '100%'}}>
-                <Link className='nav-link' to="/settings">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'blue', borderWidth: "13px"}}>Play Games!</button>
-                </Link>
-              </Card>
-            </Grid>
           </Grid>
+          <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
+            {/* directs it to the about page */}
+            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+                    moveTo('/about');
+                  }}>
+              <CardActionArea>
+                <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "2vh", borderColor: "red" }}>About</button>
+              </CardActionArea>
+            </Card>
+          </Grid>
+          <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
+            {/* directs it to the getting started page */}
+            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+                    moveTo('/gettingStarted');
+                  }}>
+              <CardActionArea>
+                <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "2vh", borderColor: 'lightgreen' }}>Getting Started</button>
+              </CardActionArea>
+            </Card>
+          </Grid>
+          <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
+            {/* play games button, directs it to the games page */}
+            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+                    moveTo('/settings');
+                  }}>
+              <CardActionArea>
+                <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'blue', borderWidth: "2vh" }}>Play Games!</button>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );

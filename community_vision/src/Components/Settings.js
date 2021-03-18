@@ -146,7 +146,6 @@ function Settings(props) {
                     </Grid>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
-                            <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>Pick a Theme!</h1>
                             <Grid container direction='row' alignItems='center' justify='center'>
                                 <Grid item>
                                     <input style={{ cursor: 'pointer' }} checked={isChecked('theme', 'default')} type="radio" id="defaultTheme" name="theme" value="default"
@@ -186,7 +185,6 @@ function Settings(props) {
                                     }}>Default</h1>
                                 </Grid>
                             </Grid>
-                            <h1 style={{ fontSize: '1vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none', opacity: 0 }}>PICK A THEME!</h1>
                         </Grid>
                         <Grid item>
                             <h1 style={{ fontSize: '3vh', marginTop: '-0.2vh', cursor: 'default', userSelect: 'none' }}>Background Color</h1>
@@ -291,7 +289,7 @@ function Settings(props) {
                                         <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDashButtonColor('blue')}>Blue</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'blue')} type="radio" id="blueDashButtonColor" name="dotButtonColor" value="blue" onClick={() => changeDashButtonColor('blue')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'blue')} type="radio" id="blueDashButtonColor" name="dashButtonColor" value="blue" onClick={() => changeDashButtonColor('blue')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -302,7 +300,7 @@ function Settings(props) {
                                         <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDashButtonColor('red')}>Red</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'red')} type="radio" id="redDashButtonColor" name="dotButtonColor" value="red" onClick={() => changeDashButtonColor('red')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'red')} type="radio" id="redDashButtonColor" name="dashButtonColor" value="red" onClick={() => changeDashButtonColor('red')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -313,7 +311,7 @@ function Settings(props) {
                                         <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDashButtonColor('green')}>Green</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'green')} type="radio" id="greenDashButtonColor" name="dotButtonColor" value="green" onClick={() => changeDashButtonColor('green')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'green')} type="radio" id="greenDashButtonColor" name="dashButtonColor" value="green" onClick={() => changeDashButtonColor('green')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>

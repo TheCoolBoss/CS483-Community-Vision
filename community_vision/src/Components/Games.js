@@ -6,20 +6,20 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
-import LearnABCIMG from "./Games/apple.jpg"
-import buttonsImg from "./Games/buttons.jpg"
-import needleImg from "./Games/needle.jpg"
-import sandBocWords from "./Games/sandboxWord.jpg"
-import stackABC from "./Games/stack_abc.jpg"
-import abceyes from "./Games/abc_eyes.jpg"
-import unicycleImg from "./Games/unicycle.jpg"
-import alphabetIMG from "./Games/abc.jpg"
-import sandboxIMG from "./Games/sandbox1.jpg"
-import numbersIMG from "./Games/numbers.jpg"
-import raceLevel4 from "./Games/racez.jpg"
-import raceLevel3 from "./Games/raceq.jpg"
+import LearnABCIMG from "./Games/appleR.jpg"
+import buttonsImg from "./Games/buttonsR.jpg"
+import needleImg from "./Games/needleR.jpg"
+import sandBocWords from "./Games/sandboxWordR.jpg"
+import stackABC from "./Games/stack_abcR.jpg"
+import abceyes from "./Games/abc_eyesR.jpg"
+import unicycleImg from "./Games/unicycleR.jpg"
+import alphabetIMG from "./Games/abcR.jpg"
+import sandboxIMG from "./Games/sandbox1R.jpg"
+import numbersIMG from "./Games/numbersR.jpg"
+import raceLevel4 from "./Games/racezR.jpg"
+import raceLevel3 from "./Games/raceqR.jpg"
 import { initial } from "./Games/Common/Functions"
-import { CardMedia, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 const Games = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
@@ -44,7 +44,7 @@ const Games = forwardRef((props, ref) => {
       gridTemplate: '1fr 4fr / 1fr',
       gridTemplateAreas: '"top" "bottom'
     }}>
-      <h1 style={{ fontSize: '7vh', color: fontColor, position: 'relative', bottom: '-2vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+      <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
