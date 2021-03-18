@@ -72,8 +72,6 @@ const SortedAlphabet = forwardRef((props, ref) => {
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
-    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
-    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
     const fSize = size + 'vh';
@@ -140,8 +138,6 @@ const SortedAlphabet = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
-                setDashButtonColor(initial('dashButtonColor'));
-                setDotButtonColor(initial('dotButtonColor'));
                 setButtonColor(initial('buttonColor'));
                 setFontColor(initial('fontColor'));
             }
@@ -190,15 +186,15 @@ const SortedAlphabet = forwardRef((props, ref) => {
                 </div>
             </div>
             <Buttons
-                fontColor = {fontColor}
-                input = {input}
-                dotButtonColor = {dotButtonColor}
-                dashButtonColor = {dashButtonColor}
-                t = {t}
-                setInput = {setInput}
-                volume = {volume}
-                resetTimer={resetTimer}
-                game = "notSandWords"
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                buttonColor={buttonColor}
+                volume={volume}
+                input={input}
+                input2={input}
+                newInput={setInput}
+                output={output}
+                output2={output}
             />
         </div>
     );
