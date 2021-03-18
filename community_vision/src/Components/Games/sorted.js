@@ -198,6 +198,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                 setInput = {setInput}
                 volume = {volume}
                 resetTimer={resetTimer}
+                game = "notSandWords"
             />
         </div>
     );

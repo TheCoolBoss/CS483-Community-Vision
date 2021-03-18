@@ -44,7 +44,7 @@ function updateTutorial() {
 var t;
 
 const SandboxLetters = forwardRef((props, ref) => {
-    var [input, setInput] = React.useState('');
+    var [input, setInput] = React.useState('&nbsp;');
     var output = morseToChar(input);
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
@@ -140,6 +140,7 @@ const SandboxLetters = forwardRef((props, ref) => {
                 setInput = {setInput}
                 volume = {volume}
                 resetTimer={resetTimer}
+                game = "notSandWords"
             />
         </div>
     );

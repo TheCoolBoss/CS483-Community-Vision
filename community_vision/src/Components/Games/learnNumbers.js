@@ -233,6 +233,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                 setInput = {setInput}
                 volume = {volume}
                 resetTimer={resetTimer}
+                game = "notSandWords"
             />
         </div>
     );

@@ -45,7 +45,7 @@ export function resetInputLength(input, setInput)
 }
 
 //Clear input after timer expires
-export function resetInputTime(t, input, setInput, resetTimer)
+export function resetInputTime(t, input, setInput, resetTimer, game)
 {
     t = setTimeout(() =>
         {
@@ -67,6 +67,7 @@ export function Buttons(props)
         dotSound,
         { volume: props.volume / 100 }
     );
+
     return (
         <div style={{ gridArea: 'middle' }}>
             <Container>
@@ -119,8 +120,8 @@ export function Buttons(props)
                                 }} onMouseDown={function () {
                                     props.setInput(input + '•');
                                     playDot();
-                                    clearTimeout(props.t);
-                                    t = resetInputTime(props.t, input, props.setInput, props.resetTimer);
+                                    //clearTimeout(props.t);
+                                    //t = resetInputTime(props.t, input, props.setInput, props.resetTimer, props.game);
                                 }}>
                                         <span
                                         >•
@@ -146,8 +147,8 @@ export function Buttons(props)
                                 }} onMouseDown={function () {
                                     props.setInput(input + '-');
                                     playDash();
-                                    clearTimeout(t);
-                                    t = resetInputTime(t, input, props.setInput, props.resetTimer);
+                                    //clearTimeout(t);
+                                    //t = resetInputTime(t, input, props.setInput, props.resetTimer, props.game);
                                 }}>
                                     -
                                 </button>

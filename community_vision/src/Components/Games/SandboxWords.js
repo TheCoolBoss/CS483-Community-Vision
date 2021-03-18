@@ -71,7 +71,7 @@ const SandboxWords = forwardRef((props, ref) => {
     //This cannot be imported due to the additional functionality of adding to the textbox
     clearTimeout(t);
     t = setTimeout(function(){
-        document.getElementById("textbox").innerHTML += input;
+        document.getElementById("textbox").innerHTML += output;
         setInput('');
     }, resetTimer);
 
@@ -87,7 +87,7 @@ const SandboxWords = forwardRef((props, ref) => {
             setInput(input + '-');
             playDash();
         } else if (evt.keyCode === 9) {
-            document.getElementById("textbox").innerHTML = "";
+            document.getElementById("textbox").innerHTML = "&nbsp;";
         }
     };
 
@@ -140,6 +140,7 @@ const SandboxWords = forwardRef((props, ref) => {
                 input = {input}
                 dotButtonColor = {dotButtonColor}
                 dashButtonColor = {dashButtonColor}
+                game = "sandWords"
                 t = {t}
                 setInput = {setInput}
                 volume = {volume}

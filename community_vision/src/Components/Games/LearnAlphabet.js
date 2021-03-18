@@ -116,6 +116,8 @@ const LearnAlphabet = forwardRef((props, ref) => {
     var [endScreen, setEndScreen] = useState(false);
 
     resetInputLength(input, setInput);
+    clearTimeout(t);
+    t = resetInputTime(t, input, setInput, resetTimer);
 
     React.useEffect(() => {
         if (input === currentMorse) {
@@ -366,6 +368,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 setInput = {setInput}
                 volume = {volume}
                 resetTimer={resetTimer}
+                game = "notSandWords"
                 />
         </div>
     );
