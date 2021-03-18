@@ -57,7 +57,7 @@ const Nav = forwardRef((props, ref) => {
         color: 'white'
       }}>
         <Link to="/">
-          <img style={{ height: '8vh', cursor: 'pointer', userSelect: 'none' }} src={logo} alt={logo}></img>
+          <img style={{ height: '8vh', cursor: 'pointer', userSelect: 'none', paddingLeft: '0.25vw' }} src={logo} alt={logo}></img>
         </Link>
         <div style={{
           width: '100%',
@@ -108,14 +108,27 @@ const Nav = forwardRef((props, ref) => {
             </Hidden>
           </Container>
         </div>
-        <button style={{ position: 'relative', right: '0.25vw', cursor: 'pointer', userSelect: 'none' }}
-          onMouseDown={() => {
+        <Card style={{
+          position: 'absolute',
+          borderRadius: '10px',
+          height: '9.25vh',
+          width: '9.25vh',
+          right: '0.25vw',
+          cursor: 'pointer',
+          userSelect: 'none',
+          display: 'flex',
+          justifyContent: 'center'
+        }}
+          onMouseUp={() => {
             if (window.location.href.slice(-8) !== 'settings') {
               toggle(!dropdownState);
             }
           }}>
-          <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
-        </button>
+          <CardActionArea>
+            <img style={{ width: '8vh' }} src={pic} alt={pic}></img>
+          </CardActionArea>
+        </Card>
+
       </div>
       <div id="root">
       </div>
@@ -129,40 +142,47 @@ const Nav = forwardRef((props, ref) => {
         left: x.interpolate({ range: [0, 1], output: ['100vw', '0vw'] }),
         opacity: x.interpolate({ range: [0, 1], output: [0, 0.95] })
       }}>
-        <p style={{
-          fontSize: '10vh',
-          position: 'absolute',
-          background: 'white',
-          top: '-20vh',
-          width: '100%',
-          zIndex: 5,
-          cursor: 'pointer',
-          userSelect: 'none',
-          textAlign: 'right',
-        }} onMouseDown={() => {
-          toggle(!dropdownState);
-        }}>X</p>
-        <h1 style={{
-          fontSize: '10vh',
-          position: 'absolute',
-          top: '-17vh',
-          width: '100%',
-          zIndex: 5,
-          cursor: 'pointer',
-          userSelect: 'none',
-          textAlign: 'center',
-        }} onMouseDown={() => {
+        <Card onMouseUp={() => {
           toggle(!dropdownState);
         }}>
-          <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
-          Settings
-        </h1>
-        <Grid container style={{ paddingTop: '1.25vh', zIndex: 4 }}>
+          <CardActionArea style={{
+            fontSize: '10vh',
+            position: 'absolute',
+            background: 'white',
+            top: '-10vh',
+            width: '100%',
+            zIndex: 5,
+            cursor: 'pointer',
+            userSelect: 'none',
+            textAlign: 'right',
+          }}>
+            X
+          </CardActionArea>
+        </Card>
+        <Card onMouseUp={() => {
+          toggle(!dropdownState);
+        }} style={{ backgroundColor: 'white' }}>
+          <CardActionArea style={{
+            fontSize: '10vh',
+            position: 'absolute',
+            top: '-10vh',
+            width: '100%',
+            zIndex: 5,
+            cursor: 'pointer',
+            userSelect: 'none',
+            textAlign: 'center',
+          }}>
+            <img style={{ height: '8vh' }} src={pic} alt={pic}></img>
+            Settings
+            <div style={{ textAlign: 'right' }}>X</div>
+          </CardActionArea>
+        </Card>
+        <Grid container style={{ paddingTop: '1.25vh', zIndex: 6 }}>
           <Grid item xs={12} style={{ background: 'white' }}>
             <Hidden mdUp>
-              <Grid container direction='row' justify='flex-start' alignItems='center' spacing={1}>
+              <Grid container direction='row' justify='flex-start' alignItems='center' spacing={1} style={{ paddingLeft: '8px', paddingRight: '8px' }}>
                 <Grid item xs={4}>
-                  <Card style={{ borderRadius: '20px' }} onMouseDown={() => {
+                  <Card style={{ borderRadius: '20px' }} onMouseUp={() => {
                     moveTo('/about');
                     toggle(!dropdownState);
                   }}>
@@ -174,7 +194,7 @@ const Nav = forwardRef((props, ref) => {
                   </Card>
                 </Grid>
                 <Grid item xs={4}>
-                  <Card style={{ borderRadius: '20px' }} onMouseDown={() => {
+                  <Card style={{ borderRadius: '20px' }} onMouseUp={() => {
                     moveTo('/gettingStarted');
                     toggle(!dropdownState);
                   }}>
@@ -186,7 +206,7 @@ const Nav = forwardRef((props, ref) => {
                   </Card>
                 </Grid>
                 <Grid item xs={4}>
-                  <Card style={{ borderRadius: '20px' }} onMouseDown={() => {
+                  <Card style={{ borderRadius: '20px' }} onMouseUp={() => {
                     moveTo('/games');
                     toggle(!dropdownState);
                   }}>

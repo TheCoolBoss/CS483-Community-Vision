@@ -63,7 +63,7 @@ const Home = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* directs it to the about page */}
-            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
               moveTo('/about');
             }}>
               <CardActionArea>
@@ -73,7 +73,7 @@ const Home = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* directs it to the getting started page */}
-            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
               moveTo('/gettingStarted');
             }}>
               <CardActionArea>
@@ -83,7 +83,7 @@ const Home = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
             {/* play games button, directs it to the games page */}
-            <Card style={{ minHeight: '100%' }} onMouseDown={() => {
+            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
               moveTo('/settings');
             }}>
               <CardActionArea>
