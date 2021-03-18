@@ -20,7 +20,10 @@ const Nav = forwardRef((props, ref) => {
     history.push(input);
   }
 
-  var [dropdownState, toggle] = useState(false);
+  var [dropdownState, setDropdownState] = useState(false);
+  const toggle = (newValue) => {
+    setDropdownState(newValue);
+  };
   const { x } = useSpring({
     from: { x: 0 },
     to: { x: dropdownState ? 1 : 0 },
@@ -35,7 +38,7 @@ const Nav = forwardRef((props, ref) => {
     ref,
     () => ({
       update() {
-        
+
       }
     }),
   )
