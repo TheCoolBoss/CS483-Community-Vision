@@ -33,6 +33,8 @@ export function initial(type){
         return 'yellow';
     } else if (type === 'alphabetRaceHS'){
         return 0;
+    } else if (type === 'alphabetRacePracticeHS'){
+        return 0;
     }
 }
 

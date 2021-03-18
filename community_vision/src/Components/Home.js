@@ -50,7 +50,7 @@ const Home = forwardRef((props, ref) => {
               {/* directs it to the about page */}
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/about">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>About</button>
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "13px", borderColor: "red"}}>About</button>
                 </Link>
               </Card>
             </Grid>
@@ -58,7 +58,7 @@ const Home = forwardRef((props, ref) => {
               {/* directs it to the getting started page */}
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/GettingStarted">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>Getting Started</button>
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderWidth: "13px", borderColor: 'lightgreen'}}>Getting Started</button>
                 </Link>
               </Card>
             </Grid>
@@ -66,7 +66,7 @@ const Home = forwardRef((props, ref) => {
               {/* play games button, directs it to the games page */}
               <Card style={{minHeight: '100%'}}>
                 <Link className='nav-link' to="/settings">
-                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer'}}>Play Games!</button>
+                  <button style={{height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'blue', borderWidth: "13px"}}>Play Games!</button>
                 </Link>
               </Card>
             </Grid>

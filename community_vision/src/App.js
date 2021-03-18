@@ -18,6 +18,7 @@ import LearnNumbers from "./Components/Games/learnNumbers";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
 import AlphabetRace from './Components/Games/AlphabetRace';
+import AlphabetRacePractice from './Components/Games/AlphabetRacePractice';
 
 function App() {
   const currentRef = useRef();
@@ -80,6 +81,9 @@ function App() {
           </Route>
           <Route path="/gettingStarted">
             <GettingStarted ref={currentRef} />
+          </Route>
+          <Route path="/alphabetRacePractice">
+            <AlphabetRacePractice ref={currentRef} />
           </Route>
         </Switch>
       </div>
