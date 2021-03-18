@@ -21,6 +21,7 @@ var textIndex = 0;
 var customLetters;
 var customMorse;
 
+/*
 function parseInput() {
     var customWord = document.getElementById("customInput").innerHTML;
     window.alert(customWord);
@@ -29,6 +30,7 @@ function parseInput() {
     }
     customLetters = customWord;
 }
+*/
 
 
 const CustomWords = forwardRef((props, ref) => {
@@ -37,6 +39,8 @@ const CustomWords = forwardRef((props, ref) => {
         history.push("/games");
     }
 
+    var [correct, setCorrect] = useState('');
+    var [wordIndex, setWordIndex] = useState(0);
     var [index, setIndex] = useState(0);
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
@@ -44,7 +48,7 @@ const CustomWords = forwardRef((props, ref) => {
     var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
-
+    // Settings
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
     const [speed, setSpeed] = useState(() => initial('speed'));
@@ -56,6 +60,7 @@ const CustomWords = forwardRef((props, ref) => {
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
+    // Sounds
     const [playDash] = useSound(
         dashSound,
         { volume: volume / 100 }
@@ -64,12 +69,12 @@ const CustomWords = forwardRef((props, ref) => {
         dotSound,
         { volume: volume / 100 }
     );
-
     var soundSrc = require('../Assets/Sounds/Letters/' + currentLetter + '.flac');
     const [playCurrentLetterSound] = useSound(
         soundSrc,
         { volume: volume / 100 }
     );
+
 
     var d = 2000;
     if (!anim) {
@@ -115,7 +120,7 @@ const CustomWords = forwardRef((props, ref) => {
                         pointer: 'default',
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
-                    }}>{'customLetters'}</animated.h1>
+                    }}>{'test'}</animated.h1>
                     <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
@@ -159,7 +164,7 @@ const CustomWords = forwardRef((props, ref) => {
                             <button style={{
                                 fontSize: '4vh'
                             }} onClick={function(){
-                                parseInput();
+                                //parseInput();
                             }}
                             variant='outline-secondary'>Enter</button>
                         </Grid>
