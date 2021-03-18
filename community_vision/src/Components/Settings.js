@@ -112,7 +112,7 @@ function Settings(props) {
                                     <img style={{ cursor: 'default', userSelect: 'none' }} src={tortoise} alt="tortoise" id="tortoiseimg" width="20" height="20"></img>
                                 </Grid>
                                 <Grid item xs={10}>
-                                    <Slider value={speed} onChange={changeSpeed}
+                                    <Slider id = "textSlider" value={speed} onChange={changeSpeed}
                                         valueLabelDisplay="auto" marks
                                         step={0.2} min={0.5} max={4}
                                         scale={x => (4.5 - x).toFixed(1)}
