@@ -10,6 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import Settings from './Settings';
 import { initial } from "./Games/Common/Functions";
+import Hidden from '@material-ui/core/Hidden';
 
 const Nav = forwardRef((props, ref) => {
   var [dropdownState, toggle] = useState(false);
@@ -48,7 +49,7 @@ const Nav = forwardRef((props, ref) => {
         color: 'white'
       }}>
         <Link to="/">
-          <img style={{ height: '8vh' }} src={logo} alt={logo}></img>
+          <img style={{ height: '8vh', cursor: 'pointer', userSelect: 'none' }} src={logo} alt={logo}></img>
         </Link>
         <div style={{
           width: '100%',
@@ -58,36 +59,38 @@ const Nav = forwardRef((props, ref) => {
         }}>
           <Container>
             <Grid container direction='row' justify='flex-start' alignItems='center' spacing={2}>
-              <Grid item xs={2} />
-              <Grid item xs={2}>
-                <Card style={{ borderRadius: '20px' }}>
-                  <CardActionArea>
-                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/about">
-                      About
+              <Hidden only={['sm', 'xs']}>
+                <Grid item xs={2} />
+                <Grid item xs={2}>
+                  <Card style={{ borderRadius: '20px' }}>
+                    <CardActionArea>
+                      <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/about">
+                        About
                     </Link>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item xs={1} />
-              <Grid item xs={2}>
-                <Card style={{ borderRadius: '20px' }}>
-                  <CardActionArea>
-                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/GettingStarted">
-                      Getting Started
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+                <Grid item xs={1} />
+                <Grid item xs={2}>
+                  <Card style={{ borderRadius: '20px' }}>
+                    <CardActionArea>
+                      <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/GettingStarted">
+                        Getting Started
                     </Link>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item xs={1} />
-              <Grid item xs={2}>
-                <Card style={{ borderRadius: '20px' }}>
-                  <CardActionArea>
-                    <Link style={{ color: 'black', textDecoration: 'none', fontSize: '5vh' }} to="/games">
-                      Games
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+                <Grid item xs={1} />
+                <Grid item xs={2}>
+                  <Card style={{ borderRadius: '20px' }}>
+                    <CardActionArea>
+                      <Link style={{ color: 'black', textDecoration: 'none', fontSize: '4vh' }} to="/games">
+                        Games
                     </Link>
-                  </CardActionArea>
-                </Card>
-              </Grid>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              </Hidden>
             </Grid>
           </Container>
         </div>

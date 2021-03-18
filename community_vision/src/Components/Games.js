@@ -19,7 +19,7 @@ import numbersIMG from "./Games/numbers.jpg"
 import raceLevel4 from "./Games/racez.jpg"
 import raceLevel3 from "./Games/raceq.jpg"
 import { initial } from "./Games/Common/Functions"
-import { Container } from '@material-ui/core';
+import { CardMedia, Container } from '@material-ui/core';
 
 const Games = forwardRef((props, ref) => {
   const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
@@ -85,7 +85,7 @@ const Games = forwardRef((props, ref) => {
           </Grid>
         </Grid>
       </Container>
-      <Link className='nav-link' to="/" style ={{
+      <Link className='nav-link' to="/" style={{
         backgroundColor: backgroundColor
       }}>
         <button style={{
@@ -120,10 +120,12 @@ class GameSelection extends React.Component {
         <Link style={{ textDecoration: 'none' }} to={this.props.link}>
           <Card>
             <CardActionArea>
-              <img style={{ height: '100%', width: '100%', margin: '0%', padding: '0%', display: 'block' }} src={this.props.img} alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*/ />
-              <p style={{ color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color, fontSize: '2.5vh'}} >{this.props.name}</p>
+              <div style={{ width: '100%', paddingTop: '66.66%' }}>
+                <img style={{ width: '100%', margin: '0%', padding: '0%', position: 'absolute', left: '0', top: '0' }} src={this.props.img} type="image/png" alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*/ />
+              </div>
+              <p style={{ color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color, fontSize: '2.5vh' }} >{this.props.name}</p>
               <div style={{ backgroundColor: color }}>
-                <text style={{ color: 'black', fontWeight: 'bold', fontSize: '1.75vh'}}>{this.props.difficulty}</text>
+                <text style={{ color: 'black', fontWeight: 'bold', fontSize: '1.75vh' }}>{this.props.difficulty}</text>
               </div>
             </CardActionArea>
           </Card>
