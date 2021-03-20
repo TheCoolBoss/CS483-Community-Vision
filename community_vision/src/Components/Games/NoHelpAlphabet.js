@@ -60,6 +60,8 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
     const [speed, setSpeed] = useState(() => initial('speed'));
     const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
     const [buttonColor, setButtonColor] = useState(() => initial('buttonColor'));
+    const [dashButtonColor, setDashButtonColor] = useState(() => initial('dashButtonColor'));
+    const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
     const [playDash] = useSound(
@@ -126,6 +128,8 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                 setSize(initial('size'));
                 setSpeed(initial('speed'));
                 setBackgroundColor(initial('backgroundColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
                 setFontColor(initial('fontColor'));
                 setButtonColor(initial("buttonColor"));
             }
@@ -163,12 +167,11 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
                 buttonColor={buttonColor}
+                dotButtonColor={dotButtonColor}
+                dashButtonColor={dashButtonColor}
                 volume={volume}
                 input={input}
-                input2={input}
-                newInput={setInput}
-                output={output}
-                output2={output}
+                setInput={setInput}
             />
         </div>
     );
