@@ -67,6 +67,9 @@ const AlphabetRace = forwardRef((props, ref) => {
 
     // input resetting on timeout and length over max morse length
     resetInputLength(input, setInput);
+    //clearTimeout(t);
+    //resets the input from the user after time
+    //t = resetInputTime(t, input, setInput, resetTimer);
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function (evt) {
@@ -418,17 +421,97 @@ const AlphabetRace = forwardRef((props, ref) => {
                     </p>
                 </div>
             </div>
-            <Buttons
-                fontColor = {fontColor}
-                input = {input}
-                dotButtonColor = {dotButtonColor}
-                dashButtonColor = {dashButtonColor}
-                t = {t}
-                setInput = {setInput}
-                volume = {volume}
-                resetTimer={resetTimer}
-                game = "notSandWords"
-            />
+            <div style={{ gridArea: 'middle' }}>
+                <Container>
+                    <Grid container justify='center' spacing={0}>
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: props.fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
+                        </Grid>
+                        <Grid item sm={10}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: props.fontColor,
+                                fontSize: '10vh',
+                                textAlign: 'center',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}>{input}</p>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <p style={{
+                                lineHeight: 0,
+                                color: props.fontColor,
+                                fontSize: '10vh',
+                                pointer: 'default',
+                                userSelect: 'none'
+                            }}> &nbsp; </p>
+                        </Grid>
+                    </Grid>
+                    <Grid container justify='center' spacing={2}>
+                        <Grid item xs={4}>
+                            <Card>
+                                {/* button updates */}
+                                <CardActionArea>
+                                    <button id="dotButton" style={{
+                                        backgroundColor: dotButtonColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        cursor: 'pointer',
+                                        textAlign: 'center',
+                                        fontSize: '35vh',
+                                        color: fontColor,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }} onMouseDown={function () {
+                                        setInput(input + '•');
+                                        playDot();
+                                        //console.log("testdot");
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
+                                    }}>
+                                        <span
+                                        >•
+                                        </span>
+                                    </button>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Card>
+                                <CardActionArea>
+                                    <button id="dashButton" style={{
+                                        backgroundColor: dashButtonColor,
+                                        width: '100%',
+                                        height: '20vh',
+                                        cursor: 'pointer',
+                                        textAlign: 'center',
+                                        fontSize: '35vh',
+                                        color: fontColor,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }} onMouseDown={function () {
+                                        setInput(input + '-');
+                                        playDash();
+                                        //console.log("testdash");
+                                        clearTimeout(t);
+                                        t = resetInputTime(t, input, setInput, resetTimer);
+                                    }}>
+                                        -
+                                    </button>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </div>
         </div>
     );
 })

@@ -59,7 +59,7 @@ export function resetInputTime(t, input, setInput, resetTimer, game)
 
 export function Buttons(props)
 {
-    var t = props.t;
+    let t = props.t;
     const input = props.input;
     const [playDash] = useSound(
         dashSound,
@@ -122,8 +122,9 @@ export function Buttons(props)
                                 }} onMouseDown={function () {
                                     props.setInput(input + '•');
                                     playDot();
-                                    //clearTimeout(props.t);
-                                    //t = resetInputTime(props.t, input, props.setInput, props.resetTimer, props.game);
+                                    //console.log("testdot");
+                                    //clearTimeout(t);
+                                    //t = resetInputTime(t, input, props.setInput, props.resetTimer, props.game);
                                 }}>
                                         <span
                                         >•
@@ -149,6 +150,7 @@ export function Buttons(props)
                                 }} onMouseDown={function () {
                                     props.setInput(input + '-');
                                     playDash();
+                                    //console.log("testdash");
                                     //clearTimeout(t);
                                     //t = resetInputTime(t, input, props.setInput, props.resetTimer, props.game);
                                 }}>
