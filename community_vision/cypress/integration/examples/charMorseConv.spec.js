@@ -2,7 +2,7 @@
 var f = require ( "../../../src/Components/Games/charMorseConv");
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-test('morseToChar', () => {
+it('morseToChar', () => {
     for (let i = 0; i < list.length; i++)
     {
         var morse = f.charToMorse(list.charAt(i));

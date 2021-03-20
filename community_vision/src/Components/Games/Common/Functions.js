@@ -47,7 +47,7 @@ export function resetInputLength(input, setInput)
 }
 
 //Clear input after timer expires
-export function resetInputTime(t, input, setInput, resetTimer, game)
+export function resetInputTime(t, input, setInput, resetTimer)
 {
     t = setTimeout(() =>
         {
@@ -164,8 +164,6 @@ export function Buttons(props)
         </div>
     )
 }
-
-
 
 //Button code
 export function ButtonsOld(props)
