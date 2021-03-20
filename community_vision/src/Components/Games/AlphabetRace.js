@@ -67,6 +67,9 @@ const AlphabetRace = forwardRef((props, ref) => {
 
     // input resetting on timeout and length over max morse length
     resetInputLength(input, setInput);
+    //clearTimeout(t);
+    //resets the input from the user after time
+    //t = resetInputTime(t, input, setInput, resetTimer);
 
     // tracks keycodes for space button  and enter button input 
     document.onkeydown = function (evt) {
