@@ -427,7 +427,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                         <Grid item xs={1}>
                             <p style={{
                                 lineHeight: 0,
-                                color: props.fontColor,
+                                color: fontColor,
                                 fontSize: '10vh',
                                 pointer: 'default',
                                 userSelect: 'none'
@@ -436,7 +436,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                         <Grid item sm={10}>
                             <p style={{
                                 lineHeight: 0,
-                                color: props.fontColor,
+                                color: fontColor,
                                 fontSize: '10vh',
                                 textAlign: 'center',
                                 pointer: 'default',
@@ -446,7 +446,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                         <Grid item xs={1}>
                             <p style={{
                                 lineHeight: 0,
-                                color: props.fontColor,
+                                color: fontColor,
                                 fontSize: '10vh',
                                 pointer: 'default',
                                 userSelect: 'none'
@@ -472,7 +472,6 @@ const AlphabetRace = forwardRef((props, ref) => {
                                     }} onMouseDown={function () {
                                         setInput(input + '•');
                                         playDot();
-                                        //console.log("testdot");
                                         clearTimeout(t);
                                         t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
@@ -500,7 +499,6 @@ const AlphabetRace = forwardRef((props, ref) => {
                                     }} onMouseDown={function () {
                                         setInput(input + '-');
                                         playDash();
-                                        //console.log("testdash");
                                         clearTimeout(t);
                                         t = resetInputTime(t, input, setInput, resetTimer);
                                     }}>
