@@ -14,6 +14,7 @@ import Picture from './Picture';
 import {BackButton} from "../Common/Functions";
 import gameData from "./WordsGameData";
 import sounds from "../LetterSounds";
+import StartScreen from "./LearnWordsStart";
 
 
 /*
@@ -61,6 +62,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var [gameIndex, setGameIndex] = useState(0);
 
     var [finished, setFinished] = useState(() => initial(false));
+
+    var [start, setStart] = useState(true);
 
     //Get the image source
     var img = gameData[gameIndex].imgSrc;
@@ -144,9 +147,14 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             setOutput('');
             playDot();
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            setOutput('');
-            playDash();
+            if(start) {
+                setStart(false);
+            }
+            else {
+                setInput(input + '-');
+                setOutput('');
+                playDash();
+            }
         }
     };
 
@@ -213,6 +221,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     return (
         <div>
+            {start ? <StartScreen level={"beginner"} start={start} setStart={setStart} /> : null}
             {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
@@ -229,7 +238,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} lg={6}>
+                                <Grid item xs={12} sm={4} xl={6}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -237,7 +246,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} lg={6}>
+                                <Grid item xs={12} sm={4} xl={6}>
                                     <div>
                                         {isCorrect
                                         ?
