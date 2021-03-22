@@ -237,7 +237,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                     <div style={{ position: 'absolute' }}>
                         <Container>
                             <BackButton />
-                            <Grid container justify='left'>
+                            {/* <Grid container justify='left'>
                                 <Grid item>
                                     <Tutorial 
                                         background={backgroundColor} 
@@ -245,7 +245,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                                         fColor={fontColor}
                                     />
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>

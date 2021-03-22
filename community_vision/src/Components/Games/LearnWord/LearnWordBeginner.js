@@ -225,14 +225,14 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
-                     <div style={{ position: 'absolute' }}>
+                    <div style={{ position: 'absolute' }}>
                         <Container>
                             <BackButton />
-                            <Grid container justify='left'>
+                            {/* <Grid container justify='left'>
                                 <Grid item>
                                     <Tutorial background={backgroundColor} level='beginner' fColor={fontColor}/>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>

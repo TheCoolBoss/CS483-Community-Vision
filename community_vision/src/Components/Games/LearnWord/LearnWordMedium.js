@@ -242,11 +242,11 @@ const LearnWordMedium = forwardRef((props, ref) => {
                     <div style={{ position: 'absolute' }}>
                         <Container>
                             <BackButton />
-                            <Grid container justify='left'>
+                            {/* <Grid container justify='left'>
                                 <Grid item>
                                     <Tutorial level='medium' background={backgroundColor} fontColor={fontColor}/>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>
