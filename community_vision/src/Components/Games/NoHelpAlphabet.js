@@ -10,6 +10,7 @@ import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
+import sounds from "./LetterSounds"
 
 
 var t;
@@ -73,7 +74,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
-    var soundSrc = require('../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    var soundSrc = sounds[currentLetter];
     const [playCurrentLetterSound] = useSound(
         soundSrc,
         { volume: volume / 100 }

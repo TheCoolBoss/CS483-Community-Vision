@@ -14,6 +14,7 @@ import spacebar from '../Assets/Images/spacebar.png';
 import enterButton from '../Assets/Images/enterButton.png';
 import {useHistory} from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
+import sounds from './NumberSounds';
 
 
 /*
@@ -122,7 +123,7 @@ const LearnNumbers = forwardRef((props, ref) => {
         {volume: volume / 100}
     );
     //number sound
-    var soundSrc = require('../Assets/Sounds/Numbers/' + currentNumber + '.mp3');
+    var soundSrc = sounds[currentNumber];
     const [playCurrentNumberSound] = useSound(
         soundSrc,
         { volume: volume / 100 }

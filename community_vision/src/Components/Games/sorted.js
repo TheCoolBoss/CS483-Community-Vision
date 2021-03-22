@@ -10,6 +10,7 @@ import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
 import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
+import sounds from "./LetterSounds";
 
 var t;
 var list = "ETIANMSURWDKGOHVFLPJBXCYZQ";
@@ -88,7 +89,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
     //sound of letter
-    var soundSrc = require('../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    var soundSrc = sounds[currentLetter];
     const [playCurrentLetterSound] = useSound(
         soundSrc,
         { volume: volume / 100 }

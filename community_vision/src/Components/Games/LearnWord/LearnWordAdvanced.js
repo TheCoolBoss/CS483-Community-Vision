@@ -13,6 +13,7 @@ import Tutorial from './WordGameTutorial';
 import Picture from './Picture';
 import CurrentWord from './CurrentWord';
 import {BackButton} from "../Common/Functions";
+import gameData from "./WordsGameData";
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -43,9 +44,6 @@ function initial(type){
 }
 
 const LearnWordAdvanced = forwardRef((props, ref) => {
-    //Get the data
-    var gameData = require('./WordGameData.json');
-
     //The correct words that the user got so far
     var [correct, setCorrect] = useState('');  
 
@@ -61,7 +59,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     var [finished, setFinished] = useState(() => initial(false));
     
     //Word that the user needs to type
-    var currentWord = gameData[gameIndex].name; 
+    var currentWord = gameData[gameIndex].word; 
     
     //Current letter to be type
     var currentLetter = currentWord[wordIndex];
@@ -73,7 +71,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     var [output, setOutput] = useState('');   
     
     //Get the image source
-    var img = require('' + gameData[gameIndex].imagePath);
+    var img = gameData[gameIndex].imgSrc;
 
     //Settings
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -91,7 +89,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     const notCurrLetterSize = (size - sizeAdjust - 7) + 'vh';
 
     //Get the sound of current word
-    var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
+    var soundSrc = gameData[gameIndex].soundSrc;
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});

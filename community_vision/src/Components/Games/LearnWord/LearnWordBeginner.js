@@ -6,14 +6,14 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
 import {charToMorse, morseToChar} from "./../charMorseConv";
 import useSound from 'use-sound';
-import {Transition, animated} from 'react-spring/renderprops';
 import dashSound from '../../Assets/Sounds/dash.mp3';
 import dotSound from '../../Assets/Sounds/dot.mp3';
 import Tutorial from './WordGameTutorial';
 import EndGame from './EndGame';
 import Picture from './Picture';
-import CurrentWord from './CurrentWord';
 import {BackButton} from "../Common/Functions";
+import gameData from "./WordsGameData";
+import sounds from "../LetterSounds";
 
 
 /*
@@ -47,8 +47,6 @@ function initial(type){
 
 
 const LearnWordBeginner = forwardRef((props, ref) => {
-    //Get the data
-    var gameData = require('./WordGameData.json');
     
     //Track user input
     var [input, setInput] = useState('');
@@ -65,10 +63,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var [finished, setFinished] = useState(() => initial(false));
 
     //Get the image source
-    var img = require('' + gameData[gameIndex].imagePath);
+    var img = gameData[gameIndex].imgSrc;
 
     //Word that the user needs to type
-    var currentWord = gameData[gameIndex].name;
+    var currentWord = gameData[gameIndex].word;
 
     //Current letter to be type(first letter)
     var currentLetter = currentWord[0];
@@ -92,8 +90,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     const notCurrLetterSize = (size - sizeAdjust - 7) + 'vh';
 
     //Get the sound of current word
-    var soundSrc = require('./WordSound/' + currentWord.toLowerCase() + '.flac');
-    var letterSoundSrc = require('../../Assets/Sounds/Letters/' + currentLetter + '.flac');
+    var soundSrc = gameData[gameIndex].soundSrc;
+    var letterSoundSrc = sounds[currentLetter];
     var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
