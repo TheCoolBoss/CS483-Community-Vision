@@ -38,7 +38,6 @@ function Settings(props) {
     const changeBackgroundColor = (newValue) => {
         localStorage.setItem('backgroundColor', newValue);
         setBackgroundColor(newValue);
-        props.updateNavBackgroundColor(newValue);
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
     };
@@ -60,7 +59,6 @@ function Settings(props) {
     const changeFontColor = (newValue) => {
         localStorage.setItem('fontColor', newValue);
         setFontColor(newValue);
-        props.updateNavFontColor(newValue);
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
     };

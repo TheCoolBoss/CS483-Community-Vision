@@ -26,7 +26,7 @@ function App() {
   const currentRef = useRef();
   const navRef = useRef();
   const updatePage = (value) => {
-    currentRef.current.update();
+    currentRef.current.update(value);
     setBackgroundColor(initial('backgroundColor'));
   }
   const updateNav = (value) => {

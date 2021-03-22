@@ -121,6 +121,7 @@ const Nav = forwardRef((props, ref) => {
         }}
           onMouseUp={() => {
             if (window.location.href.slice(-8) !== 'settings') {
+              props.updateAppState(true);
               toggle(!dropdownState);
             }
           }}>
@@ -143,6 +144,7 @@ const Nav = forwardRef((props, ref) => {
         opacity: x.interpolate({ range: [0, 1], output: [0, 0.95] })
       }}>
         <Card onMouseUp={() => {
+          props.updateAppState(false);
           toggle(!dropdownState);
         }}>
           <CardActionArea style={{
@@ -160,6 +162,7 @@ const Nav = forwardRef((props, ref) => {
           </CardActionArea>
         </Card>
         <Card onMouseUp={() => {
+          props.updateAppState(false);
           toggle(!dropdownState);
         }} style={{ backgroundColor: 'white' }}>
           <CardActionArea style={{
@@ -221,9 +224,7 @@ const Nav = forwardRef((props, ref) => {
             </Hidden>
           </Grid>
           <Grid item xs={12} style={{ marginTop: '-1.4vh' }}>
-            <Settings updateNavBackgroundColor={() => void 0}
-              updateNavFontColor={() => void 0}
-              updateSettingsPageState={() => void 0}
+            <Settings updateSettingsPageState={() => void 0}
               updateNavState={props.updateAppState} />
           </Grid>
         </Grid>
