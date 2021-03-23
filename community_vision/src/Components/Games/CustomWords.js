@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from "@material-ui/core/Card";
@@ -11,6 +11,8 @@ import dashSound from '../Assets/Sounds/dash.mp3'
 import dotSound from '../Assets/Sounds/dot.mp3'
 import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
+import CurrentWord from './LearnWord/CurrentWord'
+import gameData from "./LearnWord/WordsGameData";
 import { initial, Buttons, resetInputTime, resetInputLength, BackButton } from "./Common/Functions";
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
@@ -18,8 +20,8 @@ import { Transition } from 'react-spring/renderprops';
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
-var customLetters;
 var customMorse;
+var customWord;
 
 /*
 function parseInput() {
@@ -32,6 +34,15 @@ function parseInput() {
 }
 */
 
+function displayCustomWord() {
+    customWord = document.getElementById("customInput").value;
+    //window.alert(customWord);
+    if(customWord.length > 6) {
+        window.alert("Custom Word must be less than 8 letters");
+    }
+    //sampleMorse = customWord;
+    document.getElementById('customLetters').innerHTML = customWord;
+}
 
 const CustomWords = forwardRef((props, ref) => {
     const history = useHistory();
@@ -41,8 +52,11 @@ const CustomWords = forwardRef((props, ref) => {
 
     var [correct, setCorrect] = useState('');
     var [wordIndex, setWordIndex] = useState(0);
-    var [index, setIndex] = useState(0);
-    var currentLetter = list[index];
+    var [input, setInput] = useState('');
+    var [gameIndex, setGameIndex] = useState(0);
+    var [finished, setFinished] = useState(() => initial(false));
+    var currentWord = gameData[gameIndex].word;
+    var currentLetter = currentWord[wordIndex];
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = useState('');
     var output = morseToChar(input);
@@ -57,6 +71,7 @@ const CustomWords = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
+    const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
@@ -75,6 +90,13 @@ const CustomWords = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    useEffect(() => {
+        if(output == currentLetter) {
+            setCorrect(correct + currentWord[wordIndex]);
+            setInput('');
+            setWordIndex(prevWordIndex => prevWordIndex + 1);
+        }
+    }, [input]);
 
     var d = 2000;
     if (!anim) {
@@ -101,18 +123,11 @@ const CustomWords = forwardRef((props, ref) => {
     )
 
     return (
-        <div style={{ gridArea: 'top' }}>
-                {/* <div style={{ position: 'absolute' }}>
-                    <Container>
-                        <BackButton />
-                        <Grid container justify='left' >
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
-                    </Container>
-                </div> */}
+        <div style={{ gridArea: 'top' }}>      
                 <div id="sampleMorse">
+                    <CurrentWord>
+                        currentWord={customWord}
+                    </CurrentWord>
                     <animated.h1 style={{
                         lineHeight: 0,
                         color: fontColor,
@@ -120,7 +135,8 @@ const CustomWords = forwardRef((props, ref) => {
                         pointer: 'default',
                         userSelect: 'none',
                         opacity: x.interpolate({ range: [0, 1], output: [0, 1] })
-                    }}>{'test'}</animated.h1>
+                    }}
+                    id='customLetters'>{'test'}</animated.h1>
                     <animated.p id="sampleMorseCode" style={{
                         lineHeight: 0,
                         color: fontColor,
@@ -164,7 +180,7 @@ const CustomWords = forwardRef((props, ref) => {
                             <button style={{
                                 fontSize: '4vh'
                             }} onClick={function(){
-                                //parseInput();
+                                displayCustomWord();
                             }}
                             variant='outline-secondary'>Enter</button>
                         </Grid>
