@@ -9,7 +9,7 @@ import useSound from 'use-sound';
 import dashSound from '../../Assets/Sounds/dash.mp3';
 import dotSound from '../../Assets/Sounds/dot.mp3';
 import EndGame from './EndGame';
-import Tutorial from './WordGameTutorial';
+//import Tutorial from './WordGameTutorial';
 import Picture from './Picture';
 import CurrentWord from './CurrentWord';
 import {BackButton} from "../Common/Functions";
@@ -84,7 +84,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
+    const [sizeAdjust, setSizeAdjust] = useState(3);
     const fSize = (size-sizeAdjust) +'vh';
     const [picHeight, setPicHeight] = React.useState('');
     const [picWidth, setPicWidth] = React.useState('');

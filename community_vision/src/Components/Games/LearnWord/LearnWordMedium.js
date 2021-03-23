@@ -9,7 +9,7 @@ import useSound from 'use-sound';
 import dashSound from '../../Assets/Sounds/dash.mp3';
 import dotSound from '../../Assets/Sounds/dot.mp3';
 import EndGame from './EndGame';
-import Tutorial from './WordGameTutorial';
+//import Tutorial from './WordGameTutorial';
 import Picture from './Picture';
 import CurrentWord from './CurrentWord';
 import {BackButton} from "../Common/Functions";
