@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
 import AlphabetRace from './Components/Games/AlphabetRace';
 import AlphabetRacePractice from './Components/Games/AlphabetRacePractice';
+import JumpingGame from './Components/Games/JumpingGame';
 import { initial } from "./Components/Games/Common/Functions";
 
 function App() {
@@ -82,6 +83,9 @@ function App() {
           </Route>
           <Route path="/alphabetRace">
             <AlphabetRace ref={currentRef} />
+          </Route>
+          <Route path="/jumpingGame">
+            <JumpingGame ref={currentRef} />
           </Route>
           <Route path="/gettingStarted">
             <GettingStarted ref={currentRef} />
