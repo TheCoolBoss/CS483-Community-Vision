@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import Home from './Components/Home';
 import Nav from './Components/Nav';
@@ -20,19 +20,23 @@ import ButtonsTutorial from "./Components/Games/buttonTutorial";
 import AlphabetRace from './Components/Games/AlphabetRace';
 import AlphabetRacePractice from './Components/Games/AlphabetRacePractice';
 import CustomWords from './Components/Games/CustomWords';
+import { initial } from "./Components/Games/Common/Functions";
 
 function App() {
+  const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
   const currentRef = useRef();
   const navRef = useRef();
   const updatePage = (value) => {
-    currentRef.current.update();
+    currentRef.current.update(value);
+    setBackgroundColor(initial('backgroundColor'));
   }
   const updateNav = (value) => {
     navRef.current.update();
+    setBackgroundColor(initial('backgroundColor'));
   }
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ backgroundColor: backgroundColor }}>
         <Nav updateAppState={updatePage} ref={navRef} />
         <Switch>
           <Route path="/" exact>

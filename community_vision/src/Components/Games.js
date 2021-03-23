@@ -6,18 +6,18 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 
 import LearnAlphabetIMG from "./Games/LearnAlphabet.jpg" //test image (pig)
-import LearnABCIMG from "./Games/apple.jpg"
-import buttonsImg from "./Games/buttons.jpg"
-import needleImg from "./Games/needle.jpg"
-import sandBocWords from "./Games/sandboxWord.jpg"
-import stackABC from "./Games/stack_abc.jpg"
-import abceyes from "./Games/abc_eyes.jpg"
-import unicycleImg from "./Games/unicycle.jpg"
-import alphabetIMG from "./Games/abc.jpg"
-import sandboxIMG from "./Games/sandbox1.jpg"
-import numbersIMG from "./Games/numbers.jpg"
-import raceLevel4 from "./Games/racez.jpg"
-import raceLevel3 from "./Games/raceq.jpg"
+import LearnABCIMG from "./Games/appleR.jpg"
+import buttonsImg from "./Games/buttonsR.jpg"
+import needleImg from "./Games/needleR.jpg"
+import sandBocWords from "./Games/sandboxWordR.jpg"
+import stackABC from "./Games/stack_abcR.jpg"
+import abceyes from "./Games/abc_eyesR.jpg"
+import unicycleImg from "./Games/unicycleR.jpg"
+import alphabetIMG from "./Games/abcR.jpg"
+import sandboxIMG from "./Games/sandbox1R.jpg"
+import numbersIMG from "./Games/numbersR.jpg"
+import raceLevel4 from "./Games/racezR.jpg"
+import raceLevel3 from "./Games/raceqR.jpg"
 import { initial } from "./Games/Common/Functions"
 import { Container } from '@material-ui/core';
 
@@ -44,7 +44,7 @@ const Games = forwardRef((props, ref) => {
       gridTemplate: '1fr 4fr / 1fr',
       gridTemplateAreas: '"top" "bottom'
     }}>
-      <h1 style={{ fontSize: '7vh', color: fontColor, position: 'relative', bottom: '-2vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+      <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
@@ -54,7 +54,7 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Learn Morse Patterns' img={alphabetIMG} link='/sorted' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn The Alphabet In Morse' img={alphabetIMG} link='/learnAlphabet' difficulty='Level 1' />
+            <GameSelection name='Learn The Alphabet In Morse' img={abceyes} link='/learnAlphabet' difficulty='Level 1' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Numbers' img={numbersIMG} link='/learnNumbers' difficulty='Level 1' />
@@ -88,7 +88,7 @@ const Games = forwardRef((props, ref) => {
           </Grid>
         </Grid>
       </Container>
-      <Link className='nav-link' to="/" style ={{
+      <Link className='nav-link' to="/" style={{
         backgroundColor: backgroundColor
       }}>
         <button style={{
@@ -123,10 +123,12 @@ class GameSelection extends React.Component {
         <Link style={{ textDecoration: 'none' }} to={this.props.link}>
           <Card>
             <CardActionArea>
-              <img style={{ height: '100%', width: '100%', margin: '0%', padding: '0%', display: 'block' }} src={this.props.img} alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*/ />
-              <p style={{ color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color, fontSize: '2.5vh'}} >{this.props.name}</p>
+              <div style={{ width: '100%', paddingTop: '66.66%' }}>
+                <img style={{ width: '100%', margin: '0%', padding: '0%', position: 'absolute', left: '0', top: '0' }} src={this.props.img} type="image/png" alt={LearnAlphabetIMG}/* this should be the default for if we don't have an image source*/ />
+              </div>
+              <p style={{ color: 'black', fontWeight: 'bold', margin: 0, padding: 0, display: 'block', backgroundColor: color, fontSize: '2.5vh' }} >{this.props.name}</p>
               <div style={{ backgroundColor: color }}>
-                <text style={{ color: 'black', fontWeight: 'bold', fontSize: '1.75vh'}}>{this.props.difficulty}</text>
+                <text style={{ color: 'black', fontWeight: 'bold', fontSize: '1.75vh' }}>{this.props.difficulty}</text>
               </div>
             </CardActionArea>
           </Card>

@@ -71,7 +71,7 @@ const GettingStarted = forwardRef((props, ref) => {
           screen.
         </p>
 
-        <img src={buttons} alt="Buttons" id="buttonsimage" width="500" height="100"></img>
+        <img src={buttons} alt="Buttons" id="buttonsimage" width="60%"></img>
 
         <h2 style={{ fontweight: 900, fontSize: "40px", textAlign: "Left", paddingLeft: "10vw" }}>Using a Mouse:</h2>
 
