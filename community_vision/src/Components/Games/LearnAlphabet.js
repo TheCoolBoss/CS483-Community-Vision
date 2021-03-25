@@ -125,22 +125,23 @@ const LearnAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            //clearTimeout(t);
             playCorrectSoundFX();
+            clearTimeout(t);
             setTimeout(() => {
+                clearTimeout(t);
                 playCurrentLetterSound();
                 setTimeout(() => {
-                   //clearTimeout(t);
-                    setInput('');
+                    clearTimeout(t);
                     setAnim(!anim);
+                    setInput('');
                     if (index != list.length - 1) {
                         setIndex(prevState => prevState + 1);
                     } else {
                         setIndex(0);
                         setEndScreen(true);
                     }
-                }, 2000)
-            }, 2100)
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 

@@ -107,6 +107,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
+            clearTimeout(t);
             playCorrectSoundFX();
             setTimeout(() => {
                 clearTimeout(t);
@@ -120,8 +121,8 @@ const SortedAlphabet = forwardRef((props, ref) => {
                     } else {
                         setIndex(0);
                     }
-                }, 2000)
-            }, 2100)
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 
