@@ -117,17 +117,20 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (output === currentLetter) {
+            clearTimeout(t);
             playCorrectSoundFX();
             setIsCorrect(true);
             setTimeout(() => {
+                clearTimeout(t);
                 //Play current letter sound
                 playCurrLetterSound();
                 setTimeout(() => {
                     //Play current sound of word
                     playCurrWordSound();
-                }, 1550)
+                }, resetTimer)
                 //Move to the next word
                 setTimeout(() => {
+                    clearTimeout(t);
                     if(gameIndex < 25) {
                         setGameIndex(prevState => prevState + 1);
                     }
@@ -138,8 +141,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     setOutput('');
                     setInput('');
                     setIsCorrect(false);
-                }, 3550);
-            }, 2100);
+                }, resetTimer + 2000);
+            }, resetTimer);
         }
     }, [input]);
 

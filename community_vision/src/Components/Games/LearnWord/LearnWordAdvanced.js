@@ -117,26 +117,31 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     useEffect (() => {
         //Check for matching current morse sequence to current letter
         if (output === currentLetter) {
+            clearTimeout(t);
             playCurrLetterSound();
             setTimeout(() => {
+                clearTimeout(t);
                 setCorrect(correct + currentWord[wordIndex]);
                 setInput('');
                 setOutput('');
                 setWordIndex(prevWordIndex => prevWordIndex + 1);
-            }, 2000);
+            }, resetTimer);
         }
     }, [input]);
 
     useEffect(() => {
         //Check when the user complete the whole word
         if (correct.localeCompare(currentWord) === 0) {
+            clearTimeout(t);
             //Play the correct jingle
             playCorrectSoundFX();
             setTimeout(() => {
+                clearTimeout(t);
                 //Play the pronunciation of the current word
                 playCurrWordSound();
                 //Delay 2 sec
                 setTimeout(function () {
+                    clearTimeout(t);
                     //Set the new word
                     if(gameIndex < 25) {
                         setGameIndex(prevState => prevState + 1);
@@ -150,8 +155,8 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                     setWordIndex(0);
                     //Reset correct
                     setCorrect('');
-                }, 2000)
-            }, 2100);
+                }, resetTimer)
+            }, resetTimer);
         }
     }, [wordIndex]);
     
