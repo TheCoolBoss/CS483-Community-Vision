@@ -102,13 +102,17 @@ const SortedAlphabet = forwardRef((props, ref) => {
     React.useEffect(() => {
         if (input === currentMorse) {
             playCurrentLetterSound();
+            clearTimeout(t);
             setTimeout(() => {
+                clearTimeout(t);
                 setAnim(!anim);
-                setIndex(prevState => prevState + 1);
-                setTimeout(function () {
-                    setInput("");
-                }, resetTimer);
-            }, 2000)
+                setInput('');
+                if (index != list.length - 1) {
+                    setIndex(prevState => prevState + 1);
+                } else {
+                    setIndex(0);
+                }
+            }, resetTimer)
         }
     }, [input])
 

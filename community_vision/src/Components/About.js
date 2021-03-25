@@ -3,6 +3,7 @@ import '../App.css';
 import morse from '../Components/Assets/Images/morse.png'
 import appInfo from "../../package.json"
 import { initial } from "./Games/Common/Functions"
+import { Link } from 'react-router-dom';
 
 //Help received from https://www.reddit.com/r/reactjs/comments/f4bpgf/automatic_versioning_from_run_build_create_react/
 
@@ -66,7 +67,21 @@ const About = forwardRef((props, ref) => {
       <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAligh: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
 
         
-      <p style={{ userSelect: 'none', cursor: 'default', paddingBottom: '10vh' }}>Version {appInfo.version}</p>
+      <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
+    
+      <Link className='nav-link' to="/" style={{
+        backgroundColor: backgroundColor
+      }}>
+        <button style={{
+          width: '40vw',
+          fontSize: '5vh',
+          fontWeight: 900,
+          userSelect: 'none',
+          cursor: 'pointer',
+          marginBottom: "5vh",
+          backgroundColor: 'white'
+        }}>Go Back to Home</button>
+      </Link>
     </div>
   );
 })

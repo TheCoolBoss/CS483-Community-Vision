@@ -143,16 +143,18 @@ const LearnNumbers = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentNumberSound();
+            clearTimeout(t);
             setTimeout(() => {
+                clearTimeout(t);
                 setAnim(!anim);
-                if(index != list.length -1) {
+                setInput('');
+                if (index != list.length - 1) {
                     setIndex(prevState => prevState + 1);
                 } else {
                     setIndex(0);
                     setEndScreen(true);
                 }
-            }, 2000)
+            }, resetTimer)
         }
     }, [input])
 
