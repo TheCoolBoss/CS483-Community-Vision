@@ -230,7 +230,7 @@ const Settings = forwardRef((props, ref) => {
                                         changeFontColor('black');
                                         changeDotButtonColor('yellow');
                                         changeDashButtonColor('red');
-                                    }}>Default Colors</h1>
+                                    }}>Default</h1>
                                 </Grid>
                             </Grid>
                         </Grid>

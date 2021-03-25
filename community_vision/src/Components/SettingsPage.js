@@ -11,11 +11,12 @@ function SettingsPage(props) {
     return (
         <div style={{
             minHeight: '90vh',
-            marginTop: '-1.5vh'
+            marginTop: '-1.5vh',
+            backgroundColor: 'white'
         }}>
             <Card>
-                <h1 style={{ fontSize: '6vh', marginTop: '2vh', marginBottom: 0, userSelect: 'none' }}>
-                    <img style={{ height: '5vh' }} src={pic} alt={pic}></img>
+                <h1 style={{ fontSize: '6vh', marginTop: '2vh', marginBottom: '0', userSelect: 'none' }}>
+                    <img style={{ height: '5vh', margin: 0 }} src={pic} alt={pic}></img>
                     Settings
                 </h1>
             </Card>
