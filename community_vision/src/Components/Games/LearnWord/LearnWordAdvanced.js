@@ -145,6 +145,7 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
                         setGameIndex(25);
                         setFinished(true);
                     }
+                    setOutput('');
                     //Reset word index
                     setWordIndex(0);
                     //Reset correct

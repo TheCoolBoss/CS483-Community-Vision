@@ -135,6 +135,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                         setGameIndex(25);
                         setFinished(true);
                     }
+                    setOutput('');
                     setInput('');
                     setIsCorrect(false);
                 }, 3550);

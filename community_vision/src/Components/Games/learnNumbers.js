@@ -155,6 +155,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                 playCurrentNumberSound();
                 setTimeout(() => {
                     clearTimeout(t);
+                    setInput('');
                     setAnim(!anim);
                     if (index != list.length - 1) {
                         setIndex(prevState => prevState + 1);
