@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import logo from './logo.png'
@@ -34,11 +34,17 @@ const Nav = forwardRef((props, ref) => {
   // const [fontColor, setFontColor] = useState(() => initial('fontColor'));
   var navbarColor = '#f8ac2e'
 
+  const dropdownRef = useRef();
+
+  const updateDropdown = (value) => {
+    dropdownRef.current.update();
+  }
+
   useImperativeHandle(
     ref,
     () => ({
       update() {
-
+        updateDropdown();
       }
     }),
   )
@@ -225,7 +231,8 @@ const Nav = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={12} style={{ marginTop: '-1.4vh' }}>
             <Settings updateSettingsPageState={() => void 0}
-              updateNavState={props.updateAppState} />
+              updateNavState={props.updateAppState}
+              ref={dropdownRef} />
           </Grid>
         </Grid>
       </animated.div>

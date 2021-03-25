@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import '../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -15,7 +15,7 @@ import { CardActionArea } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 
 
-function Settings(props) {
+const Settings = forwardRef((props, ref) => {
 
     const history = useHistory();
     function moveTo(input) {
@@ -109,6 +109,21 @@ function Settings(props) {
                 </Grid>
             </div>
     }
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
 
     return (
         <div style={{
@@ -408,7 +423,7 @@ function Settings(props) {
             </Card>
         </div >
     )
-}
+})
 
 class ColorPicker extends React.Component {
     state = {
