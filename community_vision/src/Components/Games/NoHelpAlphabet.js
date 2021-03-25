@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
 import sounds from "./LetterSounds"
+import correctFX from "../Assets/Sounds/correct.mp3";
 
 
 var t;
@@ -79,6 +80,11 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
         soundSrc,
         { volume: volume / 100 }
     );
+
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        { volume: volume / 100}
+    );
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
 
@@ -88,17 +94,19 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            clearTimeout(t);
+            playCorrectSoundFX();
             setTimeout(() => {
                 clearTimeout(t);
-                setAnim(!anim);
-                setInput('');
-                if (index != list.length - 1) {
+                playCurrentLetterSound();
+                clearTimeout(t);
+                setTimeout(() => {
+                    setAnim(!anim);
                     setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                }
-            }, resetTimer)
+                    setTimeout(function () {
+                        setInput("");
+                    }, resetTimer);
+                }, 2000)
+            }, 2100);
         }
     }, [input])
 

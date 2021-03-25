@@ -26,9 +26,9 @@ const CurrentWord = (props) => {
             {isValidLetter
             ?
             <h1 style={{lineHeight: 0, fontSize: fontSize}}>
-                <span style={{color: '#00FF00', fontSize: notCurrLetterSize}}>{correct}</span>
-                <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
-                <span style={{color: fontColor, fontSize: notCurrLetterSize}}>{currentWord.substr(idx+1)}</span>
+                <span style={{color: '#00FF00', fontSize: notCurrLetterSize, textShadow: "-2px 2px 2px #000, 2px 2px 2px #000, 2px -2px 2px #000, -2px -2px 2px #000"}}>{correct}</span>
+                <span style={{color: fontColor}}>{currentLetter}</span>
+                <span style={{color: fontColor, fontSize: notCurrLetterSize, opacity: 0.7}}>{currentWord.substr(idx+1)}</span>
             </h1>
             :
             <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fontSize}}>{currentWord}</h1>
