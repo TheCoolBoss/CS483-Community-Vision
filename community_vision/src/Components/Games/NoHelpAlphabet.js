@@ -96,7 +96,9 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
         if (input === currentMorse) {
             playCorrectSoundFX();
             setTimeout(() => {
+                clearTimeout(t);
                 playCurrentLetterSound();
+                clearTimeout(t);
                 setTimeout(() => {
                     setAnim(!anim);
                     setIndex(prevState => prevState + 1);
@@ -105,7 +107,6 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                     }, resetTimer);
                 }, 2000)
             }, 2100);
-            
         }
     }, [input])
 

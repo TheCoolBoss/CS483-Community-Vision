@@ -151,8 +151,10 @@ const LearnNumbers = forwardRef((props, ref) => {
         if (input === currentMorse) {
             playCorrectSoundFX();
             setTimeout(() => {
+                clearTimeout(t);
                 playCurrentNumberSound();
                 setTimeout(() => {
+                    clearTimeout(t);
                     setAnim(!anim);
                     if (index != list.length - 1) {
                         setIndex(prevState => prevState + 1);
