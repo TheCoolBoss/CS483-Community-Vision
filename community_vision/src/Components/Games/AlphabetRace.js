@@ -141,7 +141,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         setNewSpawn(curr => curr + 1);
         setLetters(currLetters => {
             for (var j = 0; j < currLetters.length; j++) {
-                currLetters[j]['x'] = currLetters[j]['x'] - 0.10;
+                currLetters[j]['x'] = currLetters[j]['x'] - ((((speed-4) * (0.1-0.05)) / (0.5-4)) + 0.05);
             }
             return [...currLetters];
         });
@@ -189,7 +189,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         clearInterval(interval);
     }
 
-    if (newSpawn > 250) {
+    if (newSpawn > ((((speed-4) * (250-500)) / (0.5-4)) + 500)) {
         addLetter();
         setNewSpawn(0);
     }
@@ -205,7 +205,7 @@ const AlphabetRace = forwardRef((props, ref) => {
             }
             setScore(currScore => currScore + 1);
             setLetters(tempLetters);
-            setTimeout(function () { setInput(''); }, resetTimer / 2);
+            setTimeout(function () { setInput(''); }, resetTimer / 4);
             break;
         }
         if (tempLetters[j].x < 0) {
@@ -217,7 +217,6 @@ const AlphabetRace = forwardRef((props, ref) => {
             }
             setLives(currLives => currLives - 1);
             setLetters(tempLetters);
-            setTimeout(function () { setInput(''); }, resetTimer / 2);
             break;
         }
     }
