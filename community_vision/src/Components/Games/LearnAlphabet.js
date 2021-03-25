@@ -15,6 +15,7 @@ import { initial, Buttons, resetInputTime, resetInputLength, BackButton } from "
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 import sounds from "./LetterSounds";
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 
 var t;
@@ -113,6 +114,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
 
@@ -120,16 +126,19 @@ const LearnAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentLetterSound();
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                if (index != list.length - 1) {
-                    setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                    setEndScreen(true);
-                }
-            }, 2000)
+                playCurrentLetterSound();
+                setTimeout(() => {
+                    setAnim(!anim);
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, 2000)
+            }, 2100)
         }
     }, [input])
 

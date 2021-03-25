@@ -15,6 +15,7 @@ import {BackButton} from "../Common/Functions";
 import gameData from "./WordsGameData";
 import sounds from "../LetterSounds";
 import StartScreen from "./LearnWordsStart";
+import correctFX from "../../Assets/Sounds/correct.mp3";
 
 
 /*
@@ -97,6 +98,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var letterSoundSrc = sounds[currentLetter];
     var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
+    const [playCorrectSoundFX] = useSound(correctFX, {volume: volume / 100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
 
@@ -115,27 +117,28 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (output === currentLetter) {
+            playCorrectSoundFX();
+            setIsCorrect(true);
             setTimeout(() => {
-                setIsCorrect(true);
                 //Play current letter sound
                 playCurrLetterSound();
                 setTimeout(() => {
                     //Play current sound of word
                     playCurrWordSound();
                 }, 1550)
-            }, 1000);
-            //Move to the next word
-            setTimeout(() => {
-                if(gameIndex < 25) {
-                    setGameIndex(prevState => prevState + 1);
-                }
-                else {
-                    setGameIndex(25);
-                    setFinished(true);
-                }
-                setInput('');
-                setIsCorrect(false);
-            }, 4550);
+                //Move to the next word
+                setTimeout(() => {
+                    if(gameIndex < 25) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        setGameIndex(25);
+                        setFinished(true);
+                    }
+                    setInput('');
+                    setIsCorrect(false);
+                }, 3550);
+            }, 2100);
         }
     }, [input]);
 

@@ -15,6 +15,8 @@ import CurrentWord from './CurrentWord';
 import {BackButton} from "../Common/Functions";
 import gameData from "./WordsGameData";
 import StartScreen from "./LearnWordsStart";
+import correctFX from "../../Assets/Sounds/correct.mp3";
+import letterSounds from "../LetterSounds";
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -92,7 +94,10 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
 
     //Get the sound of current word
     var soundSrc = gameData[gameIndex].soundSrc;
+    var letterSoundSrc = letterSounds[currentLetter];
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
+    const [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume / 100});
+    const [playCorrectSoundFX] = useSound(correctFX, {volume: volume / 100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
 
@@ -112,32 +117,40 @@ const LearnWordAdvanced = forwardRef((props, ref) => {
     useEffect (() => {
         //Check for matching current morse sequence to current letter
         if (output === currentLetter) {
-            setCorrect(correct + currentWord[wordIndex]);
-            setInput('');
-            setWordIndex(prevWordIndex => prevWordIndex + 1);
+            playCurrLetterSound();
+            setTimeout(() => {
+                setCorrect(correct + currentWord[wordIndex]);
+                setInput('');
+                setOutput('');
+                setWordIndex(prevWordIndex => prevWordIndex + 1);
+            }, 2000);
         }
     }, [input]);
 
     useEffect(() => {
         //Check when the user complete the whole word
         if (correct.localeCompare(currentWord) === 0) {
-            //Play the pronunciation of the current word
-            playCurrWordSound();
-            //Delay 2 sec
-            setTimeout(function () {
-                //Set the new word
-                if(gameIndex < 25) {
-                    setGameIndex(prevState => prevState + 1);
-                }
-                else {
-                    setGameIndex(25);
-                    setFinished(true);
-                }
-                //Reset word index
-                setWordIndex(0);
-                //Reset correct
-                setCorrect('');
-            }, 2000)
+            //Play the correct jingle
+            playCorrectSoundFX();
+            setTimeout(() => {
+                //Play the pronunciation of the current word
+                playCurrWordSound();
+                //Delay 2 sec
+                setTimeout(function () {
+                    //Set the new word
+                    if(gameIndex < 25) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        setGameIndex(25);
+                        setFinished(true);
+                    }
+                    //Reset word index
+                    setWordIndex(0);
+                    //Reset correct
+                    setCorrect('');
+                }, 2000)
+            }, 2100);
         }
     }, [wordIndex]);
     

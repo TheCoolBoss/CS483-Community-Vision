@@ -11,6 +11,7 @@ import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
 import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import sounds from "./LetterSounds";
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 var t;
 var list = "ETIANMSURWDKGOHVFLPJBXCYZQ";
@@ -95,20 +96,29 @@ const SortedAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
     resetInputLength(input, setInput);
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentLetterSound();
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                setIndex(prevState => prevState + 1);
-                setTimeout(function () {
-                    setInput("");
-                }, resetTimer);
-            }, 2000)
+                playCurrentLetterSound();
+                setTimeout(() => {
+                    setAnim(!anim);
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                    }
+                }, 2000)
+            }, 2100)
         }
     }, [input])
 
