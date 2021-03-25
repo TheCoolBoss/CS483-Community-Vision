@@ -253,10 +253,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                     <div>
                                         {isCorrect
                                         ?
-                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, textShadow: "-2px 2px 2px #000, 2px 2px 2px #000, 2px -2px 2px #000, -2px -2px 2px #000"}}>{currentWord}</h1>
                                         :
                                         <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                                            <span style={{color: fontColor}}>{currentLetter}</span>
                                             <span style={{color: fontColor, opacity: 0.5, fontSize: notCurrLetterSize}}>{currentWord.substr(1)}</span>
                                         </h1>
                                         }
