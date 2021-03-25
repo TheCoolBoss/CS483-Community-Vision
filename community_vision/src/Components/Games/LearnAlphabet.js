@@ -84,7 +84,6 @@ const LearnAlphabet = forwardRef((props, ref) => {
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = useState('');
-    var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -121,15 +120,18 @@ const LearnAlphabet = forwardRef((props, ref) => {
     React.useEffect(() => {
         if (input === currentMorse) {
             playCurrentLetterSound();
+            clearTimeout(t);
             setTimeout(() => {
+                clearTimeout(t);
                 setAnim(!anim);
+                setInput('');
                 if (index != list.length - 1) {
                     setIndex(prevState => prevState + 1);
                 } else {
                     setIndex(0);
                     setEndScreen(true);
                 }
-            }, 2000)
+            }, resetTimer)
         }
     }, [input])
 
