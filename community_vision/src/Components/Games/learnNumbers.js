@@ -15,6 +15,7 @@ import enterButton from '../Assets/Images/enterButton.png';
 import {useHistory} from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 import sounds from './NumberSounds';
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 
 /*
@@ -129,6 +130,11 @@ const LearnNumbers = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
 
@@ -143,16 +149,23 @@ const LearnNumbers = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentNumberSound();
+            clearTimeout(t);
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                if(index != list.length -1) {
-                    setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                    setEndScreen(true);
-                }
-            }, 2000)
+                clearTimeout(t);
+                playCurrentNumberSound();
+                setTimeout(() => {
+                    clearTimeout(t);
+                    setInput('');
+                    setAnim(!anim);
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 

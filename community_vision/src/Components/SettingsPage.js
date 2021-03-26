@@ -4,32 +4,27 @@ import Settings from './Settings'
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import { initial } from "./Games/Common/Functions";
+import pic from './settings.png'
+import Card from '@material-ui/core/Card';
 
 function SettingsPage(props) {
-    const [backgroundColor, setBackgroundColor] = useState(() => initial('backgroundColor'));
-    const [fontColor, setFontColor] = useState(() => initial('fontColor'));
-    return(
-        <div style={{backgroundColor: backgroundColor,
+    return (
+        <div style={{
             minHeight: '90vh',
-            marginTop: '-1.5vh'}}>
-            <Settings updateNavBackgroundColor={setBackgroundColor}
-                updateNavFontColor={setFontColor}
-                updateSettingsPageState={props.updateAppState}
+            marginTop: '-1.5vh',
+            backgroundColor: 'white'
+        }}>
+            <Card>
+                <h1 style={{ fontSize: '6vh', marginTop: '2vh', marginBottom: '0', userSelect: 'none' }}>
+                    <img style={{ height: '5vh', margin: 0 }} src={pic} alt={pic}></img>
+                    Settings
+                </h1>
+            </Card>
+            <Settings updateSettingsPageState={props.updateAppState}
                 updateNavState={() => void 0} />
-            <Grid justify='center'>
-                <Link to="/games">
-                    <button style={{width: '50vw',
-                        minHeight: '5vh',
-                        marginBottom: '1.5vh',
-                        fontSize: '3vw',
-                        textDecoration: 'none'}}>
-                        Play Games!
-                    </button>
-                </Link>
-            </Grid>
         </div>
     );
 }
-  
+
 
 export default SettingsPage;

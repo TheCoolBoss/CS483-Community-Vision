@@ -89,14 +89,14 @@ const Games = forwardRef((props, ref) => {
         backgroundColor: backgroundColor
       }}>
         <button style={{
-          height: '80%',
-          width: '40%',
+          width: '40vw',
           fontSize: '5vh',
           fontWeight: 900,
           userSelect: 'none',
           cursor: 'pointer',
-          marginBottom: "20px"
-        }}>Go back to Home</button>
+          marginBottom: "5vh",
+          backgroundColor: 'white'
+        }}>Go Back to Home</button>
       </Link>
     </div>
 

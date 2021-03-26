@@ -11,9 +11,13 @@ import spacebar from '../Assets/Images/spacebar.png'
 import enterButton from '../Assets/Images/enterButton.png'
 import {initial, Buttons, resetInputTime, resetInputLength, BackButton} from "./Common/Functions";
 import sounds from "./LetterSounds";
+
 import {Transition} from "react-spring/renderprops";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router-dom";
+
+import correctFX from "../Assets/Sounds/correct.mp3"
+
 
 var t;
 var list = "ETIANMSURWDKGOHVFLPJBXCYZQ";
@@ -102,8 +106,15 @@ const SortedAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
+
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
 
     resetInputLength(input, setInput);
     clearTimeout(t);
@@ -111,14 +122,22 @@ const SortedAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentLetterSound();
+            clearTimeout(t);
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                setIndex(prevState => prevState + 1);
-                setTimeout(function () {
-                    setInput("");
-                }, resetTimer);
-            }, 2000)
+                clearTimeout(t);
+                playCurrentLetterSound();
+                setTimeout(() => {
+                    clearTimeout(t);
+                    setInput('');
+                    setAnim(!anim);
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 

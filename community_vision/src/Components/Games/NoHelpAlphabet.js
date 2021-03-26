@@ -11,9 +11,13 @@ import Grid from "@material-ui/core/Grid";
 import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
 import sounds from "./LetterSounds"
+
 import {Transition} from "react-spring/renderprops";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router-dom";
+
+import correctFX from "../Assets/Sounds/correct.mp3";
+
 
 
 var t;
@@ -86,6 +90,11 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
         soundSrc,
         { volume: volume / 100 }
     );
+
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        { volume: volume / 100}
+    );
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
     var [startScreen, setStartScreen] = useState(true);
@@ -97,14 +106,21 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentLetterSound();
+            clearTimeout(t);
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                setIndex(prevState => prevState + 1);
-                setTimeout(function () {
-                    setInput("");
+                clearTimeout(t);
+                playCurrentLetterSound();
+                clearTimeout(t);
+                setTimeout(() => {
+                    setInput('');
+                    setAnim(!anim);
+                    setIndex(prevState => prevState + 1);
+                    setTimeout(function () {
+                        setInput("");
+                    }, resetTimer);
                 }, resetTimer);
-            }, 2000)
+            }, resetTimer);
         }
     }, [input])
 
