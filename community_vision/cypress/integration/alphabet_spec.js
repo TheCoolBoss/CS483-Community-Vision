@@ -54,7 +54,7 @@ describe('Learning Alphabet Game Test', function () {
         //         }
         //     }
         //
-        //     cy.wait(initial("speed"))
+        //     cy.wait(initial("speed") * 1000)
         // }
         
         cy.get("button[id^='dotButton']").click()

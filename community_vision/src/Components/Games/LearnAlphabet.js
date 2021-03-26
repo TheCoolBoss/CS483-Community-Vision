@@ -235,7 +235,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of all the letters in the alphabet.
+                                        }}>Type the Morse of all the letters in the alphabet.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -297,7 +297,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in morse.
+                                        }}>You have learned the alphabet in Morse.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -328,16 +328,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 }
             </Transition>
             <div style={{ gridArea: 'top' }}>
-                {/* <div style={{ position: 'absolute' }}>
+                { <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton />
-                        <Grid container justify='left' >
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
                     </Container>
-                </div> */}
+                </div> }
                 <div id="sampleMorse">
                     <animated.h1 style={{
                         lineHeight: 0,
