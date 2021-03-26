@@ -8,7 +8,7 @@ import { Container } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Functions";
+import {initial, Buttons, resetInputLength, resetInputTime, BackButton} from "./Common/Functions";
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 
@@ -284,7 +284,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of the letters before they reach you.
+                                        }}>Type the Morse of the letters before they reach you.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -396,7 +396,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                 <div style={{
                     position: 'absolute',
                     right: '2vw',
-                    top: '5vh',
+                    top: '9vh',
                     fontSize: '7vh',
                     pointer: 'default',
                     userSelect: 'none',
@@ -406,10 +406,15 @@ const AlphabetRace = forwardRef((props, ref) => {
                         {livesDisplay}
                     </p>
                 </div>
+                <div style={{ position: 'absolute' }}>
+                    <Container>
+                        <BackButton />
+                    </Container>
+                </div>
                 <div style={{
                     position: 'absolute',
                     left: '2vw',
-                    top: '5vh',
+                    top: '9vh',
                     fontSize: '7vh',
                     pointer: 'default',
                     userSelect: 'none',
