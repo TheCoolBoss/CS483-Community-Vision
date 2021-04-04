@@ -90,3 +90,12 @@ export function iterateSandWords(list)
     }
 }
 
+export function iterateButtons(list)
+{
+    for (var i = 0; i < list.length; i++)
+    {
+        var c = enterChar(list.charAt(i));
+        cy.contains(c)
+        cy.wait((initial("speed") * 1000))
+    }
+}
