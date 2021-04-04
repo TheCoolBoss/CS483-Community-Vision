@@ -1,4 +1,4 @@
-import {clickDotXTimes, iterateList, iterateSandLetters} from "./helpfulFuncs";
+import {clickDotXTimes, iterateList, iterateSandLetters, iterateSandWords} from "./helpfulFuncs";
 
 const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
@@ -10,8 +10,8 @@ import {initial} from "../../src/Components/Games/Common/Functions";
 //Easy access to dot
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-describe('Sandbox Letters Game Test', function () {
-    it('Navigates to Sandbox Letters Game and tests functionality', function () {
+describe('Sandbox Words Game Test', function () {
+    it('Navigates to Sandbox Words Game and tests functionality', function () {
         // Arrange - setup initial app state
         // - query for an element
         cy.visit('http://localhost:3000/')
@@ -22,9 +22,9 @@ describe('Sandbox Letters Game Test', function () {
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.contains('Sandbox Letters').click()
+        cy.contains('Sandbox Words').click()
         cy.url()
-            .should('include','/sandboxLetters')
+            .should('include','/sandboxWords')
 
         // Assert - make an assertion
         // - make an assertion about page content
@@ -36,12 +36,8 @@ describe('Sandbox Letters Game Test', function () {
         cy.get("button[id^='dashButton']")
 
 
-        iterateSandLetters(list)
+        iterateSandWords(list)
 
-        //clickDotXTimes(6)
-        //cy.get("[id^=input]").contains("")
-        //cy.get("[id^=output]").contains(morseToChar(""))
-        
         //Go back button should go back to games page
         cy.contains("Go back to games").click()
         cy.url().should("include", "/games")

@@ -330,7 +330,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         </Grid>
                     </Container>
                 </div>
-                <div id="sampleMorse">
+                <div id="sampleMorseCode">
                     <animated.h1 style={{
                         lineHeight: 0,
                         color: fontColor,

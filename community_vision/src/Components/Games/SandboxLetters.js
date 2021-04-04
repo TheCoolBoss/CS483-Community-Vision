@@ -203,7 +203,7 @@ const SandboxLetters = forwardRef((props, ref) => {
                     </Container>
                 </div>
                 <div>
-                    <animated.h1 style={{
+                    <animated.h1 id = "output" style={{
                         lineHeight: 0,
                         color: fontColor,
                         fontSize: fSize

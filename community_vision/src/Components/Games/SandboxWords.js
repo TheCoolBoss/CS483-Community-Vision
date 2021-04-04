@@ -234,7 +234,7 @@ const SandboxWords = forwardRef((props, ref) => {
             />
             <div style = {{gridArea: "bottom"}}>
                 <div>
-                    <button style = {{
+                    <button id = "clearButton" style = {{
                         fontSize: "4vh",
                         marginLeft: "1300px",
                         marginBottom: "10px",
