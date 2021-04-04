@@ -135,6 +135,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         setIndex(prevState => prevState + 1);
                     } else {
                         setIndex(0);
+                        setEndScreen(true);
                     }
                 }, resetTimer)
             }, resetTimer)
@@ -145,11 +146,25 @@ const SortedAlphabet = forwardRef((props, ref) => {
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
+            if (startScreen) {
+
+            } else if (endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+            }
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+            }
         }
     };
 
