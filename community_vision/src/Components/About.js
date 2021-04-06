@@ -64,7 +64,7 @@ const About = forwardRef((props, ref) => {
         and explore the alphabet when they are very young, so it is never too early to 
         start playing with Morse!</p>
 
-      <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAligh: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
+      <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
 
         
       <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
