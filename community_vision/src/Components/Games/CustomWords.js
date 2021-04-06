@@ -22,6 +22,7 @@ var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
 var customMorse;
 var customWord;
+var z=1;
 
 /*
 function parseInput() {
@@ -35,12 +36,26 @@ function parseInput() {
 */
 
 function displayCustomWord() {
+    const wordData =[10];
     customWord = document.getElementById("customInput").value;
     //window.alert(customWord);
-    if(customWord.length > 6) {
+    if(customWord.length > 8) {
         window.alert("Custom Word must be less than 8 letters");
     }
     //sampleMorse = customWord;
+
+    wordData[z] = customWord;
+    window.alert("custom word: " + customWord);
+    window.alert("wordData  " +wordData[z]+ " " +z);
+    // rewrite word list once user puts more than ten letters
+    if(z>10) {
+        window.alert("You have reached 10 words!");
+        z=1;
+    }
+    z++;
+}
+
+function startGame() {
     document.getElementById('customLetters').innerHTML = customWord;
 }
 
@@ -182,7 +197,16 @@ const CustomWords = forwardRef((props, ref) => {
                             }} onClick={function(){
                                 displayCustomWord();
                             }}
-                            variant='outline-secondary'>Enter</button>
+                            variant='outline-secondary'>Enter Word</button>
+                            <button style={{
+                                fontSize: '4vh'
+                            }} onClick={function(){
+                                displayCustomWord();
+                            }}
+                            variant='outline-secondary'>Start</button>
+                            <p style={{
+                                fontSize: '2vh'
+                            }}>Word Count: {z}</p>
                         </Grid>
                         <Grid item xs={1}>
                             <p style={{
