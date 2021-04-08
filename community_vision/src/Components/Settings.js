@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import '../App.css';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -9,10 +9,19 @@ import hare from '../Components/Assets/Images/hare.png';
 import tortoise from '../Components/Assets/Images/tortoise.png';
 import { SketchPicker } from 'react-color';
 import reactCSS from 'reactcss';
-import { initial } from "./Games/Common/Functions";
+import { Buttons, initial } from "./Games/Common/Functions";
+import { Link } from 'react-router-dom';
+import { CardActionArea } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
 
 
-function Settings(props) {
+const Settings = forwardRef((props, ref) => {
+
+    const history = useHistory();
+    function moveTo(input) {
+        history.push(input);
+    }
+
     const [volume, setVolume] = useState(() => initial('volume'));
     const changeVolume = (event, newValue) => {
         localStorage.setItem('volume', newValue);
@@ -74,10 +83,50 @@ function Settings(props) {
         }
         return false;
     };
+    var playGames = <div></div>;
+    if (window.location.href.slice(-8) === 'settings') {
+        playGames =
+            <div>
+                <Grid item style={{ paddingTop: '5vh', paddingLeft: '5vw', paddingRight: '5vw' }}>
+                    <Card onMouseUp={() => {
+                        moveTo('/games');
+                    }}>
+                        <CardActionArea>
+                            <button style={{
+                                width: '100%',
+                                height: '100%',
+                                fontSize: '5vh',
+                                textDecoration: 'none',
+                                background: 'white',
+                                borderColor: 'blue',
+                                borderWidth: "1.5vh",
+                                fontWeight: 900
+                            }}>
+                                Play Games!
+            </button>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </div>
+    }
+
+    useImperativeHandle(
+        ref,
+        () => ({
+            update() {
+                setVolume(initial('volume'));
+                setSize(initial('size'));
+                setSpeed(initial('speed'));
+                setBackgroundColor(initial('backgroundColor'));
+                setDashButtonColor(initial('dashButtonColor'));
+                setDotButtonColor(initial('dotButtonColor'));
+                setFontColor(initial('fontColor'));
+            }
+        }),
+    )
 
     return (
         <div style={{
-            position: 'relative',
             marginTop: '1.5vh',
             top: '0vh',
             marginBottom: '2vh',
@@ -141,6 +190,7 @@ function Settings(props) {
                                 <Grid item xs={2} />
                             </Grid>
                         </Grid>
+                        {playGames}
                     </Grid>
                     <Grid style={{ marginLeft: '2px' }} container direction='column' xs={6} spacing={1}>
                         <Grid item>
@@ -168,10 +218,10 @@ function Settings(props) {
                                         changeDotButtonColor('yellow');
                                         changeDashButtonColor('red');
                                     }}>
-                                        <button style={{ gridArea: '1', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                        <button style={{ gridArea: '1', backgroundColor: 'LightGray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                        <button style={{ gridArea: '2', backgroundColor: 'white', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
-                                        <button style={{ gridArea: '2', backgroundColor: 'gray', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '1', backgroundColor: '#e8e8e8', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '1', backgroundColor: 'black', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '2', backgroundColor: 'yellow', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
+                                        <button style={{ gridArea: '2', backgroundColor: 'red', width: '3vh', height: '3vh', borderStyle: 'solid', cursor: 'pointer' }} />
                                     </div>
                                 </Grid>
                                 <Grid item>
@@ -189,13 +239,13 @@ function Settings(props) {
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue', cursor: 'pointer' }} onClick={() => changeBackgroundColor('blue')}></button>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: '#e8e8e8', cursor: 'pointer' }} onClick={() => changeBackgroundColor('#e8e8e8')}></button>
                                     </Grid>
                                     <Grid item>
-                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeBackgroundColor('blue')}>Blue</p>
+                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeBackgroundColor('#e8e8e8')}>Gray</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(backgroundColor, 'blue')} type="radio" id="blueBackgroundColor" name="backgroundColor" value="blue" onClick={() => changeBackgroundColor('blue')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(backgroundColor, '#e8e8e8')} type="radio" id="grayBackgroundColor" name="backgroundColor" value="gray" onClick={() => changeBackgroundColor('#e8e8e8')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -211,13 +261,13 @@ function Settings(props) {
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'green', cursor: 'pointer' }} onClick={() => changeBackgroundColor('green')}></button>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'black', cursor: 'pointer' }} onClick={() => changeBackgroundColor('black')}></button>
                                     </Grid>
                                     <Grid item>
-                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeBackgroundColor('green')}>Green</p>
+                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeBackgroundColor('black')}>Black</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(backgroundColor, 'green')} type="radio" id="greenBackgroundColor" name="backgroundColor" value="green" onClick={() => changeBackgroundColor('green')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(backgroundColor, 'black')} type="radio" id="blackBackgroundColor" name="backgroundColor" value="black" onClick={() => changeBackgroundColor('black')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column' alignItems='center'>
@@ -235,13 +285,13 @@ function Settings(props) {
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue', cursor: 'pointer' }} onClick={() => changeDotButtonColor('blue')}></button>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'yellow', cursor: 'pointer' }} onClick={() => changeDotButtonColor('yellow')}></button>
                                     </Grid>
                                     <Grid item>
-                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDotButtonColor('blue')}>Blue</p>
+                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDotButtonColor('yellow')}>Yellow</p>
                                     </Grid>
                                     <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dotButtonColor, 'blue')} type="radio" id="blueDotButtonColor" name="dotButtonColor" value="blue" onClick={() => changeDotButtonColor('blue')} />
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dotButtonColor, 'yellow')} type="radio" id="yellowDotButtonColor" name="dotButtonColor" value="yellow" onClick={() => changeDotButtonColor('yellow')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -281,17 +331,6 @@ function Settings(props) {
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue', cursor: 'pointer' }} onClick={() => changeDashButtonColor('blue')}></button>
-                                    </Grid>
-                                    <Grid item>
-                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDashButtonColor('blue')}>Blue</p>
-                                    </Grid>
-                                    <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'blue')} type="radio" id="blueDashButtonColor" name="dashButtonColor" value="blue" onClick={() => changeDashButtonColor('blue')} />
-                                    </Grid>
-                                </Grid>
-                                <Grid container xs={3} direction='column'>
-                                    <Grid item>
                                         <button style={{ height: '5vh', width: '5vh', backgroundColor: 'red', cursor: 'pointer' }} onClick={() => changeDashButtonColor('red')}></button>
                                     </Grid>
                                     <Grid item>
@@ -299,6 +338,17 @@ function Settings(props) {
                                     </Grid>
                                     <Grid item>
                                         <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'red')} type="radio" id="redDashButtonColor" name="dashButtonColor" value="red" onClick={() => changeDashButtonColor('red')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'blue', cursor: 'pointer' }} onClick={() => changeDashButtonColor('blue')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeDashButtonColor('blue')}>Blue</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(dashButtonColor, 'blue')} type="radio" id="blueDashButtonColor" name="dashButtonColor" value="blue" onClick={() => changeDashButtonColor('blue')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -327,17 +377,6 @@ function Settings(props) {
                             <Grid container direction='row' style={{ marginTop: '-1vh' }}>
                                 <Grid container xs={3} direction='column'>
                                     <Grid item>
-                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'white', cursor: 'pointer' }} onClick={() => changeFontColor('white')}></button>
-                                    </Grid>
-                                    <Grid item>
-                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeFontColor('white')}>White</p>
-                                    </Grid>
-                                    <Grid item>
-                                        <input style={{ cursor: 'pointer' }} checked={isChecked(fontColor, 'white')} type="radio" id="whiteFontColor" name="fontColor" value="white" onClick={() => changeFontColor('white')} />
-                                    </Grid>
-                                </Grid>
-                                <Grid container xs={3} direction='column'>
-                                    <Grid item>
                                         <button style={{ height: '5vh', width: '5vh', backgroundColor: 'black', cursor: 'pointer' }} onClick={() => changeFontColor('black')}></button>
                                     </Grid>
                                     <Grid item>
@@ -345,6 +384,17 @@ function Settings(props) {
                                     </Grid>
                                     <Grid item>
                                         <input style={{ cursor: 'pointer' }} checked={isChecked(fontColor, 'black')} type="radio" id="blackFontColor" name="fontColor" value="black" onClick={() => changeFontColor('black')} />
+                                    </Grid>
+                                </Grid>
+                                <Grid container xs={3} direction='column'>
+                                    <Grid item>
+                                        <button style={{ height: '5vh', width: '5vh', backgroundColor: 'white', cursor: 'pointer' }} onClick={() => changeFontColor('white')}></button>
+                                    </Grid>
+                                    <Grid item>
+                                        <p style={{ margin: -2, cursor: 'pointer', userSelect: 'none' }} onClick={() => changeFontColor('white')}>White</p>
+                                    </Grid>
+                                    <Grid item>
+                                        <input style={{ cursor: 'pointer' }} checked={isChecked(fontColor, 'white')} type="radio" id="whiteFontColor" name="fontColor" value="white" onClick={() => changeFontColor('white')} />
                                     </Grid>
                                 </Grid>
                                 <Grid container xs={3} direction='column'>
@@ -373,7 +423,7 @@ function Settings(props) {
             </Card>
         </div >
     )
-}
+})
 
 class ColorPicker extends React.Component {
     state = {

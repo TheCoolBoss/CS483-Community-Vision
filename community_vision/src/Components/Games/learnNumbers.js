@@ -15,6 +15,7 @@ import enterButton from '../Assets/Images/enterButton.png';
 import {useHistory} from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 import sounds from './NumberSounds';
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 
 /*
@@ -129,6 +130,11 @@ const LearnNumbers = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
 
@@ -143,16 +149,23 @@ const LearnNumbers = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentNumberSound();
+            clearTimeout(t);
+            playCorrectSoundFX();
             setTimeout(() => {
-                setAnim(!anim);
-                if(index != list.length -1) {
-                    setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                    setEndScreen(true);
-                }
-            }, 2000)
+                clearTimeout(t);
+                playCurrentNumberSound();
+                setTimeout(() => {
+                    clearTimeout(t);
+                    setInput('');
+                    setAnim(!anim);
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 
@@ -257,7 +270,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                         <h1 style={{
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
-                                        }}>Learn Alphabet
+                                        }}>Learn Numbers
                                         </h1>
                                         <br />
                                         <p style={{
@@ -265,7 +278,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of all the letters in the alphabet.
+                                        }}>Type the Morse of all the numbers from 0 to 9.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -327,7 +340,7 @@ const LearnNumbers = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in morse.
+                                        }}>You have learned the numbers in Morse.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -358,16 +371,11 @@ const LearnNumbers = forwardRef((props, ref) => {
                 }
             </Transition>
             <div style={{gridArea: 'top'}}>
-                {/* <div style={{ position: 'absolute' }}>
+                { <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton />
-                        <Grid container justify='left'>
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
                     </Container>
-                </div> */}
+                </div> }
                 <div id="sampleMorse">
                     <animated.h1 style={{
                         lineHeight: 0,

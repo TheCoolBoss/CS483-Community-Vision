@@ -14,6 +14,8 @@ import Picture from './Picture';
 import {BackButton} from "../Common/Functions";
 import gameData from "./WordsGameData";
 import sounds from "../LetterSounds";
+import StartScreen from "./LearnWordsStart";
+import correctFX from "../../Assets/Sounds/correct.mp3";
 
 
 /*
@@ -62,6 +64,8 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     var [finished, setFinished] = useState(() => initial(false));
 
+    var [start, setStart] = useState(true);
+
     //Get the image source
     var img = gameData[gameIndex].imgSrc;
 
@@ -94,6 +98,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     var letterSoundSrc = sounds[currentLetter];
     var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
+    const [playCorrectSoundFX] = useSound(correctFX, {volume: volume / 100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
 
@@ -112,27 +117,32 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     useEffect(() => {
         //Check for matching current morse sequence to current letter
         if (output === currentLetter) {
+            clearTimeout(t);
+            playCorrectSoundFX();
+            setIsCorrect(true);
             setTimeout(() => {
-                setIsCorrect(true);
+                clearTimeout(t);
                 //Play current letter sound
                 playCurrLetterSound();
                 setTimeout(() => {
                     //Play current sound of word
                     playCurrWordSound();
-                }, 1550)
-            }, 1000);
-            //Move to the next word
-            setTimeout(() => {
-                if(gameIndex < 25) {
-                    setGameIndex(prevState => prevState + 1);
-                }
-                else {
-                    setGameIndex(25);
-                    setFinished(true);
-                }
-                setInput('');
-                setIsCorrect(false);
-            }, 4550);
+                }, resetTimer)
+                //Move to the next word
+                setTimeout(() => {
+                    clearTimeout(t);
+                    if(gameIndex < 25) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        setGameIndex(25);
+                        setFinished(true);
+                    }
+                    setOutput('');
+                    setInput('');
+                    setIsCorrect(false);
+                }, resetTimer + 2000);
+            }, resetTimer);
         }
     }, [input]);
 
@@ -144,9 +154,14 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             setOutput('');
             playDot();
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            setOutput('');
-            playDash();
+            if(start) {
+                setStart(false);
+            }
+            else {
+                setInput(input + '-');
+                setOutput('');
+                playDash();
+            }
         }
     };
 
@@ -213,23 +228,24 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     return (
         <div>
+            {start ? <StartScreen level={"beginner"} start={start} setStart={setStart} /> : null}
             {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
-                     <div style={{ position: 'absolute' }}>
+                    <div style={{ position: 'absolute' }}>
                         <Container>
                             <BackButton />
-                            <Grid container justify='left'>
+                            {/* <Grid container justify='left'>
                                 <Grid item>
                                     <Tutorial background={backgroundColor} level='beginner' fColor={fontColor}/>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} lg={6}>
+                                <Grid item xs={12} sm={4} xl={6}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -237,14 +253,14 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} lg={6}>
+                                <Grid item xs={12} sm={4} xl={6}>
                                     <div>
                                         {isCorrect
                                         ?
-                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize}}>{currentWord}</h1>
+                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, textShadow: "-2px 2px 2px #000, 2px 2px 2px #000, 2px -2px 2px #000, -2px -2px 2px #000"}}>{currentWord}</h1>
                                         :
                                         <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                                            <span style={{color: fontColor, textDecoration: 'underline'}}>{currentLetter}</span>
+                                            <span style={{color: fontColor}}>{currentLetter}</span>
                                             <span style={{color: fontColor, opacity: 0.5, fontSize: notCurrLetterSize}}>{currentWord.substr(1)}</span>
                                         </h1>
                                         }

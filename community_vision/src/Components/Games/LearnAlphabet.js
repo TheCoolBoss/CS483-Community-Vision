@@ -15,6 +15,7 @@ import { initial, Buttons, resetInputTime, resetInputLength, BackButton } from "
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 import sounds from "./LetterSounds";
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 
 var t;
@@ -84,7 +85,6 @@ const LearnAlphabet = forwardRef((props, ref) => {
     var currentLetter = list[index];
     var currentMorse = charToMorse(currentLetter);
     var [input, setInput] = useState('');
-    var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
 
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -113,7 +113,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
-    // creates starts and end screen 
+    const [playCorrectSoundFX] = useSound(
+        correctFX,
+        {volume: volume / 100}
+    )
+
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
 
@@ -121,16 +125,23 @@ const LearnAlphabet = forwardRef((props, ref) => {
     
     React.useEffect(() => {
         if (input === currentMorse) {
-            playCurrentLetterSound();
+            playCorrectSoundFX();
+            clearTimeout(t);
             setTimeout(() => {
-                setAnim(!anim);
-                if (index != list.length - 1) {
-                    setIndex(prevState => prevState + 1);
-                } else {
-                    setIndex(0);
-                    setEndScreen(true);
-                }
-            }, 2000)
+                clearTimeout(t);
+                playCurrentLetterSound();
+                setTimeout(() => {
+                    clearTimeout(t);
+                    setAnim(!anim);
+                    setInput('');
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 
@@ -236,7 +247,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of all the letters in the alphabet.
+                                        }}>Type the Morse of all the letters in the alphabet.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -298,7 +309,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in morse.
+                                        }}>You have learned the alphabet in Morse.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -329,16 +340,11 @@ const LearnAlphabet = forwardRef((props, ref) => {
                 }
             </Transition>
             <div style={{ gridArea: 'top' }}>
-                {/* <div style={{ position: 'absolute' }}>
+                { <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton />
-                        <Grid container justify='left' >
-                            <Grid item>
-                                <Radio />
-                            </Grid>
-                        </Grid>
                     </Container>
-                </div> */}
+                </div> }
                 <div id="sampleMorse">
                     <animated.h1 style={{
                         lineHeight: 0,

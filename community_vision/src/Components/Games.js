@@ -78,10 +78,10 @@ const Games = forwardRef((props, ref) => {
             <GameSelection name='Alphabet Race Game with Morse' img={raceLevel3} link='/alphabetRacePractice' difficulty='Level 3' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn Words' img={unicycleImg} link='/learnWordAdvanced' difficulty='Level 4' />
+            <GameSelection name='Learn the Alphabet In Morse' img={stackABC} link='/noHelpAlphabet' difficulty='Level 4' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Learn the Alphabet In Morse' img={stackABC} link='/noHelpAlphabet' difficulty='Level 4' />
+            <GameSelection name='Learn Words' img={unicycleImg} link='/learnWordAdvanced' difficulty='Level 4' />
           </Grid>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Alphabet Race Game' img={raceLevel4} link='/alphabetRace' difficulty='Level 4' />
@@ -92,14 +92,14 @@ const Games = forwardRef((props, ref) => {
         backgroundColor: backgroundColor
       }}>
         <button style={{
-          height: '80%',
-          width: '40%',
+          width: '40vw',
           fontSize: '5vh',
           fontWeight: 900,
           userSelect: 'none',
           cursor: 'pointer',
-          marginBottom: "20px"
-        }}>Go back to Home</button>
+          marginBottom: "5vh",
+          backgroundColor: 'white'
+        }}>Go Back to Home</button>
       </Link>
     </div>
 

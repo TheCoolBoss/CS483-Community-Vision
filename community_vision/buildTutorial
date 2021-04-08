@@ -1,0 +1,5 @@
+1. Run "npm run build" in the community_vision folder
+2. A build folder should have been made. Copy it into a zip folder; the zip folder's contents should be the build folder, not the stuff inside it
+3. Login to CPanel and go to the file manager.
+4. Upload the zip folder to the public_html/community_vision/ folder. Extract the contents.
+5. Put the extracted contents into public_html.

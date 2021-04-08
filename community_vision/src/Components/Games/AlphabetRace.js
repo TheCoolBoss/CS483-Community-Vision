@@ -8,7 +8,7 @@ import { Container } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import { initial, Buttons, resetInputLength, resetInputTime } from "./Common/Functions";
+import {initial, Buttons, resetInputLength, resetInputTime, BackButton} from "./Common/Functions";
 import { useHistory } from "react-router-dom";
 import { Transition } from 'react-spring/renderprops';
 
@@ -141,7 +141,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         setNewSpawn(curr => curr + 1);
         setLetters(currLetters => {
             for (var j = 0; j < currLetters.length; j++) {
-                currLetters[j]['x'] = currLetters[j]['x'] - 0.10;
+                currLetters[j]['x'] = currLetters[j]['x'] - ((((speed-4) * (0.1-0.05)) / (0.5-4)) + 0.05);
             }
             return [...currLetters];
         });
@@ -189,7 +189,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         clearInterval(interval);
     }
 
-    if (newSpawn > 250) {
+    if (newSpawn > ((((speed-4) * (250-500)) / (0.5-4)) + 500)) {
         addLetter();
         setNewSpawn(0);
     }
@@ -205,7 +205,7 @@ const AlphabetRace = forwardRef((props, ref) => {
             }
             setScore(currScore => currScore + 1);
             setLetters(tempLetters);
-            setTimeout(function () { setInput(''); }, resetTimer / 2);
+            setTimeout(function () { setInput(''); }, resetTimer / 4);
             break;
         }
         if (tempLetters[j].x < 0) {
@@ -217,7 +217,6 @@ const AlphabetRace = forwardRef((props, ref) => {
             }
             setLives(currLives => currLives - 1);
             setLetters(tempLetters);
-            setTimeout(function () { setInput(''); }, resetTimer / 2);
             break;
         }
     }
@@ -285,7 +284,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the morse of the letters before they reach you.
+                                        }}>Type the Morse of the letters before they reach you.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -397,7 +396,7 @@ const AlphabetRace = forwardRef((props, ref) => {
                 <div style={{
                     position: 'absolute',
                     right: '2vw',
-                    top: '5vh',
+                    top: '9vh',
                     fontSize: '7vh',
                     pointer: 'default',
                     userSelect: 'none',
@@ -407,10 +406,15 @@ const AlphabetRace = forwardRef((props, ref) => {
                         {livesDisplay}
                     </p>
                 </div>
+                <div style={{ position: 'absolute' }}>
+                    <Container>
+                        <BackButton />
+                    </Container>
+                </div>
                 <div style={{
                     position: 'absolute',
                     left: '2vw',
-                    top: '5vh',
+                    top: '9vh',
                     fontSize: '7vh',
                     pointer: 'default',
                     userSelect: 'none',

@@ -33,10 +33,10 @@ describe('Sandbox Letters Game Test', function () {
 
         //Click dot button, wait for output to appear, then check output
         cy.contains("•").click()
-        cy.wait(initial("speed"))
+        //cy.wait(initial("speed"))
         cy.contains(morseToChar("•"))
 
-        cy.wait(initial("speed"))
+        cy.wait(initial("speed") * 1000)
 
         cy.get("button[id^='dotButton']").click()
         cy.get("button[id^='dotButton']").click()
