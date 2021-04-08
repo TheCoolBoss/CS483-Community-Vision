@@ -2,6 +2,7 @@
 
 import {morseToChar, charToMorse} from "../../src/Components/Games/charMorseConv";
 import {initial} from "../../src/Components/Games/Common/Functions";
+import gameData from "../../src/Components/Games/LearnWord/WordsGameData";
 
 export function clickDotXTimes(count)
 {
@@ -97,5 +98,18 @@ export function iterateButtons(list)
         var c = enterChar(list.charAt(i));
         cy.contains(c)
         cy.wait((initial("speed") * 1000))
+    }
+}
+
+export function iterateWords()
+{
+    for (var i = 0; i < gameData.length; i++)
+    {
+        for (var j = 0; j < gameData[i].word.length; j++)
+        {
+            var c = enterChar(gameData[i].word.charAt(j));
+            cy.contains(c)
+            cy.wait((initial("speed") * 1000) + 3500)
+        }
     }
 }
