@@ -31,7 +31,7 @@ const About = forwardRef((props, ref) => {
       <h1 style={{ fontWeight: 900, textSize: "60px" }}>Who We Are</h1>
 
       <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}} >The Community Vision Assistive Technology (AT) Lab is an education and 
-      resource center in Portland, Oregon that promotes accessibility & inclusive 
+      resource center in Portland, Oregon that promotes accessibility & inclusion
       in our community. We collaborate with people with disabilities, families, 
       caregivers, professionals, and community partners. We want more people to 
       see, access, and feel comfortable with AT. The Lab offers AT Consultations,
