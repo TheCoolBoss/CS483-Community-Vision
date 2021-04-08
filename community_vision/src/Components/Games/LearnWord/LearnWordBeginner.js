@@ -95,7 +95,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
 
     //Get the sound of current word
     var soundSrc = gameData[gameIndex].soundSrc;
+    //Get the sound of current letter
     var letterSoundSrc = sounds[currentLetter];
+
+    //Sound hooks
     var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
     var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
     const [playCorrectSoundFX] = useSound(correctFX, {volume: volume / 100});
@@ -245,7 +248,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     <div style={{width: '100vw', height:'40vh'}}>
                         <Container>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} xl={6}>
+                                <Grid item xs={12} sm={4} xl={6} style={{userSelect: 'none'}}>
                                     <Picture 
                                         img={img} 
                                         currentWord={currentWord}
@@ -253,7 +256,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                         picHeight={picHeight}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} xl={6}>
+                                <Grid item xs={12} sm={4} xl={6} style={{userSelect: 'none'}}>
                                     <div>
                                         {isCorrect
                                         ?
@@ -272,7 +275,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
-                    <Container>
+                    <Container style={{userSelect: 'none'}}>
                         <div style={{height: '10vh'}}>
                             <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output + input}</p>
                         </div>

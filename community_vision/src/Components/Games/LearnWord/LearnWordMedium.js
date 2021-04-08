@@ -269,7 +269,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>
-                        <Container>
+                        <Container style={{userSelect: 'none'}}>
                             <Grid container justify='center' spacing={0}>
                                 <Grid item xs={12} sm={4} xl={6}>
                                     <Picture 
@@ -298,7 +298,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
-                    <Container>
+                    <Container style={{userSelect: 'none'}}>
                         <div style={{height: '10vh'}}>
                             <p style={{lineHeight: 0, color: fontColor, fontSize: '10vh'}}>{output + input}</p>
                         </div>
