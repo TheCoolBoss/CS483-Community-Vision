@@ -22,7 +22,7 @@ import correctFX from "../Assets/Sounds/correct.mp3";
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 var textIndex = 0;
 
@@ -106,21 +106,23 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            clearTimeout(t);
             playCorrectSoundFX();
+            clearTimeout(t);
             setTimeout(() => {
                 clearTimeout(t);
                 playCurrentLetterSound();
-                clearTimeout(t);
                 setTimeout(() => {
-                    setInput('');
+                    clearTimeout(t);
                     setAnim(!anim);
-                    setIndex(prevState => prevState + 1);
-                    setTimeout(function () {
-                        setInput("");
-                    }, resetTimer);
-                }, resetTimer);
-            }, resetTimer);
+                    setInput('');
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 
@@ -136,8 +138,6 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                 setInput(input + '•');
                 playDot();
                 document.getElementById('dotButton').focus();
-                clearTimeout(t);
-                t = resetInputTime(t, input, setInput, resetTimer);
             }
         } else if (evt.keyCode === 13) {
             if (startScreen) {
@@ -148,8 +148,6 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                 setInput(input + '-');
                 playDash();
                 document.getElementById('dashButton').focus();
-                clearTimeout(t);
-                t = resetInputTime(t, input, setInput, resetTimer);
             }
         }
     };
@@ -290,7 +288,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in Morse.
+                                        }}>You have learned the alphabet in Morse without help.
                                         </p>
                                     </Card>
                                 </Grid>
