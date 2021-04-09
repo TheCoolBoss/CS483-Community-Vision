@@ -202,7 +202,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                         <h1 style={{
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
-                                        }}>Learn Alphabet
+                                        }}>Learn Morse Alphabet
                                         </h1>
                                         <br />
                                         <p style={{
@@ -210,7 +210,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the Morse of all the letters in the alphabet.
+                                        }}>Use your memory to type the Morse of all the letters in the alphabet.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -223,7 +223,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                                         setStartScreen(false);
                                                     }
                                                 }}>
-                                            Start (-)
+                                            Press Enter (dash) to Start
                                         </button>
                                     </Card>
                                 </Grid>
