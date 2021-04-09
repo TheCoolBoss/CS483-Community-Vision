@@ -79,7 +79,10 @@ const SandboxLetters = forwardRef((props, ref) => {
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -104,6 +107,11 @@ const SandboxLetters = forwardRef((props, ref) => {
             }
         }
     };
+
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     useImperativeHandle(
         ref,
@@ -182,7 +190,7 @@ const SandboxLetters = forwardRef((props, ref) => {
                                                         setStartScreen(false);
                                                     }
                                                 }}>
-                                            Start (-)
+                                            Press Enter (dash) to Start
                                         </button>
                                     </Card>
                                 </Grid>

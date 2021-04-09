@@ -87,7 +87,10 @@ const SandboxWords = forwardRef((props, ref) => {
     resetInputLength(input, setInput);
 
     // tracks keycodes for space button  and enter button input
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -117,6 +120,11 @@ const SandboxWords = forwardRef((props, ref) => {
             document.getElementById("textbox").innerHTML = "&nbsp;";
         }
     };
+
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     useImperativeHandle(
         ref,
@@ -195,7 +203,7 @@ const SandboxWords = forwardRef((props, ref) => {
                                                         setStartScreen(false);
                                                     }
                                                 }}>
-                                            Start (-)
+                                            Press Enter (dash) to Start
                                         </button>
                                     </Card>
                                 </Grid>

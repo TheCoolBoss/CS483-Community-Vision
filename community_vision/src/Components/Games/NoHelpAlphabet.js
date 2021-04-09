@@ -126,8 +126,11 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
         }
     }, [input])
 
-    // tracks keycodes for space button  and enter button input 
+    // tracks keycodes for space button  and enter button input
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if(startScreen){
@@ -151,6 +154,11 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
             }
         }
     };
+
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     var d = 2000;
     if (!anim){
@@ -239,7 +247,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                                         setStartScreen(false);
                                                     }
                                                 }}>
-                                            Start (-)
+                                            Press Enter (dash) to Start
                                         </button>
                                     </Card>
                                 </Grid>

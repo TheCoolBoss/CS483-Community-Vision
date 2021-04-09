@@ -23,7 +23,7 @@ describe('Learning Numbers Game Test', function () {
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.contains('Learn Numbers').click()
+        cy.contains('Learn Morse Numbers').click()
         cy.url()
             .should('include','/learnNumbers')
 
