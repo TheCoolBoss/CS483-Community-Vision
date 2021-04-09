@@ -146,7 +146,10 @@ const LearnAlphabet = forwardRef((props, ref) => {
     }, [input])
 
     // tracks keycodes for space button  and enter button input 
+    const [handleKeyDown, setHandleKeyDown] = useState(true); //
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -174,6 +177,10 @@ const LearnAlphabet = forwardRef((props, ref) => {
             }
         }
     };
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     var d = 2000;
     if (!anim) {
@@ -239,7 +246,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                         <h1 style={{
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
-                                        }}>Learn Alphabet
+                                        }}>Learn Morse Alphabet
                                         </h1>
                                         <br />
                                         <p style={{
@@ -247,7 +254,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Type the Morse of all the letters in the alphabet.
+                                        }}>Look for the dot ('space') and dash ('enter') patterns to make a letter
                                         </p>
                                     </Card>
                                 </Grid>
@@ -260,7 +267,7 @@ const LearnAlphabet = forwardRef((props, ref) => {
                                                     setStartScreen(false);
                                                 }
                                             }}>
-                                            Start (-)
+                                            Press Enter (dash) to Start
                                         </button>
                                     </Card>
                                 </Grid>

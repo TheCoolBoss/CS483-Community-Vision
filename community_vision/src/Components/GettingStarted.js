@@ -23,8 +23,7 @@ const GettingStarted = forwardRef((props, ref) => {
       marginTop: '-3vh',
       height: '90vh',
       width: '100vw',
-      color: 'black',
-
+      color: fontColor,
 
     }}>
       <h1 style={{ fontWeight: 900, fontSize: "50px" }}>Typing with Morse on this Website</h1>
