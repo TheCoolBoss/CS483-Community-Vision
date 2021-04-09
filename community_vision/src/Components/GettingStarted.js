@@ -123,7 +123,7 @@ const GettingStarted = forwardRef((props, ref) => {
       <h2 style={{ fontweight: 900, color: "blue", fontSize: "30px", textAlign: "left", paddingLeft: "10vw" }}>Level 4:</h2>
 
       <p style={{ paddingLeft: "10vw", paddingRight: "10vw", fontSize: "20px", textAlign: "left" }}>Many of the games in Level 4 are similar
-        to earlier levels but ther are no hints on Level 4, so you need to remember Morse code on your own or have a paper guide beside you to play!</p>
+        to earlier levels but there are no hints on Level 4, so you need to remember Morse code on your own or have a paper guide beside you to play!</p>
 
       <Link className='nav-link' to="/" style={{
         backgroundColor: backgroundColor

@@ -10,6 +10,9 @@ import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
 import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import {Transition} from "react-spring/renderprops";
+import Card from "@material-ui/core/Card";
+import {useHistory} from "react-router-dom";
 
 var t;
 
@@ -46,6 +49,10 @@ function updateTutorial() {
 }
 
 const SandboxWords = forwardRef((props, ref) => {
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
     const [input, setInput] = React.useState('');
     const output = morseToChar(input);
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -67,6 +74,8 @@ const SandboxWords = forwardRef((props, ref) => {
     );
     const fSize = size +'vh';
     const sfSize = size/3 +'vh';
+    var [startScreen, setStartScreen] = useState(true);
+    var [endScreen, setEndScreen] = useState(false);
 
     //This cannot be imported due to the additional functionality of adding to the textbox
     clearTimeout(t);
@@ -78,16 +87,34 @@ const SandboxWords = forwardRef((props, ref) => {
     resetInputLength(input, setInput);
 
     // tracks keycodes for space button  and enter button input
-    document.onkeydown = function(evt) {
+    document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
+            if (startScreen) {
+
+            } else if (endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+            }
+
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
-        } else if (evt.keyCode === 9) {
-            document.getElementById("textbox").innerHTML = "";
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+            }
+        }
+
+        else if (evt.keyCode === 8)
+        {
+            document.getElementById("textbox").innerHTML = "&nbsp;";
         }
     };
 
@@ -116,13 +143,74 @@ const SandboxWords = forwardRef((props, ref) => {
             gridTemplate: '1fr 10fr 7fr / 1fr',
             gridTemplateAreas: '"top" "middle" "bottom'
         }}>
+            <Transition
+                items={startScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container direction='column' justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item style={{ userSelect: 'none', cursor: 'default' }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Sandbox Words
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '4vh'
+                                        }}>Type any Morse combination and form words with the results. Press "Backspace" or use the clear button to clear the word.
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <br />
+                                <Grid item style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button id = "start" style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
+                                                onMouseDown={function () {
+                                                    if (startScreen) {
+                                                        setStartScreen(false);
+                                                    }
+                                                }}>
+                                            Start (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
             <div style={{gridArea: 'top'}}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton />
                         <Grid container justify='left'>
                             <Grid item>
-                                <Radio />
+
                             </Grid>
                         </Grid>
                     </Container>
@@ -134,7 +222,6 @@ const SandboxWords = forwardRef((props, ref) => {
                         fontSize: fSize}}>&nbsp;</animated.h1>
                 </div>
             </div>
-
             <Buttons
                 fontColor={fontColor}
                 backgroundColor={backgroundColor}
@@ -145,7 +232,28 @@ const SandboxWords = forwardRef((props, ref) => {
                 input={input}
                 setInput={setInput}
             />
+            <div style = {{gridArea: "bottom"}}>
+                <div>
+                    <button style = {{
+                        fontSize: "4vh",
+                        marginLeft: "1300px",
+                        marginBottom: "10px",
+                        width: "10%",
+                        height: "100%",
+                        userSelect: "none",
+                        fontWeight: 800
+                    }}
+                    onMouseDown={function()
+                    {
+                        document.getElementById("textbox").innerHTML = "&nbsp;";
+                    }}>
+                        Clear
+                    </button>
+                </div>
+            </div>
+
         </div>
+
     );
 })
 

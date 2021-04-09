@@ -30,8 +30,8 @@ const About = forwardRef((props, ref) => {
     }}>
       <h1 style={{ fontWeight: 900, textSize: "60px" }}>Who We Are</h1>
 
-      <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}} >The Community Vision Assitive Technology (AT) Lab is an education and 
-      resource center in Portland, Oregon that promotes accessibility & inclusive 
+      <p style={{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "left", fontSize: "20px"}} >The Community Vision Assistive Technology (AT) Lab is an education and 
+      resource center in Portland, Oregon that promotes accessibility & inclusion
       in our community. We collaborate with people with disabilities, families, 
       caregivers, professionals, and community partners. We want more people to 
       see, access, and feel comfortable with AT. The Lab offers AT Consultations,
@@ -64,7 +64,7 @@ const About = forwardRef((props, ref) => {
         and explore the alphabet when they are very young, so it is never too early to 
         start playing with Morse!</p>
 
-      <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAligh: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
+      <p style= {{paddingLeft: "10vw", paddingRight: "10vw", textAlign: "center", fontSize: "30px"}}>Have Feedback? Let us know <a href="https://docs.google.com/forms/d/e/1FAIpQLSeeeHIXvEi3zPTDfLuXZ3Sn6FVyqqzSR-Fg536Y_83RtSO_Ew/viewform?usp=sf_link" target="_blank">HERE!</a></p>
 
         
       <p style={{ userSelect: 'none', cursor: 'default' }}>Version {appInfo.version}</p>
