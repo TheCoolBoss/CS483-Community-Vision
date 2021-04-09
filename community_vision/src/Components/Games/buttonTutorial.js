@@ -10,38 +10,20 @@ import enterButton from "../Assets/Images/enterButton.png";
 import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
+import {Transition} from "react-spring/renderprops";
+import Card from "@material-ui/core/Card";
+import {useHistory} from "react-router-dom";
+
 var t;
 
 var textIndex = 0;
 
-function updateTutorial() {
-    var text = document.getElementById('tutorialText').innerHTML;
-    var space = document.getElementById('spaceImage');
-    var enter = document.getElementById('enterImage');
-
-    if (textIndex === 0) {
-        document.getElementById('tutorialText').innerHTML = 'This game consists of two buttons at the bottom of the page.';
-
-        textIndex++;
-    } else if (textIndex === 1) {
-        document.getElementById('tutorialText').innerHTML = 'This button is used for the dots and can be accessed through the space button or by clicking here!';
-        document.getElementById('dotButton').style.backgroundColor = "yellow";
-        space.style.display = "block";
-        textIndex++;
-    } else if (textIndex === 2) {
-        document.getElementById('dotButton').style.backgroundColor = document.getElementById('dashButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'This button is used for the dashes and can be accessed through the enter button or by clicking here!';
-        document.getElementById('dashButton').style.backgroundColor = "yellow";
-        space.style.display = "none";
-        enter.style.display = "block";
-        textIndex++;
-    } else if (textIndex === 3) {
-        document.getElementById('dashButton').style.backgroundColor = document.getElementById('dotButton').style.backgroundColor;
-        document.getElementById('tutorialText').innerHTML = 'Click any button and see its output appear on screen!';
-        //document.getElementById('sampleMorse').style.backgroundColor = "yellow";
-        enter.style.display = "none";
-        textIndex = 0;
-        
+function showImage() {
+    var x = document.getElementById("tutorialImage");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
     }
 }
 
@@ -56,6 +38,11 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
+
     const [playDash] = useSound(
         dashSound,
         { volume: volume / 100 }
@@ -67,20 +54,49 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
 
+    var [startScreen, setStartScreen] = useState(true);
+    var [endScreen, setEndScreen] = useState(false);
+
     resetInputLength(input, setInput);
     clearTimeout(t);
     t = resetInputTime(t, input, setInput, resetTimer);
 
+    const [handleKeyDown, setHandleKeyDown] = useState(true); //
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return;
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
+            if (startScreen) {
+
+            } else if (endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         }
     };
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
+    
 
     useImperativeHandle(
         ref,
@@ -107,13 +123,143 @@ const ButtonsTutorial = forwardRef((props, ref) => {
             gridTemplate: '8fr 8fr / 1fr',
             gridTemplateAreas: '"top" "middle" "bottom'
         }}>
+            <Transition
+                items={startScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container direction='column' justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item style={{ userSelect: 'none', cursor: 'default' }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Explore Dot and Dash
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '4vh'
+                                        }}>Press the 'Space' or 'Enter' keys to see what letters they can create 
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <br />
+                                <Grid item style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button id = "start" style={{ fontSize: '8vh', height: '100%', width: '100%', cursor: 'pointer' }}
+                                                onMouseDown={function () {
+                                                    if (startScreen) {
+                                                        setStartScreen(false);
+                                                    }
+                                                }}>
+                                            Start (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
+            <Transition
+                items={endScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item xs={9} style={{ userSelect: 'none', color: fontColor }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Yay!
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '8vh',
+                                            marginBottom: '0vh'
+                                        }}>You have learned the Morse patterns of the alphabet.
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: 'pointer', height: '100%', width: '100%' }}
+                                                onMouseDown={function () {
+                                                    backToGames();
+                                                }}>
+                                            Other Games (•)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={1}></Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: ' pointer', height: '100%', width: '100%' }}
+                                                onMouseDown={function () {
+                                                    setEndScreen(false);
+                                                }}>
+                                            More Practice (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
             <div style={{gridArea: 'top'}}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton/>
                         <Grid container justify='left'>
                             <Grid item>
-                                <Radio />
                             </Grid>
                         </Grid>
                     </Container>
@@ -141,56 +287,5 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     );
 })
 
-const Radio = () => {
-    const [isToggled, setToggle] = useState(true);
-    const menubg = useSpring({ background: isToggled ? "#6ce2ff" : "#ebebeb" });
-    const { y } = useSpring({
-        y: isToggled ? 180 : 0
-    });
-    const menuAppear = useSpring({
-        transform: isToggled ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
-        opacity: isToggled ? 1 : 0
-    });
-
-    return (
-        <div style={{ position: "relative", width: "300px", margin: "0 auto" }}>
-            <animated.button
-                style={menubg}
-                className="radiowrapper"
-                onClick={() => setToggle(!isToggled)}
-            >
-                <div className="radio">
-                    <p>Tutorial</p>
-                    <animated.p
-                        style={{
-                            transform: y.interpolate(y => `rotateX(${y}deg)`)
-                        }}
-                    >
-                        ▼
-                    </animated.p>
-                </div>
-            </animated.button>
-            <animated.div style={menuAppear}>
-                {isToggled ? <RadioContent /> : null}
-            </animated.div>
-        </div>
-    );
-};
-
-const RadioContent = () => {
-    return (
-        <div className="radiocontent" >
-            <a href="#" alt="Home">
-            </a>
-            <button onClick={function () {
-                updateTutorial();
-            }} style={{ fontSize: '5vh' }}>Next</button>
-            <p id="tutorialText" value="Change Text">Welcome to the Explore Dot and Dash tutorial! </p>
-            <img src={spacebar} alt="Spacebar" id="spaceImage" style={{ display: "none" }}></img>
-            <img src={enterButton} alt="Enter Button" id="enterImage" style={{ display: "none" }}></img>
-            
-        </div>
-    );
-};
 
 export default ButtonsTutorial;
