@@ -70,7 +70,10 @@ const AlphabetRacePractice = forwardRef((props, ref) => {
     resetInputLength(input, setInput);
 
     // tracks keycodes for space button  and enter button input 
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return;
+        setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -108,6 +111,10 @@ const AlphabetRacePractice = forwardRef((props, ref) => {
                 t = resetInputTime(t, input, setInput, resetTimer);
             }
         }
+    };
+    document.onkeyup = function (evt) {
+        setHandleKeyDown(true);
+        document.activeElement.blur();
     };
 
     //var [startScreen, setStartScreen] = useState(true);

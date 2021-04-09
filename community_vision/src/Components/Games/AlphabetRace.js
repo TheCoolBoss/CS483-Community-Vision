@@ -72,7 +72,10 @@ const AlphabetRace = forwardRef((props, ref) => {
     //t = resetInputTime(t, input, setInput, resetTimer);
 
     // tracks keycodes for space button  and enter button input 
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return;
+        setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -111,6 +114,10 @@ const AlphabetRace = forwardRef((props, ref) => {
             }
         }
     };
+    document.onkeyup = function (evt) {
+        setHandleKeyDown(true);
+        document.activeElement.blur();
+    };
 
     //var [startScreen, setStartScreen] = useState(true);
     var [lives, setLives] = useState(3);
@@ -141,7 +148,7 @@ const AlphabetRace = forwardRef((props, ref) => {
         setNewSpawn(curr => curr + 1);
         setLetters(currLetters => {
             for (var j = 0; j < currLetters.length; j++) {
-                currLetters[j]['x'] = currLetters[j]['x'] - ((((speed-4) * (0.1-0.05)) / (0.5-4)) + 0.05);
+                currLetters[j]['x'] = currLetters[j]['x'] - ((((speed-4) * (0.1-0.05)) / (0.5-4)) + 0.05); //(((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
             }
             return [...currLetters];
         });
