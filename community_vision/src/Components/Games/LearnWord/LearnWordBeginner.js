@@ -150,7 +150,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     }, [input]);
 
     // tracks keycodes for space button  and enter button input 
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function(evt) {
+        if(!handleKeyDown) return;
+        setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             setInput(input + '•');
@@ -168,6 +171,10 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         }
     };
 
+    document.onkeyup = function (evt) { 
+        setHandleKeyDown(true); 
+        document.activeElement.blur(); 
+    };
     useImperativeHandle(
         ref,
         () => ({
