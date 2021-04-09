@@ -13,9 +13,6 @@ import {Transition} from "react-spring/renderprops";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router-dom";
 
-import {Transition} from "react-spring/renderprops";
-import Card from "@material-ui/core/Card";
-import {useHistory} from "react-router-dom";
 
 var t;
 
@@ -45,7 +42,7 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
-    const history = useHistory();
+
     function backToGames() {
         history.push("/games");
     }
