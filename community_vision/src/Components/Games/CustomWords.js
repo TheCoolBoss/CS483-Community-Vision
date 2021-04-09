@@ -20,44 +20,6 @@ import { Transition } from 'react-spring/renderprops';
 var t;
 var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var textIndex = 0;
-var customMorse;
-var customWord;
-var z=1;
-
-/*
-function parseInput() {
-    var customWord = document.getElementById("customInput").innerHTML;
-    window.alert(customWord);
-    if(customWord.length > 6) {
-        window.alert("Custom Word must be less than 6 letters");
-    }
-    customLetters = customWord;
-}
-*/
-
-function displayCustomWord() {
-    const wordData =[10];
-    customWord = document.getElementById("customInput").value;
-    //window.alert(customWord);
-    if(customWord.length > 8) {
-        window.alert("Custom Word must be less than 8 letters");
-    }
-    //sampleMorse = customWord;
-
-    wordData[z] = customWord;
-    window.alert("custom word: " + customWord);
-    window.alert("wordData  " +wordData[z]+ " " +z);
-    // rewrite word list once user puts more than ten letters
-    if(z>10) {
-        window.alert("You have reached 10 words!");
-        z=1;
-    }
-    z++;
-}
-
-function startGame() {
-    document.getElementById('customLetters').innerHTML = customWord;
-}
 
 const CustomWords = forwardRef((props, ref) => {
     const history = useHistory();
@@ -70,12 +32,18 @@ const CustomWords = forwardRef((props, ref) => {
     var [input, setInput] = useState('');
     var [gameIndex, setGameIndex] = useState(0);
     var [finished, setFinished] = useState(() => initial(false));
-    var currentWord = gameData[gameIndex].word;
-    var currentLetter = currentWord[wordIndex];
-    var currentMorse = charToMorse(currentLetter);
+    
     var [input, setInput] = useState('');
     var output = morseToChar(input);
     const [anim, setAnim] = useState(true);
+
+    var [z, setWordCount] = useState(0);
+    const [wordData, setWordData] = useState([]);
+    var currentWord = gameData[gameIndex].word;
+    var currentLetter = currentWord[wordIndex];
+    var currentMorse = charToMorse(currentLetter);
+    var customMorse;
+    var customWord;
 
     // Settings
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -105,6 +73,43 @@ const CustomWords = forwardRef((props, ref) => {
         { volume: volume / 100 }
     );
 
+    clearTimeout(t);
+    t = setTimeout(function(){
+        setInput('');
+    }, resetTimer);
+
+    function displayCustomWord() {
+        var tempData = wordData;
+        customWord = document.getElementById("customInput").value;
+        //window.alert(customWord);
+        if(customWord.length > 8) {
+            window.alert("Custom Word must be less than 8 letters");
+        }
+        //sampleMorse = customWord;
+        
+        tempData.push(customWord);
+        //window.alert("custom word: " + customWord);
+        window.alert("wordData  " + tempData[z]+ " " +z);
+        // rewrite word list once user puts more than ten letters
+        if(z>10) {
+            window.alert("You have reached 10 words!");
+            setWordCount(1);
+        }
+        setWordCount(z+1);
+        setWordData(tempData);
+    }
+
+    function startGame() {
+        var gameBool = true;
+        while(gameBool == true){}
+            window.alert("word Data z "+wordData[gameIndex]);
+            document.getElementById('customLetters').innerHTML = wordData[gameIndex];
+            
+            setGameIndex(gameIndex+1);
+        }
+
+    }
+
     useEffect(() => {
         if(output == currentLetter) {
             setCorrect(correct + currentWord[wordIndex]);
@@ -112,6 +117,27 @@ const CustomWords = forwardRef((props, ref) => {
             setWordIndex(prevWordIndex => prevWordIndex + 1);
         }
     }, [input]);
+
+    document.onkeydown = function (evt) {
+        evt = evt || window.event;
+        if (evt.keyCode === 32) {
+            //implement start screen here
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            
+        } else if (evt.keyCode === 13) {
+            //implement start screen here
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            
+        }
+    };
 
     var d = 2000;
     if (!anim) {
@@ -121,6 +147,8 @@ const CustomWords = forwardRef((props, ref) => {
         }, 100);
     }
     var { x } = useSpring({ from: { x: 0 }, x: anim ? 1 : 0, config: { duration: d } });
+
+    
 
     useImperativeHandle(
         ref,
@@ -201,7 +229,7 @@ const CustomWords = forwardRef((props, ref) => {
                             <button style={{
                                 fontSize: '4vh'
                             }} onClick={function(){
-                                displayCustomWord();
+                                startGame();
                             }}
                             variant='outline-secondary'>Start</button>
                             <p style={{
