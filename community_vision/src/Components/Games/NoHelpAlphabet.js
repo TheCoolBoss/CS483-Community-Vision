@@ -22,7 +22,7 @@ import correctFX from "../Assets/Sounds/correct.mp3";
 
 var t;
 var resetTimer = 1500; //reset timer in milliseconds
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 var textIndex = 0;
 
@@ -106,35 +106,59 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (input === currentMorse) {
-            clearTimeout(t);
             playCorrectSoundFX();
+            clearTimeout(t);
             setTimeout(() => {
                 clearTimeout(t);
                 playCurrentLetterSound();
-                clearTimeout(t);
                 setTimeout(() => {
-                    setInput('');
+                    clearTimeout(t);
                     setAnim(!anim);
-                    setIndex(prevState => prevState + 1);
-                    setTimeout(function () {
-                        setInput("");
-                    }, resetTimer);
-                }, resetTimer);
-            }, resetTimer);
+                    setInput('');
+                    if (index != list.length - 1) {
+                        setIndex(prevState => prevState + 1);
+                    } else {
+                        setIndex(0);
+                        setEndScreen(true);
+                    }
+                }, resetTimer)
+            }, resetTimer)
         }
     }, [input])
 
-    // tracks keycodes for space button  and enter button input 
-    document.onkeydown = function(evt) {
+    // tracks keycodes for space button  and enter button input
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
+    document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
+            if(startScreen){
+
+            } else if(endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+            }
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+            }
         }
     };
+
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     var d = 2000;
     if (!anim){
@@ -272,7 +296,7 @@ const NoHelpAlphabet = forwardRef((props, ref) => {
                                             paddingRight: '2vw',
                                             fontSize: '8vh',
                                             marginBottom: '0vh'
-                                        }}>You have learned the alphabet in Morse.
+                                        }}>You have learned the alphabet in Morse without help.
                                         </p>
                                     </Card>
                                 </Grid>

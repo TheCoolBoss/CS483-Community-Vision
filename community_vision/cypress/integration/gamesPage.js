@@ -22,7 +22,7 @@ describe('Learning Alphabet Game Test', function () {
         // - make an assertion about page content
 
         //Go back button should go back to home page
-        cy.contains("Go back").click()
+        cy.contains("Go Back to Home").click()
         cy.url().should("include", "/")
 
     })

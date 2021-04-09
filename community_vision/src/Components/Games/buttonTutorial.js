@@ -9,10 +9,10 @@ import spacebar from "../Assets/Images/spacebar.png";
 import enterButton from "../Assets/Images/enterButton.png";
 import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-
 import {Transition} from "react-spring/renderprops";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router-dom";
+
 
 var t;
 
@@ -28,6 +28,10 @@ function showImage() {
 }
 
 const ButtonsTutorial = forwardRef((props, ref) => {
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
     var [input, setInput] = React.useState('');
     const [volume, setVolume] = useState(() => initial('volume'));
     const [size, setSize] = useState(() => initial('size'));
@@ -38,7 +42,7 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed * 1000; //reset timer in milliseconds
-    const history = useHistory();
+
     function backToGames() {
         history.push("/games");
     }
@@ -53,6 +57,8 @@ const ButtonsTutorial = forwardRef((props, ref) => {
     );
     const fSize = size + 'vh';
     const sfSize = size / 3 + 'vh';
+    var [startScreen, setStartScreen] = useState(true);
+    var [endScreen, setEndScreen] = useState(false);
 
     var [startScreen, setStartScreen] = useState(true);
     var [endScreen, setEndScreen] = useState(false);
@@ -78,6 +84,7 @@ const ButtonsTutorial = forwardRef((props, ref) => {
                 clearTimeout(t);
                 t = resetInputTime(t, input, setInput, resetTimer);
             }
+
         } else if (evt.keyCode === 13) {
             if (startScreen) {
                 setStartScreen(false);
@@ -155,6 +162,7 @@ const ButtonsTutorial = forwardRef((props, ref) => {
                                             marginBottom: '0vh',
                                             fontSize: '8vh'
                                         }}>Explore Dot and Dash
+
                                         </h1>
                                         <br />
                                         <p style={{
@@ -162,7 +170,7 @@ const ButtonsTutorial = forwardRef((props, ref) => {
                                             paddingLeft: '2vw',
                                             paddingRight: '2vw',
                                             fontSize: '4vh'
-                                        }}>Press the 'Space' or 'Enter' keys to see what letters they can create 
+                                        }}>Get familiar with how the buttons work. You can click them or use the Enter and Spacebar keys.
                                         </p>
                                     </Card>
                                 </Grid>
@@ -184,82 +192,13 @@ const ButtonsTutorial = forwardRef((props, ref) => {
                         : props => <div />
                 }
             </Transition>
-            <Transition
-                items={endScreen}
-                duration={500}
-                from={{ opacity: 0 }}
-                enter={{ opacity: 1 }}
-                leave={{ opacity: 0 }}>
-                {toggle =>
-                    toggle
-                        ? props => <div style={{
-                            position: 'absolute',
-                            width: '100vw',
-                            height: '90vh',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            zIndex: 1,
-                            ...props
-                        }}>
-                            <div style={{
-                                position: 'absolute',
-                                width: '100%',
-                                height: '100%',
-                                backgroundColor: 'black',
-                                opacity: 0.7
-                            }} />
-                            <Grid container justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
-                                <Grid item xs={9} style={{ userSelect: 'none', color: fontColor }}>
-                                    <Card>
-                                        <h1 style={{
-                                            marginBottom: '0vh',
-                                            fontSize: '8vh'
-                                        }}>Yay!
-                                        </h1>
-                                        <br />
-                                        <p style={{
-                                            marginTop: '0vh',
-                                            paddingLeft: '2vw',
-                                            paddingRight: '2vw',
-                                            fontSize: '8vh',
-                                            marginBottom: '0vh'
-                                        }}>You have learned the Morse patterns of the alphabet.
-                                        </p>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={4} style={{ userSelect: 'none' }}>
-                                    <Card>
-                                        <button style={{ fontSize: '8vh', cursor: 'pointer', height: '100%', width: '100%' }}
-                                                onMouseDown={function () {
-                                                    backToGames();
-                                                }}>
-                                            Other Games (•)
-                                        </button>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={1}></Grid>
-                                <Grid item xs={4} style={{ userSelect: 'none' }}>
-                                    <Card>
-                                        <button style={{ fontSize: '8vh', cursor: ' pointer', height: '100%', width: '100%' }}
-                                                onMouseDown={function () {
-                                                    setEndScreen(false);
-                                                }}>
-                                            More Practice (-)
-                                        </button>
-                                    </Card>
-                                </Grid>
-                            </Grid>
-                        </div>
-                        : props => <div />
-                }
-            </Transition>
             <div style={{gridArea: 'top'}}>
                 <div style={{ position: 'absolute' }}>
                     <Container>
                         <BackButton/>
                         <Grid container justify='left'>
                             <Grid item>
+
                             </Grid>
                         </Grid>
                     </Container>

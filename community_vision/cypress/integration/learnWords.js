@@ -1,4 +1,4 @@
-import {iterateList} from "./helpfulFuncs";
+import {clickDotXTimes, iterateButtons, iterateList, iterateSandLetters, iterateWords} from "./helpfulFuncs";
 
 const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
@@ -6,43 +6,42 @@ const { interpolate } = require("react-spring")
 import {charToMorse, morseToChar} from "../../src/Components/Games/charMorseConv";
 import {initial} from "../../src/Components/Games/Common/Functions";
 // ./node_modules/.bin/cypress open
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var index = 0;
 
-describe('Learning Alphabet Game Test', function () {
-    it('Navigates to Learn Alph Game and tests functionality', function () {
+//Note, this test took over 10 minutes to run, so be prepared if you want to run this :)
+describe('Learn Words Test', function () {
+    it('Navigates to Learn Words Game and tests functionality', function () {
         // Arrange - setup initial app state
-        // - visit Learning Alphabet game page
         // - query for an element
         cy.visit('http://localhost:3000/')
         // Act - take an action
         // - interact with that element
         cy.contains('Play Morse!')
         cy.contains('Play Games!').click()
-        cy.contains('Game Volume')
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.contains('Learn Morse Alphabet').click()
+        cy.get("[id^='medWords']").click()
         cy.url()
-            .should('include','/learnAlphabet')
-
+            .should('include','/learnWordMedium')
 
         // Assert - make an assertion
         // - make an assertion about page content
+
         cy.get("[id^=start]").click()
 
-        //Check for buttons
+        //Check for dot/dash buttons
         cy.get("button[id^='dotButton']")
         cy.get("button[id^='dashButton']")
 
-        //Check that first letter is A
-        cy.get("[id^=sampleMorse]").contains(list.charAt(index))
 
-        iterateList(list, 3000)
+        iterateWords()
+
+        //clickDotXTimes(6)
+        //cy.get("[id^=input]").contains("")
+        //cy.get("[id^=output]").contains(morseToChar(""))
 
         //Go back button should go back to games page
-        cy.contains("Other Games").click()
+        cy.contains("Go back to games").click()
         cy.url().should("include", "/games")
 
     })

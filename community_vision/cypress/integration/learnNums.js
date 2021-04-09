@@ -1,16 +1,16 @@
 import {iterateList} from "./helpfulFuncs";
-
 const { ExpansionPanelActions } = require("@material-ui/core")
 const { cyan } = require("@material-ui/core/colors")
 const { interpolate } = require("react-spring")
 import {charToMorse, morseToChar} from "../../src/Components/Games/charMorseConv";
 import {initial} from "../../src/Components/Games/Common/Functions";
 // ./node_modules/.bin/cypress open
-var list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var list = "0123456789";
 var index = 0;
 
-describe('Learning Alphabet Game Test', function () {
-    it('Navigates to Learn Alph Game and tests functionality', function () {
+
+describe('Learning Numbers Game Test', function () {
+    it('Navigates to Learn Nums Game and tests functionality', function () {
         // Arrange - setup initial app state
         // - visit Learning Alphabet game page
         // - query for an element
@@ -23,9 +23,9 @@ describe('Learning Alphabet Game Test', function () {
         cy.contains('Play Games!').click()
         cy.url()
             .should('include','/games')
-        cy.contains('Learn Morse Alphabet').click()
+        cy.contains('Learn Morse Numbers').click()
         cy.url()
-            .should('include','/learnAlphabet')
+            .should('include','/learnNumbers')
 
 
         // Assert - make an assertion
@@ -36,10 +36,14 @@ describe('Learning Alphabet Game Test', function () {
         cy.get("button[id^='dotButton']")
         cy.get("button[id^='dashButton']")
 
-        //Check that first letter is A
+        //Check that first number is 0
         cy.get("[id^=sampleMorse]").contains(list.charAt(index))
 
+
+        //clickDotXTimes(1)
         iterateList(list, 3000)
+        //cy.get("[id^=sampleMorseCode]").contains("")
+
 
         //Go back button should go back to games page
         cy.contains("Other Games").click()

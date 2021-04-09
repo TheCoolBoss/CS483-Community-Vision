@@ -83,7 +83,7 @@ export function Buttons(props)
                             userSelect: 'none'
                         }}> &nbsp; </p>
                     </Grid>
-                    <Grid item sm={10}>
+                    <Grid item sm={10} id="input">
                         <p style={{
                             lineHeight: 0,
                             color: props.fontColor,

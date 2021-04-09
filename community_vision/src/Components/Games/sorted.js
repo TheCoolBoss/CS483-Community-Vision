@@ -135,6 +135,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         setIndex(prevState => prevState + 1);
                     } else {
                         setIndex(0);
+                        setEndScreen(true);
                     }
                 }, resetTimer)
             }, resetTimer)
@@ -355,7 +356,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         </Grid>
                     </Container>
                 </div>
-                <div id="sampleMorse">
+                <div id="sampleMorseCode">
                     <animated.h1 style={{
                         lineHeight: 0,
                         color: fontColor,
