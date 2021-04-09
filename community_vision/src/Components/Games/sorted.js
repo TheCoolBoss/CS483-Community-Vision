@@ -143,7 +143,10 @@ const SortedAlphabet = forwardRef((props, ref) => {
     }, [input])
 
     // tracks keycodes for space button  and enter button input
+    const [handleKeyDown, setHandleKeyDown] = useState(true); //
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
             if (startScreen) {
@@ -154,6 +157,8 @@ const SortedAlphabet = forwardRef((props, ref) => {
                 setInput(input + '•');
                 playDot();
                 document.getElementById('dotButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
             }
         } else if (evt.keyCode === 13) {
             if (startScreen) {
@@ -164,9 +169,15 @@ const SortedAlphabet = forwardRef((props, ref) => {
                 setInput(input + '-');
                 playDash();
                 document.getElementById('dashButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
             }
         }
     };
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     var d = 2000;
     if (!anim) {
