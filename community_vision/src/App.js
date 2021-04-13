@@ -19,6 +19,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ButtonsTutorial from "./Components/Games/buttonTutorial";
 import AlphabetRace from './Components/Games/AlphabetRace';
 import AlphabetRacePractice from './Components/Games/AlphabetRacePractice';
+import PreCustomWords from './Components/Games/PreCustomWords'
+import CustomWords2 from './Components/Games/CustomWords2'
 import { initial } from "./Components/Games/Common/Functions";
 
 function App() {
@@ -88,6 +90,12 @@ function App() {
           </Route>
           <Route path="/alphabetRacePractice">
             <AlphabetRacePractice ref={currentRef} />
+          </Route>
+          <Route path="/preCustomWords">
+            <PreCustomWords ref={currentRef} />
+          </Route>
+          <Route path="/customWords2">
+            <CustomWords2 ref={currentRef} />
           </Route>
         </Switch>
       </div>
