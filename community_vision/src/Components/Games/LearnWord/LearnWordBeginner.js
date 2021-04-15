@@ -16,6 +16,7 @@ import gameData from "./WordsGameData";
 import sounds from "../LetterSounds";
 import StartScreen from "./LearnWordsStart";
 import correctFX from "../../Assets/Sounds/correct.mp3";
+import { useHistory } from "react-router-dom";
 
 
 /*
@@ -49,7 +50,10 @@ function initial(type){
 
 
 const LearnWordBeginner = forwardRef((props, ref) => {
-    
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
     //Track user input
     var [input, setInput] = useState('');
 
@@ -130,21 +134,21 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 setTimeout(() => {
                     //Play current sound of word
                     playCurrWordSound();
-                }, resetTimer)
-                //Move to the next word
-                setTimeout(() => {
-                    clearTimeout(t);
-                    if(gameIndex < 25) {
-                        setGameIndex(prevState => prevState + 1);
-                    }
-                    else {
-                        setGameIndex(25);
-                        setFinished(true);
-                    }
-                    setOutput('');
-                    setInput('');
-                    setIsCorrect(false);
-                }, resetTimer + 2000);
+                    //Move to the next word
+                    setTimeout(() => {
+                        // clearTimeout(t);
+                        if(gameIndex < 25) {
+                            setGameIndex(prevState => prevState + 1);
+                        }
+                        else {
+                            setGameIndex(25);
+                            setFinished(true);
+                        }
+                        setOutput('');
+                        setInput('');
+                        setIsCorrect(false);
+                    }, resetTimer + 2000);
+                }, resetTimer);
             }, resetTimer);
         }
     }, [input]);
@@ -156,12 +160,20 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            setOutput('');
-            playDot();
+            if(finished) {
+                backToGames();
+            }
+            else {
+                setInput(input + '•');
+                setOutput('');
+                playDot();
+            }
         } else if (evt.keyCode === 13) {
             if(start) {
                 setStart(false);
+            }
+            else if(finished) {
+                setFinished(false);
             }
             else {
                 setInput(input + '-');
@@ -239,7 +251,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     return (
         <div>
             {start ? <StartScreen level={"beginner"} start={start} setStart={setStart} /> : null}
-            {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor}/> : null}
+            {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor} end={finished} setEndScreen={setFinished} backToGames={backToGames}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
                     <div style={{ position: 'absolute' }}>

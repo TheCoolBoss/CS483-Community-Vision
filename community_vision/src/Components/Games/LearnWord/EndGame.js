@@ -1,5 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import {Transition} from "react-spring/renderprops";
+
 
 function EndGame(props) {
     //background to match the current background in settings
@@ -29,39 +32,12 @@ function EndGame(props) {
         currLevel = props.level;
     }
 
-    //Style
-    const overlayStyle = {
-        backgroundColor: 'rgba(120, 120, 120, 0.7)',
-        height: '90vh',
-        width: '100vw',
-        position: 'fixed', 
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 2
-    }
-
-    const btnContainerStyle = {
-        backgroundColor: backgroundColor, 
-        padding: 50, 
-        display: 'inline-block',
-        width: '50%',
-        margin: 0
-    };
-
-    const buttonStyle = {
-        backgroundColor: backgroundColor,
-        height: '10%',
-        width: '100%',
-        fontSize: '7vh',
-        color: fontColor,
-        marginBottom: 10,
-        padding: 10,
-        display: 'block'
-    };
-
     //Complete level message display
     const msg = 'Congratulations, you completed ' + currLevel + ' level!!'
+
+    const endScreen = props.end;
+    const backToGames = props.backToGames;
+    const setEndScreen = props.setEndScreen;
 
     //Set levels
     var nextLevelPath;
@@ -80,20 +56,76 @@ function EndGame(props) {
     }
 
     return (
-        <div style={overlayStyle}>
-            <div style={btnContainerStyle}>
-                <h1 style={{color: fontColor}}>{msg}</h1>
-                <Link to={nextLevelPath}>
-                    <button style={buttonStyle}>{button1Content}</button>
-                </Link>
-                <Link>
-                    <button style={buttonStyle} onClick={() => {window.location.reload()}}>Replay This Level</button>
-                </Link>
-                <Link to='/'>
-                    <button style={buttonStyle}>Home Page</button>
-                </Link>
-            </div>
-        </div>
+        <Transition
+                items={endScreen}
+                duration={500}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                    toggle
+                        ? props => <div style={{
+                            position: 'absolute',
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            zIndex: 1,
+                            ...props
+                        }}>
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'black',
+                                opacity: 0.7
+                            }} />
+                            <Grid container justify='center' alignItems='center' style={{ height: '100%', width: '100%', zIndex: 1 }}>
+                                <Grid item xs={9} style={{ userSelect: 'none', color: fontColor }}>
+                                    <Card>
+                                        <h1 style={{
+                                            marginBottom: '0vh',
+                                            fontSize: '8vh'
+                                        }}>Yay!
+                                        </h1>
+                                        <br />
+                                        <p style={{
+                                            marginTop: '0vh',
+                                            paddingLeft: '2vw',
+                                            paddingRight: '2vw',
+                                            fontSize: '8vh',
+                                            marginBottom: '0vh'
+                                        }}>{msg}
+                                        </p>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: 'pointer', height: '100%', width: '100%' }}
+                                            onMouseDown={function () {
+                                                backToGames();
+                                            }}>
+                                            Other Games (•)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={1}></Grid>
+                                <Grid item xs={4} style={{ userSelect: 'none' }}>
+                                    <Card>
+                                        <button style={{ fontSize: '8vh', cursor: ' pointer', height: '100%', width: '100%' }}
+                                            onMouseDown={function () {
+                                                setEndScreen(false);
+                                            }}>
+                                            More Practice (-)
+                                        </button>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        : props => <div />
+                }
+            </Transition>
     );
 }
 
