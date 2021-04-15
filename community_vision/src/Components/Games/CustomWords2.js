@@ -1,31 +1,29 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
-import '../../../App.css';
+import '../../App'
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Container } from '@material-ui/core';
-import {charToMorse, morseToChar} from "./../charMorseConv";
+import { charToMorse, morseToChar} from "./charMorseConv";
 import useSound from 'use-sound';
-import dashSound from '../../Assets/Sounds/dash.mp3';
-import dotSound from '../../Assets/Sounds/dot.mp3';
-import Tutorial from './WordGameTutorial';
-import EndGame from './EndGame';
-import Picture from './Picture';
-import {BackButton} from "../Common/Functions";
-import gameData from "./WordsGameData";
-import sounds from "../LetterSounds";
-import StartScreen from "./LearnWordsStart";
-import correctFX from "../../Assets/Sounds/correct.mp3";
-import { useHistory } from "react-router-dom";
-
+import dashSound from '../Assets/Sounds/dash.mp3';
+import dotSound from '../Assets/Sounds/dot.mp3';
+import EndGame from './LearnWord/EndGame';
+//import Tutorial from './WordGameTutorial';
+import CurrentWord from './LearnWord/CurrentWord';
+import {BackButton} from "./Common/Functions";
+import StartScreen from "./LearnWord/LearnWordsStart";
+import letterSounds from "./LetterSounds";
+import correctFX from "../Assets/Sounds/correct.mp3"
 
 /*
 * Game that shows a picture and word that associates with that picture
-* The user have to put in the correct sequence of morse code for the first letter
+* The user have to put in the correct sequence of morse code
+* This difficult allows user to see the sequence of morse code needed to be input
 *
 * 
-* Created : 10/18/2020
-* Modified: 10/11/2020
+* Created : 9/28/2020
+* Modified: 11/10/2020
 */
 
 //Variables for time
@@ -48,39 +46,46 @@ function initial(type){
     }
 }
 
-
-const LearnWordBeginner = forwardRef((props, ref) => {
-    const history = useHistory();
-    function backToGames() {
-        history.push("/games");
-    }
-    //Track user input
-    var [input, setInput] = useState('');
-
-    //correct input tracker
-    var [isCorrect, setIsCorrect] = useState(false);
+const CustomWords2 = (props) => {
+    //Get the data
+    var gameData = props.data;
     
-    //Get current character from user input
-    var [output,setOutput] = useState('');
+    //The correct words that the user got so far
+    var [correct, setCorrect] = useState('');  
 
+    //Keeping track of current letter in current word       
+    var [wordIndex, setWordIndex] = useState(0); 
+    
+    //Track user input
+    var [input, setInput] = useState('');  
+    
     //Index to track the current word
     var [gameIndex, setGameIndex] = useState(0);
 
     var [finished, setFinished] = useState(() => initial(false));
-
     var [start, setStart] = useState(true);
-
-    //Get the image source
-    var img = gameData[gameIndex].imgSrc;
-
+    
     //Word that the user needs to type
-    var currentWord = gameData[gameIndex].word;
-
-    //Current letter to be type(first letter)
-    var currentLetter = currentWord[0];
-
-    //Current morse code the user is typing                  
-    var currentMorse = charToMorse(currentLetter);
+    var currentWord = gameData[gameIndex]; 
+    
+   
+    
+    //Current letter to be type
+    var currentLetter = currentWord[wordIndex];
+    console.log(currentLetter);
+    //Current morse code the user is typing
+    var currentMorse;
+    if(typeof(currentLetter) == 'undefined') {
+        currentMorse = "";
+    }
+    else {
+        currentMorse = charToMorse(currentLetter.toUpperCase());
+    }
+    
+    
+    //Get current character from user input
+    var [output, setOutput] = useState('');   
+    
 
     //Settings
     const [volume, setVolume] = useState(() => initial('volume'));
@@ -91,23 +96,16 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     const [dotButtonColor, setDotButtonColor] = useState(() => initial('dotButtonColor'));
     const [fontColor, setFontColor] = useState(() => initial('fontColor'));
     const resetTimer = speed*1000; //reset timer in milliseconds
-    const [sizeAdjust, setSizeAdjust] = useState(() => initial(3))
-    const fSize = (size-sizeAdjust) +'vh';
-    const [picHeight, setPicHeight] = React.useState('');
-    const [picWidth, setPicWidth] = React.useState('');
-    const notCurrLetterSize = (size - sizeAdjust - 7) + 'vh';
+    const fSize = (size) +'vh';
+    const notCurrLetterSize = (size - 7) + 'vh';
 
-    //Get the sound of current word
-    var soundSrc = gameData[gameIndex].soundSrc;
-    //Get the sound of current letter
-    var letterSoundSrc = sounds[currentLetter];
-
-    //Sound hooks
-    var [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume/100});
-    var [playCurrWordSound] = useSound(soundSrc, {volume: volume/100});
+    //Get the sounds
+    var letterSoundSrc = letterSounds[currentLetter];
     const [playCorrectSoundFX] = useSound(correctFX, {volume: volume / 100});
+    const [playCurrLetterSound] = useSound(letterSoundSrc, {volume: volume / 100});
     const [playDash] = useSound(dashSound, {volume: volume/100});
     const [playDot] = useSound(dotSound, {volume: volume/100});
+    
 
     //Reset input after 1.5 second if no new input is being enter
     clearTimeout(t);
@@ -120,60 +118,69 @@ const LearnWordBeginner = forwardRef((props, ref) => {
     if (input.length > 6){
         setInput('');
     }
-
-    useEffect(() => {
+    
+    //Check for correct character after each input
+    useEffect (() => {
         //Check for matching current morse sequence to current letter
-        if (output === currentLetter) {
+        if (output === currentLetter.toUpperCase()) {
             clearTimeout(t);
-            playCorrectSoundFX();
-            setIsCorrect(true);
+            playCurrLetterSound();
             setTimeout(() => {
                 clearTimeout(t);
-                //Play current letter sound
-                playCurrLetterSound();
-                setTimeout(() => {
-                    //Play current sound of word
-                    playCurrWordSound();
-                    //Move to the next word
-                    setTimeout(() => {
-                        // clearTimeout(t);
-                        if(gameIndex < 25) {
-                            setGameIndex(prevState => prevState + 1);
-                        }
-                        else {
-                            setGameIndex(25);
-                            setFinished(true);
-                        }
-                        setOutput('');
-                        setInput('');
-                        setIsCorrect(false);
-                    }, resetTimer + 2000);
-                }, resetTimer);
+                setCorrect(correct + currentWord[wordIndex]);
+                setInput('');
+                setOutput('');
+                setWordIndex(prevWordIndex => prevWordIndex + 1);
             }, resetTimer);
         }
     }, [input]);
 
+    useEffect(() => {
+        //Check when the user complete the whole word
+        if (correct.localeCompare(currentWord) === 0) {
+            clearTimeout(t);
+            //Play the correct jingle
+            playCorrectSoundFX();
+            setTimeout(() => {
+                //Delay 2 sec
+                setTimeout(function () {
+                    clearTimeout(t);
+                    //Set the new word
+                    if(gameIndex < gameData.length-1) {
+                        setGameIndex(prevState => prevState + 1);
+                    }
+                    else {
+                        //setGameIndex(25);
+                        setFinished(true);
+                    }
+                    setOutput('');
+                    //Reset word index
+                    setWordIndex(0);
+                    //Reset correct
+                    setCorrect('');
+                }, resetTimer)
+            }, resetTimer);
+        }
+    }, [wordIndex]);
+    
+    var isValidLetter;
+    if (typeof(currentLetter) == 'undefined') {
+        isValidLetter = false;
+    }
+    else {
+        isValidLetter = true;
+    }
+
     // tracks keycodes for space button  and enter button input 
-    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function(evt) {
-        if(!handleKeyDown) return;
-        setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            if(finished) {
-                backToGames();
-            }
-            else {
-                setInput(input + '•');
-                setOutput('');
-                playDot();
-            }
+            setInput(input + '•');
+            setOutput('');
+            playDot();
         } else if (evt.keyCode === 13) {
             if(start) {
                 setStart(false);
-            }
-            else if(finished) {
-                setFinished(false);
             }
             else {
                 setInput(input + '-');
@@ -183,10 +190,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
         }
     };
 
-    document.onkeyup = function (evt) { 
-        setHandleKeyDown(true); 
-        document.activeElement.blur(); 
-    };
+    /*
     useImperativeHandle(
         ref,
         () => ({
@@ -201,57 +205,12 @@ const LearnWordBeginner = forwardRef((props, ref) => {
             }
         }),
     )
-
-    //Adjust size base on the window size(still needs a bit of work)
-    const updateSize = () => {
-        //For readjusting image
-        if(window.innerWidth < 700) {
-            setPicHeight('25vh');
-            setPicWidth('25vw');
-        }
-        else {
-            setPicHeight('40vh');
-            setPicWidth('25vw');
-        }
-
-        //For readjusting font
-        if(window.innerWidth < 1000 && window.innerWidth > 700) {
-            setSizeAdjust(7);
-        }
-        else if(window.innerWidth <= 700 && window.innerWidth > 600) {
-            setSizeAdjust(9);
-        }
-        else if(window.innerWidth <= 600) {
-            if(size < 24) {
-                setSizeAdjust(11);
-            }
-            else {
-                setSizeAdjust(15);
-            }
-        }
-        else {
-            setSizeAdjust(5);
-        }
-    }
-
-    //On mount, make sure that the correct size of image is display
-    React.useEffect(() => {
-        updateSize();
-    }, [])
-
-    //Resize image when the browser is being resize
-    React.useEffect(() => {
-        window.addEventListener('resize', updateSize);
-        //clean up event listener
-        return () => window.removeEventListener('resize', updateSize);
-    })
-
-    
+    */
 
     return (
         <div>
-            {start ? <StartScreen level={"beginner"} start={start} setStart={setStart} /> : null}
-            {finished ? <EndGame level='beginner' background={backgroundColor} fontColor={fontColor} end={finished} setEndScreen={setFinished} backToGames={backToGames}/> : null}
+            {start ? <StartScreen level="medium" start={start} setStart={setStart}/> : null}
+            {finished ? <EndGame level='medium' background={backgroundColor} fontColor={fontColor}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
                     <div style={{ position: 'absolute' }}>
@@ -259,38 +218,30 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                             <BackButton />
                             {/* <Grid container justify='left'>
                                 <Grid item>
-                                    <Tutorial background={backgroundColor} level='beginner' fColor={fontColor}/>
+                                    <Tutorial level='medium' background={backgroundColor} fontColor={fontColor}/>
                                 </Grid>
                             </Grid> */}
                         </Container>
                     </div>
                     <div style={{width: '100vw', height:'40vh'}}>
-                        <Container>
+                        <Container style={{userSelect: 'none'}}>
                             <Grid container justify='center' spacing={0}>
-                                <Grid item xs={12} sm={4} xl={6} style={{userSelect: 'none'}}>
-                                    <Picture 
-                                        img={img} 
+                                <Grid item xs={12}>
+                                    <CurrentWord 
+                                        level='medium' 
+                                        fColor={fontColor}
+                                        currentLetter={currentLetter}
+                                        correct={correct}
                                         currentWord={currentWord}
-                                        picWidth={picWidth}
-                                        picHeight={picHeight}
+                                        wordIndex={wordIndex}
+                                        fSize={fSize}
+                                        notCurrLetterSize={notCurrLetterSize}
+                                        isValidLetter={isValidLetter}
+                                        currentMorse={currentMorse}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={4} xl={6} style={{userSelect: 'none'}}>
-                                    <div>
-                                        {isCorrect
-                                        ?
-                                        <h1 style={{lineHeight: 0, color: '#00FF00', fontSize: fSize, textShadow: "-2px 2px 2px #000, 2px 2px 2px #000, 2px -2px 2px #000, -2px -2px 2px #000"}}>{currentWord}</h1>
-                                        :
-                                        <h1 style={{lineHeight: 0, fontSize: fSize}}>
-                                            <span style={{color: fontColor}}>{currentLetter}</span>
-                                            <span style={{color: fontColor, opacity: 0.5, fontSize: notCurrLetterSize}}>{currentWord.substr(1)}</span>
-                                        </h1>
-                                        }
-                                        <p id="sampleMorse" style={{lineHeight: 0, color: fontColor, fontSize: fSize, margin: 0}}>{currentMorse}</p>
-                                    </div>
-                                </Grid>
                             </Grid>
-                        </Container>
+                        </Container>   
                     </div>
                 </div>
                 <div style={{gridArea: 'bottom'}}>
@@ -303,7 +254,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                 <Card>
                                     <CardActionArea>
                                         <button id="dotButton" style={{backgroundColor: dotButtonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                                setInput(input + '•');
+                                                setInput(prevInput => prevInput + '•');
                                                 setOutput('');
                                                 playDot();
                                         }}>
@@ -325,7 +276,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                                 <Card>
                                     <CardActionArea>
                                         <button id="dashButton" style={{backgroundColor: dashButtonColor, width: '100%', height: '20vh', fontSize: '20vh', color: fontColor}} onClick={function(){
-                                            setInput(input + '-');
+                                            setInput(prevInput => prevInput + '-');
                                             setOutput('');
                                             playDash();
                                         }}>
@@ -348,7 +299,7 @@ const LearnWordBeginner = forwardRef((props, ref) => {
                 </div>
             </div>
         </div>
-    )
-})
+    );
+};
 
-export default LearnWordBeginner
+export default CustomWords2;

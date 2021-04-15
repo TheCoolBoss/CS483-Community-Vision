@@ -135,6 +135,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         setIndex(prevState => prevState + 1);
                     } else {
                         setIndex(0);
+                        setEndScreen(true);
                     }
                 }, resetTimer)
             }, resetTimer)
@@ -142,16 +143,41 @@ const SortedAlphabet = forwardRef((props, ref) => {
     }, [input])
 
     // tracks keycodes for space button  and enter button input
+    const [handleKeyDown, setHandleKeyDown] = useState(true); //
     document.onkeydown = function (evt) {
+        if (!handleKeyDown) return; //
+        setHandleKeyDown(false); //
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            playDot();
+            if (startScreen) {
+
+            } else if (endScreen) {
+                backToGames();
+            } else {
+                setInput(input + '•');
+                playDot();
+                document.getElementById('dotButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         } else if (evt.keyCode === 13) {
-            setInput(input + '-');
-            playDash();
+            if (startScreen) {
+                setStartScreen(false);
+            } else if (endScreen) {
+                setEndScreen(false);
+            } else {
+                setInput(input + '-');
+                playDash();
+                document.getElementById('dashButton').focus();
+                clearTimeout(t);
+                t = resetInputTime(t, input, setInput, resetTimer);
+            }
         }
     };
+    document.onkeyup = function (evt) { //
+        setHandleKeyDown(true); //
+        document.activeElement.blur(); //
+    }; //
 
     var d = 2000;
     if (!anim) {
@@ -330,7 +356,7 @@ const SortedAlphabet = forwardRef((props, ref) => {
                         </Grid>
                     </Container>
                 </div>
-                <div id="sampleMorse">
+                <div id="sampleMorseCode">
                     <animated.h1 style={{
                         lineHeight: 0,
                         color: fontColor,

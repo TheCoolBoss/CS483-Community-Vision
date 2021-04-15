@@ -17,6 +17,7 @@ import gameData from "./WordsGameData";
 import StartScreen from "./LearnWordsStart";
 import correctFX from "../../Assets/Sounds/correct.mp3";
 import letterSounds from "../LetterSounds";
+import { useHistory } from "react-router-dom";
 
 /*
 * Game that shows a picture and word that associates with that picture
@@ -49,8 +50,10 @@ function initial(type){
 }
 
 const LearnWordMedium = forwardRef((props, ref) => {
-    //Get the data
-    //var gameData = require('./WordGameData.json');
+    const history = useHistory();
+    function backToGames() {
+        history.push("/games");
+    }
 
     //The correct words that the user got so far
     var [correct, setCorrect] = useState('');  
@@ -175,15 +178,26 @@ const LearnWordMedium = forwardRef((props, ref) => {
     }
 
     // tracks keycodes for space button  and enter button input 
+    const [handleKeyDown, setHandleKeyDown] = useState(true);
     document.onkeydown = function(evt) {
+        if(!handleKeyDown) return;
+        setHandleKeyDown(false);
         evt = evt || window.event;
         if (evt.keyCode === 32) {
-            setInput(input + '•');
-            setOutput('');
-            playDot();
+            if(finished) {
+                backToGames();
+            }
+            else {
+                setInput(input + '•');
+                setOutput('');
+                playDot();
+            }
         } else if (evt.keyCode === 13) {
             if(start) {
                 setStart(false);
+            }
+            else if(finished) {
+                setFinished(false);
             }
             else {
                 setInput(input + '-');
@@ -191,6 +205,11 @@ const LearnWordMedium = forwardRef((props, ref) => {
                 playDash();
             }
         }
+    };
+
+    document.onkeyup = function (evt) { 
+        setHandleKeyDown(true); 
+        document.activeElement.blur(); 
     };
 
     useImperativeHandle(
@@ -255,7 +274,7 @@ const LearnWordMedium = forwardRef((props, ref) => {
     return (
         <div>
             {start ? <StartScreen level={"medium"} start={start} setStart={setStart}/> : null}
-            {finished ? <EndGame level='medium' background={backgroundColor} fontColor={fontColor}/> : null}
+            {finished ? <EndGame level='medium' background={backgroundColor} fontColor={fontColor} end={finished} setEndScreen={setFinished} backToGames={backToGames}/> : null}
             <div style={{backgroundColor: backgroundColor, height: '90vh', width: '100vw', display: 'grid', gridTemplate: '8fr 8fr / 1fr', gridTemplateAreas: '"top" "bottom'}}>
                 <div style={{gridArea: 'top'}}>
                     <div style={{ position: 'absolute' }}>
