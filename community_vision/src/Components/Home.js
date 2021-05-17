@@ -99,6 +99,18 @@ const Home = forwardRef((props, ref) => {
               </CardActionArea>
             </Card>
           </Grid>
+          <Grid item xs={8} style={{ height: '20%', paddingBottom: '6vh' }}>
+            {/* play games button, directs it to the games page */}
+            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
+              if (!dropdown) {
+               window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
+              }
+            }}>
+              <CardActionArea>
+                <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'yellow', borderWidth: "2vh" }}>Give us Feedback!</button>
+              </CardActionArea>
+            </Card>
+          </Grid>
         </Grid>
       </div>
     </div>
