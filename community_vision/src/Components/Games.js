@@ -45,10 +45,10 @@ const Games = forwardRef((props, ref) => {
       gridTemplateAreas: '"top" "bottom'
     }}>
       <Container maxWidth='x1' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
-        <Grid container justify='left' space={2}>
-         <Grid item xs={8} justify='left' width='10dp' style={{ height: '40%', paddingBottom: '6vh' }}>
+        <Grid container justify='left' space={4}>
+         <Grid item xs={8} justify='left' style={{ height: '40%', paddingBottom: '6vh' }}>
           {/*button directs to the feedback form */}
-            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
+            <Card style={{ minHeight: '100%', width: 250 }} onMouseUp={() => {
                window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
             }}>
               <CardActionArea>
@@ -56,7 +56,7 @@ const Games = forwardRef((props, ref) => {
               </CardActionArea>
             </Card>
           </Grid>
-        <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+        <h1 style={{ fontSize: '8vh', color: fontColor, position: 'absolute', left: '45%', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
       </Grid>
       </Container>
 
@@ -83,6 +83,9 @@ const Games = forwardRef((props, ref) => {
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Learn Words' img={LearnABCIMG} link='/learnWordBeginner' difficulty='Level 2' />
           </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+            <GameSelection name='Custom Words' img={LearnABCIMG} link='/preCustomWords' difficulty='Level 2' />
+          </Grid>
           <Grid id ="medWords" item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection id="medWords" name='Learn Words' img={needleImg} link='/learnWordMedium' difficulty='Level 3' />
           </Grid>
@@ -98,9 +101,7 @@ const Games = forwardRef((props, ref) => {
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
             <GameSelection name='Alphabet Race Game' img={raceLevel4} link='/alphabetRace' difficulty='Level 4' />
           </Grid>
-          <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-            <GameSelection name='Custom Words' img={LearnABCIMG} link='/preCustomWords' difficulty='Level 3' />
-          </Grid>
+         
         </Grid>
       </Container>
       <Link className='nav-link' to="/" style={{
