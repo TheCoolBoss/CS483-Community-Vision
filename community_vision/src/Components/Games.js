@@ -45,8 +45,8 @@ const Games = forwardRef((props, ref) => {
       gridTemplateAreas: '"top" "bottom'
     }}>
       <Container maxWidth='x1' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
-        <Grid container justify='left' space={2}></Grid>
-        <Grid item xs={8} justify='left' width='10dp' style={{ height: '40%', paddingBottom: '6vh' }}>
+        <Grid container justify='left' space={2}>
+         <Grid item xs={8} justify='left' width='10dp' style={{ height: '40%', paddingBottom: '6vh' }}>
           {/*button directs to the feedback form */}
             <Card style={{ minHeight: '100%' }} onMouseUp={() => {
                window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
@@ -57,6 +57,7 @@ const Games = forwardRef((props, ref) => {
             </Card>
           </Grid>
         <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+      </Grid>
       </Container>
 
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
