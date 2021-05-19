@@ -103,7 +103,7 @@ const Home = forwardRef((props, ref) => {
             {/* play games button, directs it to the games page */}
             <Card style={{ minHeight: '100%' }} onMouseUp={() => {
               if (!dropdown) {
-               window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
+                window.open('https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit', '_blank');
               }
             }}>
               <CardActionArea>

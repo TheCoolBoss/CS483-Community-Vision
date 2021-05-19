@@ -49,7 +49,7 @@ const Games = forwardRef((props, ref) => {
          <Grid item xs={8} justify='left' style={{ height: '40%', paddingBottom: '6vh' }}>
           {/*button directs to the feedback form */}
             <Card style={{ minHeight: '100%', width: 250 }} onMouseUp={() => {
-               window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
+               window.open('https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit', '_blank');
             }}>
               <CardActionArea>
                 <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'yellow', borderWidth: "2vh" }}>Give us Feedback!</button>
