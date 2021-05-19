@@ -44,7 +44,21 @@ const Games = forwardRef((props, ref) => {
       gridTemplate: '1fr 4fr / 1fr',
       gridTemplateAreas: '"top" "bottom'
     }}>
-      <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+      <Container maxWidth='x1' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
+        <Grid container justify='left' space={2}></Grid>
+        <Grid item xs={8} justify='left' width='10dp' style={{ height: '40%', paddingBottom: '6vh' }}>
+          {/*button directs to the feedback form */}
+            <Card style={{ minHeight: '100%' }} onMouseUp={() => {
+               window.location.href ='https://docs.google.com/forms/d/1-Fy6sjP-xcLqWLefGCBUbdbZIKBPwEkvyng9boBpO58/edit';
+            }}>
+              <CardActionArea>
+                <button style={{ height: '100%', width: '100%', fontSize: '5vh', fontWeight: 900, userSelect: 'none', cursor: 'pointer', borderColor: 'yellow', borderWidth: "2vh" }}>Give us Feedback!</button>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        <h1 style={{ fontSize: '8vh', color: fontColor, position: 'relative', padding: 0, margin: '1vh', userSelect: 'none', cursor: 'default' }}>Games</h1>
+      </Container>
+
       <Container maxWidth='xl' style={{ backgroundColor: backgroundColor, paddingBottom: '2vh' }}>
         <Grid container justify='center' spacing={2}>
           <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
