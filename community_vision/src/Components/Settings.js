@@ -36,9 +36,9 @@ const Settings = forwardRef((props, ref) => {
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
     };
-    const [speed, setSpeed] = useState(() => 4.5 - initial('speed'));
+    const [speed, setSpeed] = useState(() => 5.5 - initial('speed'));
     const changeSpeed = (event, newValue) => {
-        localStorage.setItem('speed', (4.5 - newValue).toFixed(1));
+        localStorage.setItem('speed', (5.5 - newValue).toFixed(1));
         setSpeed(newValue);
         props.updateNavState(newValue);
         props.updateSettingsPageState(newValue);
